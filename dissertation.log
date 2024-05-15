@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2024.4.30)  14 MAY 2024 20:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2024.4.30)  14 MAY 2024 21:06
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -851,12 +851,6 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 LaTeX Warning: Label `tab:workloads' multiply defined.
 
 
-LaTeX Warning: Label `fig:lambda-example' multiply defined.
-
-
-LaTeX Warning: Label `tab:workloads' multiply defined.
-
-
 LaTeX Warning: Label `sec:impl' multiply defined.
 
 
@@ -1069,7 +1063,7 @@ Chapter 2.
 File: ./figures/sys-diag.pdf Graphic file (type pdf)
 <use ./figures/sys-diag.pdf>
 Package pdftex.def Info: ./figures/sys-diag.pdf  used on input line 6.
-(pdftex.def)             Requested size: 260.17464pt x 182.12025pt.
+(pdftex.def)             Requested size: 390.25534pt x 273.17651pt.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
@@ -1082,14 +1076,16 @@ LaTeX Font Info:    Font shape `OT1/cmss/m/it' in size <9> not available
 (Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 27.
  [10
 
-]
-Excluding 'comment' comment. [11 <./figures/sys-diag.pdf>] [12] [13]
-<serverless/figs/vms.png, id=1066, 542.025pt x 415.5525pt>
+] [11 <./figures/sys-diag.pdf>] Excluding 'comment' comment. [12] [13]
+Underfull \vbox (badness 3977) has occurred while \output is active []
+
+ [14]
+<serverless/figs/vms.png, id=1072, 542.025pt x 415.5525pt>
 File: serverless/figs/vms.png Graphic file (type png)
 <use serverless/figs/vms.png>
 Package pdftex.def Info: serverless/figs/vms.png  used on input line 171.
 (pdftex.def)             Requested size: 216.81pt x 166.21805pt.
-<serverless/figs/containers.png, id=1068, 722.7pt x 361.35pt>
+<serverless/figs/containers.png, id=1074, 722.7pt x 361.35pt>
 File: serverless/figs/containers.png Graphic file (type png)
 <use serverless/figs/containers.png>
 Package pdftex.def Info: serverless/figs/containers.png  used on input line 172
@@ -1100,24 +1096,27 @@ Overfull \hbox (7.29999pt too wide) in paragraph at lines 171--173
 [][][][] 
  []
 
-) [14] (./serverless/related.tex [15 <./serverless/figs/vms.png> <./serverless/
-figs/containers.png>]
-<./figures/wild-invocations.png, id=1095, 424.58624pt x 207.77625pt>
+)
+Underfull \vbox (badness 1377) has occurred while \output is active []
+
+ [15 <./serverless/figs/vms.png> <./serverless/figs/containers.png>]
+(./serverless/related.tex [16]
+<./figures/wild-invocations.png, id=1100, 424.58624pt x 207.77625pt>
 File: ./figures/wild-invocations.png Graphic file (type png)
 <use ./figures/wild-invocations.png>
 Package pdftex.def Info: ./figures/wild-invocations.png  used on input line 30.
 
 (pdftex.def)             Requested size: 260.17464pt x 127.3235pt.
- [16 <./figures/wild-invocations.png>]
-Excluding 'comment' comment. [17] [18] [19] [20] Excluding 'comment' comment.
-[21])) (./faascache/faascache.tex [22]
+ Excluding 'comment' comment. [17 <./figures/wild-invocations.png>] [18] [19] E
+xcluding 'comment' comment. [20] [21]))
+(./faascache/faascache.tex [22]
 Chapter 3.
 [23
 
 ] (./faascache/related.tex [24] Excluding 'comment' comment.
 Excluding 'comment' comment.) (./faascache/bg.tex [25])
 (./faascache/tradeoffs.tex [26]
-<faascache/faas-keepalive-20/figures/ow-timeline.pdf, id=1359, 901.3675pt x 200
+<faascache/faas-keepalive-20/figures/ow-timeline.pdf, id=1355, 901.3675pt x 200
 .75pt>
 File: faascache/faas-keepalive-20/figures/ow-timeline.pdf Graphic file (type pd
 f)
@@ -1142,7 +1141,7 @@ Underfull \vbox (badness 4647) has occurred while \output is active []
 
  [36]
 [37]
-<faascache/faas-keepalive-20/graphs/rep-funcs-392/hit-ratio-392-b.pdf, id=1463,
+<faascache/faas-keepalive-20/graphs/rep-funcs-392/hit-ratio-392-b.pdf, id=1459,
  423.41437pt x 347.49857pt>
 File: faascache/faas-keepalive-20/graphs/rep-funcs-392/hit-ratio-392-b.pdf Grap
 hic file (type pdf)
@@ -1152,7 +1151,7 @@ atio-392-b.pdf  used on input line 73.
 (pdftex.def)             Requested size: 216.81pt x 177.93773pt.
  [38] [39 <./faascache/faas-keepalive-20/graphs/rep-funcs-392/hit-ratio-392-b.p
 df>] [40]) (./faascache/impl.tex
-<faascache/faas-keepalive-20/figures/faascache.pdf, id=1499, 636.3775pt x 144.5
+<faascache/faas-keepalive-20/figures/faascache.pdf, id=1495, 636.3775pt x 144.5
 4pt>
 File: faascache/faas-keepalive-20/figures/faascache.pdf Graphic file (type pdf)
 
@@ -1163,7 +1162,7 @@ d on input line 7.
  [41 <./faascache/faas-keepalive-20/figures/faascache.pdf>] [42]) (./faascache/
 eval.tex
 <faascache/faas-keepalive-20/graphs/rep-funcs-392/exec_inc_mem-392-legend.pdf, 
-id=1541, 458.33403pt x 247.43536pt>
+id=1537, 458.33403pt x 247.43536pt>
 File: faascache/faas-keepalive-20/graphs/rep-funcs-392/exec_inc_mem-392-legend.
 pdf Graphic file (type pdf)
 <use faascache/faas-keepalive-20/graphs/rep-funcs-392/exec_inc_mem-392-legend.p
@@ -1172,7 +1171,7 @@ Package pdftex.def Info: faascache/faas-keepalive-20/graphs/rep-funcs-392/exec_
 inc_mem-392-legend.pdf  used on input line 14.
 (pdftex.def)             Requested size: 160.43727pt x 86.61122pt.
 <faascache/faas-keepalive-20/graphs/rare-funcs-1000/exec_inc_mem-1000.pdf, id=1
-542, 366.48402pt x 247.43536pt>
+538, 366.48402pt x 247.43536pt>
 File: faascache/faas-keepalive-20/graphs/rare-funcs-1000/exec_inc_mem-1000.pdf 
 Graphic file (type pdf)
 <use faascache/faas-keepalive-20/graphs/rare-funcs-1000/exec_inc_mem-1000.pdf>
@@ -1180,7 +1179,7 @@ Package pdftex.def Info: faascache/faas-keepalive-20/graphs/rare-funcs-1000/exe
 c_inc_mem-1000.pdf  used on input line 17.
 (pdftex.def)             Requested size: 130.08731pt x 87.83072pt.
 <faascache/faas-keepalive-20/graphs/random-funcs-200/exec_inc_mem-200.pdf, id=1
-543, 369.85495pt x 247.43536pt>
+539, 369.85495pt x 247.43536pt>
 File: faascache/faas-keepalive-20/graphs/random-funcs-200/exec_inc_mem-200.pdf 
 Graphic file (type pdf)
 <use faascache/faas-keepalive-20/graphs/random-funcs-200/exec_inc_mem-200.pdf>
@@ -1188,7 +1187,7 @@ Package pdftex.def Info: faascache/faas-keepalive-20/graphs/random-funcs-200/ex
 ec_inc_mem-200.pdf  used on input line 19.
 (pdftex.def)             Requested size: 130.08731pt x 87.0303pt.
 <faascache/faas-keepalive-20/graphs/rep-funcs-392/cold_drop_mem-392-legend.pdf,
- id=1544, 366.48402pt x 237.68172pt>
+ id=1540, 366.48402pt x 237.68172pt>
 File: faascache/faas-keepalive-20/graphs/rep-funcs-392/cold_drop_mem-392-legend
 .pdf Graphic file (type pdf)
 <use faascache/faas-keepalive-20/graphs/rep-funcs-392/cold_drop_mem-392-legend.
@@ -1197,7 +1196,7 @@ Package pdftex.def Info: faascache/faas-keepalive-20/graphs/rep-funcs-392/cold_
 drop_mem-392-legend.pdf  used on input line 29.
 (pdftex.def)             Requested size: 143.09538pt x 92.80429pt.
 <faascache/faas-keepalive-20/graphs/rare-funcs-1000/cold_drop_mem-1000.pdf, id=
-1545, 366.48402pt x 237.68172pt>
+1541, 366.48402pt x 237.68172pt>
 File: faascache/faas-keepalive-20/graphs/rare-funcs-1000/cold_drop_mem-1000.pdf
  Graphic file (type pdf)
 <use faascache/faas-keepalive-20/graphs/rare-funcs-1000/cold_drop_mem-1000.pdf>
@@ -1206,7 +1205,7 @@ Package pdftex.def Info: faascache/faas-keepalive-20/graphs/rare-funcs-1000/col
 d_drop_mem-1000.pdf  used on input line 31.
 (pdftex.def)             Requested size: 143.09538pt x 92.80429pt.
 <faascache/faas-keepalive-20/graphs/random-funcs-200/cold_drop_mem-200.pdf, id=
-1546, 365.38513pt x 234.1686pt>
+1542, 365.38513pt x 234.1686pt>
 File: faascache/faas-keepalive-20/graphs/random-funcs-200/cold_drop_mem-200.pdf
  Graphic file (type pdf)
 <use faascache/faas-keepalive-20/graphs/random-funcs-200/cold_drop_mem-200.pdf>
@@ -1242,7 +1241,7 @@ pdfTeX warning: pdflatex (file ./faascache/faas-keepalive-20/graphs/random-func
 s-200/cold_drop_mem-200.pdf): PDF inclusion: multiple pdfs with page group incl
 uded in a single page
 >] Excluding 'comment' comment. [45] [46] [47]
-<faascache/faas-keepalive-20/graphs/litmus_tests/litmus_2_stacked.pdf, id=1662,
+<faascache/faas-keepalive-20/graphs/litmus_tests/litmus_2_stacked.pdf, id=1658,
  475.23798pt x 245.99678pt>
 File: faascache/faas-keepalive-20/graphs/litmus_tests/litmus_2_stacked.pdf Grap
 hic file (type pdf)
@@ -1252,7 +1251,7 @@ _2_stacked.pdf  used on input line 226.
 (pdftex.def)             Requested size: 260.17464pt x 134.67554pt.
  [48 <./faascache/faas-keepalive-20/graphs/litmus_tests/litmus_2_stacked.pdf>]
 <faascache/faas-keepalive-20/graphs/litmus_tests/faasbench_48_cold_hot-legend.p
-df, id=1680, 548.0475pt x 260.975pt>
+df, id=1676, 548.0475pt x 260.975pt>
 File: faascache/faas-keepalive-20/graphs/litmus_tests/faasbench_48_cold_hot-leg
 end.pdf Graphic file (type pdf)
 <use faascache/faas-keepalive-20/graphs/litmus_tests/faasbench_48_cold_hot-lege
@@ -1263,7 +1262,7 @@ nch_48_cold_hot-legend.pdf  used on input line 291.
  Excluding 'comment' comment.
 [49] Excluding 'comment' comment. [50 <./faascache/faas-keepalive-20/graphs/lit
 mus_tests/faasbench_48_cold_hot-legend.pdf>]
-<faascache/faas-keepalive-20/graphs/dyn-scale-392-b.pdf, id=1701, 531.9875pt x 
+<faascache/faas-keepalive-20/graphs/dyn-scale-392-b.pdf, id=1697, 531.9875pt x 
 266.9975pt>
 File: faascache/faas-keepalive-20/graphs/dyn-scale-392-b.pdf Graphic file (type
  pdf)
@@ -1279,7 +1278,7 @@ Chapter 4.
 
 ]) (./chrlu/bg.tex
 [53] Excluding 'comment' comment.
-<chrlu/faaslb-osdi22/figs/ch-bl.pdf, id=1736, 406.51875pt x 420.57124pt>
+<chrlu/faaslb-osdi22/figs/ch-bl.pdf, id=1732, 406.51875pt x 420.57124pt>
 File: chrlu/faaslb-osdi22/figs/ch-bl.pdf Graphic file (type pdf)
 <use chrlu/faaslb-osdi22/figs/ch-bl.pdf>
 Package pdftex.def Info: chrlu/faaslb-osdi22/figs/ch-bl.pdf  used on input line
@@ -1295,7 +1294,7 @@ put line 218.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [63]
-<chrlu/faaslb-osdi22/figs/sys-diag.pdf, id=1832, 722.7pt x 505.89pt>
+<chrlu/faaslb-osdi22/figs/sys-diag.pdf, id=1828, 722.7pt x 505.89pt>
 File: chrlu/faaslb-osdi22/figs/sys-diag.pdf Graphic file (type pdf)
 <use chrlu/faaslb-osdi22/figs/sys-diag.pdf>
 Package pdftex.def Info: chrlu/faaslb-osdi22/figs/sys-diag.pdf  used on input l
@@ -1307,7 +1306,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [64]
 [65 <./chrlu/faaslb-osdi22/figs/sys-diag.pdf>] [66]
 Excluding 'comment' comment.) (./chrlu/eval.tex (./chrlu/eval-ow.tex
-<chrlu/faaslb-osdi22/figs/compare/20-global-latencies-cntnorm.pdf, id=1857, 358
+<chrlu/faaslb-osdi22/figs/compare/20-global-latencies-cntnorm.pdf, id=1853, 358
 .03056pt x 233.69809pt>
 File: chrlu/faaslb-osdi22/figs/compare/20-global-latencies-cntnorm.pdf Graphic 
 file (type pdf)
@@ -1315,7 +1314,7 @@ file (type pdf)
 Package pdftex.def Info: chrlu/faaslb-osdi22/figs/compare/20-global-latencies-c
 ntnorm.pdf  used on input line 17.
 (pdftex.def)             Requested size: 130.08731pt x 84.91217pt.
-<chrlu/faaslb-osdi22/figs/compare/20-invokes-ttl.pdf, id=1858, 381.03839pt x 23
+<chrlu/faaslb-osdi22/figs/compare/20-invokes-ttl.pdf, id=1854, 381.03839pt x 23
 3.69809pt>
 File: chrlu/faaslb-osdi22/figs/compare/20-invokes-ttl.pdf Graphic file (type pd
 f)
@@ -1332,7 +1331,7 @@ rlu/faaslb-osdi22/figs/compare/20-invokes-ttl.pdf
 pdfTeX warning: pdflatex (file ./chrlu/faaslb-osdi22/figs/compare/20-invokes-tt
 l.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >] [68]
-<chrlu/faaslb-osdi22/figs/compare/120-global-latencies-cntnorm.pdf, id=1894, 36
+<chrlu/faaslb-osdi22/figs/compare/120-global-latencies-cntnorm.pdf, id=1890, 36
 5.69984pt x 233.69809pt>
 File: chrlu/faaslb-osdi22/figs/compare/120-global-latencies-cntnorm.pdf Graphic
  file (type pdf)
@@ -1340,7 +1339,7 @@ File: chrlu/faaslb-osdi22/figs/compare/120-global-latencies-cntnorm.pdf Graphic
 Package pdftex.def Info: chrlu/faaslb-osdi22/figs/compare/120-global-latencies-
 cntnorm.pdf  used on input line 65.
 (pdftex.def)             Requested size: 130.08731pt x 83.13277pt.
-<chrlu/faaslb-osdi22/figs/compare/120-invokes-ttl.pdf, id=1895, 388.70767pt x 2
+<chrlu/faaslb-osdi22/figs/compare/120-invokes-ttl.pdf, id=1891, 388.70767pt x 2
 33.69809pt>
 File: chrlu/faaslb-osdi22/figs/compare/120-invokes-ttl.pdf Graphic file (type p
 df)
@@ -1348,7 +1347,7 @@ df)
 Package pdftex.def Info: chrlu/faaslb-osdi22/figs/compare/120-invokes-ttl.pdf  
 used on input line 66.
 (pdftex.def)             Requested size: 130.08731pt x 78.2082pt.
-<chrlu/faaslb-osdi22/figs/compare/3-120-loadAvg-variance.pdf, id=1896, 365.6998
+<chrlu/faaslb-osdi22/figs/compare/3-120-loadAvg-variance.pdf, id=1892, 365.6998
 4pt x 233.69809pt>
 File: chrlu/faaslb-osdi22/figs/compare/3-120-loadAvg-variance.pdf Graphic file 
 (type pdf)
@@ -1371,7 +1370,7 @@ pdfTeX warning: pdflatex (file ./chrlu/faaslb-osdi22/figs/compare/3-120-loadAvg
 -variance.pdf): PDF inclusion: multiple pdfs with page group included in a sing
 le page
 >]
-<chrlu/faaslb-osdi22/figs/bursty/120-global-latencies-cntnorm.pdf, id=1945, 365
+<chrlu/faaslb-osdi22/figs/bursty/120-global-latencies-cntnorm.pdf, id=1941, 365
 .69984pt x 233.69809pt>
 File: chrlu/faaslb-osdi22/figs/bursty/120-global-latencies-cntnorm.pdf Graphic 
 file (type pdf)
@@ -1379,7 +1378,7 @@ file (type pdf)
 Package pdftex.def Info: chrlu/faaslb-osdi22/figs/bursty/120-global-latencies-c
 ntnorm.pdf  used on input line 198.
 (pdftex.def)             Requested size: 130.08731pt x 83.13277pt.
-<chrlu/faaslb-osdi22/figs/bursty/3-120-loadAvg-variance.pdf, id=1946, 365.69984
+<chrlu/faaslb-osdi22/figs/bursty/3-120-loadAvg-variance.pdf, id=1942, 365.69984
 pt x 233.69809pt>
 File: chrlu/faaslb-osdi22/figs/bursty/3-120-loadAvg-variance.pdf Graphic file (
 type pdf)
@@ -1387,7 +1386,7 @@ type pdf)
 Package pdftex.def Info: chrlu/faaslb-osdi22/figs/bursty/3-120-loadAvg-variance
 .pdf  used on input line 199.
 (pdftex.def)             Requested size: 130.08731pt x 83.13277pt.
-<chrlu/faaslb-osdi22/figs/ow/openload/openload-latencies-cntnorm.pdf, id=1947, 
+<chrlu/faaslb-osdi22/figs/ow/openload/openload-latencies-cntnorm.pdf, id=1943, 
 373.36911pt x 233.69809pt>
 File: chrlu/faaslb-osdi22/figs/ow/openload/openload-latencies-cntnorm.pdf Graph
 ic file (type pdf)
@@ -1410,7 +1409,7 @@ pdfTeX warning: pdflatex (file ./chrlu/faaslb-osdi22/figs/ow/openload/openload-
 latencies-cntnorm.pdf): PDF inclusion: multiple pdfs with page group included i
 n a single page
 >] Excluding 'comment' comment.
-<chrlu/faaslb-osdi22/figs/scaling/scaling_lat_over_time-nolabel.pdf, id=1993, 3
+<chrlu/faaslb-osdi22/figs/scaling/scaling_lat_over_time-nolabel.pdf, id=1989, 3
 62.97089pt x 234.1686pt>
 File: chrlu/faaslb-osdi22/figs/scaling/scaling_lat_over_time-nolabel.pdf Graphi
 c file (type pdf)
@@ -1425,7 +1424,7 @@ Chapter 5.
 (./iluvatar/motivation.tex [74
 
 ] [75] [76] Excluding 'comment' comment.
-<iluvatar/graphs/scaling/pyaes/overhead-scaling.pdf, id=2050, 494.16179pt x 245
+<iluvatar/graphs/scaling/pyaes/overhead-scaling.pdf, id=2046, 494.16179pt x 245
 .3808pt>
 File: iluvatar/graphs/scaling/pyaes/overhead-scaling.pdf Graphic file (type pdf
 )
@@ -1441,7 +1440,7 @@ Underfull \vbox (badness 1189) has occurred while \output is active []
 Underfull \vbox (badness 4647) has occurred while \output is active []
 
  [80]
-<iluvatar/figs/il76-q.pdf, id=2109, 773.89125pt x 348.30125pt>
+<iluvatar/figs/il76-q.pdf, id=2105, 773.89125pt x 348.30125pt>
 File: iluvatar/figs/il76-q.pdf Graphic file (type pdf)
 <use iluvatar/figs/il76-q.pdf>
 Package pdftex.def Info: iluvatar/figs/il76-q.pdf  used on input line 32.
@@ -1455,7 +1454,7 @@ Excluding 'comment' comment.
 
 pdfTeX warning: pdflatex (file ./iluvatar/figs/OverheadTimeline.pdf): PDF inclu
 sion: found PDF version <1.6>, but at most version <1.5> allowed
-<iluvatar/figs/OverheadTimeline.pdf, id=2181, 766.06201pt x 216.81pt>
+<iluvatar/figs/OverheadTimeline.pdf, id=2177, 766.06201pt x 216.81pt>
 File: iluvatar/figs/OverheadTimeline.pdf Graphic file (type pdf)
 <use iluvatar/figs/OverheadTimeline.pdf>
 Package pdftex.def Info: iluvatar/figs/OverheadTimeline.pdf  used on input line
@@ -1478,7 +1477,7 @@ Package pdftex.def Info: iluvatar/graphs/scaling/pyaes/overhead-scaling.pdf  us
 ed on input line 26.
 (pdftex.def)             Requested size: 260.17464pt x 129.19003pt.
  Excluding 'comment' comment. [96]
-<iluvatar/graphs/scaling/pyaes/worker-e2e-and-exec.pdf, id=2281, 371.80467pt x 
+<iluvatar/graphs/scaling/pyaes/worker-e2e-and-exec.pdf, id=2277, 371.80467pt x 
 234.1686pt>
 File: iluvatar/graphs/scaling/pyaes/worker-e2e-and-exec.pdf Graphic file (type 
 pdf)
@@ -1486,7 +1485,7 @@ pdf)
 Package pdftex.def Info: iluvatar/graphs/scaling/pyaes/worker-e2e-and-exec.pdf 
  used on input line 88.
 (pdftex.def)             Requested size: 130.08731pt x 81.93164pt.
-<iluvatar/graphs/scaling/json_dumps_loads/worker-e2e-and-exec.pdf, id=2282, 380
+<iluvatar/graphs/scaling/json_dumps_loads/worker-e2e-and-exec.pdf, id=2278, 380
 .74432pt x 235.17029pt>
 File: iluvatar/graphs/scaling/json_dumps_loads/worker-e2e-and-exec.pdf Graphic 
 file (type pdf)
@@ -1494,7 +1493,7 @@ file (type pdf)
 Package pdftex.def Info: iluvatar/graphs/scaling/json_dumps_loads/worker-e2e-an
 d-exec.pdf  used on input line 89.
 (pdftex.def)             Requested size: 130.08731pt x 80.34796pt.
-<iluvatar/graphs/scaling/video_processing/worker-e2e-and-exec.pdf, id=2283, 389
+<iluvatar/graphs/scaling/video_processing/worker-e2e-and-exec.pdf, id=2279, 389
 .68398pt x 234.1686pt>
 File: iluvatar/graphs/scaling/video_processing/worker-e2e-and-exec.pdf Graphic 
 file (type pdf)
@@ -1517,7 +1516,7 @@ r-e2e-and-exec.pdf): PDF inclusion: multiple pdfs with page group included in a
 
 pdfTeX warning: pdflatex (file ./iluvatar/graphs/impl/benchmark_cold_e2e.pdf): 
 PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<iluvatar/graphs/impl/benchmark_cold_e2e.pdf, id=2327, 457.48415pt x 280.15466p
+<iluvatar/graphs/impl/benchmark_cold_e2e.pdf, id=2323, 457.48415pt x 280.15466p
 t>
 File: iluvatar/graphs/impl/benchmark_cold_e2e.pdf Graphic file (type pdf)
 <use iluvatar/graphs/impl/benchmark_cold_e2e.pdf>
@@ -1530,7 +1529,7 @@ Excluding 'comment' comment.
 pdfTeX warning: pdflatex (file ./iluvatar/graphs/old-baseline/breakdown/all_fun
 cs_minheap_ed.pdf): PDF inclusion: found PDF version <1.6>, but at most version
  <1.5> allowed
-<iluvatar/graphs/old-baseline/breakdown/all_funcs_minheap_ed.pdf, id=2347, 361.
+<iluvatar/graphs/old-baseline/breakdown/all_funcs_minheap_ed.pdf, id=2343, 361.
 35pt x 195.129pt>
 File: iluvatar/graphs/old-baseline/breakdown/all_funcs_minheap_ed.pdf Graphic f
 ile (type pdf)
@@ -1544,7 +1543,7 @@ pdfTeX warning: pdflatex (file ./iluvatar/graphs/scaled_trace2/trace_0_1/violin
 _e2e_for_each_queue/16_16.pdf): PDF inclusion: found PDF version <1.6>, but at 
 most version <1.5> allowed
 <iluvatar/graphs/scaled_trace2/trace_0_1/violin_e2e_for_each_queue/16_16.pdf, i
-d=2348, 361.35pt x 195.129pt>
+d=2344, 361.35pt x 195.129pt>
 File: iluvatar/graphs/scaled_trace2/trace_0_1/violin_e2e_for_each_queue/16_16.p
 df Graphic file (type pdf)
 <use iluvatar/graphs/scaled_trace2/trace_0_1/violin_e2e_for_each_queue/16_16.pd
@@ -1558,7 +1557,7 @@ pdfTeX warning: pdflatex (file ./iluvatar/graphs/scaled_trace2/trace_0_1/violin
 _func_breakdown/16_16.pdf): PDF inclusion: found PDF version <1.6>, but at most
  version <1.5> allowed
 <iluvatar/graphs/scaled_trace2/trace_0_1/violin_func_breakdown/16_16.pdf, id=23
-49, 361.35pt x 195.129pt>
+45, 361.35pt x 195.129pt>
 File: iluvatar/graphs/scaled_trace2/trace_0_1/violin_func_breakdown/16_16.pdf G
 raphic file (type pdf)
 <use iluvatar/graphs/scaled_trace2/trace_0_1/violin_func_breakdown/16_16.pdf>
@@ -1569,7 +1568,7 @@ eakdown/16_16.pdf  used on input line 189.
 
 pdfTeX warning: pdflatex (file ./iluvatar/graphs/scaling/WeakScaling.pdf): PDF 
 inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<iluvatar/graphs/scaling/WeakScaling.pdf, id=2351, 361.35pt x 195.129pt>
+<iluvatar/graphs/scaling/WeakScaling.pdf, id=2347, 361.35pt x 195.129pt>
 File: iluvatar/graphs/scaling/WeakScaling.pdf Graphic file (type pdf)
 <use iluvatar/graphs/scaling/WeakScaling.pdf>
 Package pdftex.def Info: iluvatar/graphs/scaling/WeakScaling.pdf  used on input
@@ -1583,7 +1582,7 @@ pdfTeX warning: pdflatex (file ./iluvatar/graphs/scaled_burst_trace2/trace_0_1/
 barplot_breakdown_perqueue/all_funcs_minheap_ed.pdf): PDF inclusion: found PDF 
 version <1.6>, but at most version <1.5> allowed
 <iluvatar/graphs/scaled_burst_trace2/trace_0_1/barplot_breakdown_perqueue/all_f
-uncs_minheap_ed.pdf, id=2391, 361.35pt x 195.129pt>
+uncs_minheap_ed.pdf, id=2387, 361.35pt x 195.129pt>
 File: iluvatar/graphs/scaled_burst_trace2/trace_0_1/barplot_breakdown_perqueue/
 all_funcs_minheap_ed.pdf Graphic file (type pdf)
 <use iluvatar/graphs/scaled_burst_trace2/trace_0_1/barplot_breakdown_perqueue/a
@@ -1597,7 +1596,7 @@ pdfTeX warning: pdflatex (file ./iluvatar/graphs/scaled_burst_trace2/trace_0_1/
 violin_e2e_for_each_queue/16_16.pdf): PDF inclusion: found PDF version <1.6>, b
 ut at most version <1.5> allowed
 <iluvatar/graphs/scaled_burst_trace2/trace_0_1/violin_e2e_for_each_queue/16_16.
-pdf, id=2392, 361.35pt x 195.129pt>
+pdf, id=2388, 361.35pt x 195.129pt>
 File: iluvatar/graphs/scaled_burst_trace2/trace_0_1/violin_e2e_for_each_queue/1
 6_16.pdf Graphic file (type pdf)
 <use iluvatar/graphs/scaled_burst_trace2/trace_0_1/violin_e2e_for_each_queue/16
@@ -1611,7 +1610,7 @@ pdfTeX warning: pdflatex (file ./iluvatar/graphs/scaled_burst_trace2/trace_0_1/
 violin_func_breakdown/16_16.pdf): PDF inclusion: found PDF version <1.6>, but a
 t most version <1.5> allowed
 <iluvatar/graphs/scaled_burst_trace2/trace_0_1/violin_func_breakdown/16_16.pdf,
- id=2393, 361.35pt x 195.129pt>
+ id=2389, 361.35pt x 195.129pt>
 File: iluvatar/graphs/scaled_burst_trace2/trace_0_1/violin_func_breakdown/16_16
 .pdf Graphic file (type pdf)
 <use iluvatar/graphs/scaled_burst_trace2/trace_0_1/violin_func_breakdown/16_16.
@@ -1628,7 +1627,7 @@ vatar/graphs/scaled_burst_trace2/trace_0_1/violin_e2e_for_each_queue/16_16.pdf>
  <./iluvatar/graphs/scaled_burst_trace2/trace_0_1/violin_func_breakdown/16_16.p
 df>]
 [102] [103]
-<iluvatar/graphs/trace-compare/baseline/minheap_ed/16/paper-status.pdf, id=2457
+<iluvatar/graphs/trace-compare/baseline/minheap_ed/16/paper-status.pdf, id=2453
 , 393.02774pt x 219.63431pt>
 File: iluvatar/graphs/trace-compare/baseline/minheap_ed/16/paper-status.pdf Gra
 phic file (type pdf)
@@ -1648,7 +1647,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [107
 
 ]
-<mqfq/graphs/coldstart/combined_timeline.pdf, id=2544, 504.88441pt x 267.16995p
+<mqfq/graphs/coldstart/combined_timeline.pdf, id=2540, 504.88441pt x 267.16995p
 t>
 File: mqfq/graphs/coldstart/combined_timeline.pdf Graphic file (type pdf)
 <use mqfq/graphs/coldstart/combined_timeline.pdf>
@@ -1657,7 +1656,7 @@ nput line 104.
 (pdftex.def)             Requested size: 433.62pt x 229.46pt.
 
 [108] [109 <./mqfq/graphs/coldstart/combined_timeline.pdf>] [110]
-<mqfq/graphs/cpu_compare/25.7/compute_compare_squish.pdf, id=2591, 306.88716pt 
+<mqfq/graphs/cpu_compare/25.7/compute_compare_squish.pdf, id=2587, 306.88716pt 
 x 172.0762pt>
 File: mqfq/graphs/cpu_compare/25.7/compute_compare_squish.pdf Graphic file (typ
 e pdf)
@@ -1670,7 +1669,7 @@ f  used on input line 185.
 7/compute_compare_squish.pdf>] [112] [113] Excluding 'comment' comment.
 Excluding 'comment' comment.) (./mqfq/related.tex [114]) (./mqfq/q2.tex
 [115]
-<mqfq/figs/queue-sys-2-simple.pdf, id=2712, 635.97598pt x 607.068pt>
+<mqfq/figs/queue-sys-2-simple.pdf, id=2708, 635.97598pt x 607.068pt>
 File: mqfq/figs/queue-sys-2-simple.pdf Graphic file (type pdf)
 <use mqfq/figs/queue-sys-2-simple.pdf>
 Package pdftex.def Info: mqfq/figs/queue-sys-2-simple.pdf  used on input line 3
@@ -1689,7 +1688,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [121]
 [122] [123]) (./mqfq/impl.tex [124] [125]) (./mqfq/eval.tex [126] [127]
-<mqfq/graphs/mem-move/f16-i20-driver-mps-move.pdf, id=2794, 367.44072pt x 288.8
+<mqfq/graphs/mem-move/f16-i20-driver-mps-move.pdf, id=2790, 367.44072pt x 288.8
 807pt>
 File: mqfq/graphs/mem-move/f16-i20-driver-mps-move.pdf Graphic file (type pdf)
 <use mqfq/graphs/mem-move/f16-i20-driver-mps-move.pdf>
@@ -1700,7 +1699,7 @@ Package pdftex.def Info: mqfq/graphs/mem-move/f16-i20-driver-mps-move.pdf  used
 Underfull \vbox (badness 1406) has occurred while \output is active []
 
  [128 <./mqfq/graphs/mem-move/f16-i20-driver-mps-move.pdf>]
-<mqfq/graphs/driver-compare/8-exec_time.pdf, id=2809, 401.01929pt x 291.94698pt
+<mqfq/graphs/driver-compare/8-exec_time.pdf, id=2805, 401.01929pt x 291.94698pt
 >
 File: mqfq/graphs/driver-compare/8-exec_time.pdf Graphic file (type pdf)
 <use mqfq/graphs/driver-compare/8-exec_time.pdf>
@@ -1708,7 +1707,7 @@ Package pdftex.def Info: mqfq/graphs/driver-compare/8-exec_time.pdf  used on in
 put line 60.
 (pdftex.def)             Requested size: 401.01831pt x 291.94624pt.
  [129 <./mqfq/graphs/driver-compare/8-exec_time.pdf>]
-<mqfq/graphs/container_pool/big-60min/65/cold_hits.pdf, id=2829, 365.70036pt x 
+<mqfq/graphs/container_pool/big-60min/65/cold_hits.pdf, id=2825, 365.70036pt x 
 238.2777pt>
 File: mqfq/graphs/container_pool/big-60min/65/cold_hits.pdf Graphic file (type 
 pdf)
@@ -1720,14 +1719,14 @@ Package pdftex.def Info: mqfq/graphs/container_pool/big-60min/65/cold_hits.pdf
 Underfull \vbox (badness 6708) has occurred while \output is active []
 
  [131 <./mqfq/graphs/container_pool/big-60min/65/cold_hits.pdf>]
-<mqfq/graphs/unfairness/25.7/e2e_sec.pdf, id=2848, 377.1959pt x 233.69809pt>
+<mqfq/graphs/unfairness/25.7/e2e_sec.pdf, id=2844, 377.1959pt x 233.69809pt>
 File: mqfq/graphs/unfairness/25.7/e2e_sec.pdf Graphic file (type pdf)
 <use mqfq/graphs/unfairness/25.7/e2e_sec.pdf>
 Package pdftex.def Info: mqfq/graphs/unfairness/25.7/e2e_sec.pdf  used on input
  line 132.
 (pdftex.def)             Requested size: 377.19499pt x 233.6975pt.
  [132 <./mqfq/graphs/unfairness/25.7/e2e_sec.pdf>]
-<mqfq/graphs/ttl/25.8/mqfq-ttl-compare.pdf, id=2862, 426.74039pt x 233.69809pt>
+<mqfq/graphs/ttl/25.8/mqfq-ttl-compare.pdf, id=2858, 426.74039pt x 233.69809pt>
 
 File: mqfq/graphs/ttl/25.8/mqfq-ttl-compare.pdf Graphic file (type pdf)
 <use mqfq/graphs/ttl/25.8/mqfq-ttl-compare.pdf>
@@ -1738,7 +1737,7 @@ ut line 156.
 Underfull \vbox (badness 1221) has occurred while \output is active []
 
  [133 <./mqfq/graphs/ttl/25.8/mqfq-ttl-compare.pdf>]
-<mqfq/graphs/concurrency/25.7/paper_exec_overhead.pdf, id=2878, 369.52664pt x 2
+<mqfq/graphs/concurrency/25.7/paper_exec_overhead.pdf, id=2874, 369.52664pt x 2
 33.69809pt>
 File: mqfq/graphs/concurrency/25.7/paper_exec_overhead.pdf Graphic file (type p
 df)
@@ -1746,7 +1745,7 @@ df)
 Package pdftex.def Info: mqfq/graphs/concurrency/25.7/paper_exec_overhead.pdf  
 used on input line 185.
 (pdftex.def)             Requested size: 369.52573pt x 233.6975pt.
-<mqfq/graphs/concurrency/25.7/paper_e2e_sec.pdf, id=2879, 358.03056pt x 233.698
+<mqfq/graphs/concurrency/25.7/paper_e2e_sec.pdf, id=2875, 358.03056pt x 233.698
 09pt>
 File: mqfq/graphs/concurrency/25.7/paper_e2e_sec.pdf Graphic file (type pdf)
 <use mqfq/graphs/concurrency/25.7/paper_e2e_sec.pdf>
@@ -1756,14 +1755,14 @@ n input line 192.
  Excluding 'comment' comment. [134]
 [135 <./mqfq/graphs/concurrency/25.7/paper_exec_overhead.pdf> <./mqfq/graphs/co
 ncurrency/25.7/paper_e2e_sec.pdf>]
-<mqfq/graphs/q_compare/25.7/20/paper_e2e_sec.pdf, id=2906, 371.72234pt x 283.44
+<mqfq/graphs/q_compare/25.7/20/paper_e2e_sec.pdf, id=2902, 371.72234pt x 283.44
 647pt>
 File: mqfq/graphs/q_compare/25.7/20/paper_e2e_sec.pdf Graphic file (type pdf)
 <use mqfq/graphs/q_compare/25.7/20/paper_e2e_sec.pdf>
 Package pdftex.def Info: mqfq/graphs/q_compare/25.7/20/paper_e2e_sec.pdf  used 
 on input line 230.
 (pdftex.def)             Requested size: 371.72142pt x 283.44577pt.
-<mqfq/graphs/q_compare/25.7/20/paper_fairness_squish.pdf, id=2908, 379.47003pt 
+<mqfq/graphs/q_compare/25.7/20/paper_fairness_squish.pdf, id=2904, 379.47003pt 
 x 172.0762pt>
 File: mqfq/graphs/q_compare/25.7/20/paper_fairness_squish.pdf Graphic file (typ
 e pdf)
@@ -1775,7 +1774,7 @@ f  used on input line 250.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [136 <./mqfq/graphs/q_compare/25.7/20/paper_e2e_sec.pdf>]
-<mqfq/graphs/multi-gpu/25.7/concurr_scale.pdf, id=2923, 399.90576pt x 236.87492
+<mqfq/graphs/multi-gpu/25.7/concurr_scale.pdf, id=2918, 399.90576pt x 236.87492
 pt>
 File: mqfq/graphs/multi-gpu/25.7/concurr_scale.pdf Graphic file (type pdf)
 <use mqfq/graphs/multi-gpu/25.7/concurr_scale.pdf>
@@ -1786,7 +1785,7 @@ input line 293.
 Underfull \vbox (badness 1448) has occurred while \output is active []
 
  [137 <./mqfq/graphs/q_compare/25.7/20/paper_fairness_squish.pdf>]
-<mqfq/graphs/polymorphic/25.7/compute_compare_squish_focused.pdf, id=2937, 358.
+<mqfq/graphs/polymorphic/25.7/compute_compare_squish_focused.pdf, id=2933, 358.
 03056pt x 172.0762pt>
 File: mqfq/graphs/polymorphic/25.7/compute_compare_squish_focused.pdf Graphic f
 ile (type pdf)
@@ -2036,7 +2035,7 @@ Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-<cv/cv.pdf, id=3207, 597.50829pt x 845.0471pt>
+<cv/cv.pdf, id=3203, 597.50829pt x 845.0471pt>
 File: cv/cv.pdf Graphic file (type pdf)
 <use cv/cv.pdf>
 Package pdftex.def Info: cv/cv.pdf  used on input line 56.
@@ -2045,7 +2044,7 @@ File: cv/cv.pdf Graphic file (type pdf)
 <use cv/cv.pdf>
 Package pdftex.def Info: cv/cv.pdf  used on input line 56.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<cv/cv.pdf, id=3210, page=1, 597.50829pt x 845.0471pt>
+<cv/cv.pdf, id=3206, page=1, 597.50829pt x 845.0471pt>
 File: cv/cv.pdf Graphic file (type pdf)
 <use cv/cv.pdf, page 1>
 Package pdftex.def Info: cv/cv.pdf , page1 used on input line 56.
@@ -2081,7 +2080,7 @@ File: cv/cv.pdf Graphic file (type pdf)
 Package pdftex.def Info: cv/cv.pdf , page1 used on input line 56.
 (pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
  [3 <./cv/cv.pdf>]
-<cv/cv.pdf, id=3253, page=2, 597.50829pt x 845.0471pt>
+<cv/cv.pdf, id=3249, page=2, 597.50829pt x 845.0471pt>
 File: cv/cv.pdf Graphic file (type pdf)
 <use cv/cv.pdf, page 2>
 Package pdftex.def Info: cv/cv.pdf , page2 used on input line 56.
@@ -2101,7 +2100,7 @@ File: cv/cv.pdf Graphic file (type pdf)
 Package pdftex.def Info: cv/cv.pdf , page2 used on input line 56.
 (pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
  [4 <./cv/cv.pdf>]
-<cv/cv.pdf, id=3258, page=3, 597.50829pt x 845.0471pt>
+<cv/cv.pdf, id=3254, page=3, 597.50829pt x 845.0471pt>
 File: cv/cv.pdf Graphic file (type pdf)
 <use cv/cv.pdf, page 3>
 Package pdftex.def Info: cv/cv.pdf , page3 used on input line 56.
@@ -2121,7 +2120,7 @@ File: cv/cv.pdf Graphic file (type pdf)
 Package pdftex.def Info: cv/cv.pdf , page3 used on input line 56.
 (pdftex.def)             Requested size: 562.12285pt x 795.00201pt.
  [5 <./cv/cv.pdf>]
-<cv/cv.pdf, id=3276, page=4, 597.50829pt x 845.0471pt>
+<cv/cv.pdf, id=3272, page=4, 597.50829pt x 845.0471pt>
 File: cv/cv.pdf Graphic file (type pdf)
 <use cv/cv.pdf, page 4>
 Package pdftex.def Info: cv/cv.pdf , page4 used on input line 56.
@@ -2156,9 +2155,9 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 93.
  ) 
 Here is how much of TeX's memory you used:
  25849 strings out of 481239
- 468364 string characters out of 5920377
- 934969 words of memory out of 5000000
- 39560 multiletter control sequences out of 15000+600000
+ 468366 string characters out of 5920377
+ 935400 words of memory out of 5000000
+ 39561 multiletter control sequences out of 15000+600000
  550047 words of font info for 154 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,18n,60p,918b,1515s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2185,10 +2184,10 @@ sfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 xmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/publ
 ic/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440
 .pfb>
-Output written on dissertation.pdf (201 pages, 10087646 bytes).
+Output written on dissertation.pdf (201 pages, 10085617 bytes).
 PDF statistics:
- 3490 PDF objects out of 3580 (max. 8388607)
- 2975 compressed objects within 30 object streams
- 674 named destinations out of 1000 (max. 500000)
+ 3486 PDF objects out of 3580 (max. 8388607)
+ 2971 compressed objects within 30 object streams
+ 673 named destinations out of 1000 (max. 500000)
  26229 words of extra memory for PDF output out of 29859 (max. 10000000)
 

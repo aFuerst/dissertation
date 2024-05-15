@@ -647,13 +647,6 @@ Anubhav Guleria, J~Lakshmi, and Chakri Padala.
 \newblock In {\em 2019 IEEE International Conference on Cloud Computing in
   Emerging Markets (CCEM)}, pages 1--8. IEEE, 2019.
 
-\bibitem{gunasekaran2020fifer}
-Jashwant~Raj Gunasekaran, Prashanth Thinakaran, Nachiappan~C Nachiappan,
-  Mahmut~Taylan Kandemir, and Chita~R Das.
-\newblock Fifer: Tackling resource underutilization in the serverless era.
-\newblock In {\em Proceedings of the 21st International Middleware Conference},
-  pages 280--295, 2020.
-
 \bibitem{guo2010slaw}
 Yi~Guo, Jisheng Zhao, Vincent Cave, and Vivek Sarkar.
 \newblock Slaw: a scalable locality-aware adaptive work-stealing scheduler for

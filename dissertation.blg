@@ -2,7 +2,7 @@ This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: dissertation.aux
 The style file: plain.bst
-Reallocated field_info (elt_size=4) to 10773 items from 5000.
+Reallocated field_info (elt_size=4) to 10750 items from 5000.
 Database file #1: refs.bib
 Warning--entry type for "docker-main" isn't style-file defined
 --line 891 of file refs.bib
@@ -1159,9 +1159,10 @@ Repeated entry---line 4398 of file mqfq/gpu-q-faas.bib
  : ###@misc{    graalvm
  :                     ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 4452 of file mqfq/gpu-q-faas.bib
- : ###@inproceedings{   gunasekaran2020fifer
- :                                          ,
+You're missing a field name---line 4453 of file mqfq/gpu-q-faas.bib
+ : 
+ : ###  title  = {Fifer: Tackling resource underutilization in the
+(Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Repeated entry---line 4568 of file mqfq/gpu-q-faas.bib
  : ###@misc{    guo_decomposing_2022
@@ -1575,45 +1576,45 @@ Warning--empty journal in oakes_sock_2018
 Warning--empty year in hotcarbon22-faas
 Warning--empty journal in strati2024orion
 Warning--empty journal in ensure_acsos20
-You've used 251 entries,
+You've used 250 entries,
             2118 wiz_defined-function locations,
-            1692 strings with 56440 characters,
-and the built_in function-call counts, 105798 in all, are:
-= -- 10265
-> -- 5663
-< -- 147
-+ -- 2255
-- -- 1990
-* -- 7290
-:= -- 16244
-add.period$ -- 763
-call.type$ -- 251
-change.case$ -- 1738
+            1688 strings with 56224 characters,
+and the built_in function-call counts, 105254 in all, are:
+= -- 10212
+> -- 5635
+< -- 146
++ -- 2244
+- -- 1980
+* -- 7253
+:= -- 16165
+add.period$ -- 760
+call.type$ -- 250
+change.case$ -- 1730
 chr.to.int$ -- 0
-cite$ -- 291
-duplicate$ -- 4178
-empty$ -- 7942
-format.name$ -- 1990
-if$ -- 23003
+cite$ -- 290
+duplicate$ -- 4155
+empty$ -- 7901
+format.name$ -- 1980
+if$ -- 22882
 int.to.chr$ -- 0
-int.to.str$ -- 251
-missing$ -- 208
-newline$ -- 1217
-num.names$ -- 450
-pop$ -- 2289
+int.to.str$ -- 250
+missing$ -- 207
+newline$ -- 1212
+num.names$ -- 448
+pop$ -- 2278
 preamble$ -- 1
-purify$ -- 1488
+purify$ -- 1481
 quote$ -- 0
-skip$ -- 3431
+skip$ -- 3411
 stack$ -- 0
-substring$ -- 5868
-swap$ -- 1559
-text.length$ -- 147
+substring$ -- 5831
+swap$ -- 1548
+text.length$ -- 146
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1004
+type$ -- 1000
 warning$ -- 40
-while$ -- 901
-width$ -- 254
-write$ -- 2680
+while$ -- 896
+width$ -- 253
+write$ -- 2669
 (There were 375 error messages)

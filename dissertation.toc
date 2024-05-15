@@ -5,11 +5,11 @@
 \contentsline {section}{\numberline {1.1}Thesis Outline}{6}{section.1.1}%
 \contentsline {chapter}{\numberline {2.}Background: Serverless computing and Function as a Service}{10}{chapter.2}%
 \contentsline {section}{\numberline {2.1}What exactly is Serverless Computing?}{10}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Serverless Containers}{13}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Virtual Machines}{13}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}VM Resource Management}{14}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Containers}{14}{subsection.2.2.3}%
-\contentsline {section}{\numberline {2.3}Serverless Control Plane Research}{15}{section.2.3}%
+\contentsline {section}{\numberline {2.2}Serverless Containers}{14}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Virtual Machines}{14}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}VM Resource Management}{15}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Containers}{15}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Serverless Control Plane Research}{16}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Load Balancing}{19}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Heterogeneous Hardware}{20}{subsection.2.3.2}%
 \contentsline {subsection}{\numberline {2.3.3}Serverless Data-plane}{20}{subsection.2.3.3}%

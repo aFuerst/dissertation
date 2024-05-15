@@ -6,7 +6,7 @@
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Different layers of abstraction between hardware and kernel based virtualization.\relax }}{15}{figure.caption.11}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Virtual Machines}}}{15}{subfigure.3.1}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Containers}}}{15}{subfigure.3.2}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces A CDF of daily invocations for functions. Invocation frequencies range from sub-second to less than one per day. Figure from \cite {shahrad_serverless_2020}\relax }}{16}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces A CDF of daily invocations for functions. Invocation frequencies range from sub-second to less than one per day. Figure from \cite {shahrad_serverless_2020}\relax }}{17}{figure.caption.12}%
 \addvspace {10pt}
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Timeline of function execution and sources of cold-start delay in OpenWhisk for an ML inference application.\relax }}{28}{figure.caption.14}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Initializing functions by importing and downloading code and data dependencies can reduce function latency by hiding the cold-start overhead.\relax }}{28}{figure.caption.15}%

@@ -3,7 +3,7 @@
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=.6\columnwidth]{./figures/sys-diag.pdf}
+    \includegraphics[width=.9\columnwidth]{./figures/sys-diag.pdf}
   \caption{A common architecture for serverless control planes. 
           A controller distributes invocations to workers who run them inside containers.}
   \label{fig:serverless-arch}
@@ -15,8 +15,8 @@ Serverless computing presents a radical departure from previous iterations of co
 Users can run arbitrary applications without concern for how or where it is ultimately run.
 FaaS control planes operate as a complex distributed system, operating from the lowest levels of OS abstractions to the highest levels of cloud system designs.
 
-All such control planes work similarly and follow the generic architecture shown in Figure~{fig:serverless-arch}.
-Users upload their \textit{source code} \circled{1} such as that one in Figure~\ref{fig:lambda-example} to the cloud provider to create a \textbf{function}, and such functions can be chained together inside the provider's system to form a larger \textbf{application}.
+All such control planes work similarly and follow the generic architecture shown in Figure~\ref{fig:serverless-arch}.
+Users upload their \textit{source code} \circled{1} such as that one in Figure~\ref{fig:background-lambda-example} to the cloud provider to create a \textbf{function}, and such functions can be chained together inside the provider's system to form a larger \textbf{application}.
 When the code is \textbf{invoked} (e.g. an HTTP request is made \circled{2}), the provider routes it to a worker \circled{3}, creates a sandbox for it and executes the function \circled{4}, passing in any custom parameters.
 This sandbox must provide isolation, both covering both resource and security, ensuring that hogs or malicious actors do not interfere with co-located executions.
 Often, this sandbox utilizes existing technologies such as Docker \cite{docker-main} or VMs.
@@ -39,7 +39,7 @@ The major cloud computing providers have all created offerings, Amazon Lambda \c
      \end{lstlisting}
      \caption{A classic serverless function: performing ML inference on image data. 
               In this example library and model initialization are done before execution starts.}
-     \label{fig:lambda-example}
+     \label{fig:background-lambda-example}
 \end{figure}
 
 \begin{comment}
@@ -52,16 +52,15 @@ GET http://faas.com/img_recogn?input_bucket=9bcc64b9.png
 \end{figure}
 \end{comment}
 
-In a change from the billing model for rented VMs, users are billed only for the time their code is executing, often in small millisecond-sized timeslices.
+In a change from the billing model for rented VMs, users are billed only for the time their code is executing, often in small millisecond-sized time slices.
 Most providers set the cost to a formulation of the amount of memory used per time period \cite{lambda-pricing}, roughly $\$1.66 \times 10^{-5}$ per GB/second.
 Should the provider choose to keep that sandbox resident in memory to use for a future invocation, the user will not be charged nor be aware that it is happening, save for lower latency on future invocations.
 
 % \cite{lambda,gcp-functions,azure-functions,openwhisk,alibaba-compute,shahrad2020serverless,hendrickson2016serverless}
 
 
-Serverless computing is now being provided by all large public cloud providers, and 
+Serverless computing is now being provided by all large public cloud providers and is an increasingly popular way to deploy applications on the cloud.  
 %Amazon Lambda~\cite{aws-lambda}, Google Functions~\cite{google-functions}, and Azure Functions~\cite{azure-functions} are becoming an
-is increasingly popular way to deploy applications on the cloud.  
 Functions as a Service (FaaS) can also be realized on private clouds and dedicated clusters using frameworks such as OpenWhisk~\cite{openwhisk}, OpenFaaS~\cite{openfaas},  OpenLambda~\cite{hendrickson2016serverless}, etc. 
 In this new cloud paradigm, users provide functions in languages such as Python, JavaScript, Go, Java, and others. 
 The functions are executed by the FaaS platform, greatly simplifying resource management for the application. 
@@ -80,12 +79,13 @@ FaaS functions cannot assume that state will persist across invocations, and fun
 Each function is run inside a container such as Docker~\cite{docker-main}, or a lightweight VM such as Firecracker~\cite{firecracker-nsdi20}. 
 By encapsulating function state and any side effects, the virtual execution environment provides isolation among multiple functions, and also allows for concurrent invocations of the same function. 
 Due to the overhead of starting a new virtual execution environment (i.e., container or VM), and initializing the function by importing libraries and other data dependencies, function execution thus incurs a significant \quotes{cold-start} penalty.
-Table~\ref{tab:workloads} shows the breakdown of initialization time (last column) vs. the total running time of different FaaS applications, and we can that the initialization overhead can as much as 80\% of the total running time. 
-Thus, FaaS can result in significant performance (i.e., total function execution latency) overheads compared to conventional models of execution where applications can reuse state and do not face the high initialization and cold-start overheads. 
+Table~\ref{tab:bg-workloads} shows the breakdown of initialization time (last column) vs. the total running time of different FaaS applications, and we can see that the initialization overhead can be as much as 80\% of the total running time. 
+Thus, FaaS can result in significant performance (i.e., total function execution latency) overheads compared to conventional models of execution where applications can maintain application state between handling user requests and do not face the high initialization and cold-start overheads. 
 
 
 
 \begin{table}
+  \centering
   \caption{FaaS workloads are highly diverse in their resource requirements and running times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies.}
   \begin{tabular}{lrrr}
     \hline 
@@ -102,7 +102,7 @@ Thus, FaaS can result in significant performance (i.e., total function execution
     \hline
   \end{tabular}
   % \vspace*{\myfigspace}
-  \label{tab:workloads}
+  \label{tab:bg-workloads}
   %\vspace*{\myfigspace}
 \end{table}
 
@@ -156,10 +156,10 @@ A major drawback is that users must install (duplicate) copies of OS's, librarie
 % Oodles of work in the maximizing resource use in area.
 % From making them faster, reducing footprint, bin-packing, etc.
 A number of works have sought to reduce the overhead from virtualization by techniques such as securely exposing hardware to guests \cite{dong2008sr} or reducing layers of indirection \cite{ben2010turtles}.
-\cite{waldspurger2002memory} outlined a number of optimizations to memory usage that reduce the footprint of VMs that are still used in production hypervisors today.
-Choosing where to place VMs, knowing that they may run for days of months, is critical to reduce fragmentation of hosts across provider datacenters.
-Bin-packing studies have sought to minimize fragmentation \cite{binpacking} by overcommiting resources even at the risk of violating capacity.
-Even today \cite{fuerst2022memory}, providers still see 20\%-40\% of unallocated resources that they seek ways to make use of.
+A number of optimizations to memory usage that reduce the footprint of VMs were outlined by~\cite{waldspurger2002memory}, which are still used in production hypervisors today.
+Choosing where to place VMs, knowing that they may run for days or months, is critical to reduce fragmentation on hosts across provider datacenters.
+Bin-packing studies have sought to minimize fragmentation \cite{binpacking} by overcommitting resources even at the risk of violating capacity.
+Even today, after much research in the area, providers see 20\%-40\% of unallocated resources~\cite{fuerst2022memory} that they seek ways to make use of.
 
 \subsection{Containers}
 
@@ -179,5 +179,5 @@ Kernel virtualization, built originally around Linux \textit{cgroups}, provides 
 A combination of kernel utilities enables limiting CPU, memory, and I/O usages, restricting views of the file system, blocking interaction with other processes, and more.
 Popularized by various projects \cite{oci,docker-main}, such \textit{containers} reimagined how cloud computing and applications could work.
 Multiple applications could share the same operating system, and even libraries, safe from all interference from one another.
-Developers could ship applications, complete with any dependencies, to users, that ran securely: anytime and anywhere.
+Developers could ship applications, complete with any dependencies, that ran securely, anytime, and anywhere.
 Providers even began offering services around these, tools like Kubernetes \cite{kubernetes} orchestrate placement of containers onto hosts, removing the need for users to rent VMs at all.

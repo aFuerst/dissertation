@@ -122,35 +122,31 @@
 \newlabel{chap:serverless}{{2}{10}{Background: Serverless computing and Function as a Service}{chapter.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}What exactly is Serverless Computing?}{10}{section.2.1}\protected@file@percent }
 \newlabel{sec:serverless-computing}{{2.1}{10}{What exactly is Serverless Computing?}{section.2.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces A common architecture for serverless control planes. A controller distributes invocations to workers who run them inside containers.\relax }}{11}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:serverless-arch}{{2.1}{11}{A common architecture for serverless control planes. A controller distributes invocations to workers who run them inside containers.\relax }{figure.caption.8}{}}
 \citation{lambda-pricing}
 \citation{openwhisk}
 \citation{openfaas}
 \citation{hendrickson2016serverless}
 \citation{docker-main}
 \citation{firecracker-nsdi20}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces A common architecture for serverless control planes. A controller distributes invocations to workers who run them inside containers.\relax }}{11}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:serverless-arch}{{2.1}{11}{A common architecture for serverless control planes. A controller distributes invocations to workers who run them inside containers.\relax }{figure.caption.8}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces A classic serverless function: performing ML inference on image data. In this example library and model initialization are done before execution starts.\relax }}{12}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:lambda-example}{{2.2}{12}{A classic serverless function: performing ML inference on image data. In this example library and model initialization are done before execution starts.\relax }{figure.caption.9}{}}
+\newlabel{fig:background-lambda-example}{{2.2}{12}{A classic serverless function: performing ML inference on image data. In this example library and model initialization are done before execution starts.\relax }{figure.caption.9}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces FaaS workloads are highly diverse in their resource requirements and running times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies.\relax }}{13}{table.caption.10}\protected@file@percent }
+\newlabel{tab:bg-workloads}{{2.1}{13}{FaaS workloads are highly diverse in their resource requirements and running times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies.\relax }{table.caption.10}{}}
 \citation{shahrad_serverless_2020}
 \citation{xen}
-\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces FaaS workloads are highly diverse in their resource requirements and running times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies.\relax }}{13}{table.caption.10}\protected@file@percent }
-\newlabel{tab:workloads}{{2.1}{13}{FaaS workloads are highly diverse in their resource requirements and running times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies.\relax }{table.caption.10}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Serverless Containers}{13}{section.2.2}\protected@file@percent }
-\newlabel{sec:virtualization}{{2.2}{13}{Serverless Containers}{section.2.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Virtual Machines}{13}{subsection.2.2.1}\protected@file@percent }
 \citation{dong2008sr}
 \citation{ben2010turtles}
 \citation{waldspurger2002memory}
 \citation{binpacking}
 \citation{fuerst2022memory}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Serverless Containers}{14}{section.2.2}\protected@file@percent }
+\newlabel{sec:virtualization}{{2.2}{14}{Serverless Containers}{section.2.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Virtual Machines}{14}{subsection.2.2.1}\protected@file@percent }
 \citation{oci}
 \citation{docker-main}
 \citation{kubernetes}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}VM Resource Management}{14}{subsection.2.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Containers}{14}{subsection.2.2.3}\protected@file@percent }
-\citation{docker-main}
-\citation{firecracker-nsdi20}
 \newlabel{fig:vms}{{2.3a}{15}{Subfigure 2 2.3a}{subfigure.2.3.1}{}}
 \newlabel{sub@fig:vms}{{(a)}{a}{Subfigure 2 2.3a\relax }{subfigure.2.3.1}{}}
 \newlabel{fig:docker}{{2.3b}{15}{Subfigure 2 2.3b}{subfigure.2.3.2}{}}
@@ -159,16 +155,18 @@
 \newlabel{fig:docker-vs-vms}{{2.3}{15}{Different layers of abstraction between hardware and kernel based virtualization.\relax }{figure.caption.11}{}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Virtual Machines}}}{15}{subfigure.3.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Containers}}}{15}{subfigure.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Serverless Control Plane Research}{15}{section.2.3}\protected@file@percent }
-\newlabel{sec:platform-enhance}{{2.3}{15}{Serverless Control Plane Research}{section.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}VM Resource Management}{15}{subsection.2.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Containers}{15}{subsection.2.2.3}\protected@file@percent }
+\citation{docker-main}
+\citation{firecracker-nsdi20}
 \citation{shahrad_serverless_2020}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Serverless Control Plane Research}{16}{section.2.3}\protected@file@percent }
+\newlabel{sec:platform-enhance}{{2.3}{16}{Serverless Control Plane Research}{section.2.3}{}}
 \citation{functionbench}
 \citation{shahrad_serverless_2020}
 \citation{shahrad_serverless_2020}
 \citation{shahrad_serverless_2020}
 \citation{romero2021faa}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces A CDF of daily invocations for functions. Invocation frequencies range from sub-second to less than one per day. Figure from \cite  {shahrad_serverless_2020}\relax }}{16}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:wild-invokes}{{2.4}{16}{A CDF of daily invocations for functions. Invocation frequencies range from sub-second to less than one per day. Figure from \cite {shahrad_serverless_2020}\relax }{figure.caption.12}{}}
 \citation{raza2021sok}
 \citation{hossein2022survey}
 \citation{eismann2020serverless}
@@ -176,17 +174,17 @@
 \citation{vhive-asplos21}
 \citation{du2020catalyzer}
 \citation{wei2022booting}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces A CDF of daily invocations for functions. Invocation frequencies range from sub-second to less than one per day. Figure from \cite  {shahrad_serverless_2020}\relax }}{17}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:wild-invokes}{{2.4}{17}{A CDF of daily invocations for functions. Invocation frequencies range from sub-second to less than one per day. Figure from \cite {shahrad_serverless_2020}\relax }{figure.caption.12}{}}
 \citation{docker-main}
+\citation{firecracker-nsdi20}
+\citation{carreira2021warm}
 \citation{vhive-asplos21}
 \citation{shillaker2020faasm}
 \citation{jia2021nightcore}
 \citation{du2020catalyzer}
 \citation{akkus_sand_2018}
 \citation{dukic2020photons}
-\citation{firecracker-nsdi20}
-\citation{carreira2021warm}
-\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces FaaS workloads are highly diverse in their resource requirements and running times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies.\relax }}{17}{table.caption.13}\protected@file@percent }
-\newlabel{tab:workloads}{{2.2}{17}{FaaS workloads are highly diverse in their resource requirements and running times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies.\relax }{table.caption.13}{}}
 \citation{akhtar_cose_2020}
 \citation{eismann2021sizeless}
 \citation{mvondo2021ofc}
@@ -196,10 +194,8 @@
 \citation{eismann2020serverless}
 \citation{hassan2021survey}
 \citation{mampage2021holistic}
-\citation{shahrad_serverless_2020}
-\citation{gunasekaran2020fifer}
-\citation{daw2021speedo}
-\citation{shen2021defuse}
+\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces FaaS workloads are highly diverse in their resource requirements and execution times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies.\relax }}{18}{table.caption.13}\protected@file@percent }
+\newlabel{tab:workloads}{{2.2}{18}{FaaS workloads are highly diverse in their resource requirements and execution times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies.\relax }{table.caption.13}{}}
 \citation{package-cristina-19}
 \citation{leegreedy}
 \citation{balaji2021fireplace}
@@ -233,10 +229,10 @@
 \citation{giantsidi2023flexlog}
 \citation{sreekanti2020fault}
 \citation{abdi2023palette}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Heterogeneous Hardware}{20}{subsection.2.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Serverless Data-plane}{20}{subsection.2.3.3}\protected@file@percent }
 \citation{basu2023propack}
 \citation{copik2023fmi}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Heterogeneous Hardware}{20}{subsection.2.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Serverless Data-plane}{20}{subsection.2.3.3}\protected@file@percent }
 \citation{jonas2017occupy}
 \citation{fouladi2019laptop}
 \citation{ao2018sprocket}
@@ -259,10 +255,10 @@
 \citation{mete2021implementation}
 \citation{zhang2021serverless}
 \citation{donkervlietservo}
+\citation{copik2022faaskeeper}
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Application Mitigations of Control Plane Deficiencies}{21}{section.2.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2.5}Serverless Applications}{21}{section.2.5}\protected@file@percent }
 \newlabel{sec:serverless-apps}{{2.5}{21}{Serverless Applications}{section.2.5}{}}
-\citation{copik2022faaskeeper}
 \citation{balaji2021fireplace}
 \citation{mvondo2021ofc}
 \citation{eismann2021sizeless}
@@ -1028,146 +1024,145 @@
 \bibcite{ginzburg2023vectorvisor}{108}
 \bibcite{gu2023fast}{109}
 \bibcite{guleria2019emf}{110}
-\bibcite{gunasekaran2020fifer}{111}
-\bibcite{guo2010slaw}{112}
-\bibcite{guo_decomposing_2022}{113}
-\bibcite{gupta2007analysis}{114}
-\bibcite{hall_execution_2019}{115}
-\bibcite{hassan2021survey}{116}
-\bibcite{hedayati2019multi}{117}
-\bibcite{hendrickson2016serverless}{118}
-\bibcite{hong2017gpu}{119}
-\bibcite{hu2020hivemind}{120}
-\bibcite{hu2016kinetic}{121}
-\bibcite{hung2019rapid}{122}
-\bibcite{hunhoff2020proactive}{123}
-\bibcite{hussain2019serverless}{124}
-\bibcite{jia2022hyperenclave}{125}
-\bibcite{jia2021nightcore}{126}
-\bibcite{jiang2018convergence}{127}
-\bibcite{john_sweep_2019}{128}
-\bibcite{jonas2017occupy}{129}
-\bibcite{kaffes2019shinjuku}{130}
-\bibcite{kaffes_centralized_2019}{131}
-\bibcite{kaffes2021practical}{132}
-\bibcite{kaffes_hermod_2022}{133}
-\bibcite{karger1997consistent}{134}
-\bibcite{karger1999web}{135}
-\bibcite{kim_scheduling_2021}{136}
-\bibcite{kim_functionbench_2019}{137}
-\bibcite{kim2019functionbench}{138}
-\bibcite{kim2020navigator}{139}
-\bibcite{kim2023cryonics}{140}
-\bibcite{konstantoudakis2022serverless}{141}
-\bibcite{kotni2021faastlane}{142}
-\bibcite{kumanov2018serverless}{143}
-\bibcite{leegreedy}{144}
-\bibcite{li2022kneescale}{145}
-\bibcite{faas-survey-jan-2022}{146}
-\bibcite{lin2020efficient}{147}
-\bibcite{lin_mitigating_2019}{148}
-\bibcite{locust}{149}
-\bibcite{unikernels}{150}
-\bibcite{mahgoub_wisefuse_2022}{151}
-\bibcite{mampage2021holistic}{152}
-\bibcite{manner_cold_2018}{153}
-\bibcite{megiddo2003arc}{154}
-\bibcite{mete2021implementation}{155}
-\bibcite{mirrokni2018consistent}{156}
-\bibcite{mohan2019agile}{157}
-\bibcite{mohan_agile_2019}{158}
-\bibcite{mvondo2021ofc}{159}
-\bibcite{mytkowicz2009producing}{160}
-\bibcite{naranjo2020accelerated}{161}
-\bibcite{ng2023paella}{162}
-\bibcite{nygren2010akamai}{163}
-\bibcite{oakes_sock_2018}{164}
-\bibcite{o1993lru}{165}
-\bibcite{palade-edge-22}{166}
-\bibcite{pemberton2022kernel}{167}
-\bibcite{persson2017kappa}{168}
-\bibcite{pfandzelter_tinyfaas_2020}{169}
-\bibcite{popa_http_2010}{170}
-\bibcite{prekas2017zygos}{171}
-\bibcite{oci}{172}
-\bibcite{przybylski2021data}{173}
-\bibcite{quevedo_evaluating_2019}{174}
-\bibcite{raza2021sok}{175}
-\bibcite{ringlein2021case}{176}
-\bibcite{risco2021gpu}{177}
-\bibcite{ristov_colder_warmer}{178}
-\bibcite{romero2021faa}{179}
-\bibcite{romero2021llama}{180}
-\bibcite{roy2022icebreaker}{181}
-\bibcite{russo2023serverless}{182}
-\bibcite{sahraei2023xfaas}{183}
-\bibcite{scheuner_lets_2022}{184}
-\bibcite{hossein2022survey}{185}
-\bibcite{shahrad_architectural_2019}{186}
-\bibcite{shahrad2020serverless}{187}
-\bibcite{shahrad_serverless_2020}{188}
-\bibcite{shankar2018numpywren}{189}
-\bibcite{shankar2020serverless}{190}
-\bibcite{hotcarbon22-faas}{191}
-\bibcite{deflation-eurosys19}{192}
-\bibcite{shen2021defuse}{193}
-\bibcite{shen_defuse_2021}{194}
-\bibcite{shillaker2020faasm}{195}
-\bibcite{silva_prebaking_2020}{196}
-\bibcite{singhvi2021atoll}{197}
-\bibcite{mocskos_faaster_2018}{198}
-\bibcite{sreekanti2020fault}{199}
-\bibcite{sreekanti2020cloudburst}{200}
-\bibcite{stojkovic2023mxfaas}{201}
-\bibcite{strati2024orion}{202}
-\bibcite{sundarrajan2017footprint}{203}
-\bibcite{suresh2021servermore}{204}
-\bibcite{ensure_acsos20}{205}
-\bibcite{ensure-faas-acsos20}{206}
-\bibcite{suresh2019fnsched}{207}
-\bibcite{tian_owl_2022}{208}
-\bibcite{trach2019clemmys}{209}
-\bibcite{trilles2020iot}{210}
-\bibcite{tsai2017graphene}{211}
-\bibcite{ustiugov_analyzing_2021}{212}
-\bibcite{vhive-asplos21}{213}
-\bibcite{ustiugov2021benchmarking}{214}
-\bibcite{vahidinia2022mitigating}{215}
-\bibcite{waldspurger2002memory}{216}
-\bibcite{shards}{217}
-\bibcite{wang2021lass}{218}
-\bibcite{wang2019distributed}{219}
-\bibcite{wang2020supporting}{220}
-\bibcite{wang2022virtee}{221}
-\bibcite{wang2021smartharvest}{222}
-\bibcite{wang2021wearmask}{223}
-\bibcite{wei2022booting}{224}
-\bibcite{welford}{225}
-\bibcite{werner2018serverless}{226}
-\bibcite{counterstacks}{227}
-\bibcite{xu2021lambdadnn}{228}
-\bibcite{yan2020hermes}{229}
-\bibcite{yan2016building}{230}
-\bibcite{yang2022infless}{231}
-\bibcite{yang2000general}{232}
-\bibcite{young_gd_orig_94}{233}
-\bibcite{young2002line}{234}
-\bibcite{yu2021faasrank}{235}
-\bibcite{yu2021harvesting}{236}
-\bibcite{yu2019automatic}{237}
-\bibcite{yu2017full}{238}
-\bibcite{yuan2022smpi}{239}
-\bibcite{zaharia2010delay}{240}
-\bibcite{zhang2019video}{241}
-\bibcite{zhang2021serverless}{242}
-\bibcite{serverless-harvest-sosp21}{243}
-\bibcite{osca_atc20}{244}
-\bibcite{zhang2020osca}{245}
-\bibcite{zhao2021understanding}{246}
-\bibcite{zhao2023reusable}{247}
-\bibcite{zhou2022aquatope}{248}
-\bibcite{zhou_qos-aware_2022}{249}
-\bibcite{zuk_scheduling_2020}{250}
-\bibcite{zuk_call_2022}{251}
+\bibcite{guo2010slaw}{111}
+\bibcite{guo_decomposing_2022}{112}
+\bibcite{gupta2007analysis}{113}
+\bibcite{hall_execution_2019}{114}
+\bibcite{hassan2021survey}{115}
+\bibcite{hedayati2019multi}{116}
+\bibcite{hendrickson2016serverless}{117}
+\bibcite{hong2017gpu}{118}
+\bibcite{hu2020hivemind}{119}
+\bibcite{hu2016kinetic}{120}
+\bibcite{hung2019rapid}{121}
+\bibcite{hunhoff2020proactive}{122}
+\bibcite{hussain2019serverless}{123}
+\bibcite{jia2022hyperenclave}{124}
+\bibcite{jia2021nightcore}{125}
+\bibcite{jiang2018convergence}{126}
+\bibcite{john_sweep_2019}{127}
+\bibcite{jonas2017occupy}{128}
+\bibcite{kaffes2019shinjuku}{129}
+\bibcite{kaffes_centralized_2019}{130}
+\bibcite{kaffes2021practical}{131}
+\bibcite{kaffes_hermod_2022}{132}
+\bibcite{karger1997consistent}{133}
+\bibcite{karger1999web}{134}
+\bibcite{kim_scheduling_2021}{135}
+\bibcite{kim_functionbench_2019}{136}
+\bibcite{kim2019functionbench}{137}
+\bibcite{kim2020navigator}{138}
+\bibcite{kim2023cryonics}{139}
+\bibcite{konstantoudakis2022serverless}{140}
+\bibcite{kotni2021faastlane}{141}
+\bibcite{kumanov2018serverless}{142}
+\bibcite{leegreedy}{143}
+\bibcite{li2022kneescale}{144}
+\bibcite{faas-survey-jan-2022}{145}
+\bibcite{lin2020efficient}{146}
+\bibcite{lin_mitigating_2019}{147}
+\bibcite{locust}{148}
+\bibcite{unikernels}{149}
+\bibcite{mahgoub_wisefuse_2022}{150}
+\bibcite{mampage2021holistic}{151}
+\bibcite{manner_cold_2018}{152}
+\bibcite{megiddo2003arc}{153}
+\bibcite{mete2021implementation}{154}
+\bibcite{mirrokni2018consistent}{155}
+\bibcite{mohan2019agile}{156}
+\bibcite{mohan_agile_2019}{157}
+\bibcite{mvondo2021ofc}{158}
+\bibcite{mytkowicz2009producing}{159}
+\bibcite{naranjo2020accelerated}{160}
+\bibcite{ng2023paella}{161}
+\bibcite{nygren2010akamai}{162}
+\bibcite{oakes_sock_2018}{163}
+\bibcite{o1993lru}{164}
+\bibcite{palade-edge-22}{165}
+\bibcite{pemberton2022kernel}{166}
+\bibcite{persson2017kappa}{167}
+\bibcite{pfandzelter_tinyfaas_2020}{168}
+\bibcite{popa_http_2010}{169}
+\bibcite{prekas2017zygos}{170}
+\bibcite{oci}{171}
+\bibcite{przybylski2021data}{172}
+\bibcite{quevedo_evaluating_2019}{173}
+\bibcite{raza2021sok}{174}
+\bibcite{ringlein2021case}{175}
+\bibcite{risco2021gpu}{176}
+\bibcite{ristov_colder_warmer}{177}
+\bibcite{romero2021faa}{178}
+\bibcite{romero2021llama}{179}
+\bibcite{roy2022icebreaker}{180}
+\bibcite{russo2023serverless}{181}
+\bibcite{sahraei2023xfaas}{182}
+\bibcite{scheuner_lets_2022}{183}
+\bibcite{hossein2022survey}{184}
+\bibcite{shahrad_architectural_2019}{185}
+\bibcite{shahrad2020serverless}{186}
+\bibcite{shahrad_serverless_2020}{187}
+\bibcite{shankar2018numpywren}{188}
+\bibcite{shankar2020serverless}{189}
+\bibcite{hotcarbon22-faas}{190}
+\bibcite{deflation-eurosys19}{191}
+\bibcite{shen2021defuse}{192}
+\bibcite{shen_defuse_2021}{193}
+\bibcite{shillaker2020faasm}{194}
+\bibcite{silva_prebaking_2020}{195}
+\bibcite{singhvi2021atoll}{196}
+\bibcite{mocskos_faaster_2018}{197}
+\bibcite{sreekanti2020fault}{198}
+\bibcite{sreekanti2020cloudburst}{199}
+\bibcite{stojkovic2023mxfaas}{200}
+\bibcite{strati2024orion}{201}
+\bibcite{sundarrajan2017footprint}{202}
+\bibcite{suresh2021servermore}{203}
+\bibcite{ensure_acsos20}{204}
+\bibcite{ensure-faas-acsos20}{205}
+\bibcite{suresh2019fnsched}{206}
+\bibcite{tian_owl_2022}{207}
+\bibcite{trach2019clemmys}{208}
+\bibcite{trilles2020iot}{209}
+\bibcite{tsai2017graphene}{210}
+\bibcite{ustiugov_analyzing_2021}{211}
+\bibcite{vhive-asplos21}{212}
+\bibcite{ustiugov2021benchmarking}{213}
+\bibcite{vahidinia2022mitigating}{214}
+\bibcite{waldspurger2002memory}{215}
+\bibcite{shards}{216}
+\bibcite{wang2021lass}{217}
+\bibcite{wang2019distributed}{218}
+\bibcite{wang2020supporting}{219}
+\bibcite{wang2022virtee}{220}
+\bibcite{wang2021smartharvest}{221}
+\bibcite{wang2021wearmask}{222}
+\bibcite{wei2022booting}{223}
+\bibcite{welford}{224}
+\bibcite{werner2018serverless}{225}
+\bibcite{counterstacks}{226}
+\bibcite{xu2021lambdadnn}{227}
+\bibcite{yan2020hermes}{228}
+\bibcite{yan2016building}{229}
+\bibcite{yang2022infless}{230}
+\bibcite{yang2000general}{231}
+\bibcite{young_gd_orig_94}{232}
+\bibcite{young2002line}{233}
+\bibcite{yu2021faasrank}{234}
+\bibcite{yu2021harvesting}{235}
+\bibcite{yu2019automatic}{236}
+\bibcite{yu2017full}{237}
+\bibcite{yuan2022smpi}{238}
+\bibcite{zaharia2010delay}{239}
+\bibcite{zhang2019video}{240}
+\bibcite{zhang2021serverless}{241}
+\bibcite{serverless-harvest-sosp21}{242}
+\bibcite{osca_atc20}{243}
+\bibcite{zhang2020osca}{244}
+\bibcite{zhao2021understanding}{245}
+\bibcite{zhao2023reusable}{246}
+\bibcite{zhou2022aquatope}{247}
+\bibcite{zhou_qos-aware_2022}{248}
+\bibcite{zuk_scheduling_2020}{249}
+\bibcite{zuk_call_2022}{250}
 \citation{burber}
 \@writefile{toc}{\contentsline {chapter}{Curriculum Vitae}{}{chapter*.72}\protected@file@percent }
