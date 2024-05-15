@@ -1,0 +1,216 @@
+\section{Implementation}
+
+% Use a lot of provided stuff as a starting point
+%   Containerd for isolation/container startup
+%   CNI for networking
+%   prebuilt Docker images
+%   Rust language for efficient compiled language, without garbage collection interference
+%   Tokio async handling & userspace threads
+Our language of choice was Rust, as we wanted to avoid garbage-collected languages and take advantage of the compile-time efficiencies.
+The remainder of the system that we wrote ourselves is implemented in $\sim$ 13k lines of Rust.
+To manage the expected concurrency for such a system, the Tokio Rust package implements user threads and scheduling that we found very easy to integrate with.
+
+For ease of repeatable and scalable use, we have set up our system to be deployable with Ansible \cite{}.
+In a command it can configure, set up, and tear down the applications that make up \sysname{}, and even capture artifacts like logs.
+It ties in nicely with the detailed configuration supported by our worker and controller services.
+Our services support configuration via a json file, convenient for development and local testing, but less so for large research experiments.
+Ansible, plus some clever config loading, allow us to inject arbitrary values as part of a larger command, making deployment for different experiments a breeze.
+% With this setup, \sysname{} can be configured and deployed to any number of nodes with a single command.
+% With this we easily scripted a variety of setups for our experiments in Section \ref{Evaluation}, giving us consistent and controlled environments and results.
+% Workers are configured with a json file on startup, with the various policy options (such as queuing), keep-alive, timeouts, networking, logging, etc.
+
+CNI and container-spec are also provided as json files. For the container-spec, we change....
+
+% Workers have four main services: Containers, invocation, network, and status.
+Our workers have four main services that control everything.
+The \textbf{ContainerManager} is the arbiter for container tracking as it moves them through as quasi state-machine.
+The invoker layer must ask it for a container on which to run an invocation, which is then returned on completion.
+On cold starts and prewarm requests, it interacts with backends to create a new container to satisfy a request.
+Two concurrent \emph{ContainerPools} are used, tracking for cached and currently-invoking containers respectively.
+In the background, it queries the OS for each container's memory usage.
+This is handly because functions rarely use most or all of their requested allocation and we can use their real usage in our memory tracking.
+If our free memory is not sufficient to start a new container we maintain a list of all alive containers and evict some to make room.
+To make evictions on the critical path rare and fast, we have a thread keep the list of containers sorted by eviction priority and ensures a buffer of free memory by eagerly evicting when necessary.
+
+The \textbf{Invoker} controls queuing policies, concurrency limitations, and naturally, actually invoking functions.
+It tracks various function characteristics: cold start time, warm execution, IATs, and more; for use in advanced queuing policies.
+Rust isn't the ideal language for code reusability, but we've engineered the invoker pipeline such that new queuing policies can be implemented in a few dozen lines of code.
+Monitoring invocation patterns for prewarming opportunities, delaying invocations to get a warm start, and the simplest policym FCFS, are all easy to implement.
+
+The \textbf{NetworkManager} creates and caches network namespaces, these are how we provide network isolation between containers.
+Caching and maintaining a pool of network namespaces reduces the latency of a cold start, as we show in \ref{};
+
+The \textbf{Status} service queries the other services regularly, recording worker metrics such as number of running functions, containers, memory usage.
+Additionally, it captures external values, worker CPU utilization, node load averages, node CPU usage, etc.
+
+% Containermanager is the main component of Containers service. Maintains registered functions, containerpool, system resource usage (CPU and memory).
+% Shared across different threads using reference counting.
+
+% \textbf{try-acquire-cores:} is this non-processor-sharing? % ignore this, try-acquire-cores duplicates concurrency limitations, probably will remove as it is redundant
+
+\textbf{Running a function} is a multi-step process that goes through the whole platform. % Describe the flow. 
+A request enters \sysname{} and if via the controller it is load-balanced to a worker.
+Once at the worker, our invocation is passed to the \emph{Invoker} and put into the queue.
+The invoker checks if there is concurrency to run the invocation and removes it from the queue if it can be run.
+It must then acquire a container from the \emph{ContainerManager}, ensuring each container only runs one invocation at a time.
+At this stage the \emph{Invoker} knows if the invocation will be a cold or warm start and can make a decision based on that information.
+A cold start requires the \emph{ContainerManager} to interact with the containerization backend and start a new sandbox.
+Once a container is ready, the \emph{Invoker} makes an HTTP call to a server running in the container.
+That server then runs the invocation with any arguments passed along.
+Finally, the invocation result is propagated back up to the caller.
+
+% Async nature requires a containerlock for running a function in a given container. 
+% Invocation is put into the queue, then de-queued into a \emph{different} Tokio runtime to execute.
+
+% Container pool vs. eviction list. Evict random containers of functions? 
+% Computing priorities for eviction is done by copying the container list and doing it off-path, since it is triggered only when the free memory drops below the safety limit. 
+% Rust ownership makes having a single container-pool without the extra cloning tricky?
+
+% Low-level interfacing with Containerd for creation, destruction, pulling images, etc. 
+\begin{comment}
+0-702243c7to3354toeabdto38dftoe1dc67894974
+['ilúvatar_worker::invoke', 'fcfs_invoke::sync_invocation', 'invoker_trait::enqueue_new_invocation', 'fcfs_invoke::add_item_to_queue', 'invoker_trait::spawn_tokio_worker', 'invoker_trait::invocation_worker_thread', 'invoker_trait::invoke_internal', 'containermanager::acquire_container', 'containermanager::try_acquire_container', 'containermanager::try_lock_container', 'ContainerLock::invoke', 'ContainerdContainer::invoke', 'containerdstructs::update_metadata_on_invoke', 'containerdstructs::call_container', 'containerdstructs::download_text', 'containermanager::return_container']
+[0.0, 0.026, 0.039, 0.056, 0.103, 0.132, 0.152, 0.16799999999999998, 0.191, 0.208, 0.294, 0.309, 0.32899999999999996, 0.372, 1.776, 1.867]
+[2.15, 2.096, 0.055, 0.02, 0.015000000000000001, 1.7799999999999998, 1.7440000000000002, 0.092, 0.054, 0.014, 1.55, 1.518, 0.017, 1.3639999999999999, 0.032, 0.013]
+[1, 2, 3, 4, 3, 4, 5, 6, 7, 8, 6, 7, 8, 8, 8, 6]
+['Entry/Enqueued', 'Setup', 'Invoking', 'Returning']
+[0.0, 0.103, 0.294, 1.867]
+[2.15, 2.0460000000000003, 1.856, 0.28200000000000003]
+\end{comment}
+
+\begin{figure}
+  \begin{tabular}{|c|c|r|}
+    \hline
+    Group & Function Name & Time (ms) \\
+    \hline
+    Ingestion \& Queuing & \begin{tabular}{@{}c@{}}invoke \\ sync\_invoke \\ enqueue\_invocation \\ add\_item\_to\_q \end{tabular} & \begin{tabular}{@{}c@{}}0.026 \\ 0.013 \\ 0.017 \\ 0.02 \end{tabular} \\
+    \hline
+    Container Operations & \begin{tabular}{@{}c@{}}spawn\_worker \\ dequeue \\ acquire\_container \\ try\_lock\_container \\ \end{tabular} & \begin{tabular}{@{}c@{}}0.029 \\ 0.02 \\ 0.096 \\ 0.014 \\ \end{tabular} \\
+    \hline
+    Agent Communication & \begin{tabular}{@{}c@{}}prepare\_invoke \\ call\_container \\ download\_result \\ \end{tabular} & \begin{tabular}{@{}c@{}}0.154 \\ 1.364 \\ 0.032 \\ \end{tabular} \\
+    \hline
+    Returning & \begin{tabular}{@{}c@{}}return\_container \\ return\_results \\ \end{tabular} & \begin{tabular}{@{}c@{}}0.017 \\ 0.266 \\ \end{tabular} \\
+    \hline
+  \end{tabular}
+  \caption{Times spent in differnt parts of the code for a single warm invocation.}
+\end{figure}
+
+\textbf{Platform Optimizations}.
+We made a number of optimizations that we discovered along the way, often specific to our design.
+We switched the queue used by the invoker to be notified on new items, rather than strictly polling for new items.
+This both reduced latency (nothing waiting to be discovered), and reduced CPU usage because we can avoid busy waiting.
+Rust \emph{async} items are actually resolved via polling, and originally we implemented a polling background thread per-invocation to notify the client thread of completion.
+Later this was switched to using a Tokio type for notifications, simplifying our code and improving performance by using framework members.
+Caching the HTTP client used to send invocations to containers dramatically improved latencies, as the library uses connection pooling under the hood.
+We switched the ContainerPool to use a concurrent dictionary library to reduce contention on a hot data structure.
+Lastly, the load generator proved to be a bottleneck source by excessively opening RPC connections.
+It multi-plexes connections, making it cheaper to share an existing connection between load threads than it is to open a new connection for each RPC request.
+% Optimizations: polling queue -> notification queue, tokio semaphore for invoke complete notification, caching http client for container call, container mgr to dashmap, load gen API to use API factory.
+
+
+
+\subsection{Rest} 
+
+
+
+Fine-grained performance is obtained using tracing and spans. Filter the output to reduce the overhead. \emph{What did we find using this? Main overhead figure?} . Because spans can be tricky with asynchronous code, we do ....
+Finally, worker shutdown entails cleaning all state for repeatable and robust experimentation. 
+
+
+Containerization overheads were not the target of this work, so we used some well-tested community tools from OCI \ref{} to fulfill that part of the FaaS system.
+Containerd \ref{} creates and applies resource cgroups, and handles file system protections for functions.
+CNI handles the necessary networking connections and isolation, and finally Docker images integrate seamlessly with Containerd making it easy to create runnable function packages.
+% Reusing community-tested tools, Containerd for function isolation, CNI for networking, and Docker images for file systems.
+
+% Modular design
+% Configuration allows lots of methods for adjusting internal design
+%   Take advantage of polymorphism in Rust for code reusability
+%     Easily implement new containerization backends, eviction policies, queue policies, load balancing algorithms, etc.
+We had two goals for implementing \sysname{} 1. Make an effective a research platform and 2. Have it produce valid and consistent results.
+Researchers must be able to modify and control the system with little effort to efficiently conduct research and test out new ideas.
+Additionally, if experiments require lots of hands-on time or vary between iterations, one cannot tell the impact of new ideas.
+
+A high degree of control means plenty of configuration knobs and runtime tunability, of which we have added plenty throughout \sysname{}.
+Resource limits for different sized experiments and hardware, metric logging frequencies, and more are provided out of the box.
+Making and using code modifications is extremely easy as well, using the polymorphism and code generation capabilities of Rust.
+For this work we implemented multiple containerization backends, queuing policies, and load balancers to serve both as comparisons and guides.
+
+We have written our queue policies and load balancers such that they can be written and tested in just a few man-hours and some dozens of lines of code.
+Rust's inheritance system limits code reuse, we can't have a parent ''class'' with children using the parent's properties, but you can have the parent implement member functions.
+We take advantage of this to move the invocation state management, leaving only the queue ordering and balancing to be implemented.
+
+Container management has been cleanly separated from the isolation mechanisms and their lifecycle.
+We can thus compare new isolations, cold start improvements, and more such new research possibilities \emph{on the same hardware}, with just a configuration change and a restart.
+New isolation mechanisms naturally take more effort, but can be cleanly dropped-in at runtime taking a couple days of writing and throrough testing.
+
+% All of these major components can then easily be swapped out at runtime via configuration for comparison.
+% Our modular code design and configurability can allow these to be swapped out dynamically for custom implementations to facilitate reserach.
+
+
+
+% low-variance! and low(ish)-overhead platform
+%   No bottlenecks in code
+%   Use concurrent datastructures the community provided -> good enough for our needs
+%   Mostly R-W locks as write events are rare (registration, cold starts)
+%   The mutex lock for the invcation Q has 0 impact under load
+Eliminating inconsistencies caused by the Serverless platform are critical for its use in research.
+Highly variable results make reasoning with them challenging and one can never be sure if they are from intentional changes or simply background instability.
+% Having low variance and low overhead invocations didn't require us to implement needed components ourselves.
+Concurrent data structures, from \emph{DashMap}, using sharded read-write locks compose our major pieces, helping us avoid lock contention between threads.
+As object creation happens on registration and cold starts, which are uncommon, we continue to use read-write locks elsewhere to avoid contention on global objects.
+The primary "bottleneck" comes from our enqueueing of every invocation into a global queue protected by a basic mutex.
+Our results below show that even handling many thousands of requests per second, it is no worse than a queue-less implementation \ref{}.
+
+% Low CPU usage under load
+%    ~ 20% of one CPU core
+The efficient nature of compiled Rust code and our implementation moderates the CPU usage of the worker process.
+Keeping this low is important to avoid interference on functions and minimize overhead.
+Even under a heavy and sustained load that fills our servers \ref{}, the \sysname{} worker process never uses more than 20\% of a CPU core.
+
+% Load Generator
+% Enables live testing and simulation setup
+%   Both controller (cluster) and individual worker
+% scaling - test throughput ability with increasing number of clients
+% mention this issue?: tput breakdown with increasing number of clients if they keep opening new RPC requests
+%       'clone' of RPC connection from tonic scales better than establishing new connection
+%       means that system will not scale with large % of clients coming from a varietey of sources (probably takes a lot though)
+% benchmark - run a function on an empty setup to capture its performance characteristics
+%   Cold, pre-warmed, & warmed setups
+%   useful for later evauluation of system under stress
+% trace - run a pre-generated trace against the system
+%   open-loop load generator, invocation happens at a pre-determined time
+%   Captures all the invocation details: tid, execution duration, e2e latency, etc.
+%   Pre-warms containers based on function characteristics: IAT, expected runtime characteristics, etc.
+%       Handles the "warm state" of a system to avoid herd of cold container creation
+%   Able to use benchmark data to "map" custom functions to those in trace
+%       Or specify functions to use, or use lookbusy for "realistic" usage
+%       Not perfect, if under CPU time sharing
+
+Our load generator is closely coupled with the platform, being able to target a cluster fronted by the controller, or a single worker.
+At it's simplest we can test the running characteristics of a variety of functions, which we used to inform both our design and debugging directions.
+We then leverage those function metrics to execute realistic loads against the system under test.
+For deciding what user code is actually executed on workers, we have provided several possibilities.
+The function characteristics from above are used to intelligently ''map'' ported FaasBench \cite{} functions to the trace being run, so the running times are similar.
+Supplementing this, users can either specify code to be run in each function or utilize \emph{lookbusy} \cite{} for wall-clock accurate, cpu-using, and memory-usage matching invocations.
+
+% Trace generation
+% Use the azure stuff
+% Can generate traces a few diff ways: iat, ecdf, actual invokes
+% function sizes based on # of functions taken from the Azure trace or expected # of outstanding requests per second (little's law)
+% Any hand-rolled trace with specific functions and IATs for testing and creating specific scenarios: e.g. big burst
+
+To generate loads, we pull real-world data from pub Azure \cite{} datasets.
+\sysname{} can generate basic traces using the mean inter-arrival times of functions, such that functions will appear with consistent frequency, plus some Gausian noise distribution.
+% and even directly replicate invocation patterns.
+The most advanced are traces use ECDFs \cite{}, where the range of IATs of a function form a sample distribution to when it will be invoked next.
+This allows us to capture the bursty nature of many functions, having alternating periods of high and low invocation frequencies.
+
+% Mention energy monitoring capabilities?
+We have integrated additional systemreporting capabilities for other novel FaaS research as well.
+\sysname{} can monitor a variety of hardware and software energy metrics to compute platform and per-function and per-invocation energy contributions \cite{}.
+With this capability, the platform enables new billing, scheduling, and load balancing opportunities for serverless.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

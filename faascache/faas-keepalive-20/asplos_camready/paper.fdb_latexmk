@@ -1,0 +1,19 @@
+# Fdb version 3
+["pdflatex"] 1614192074 "/home/af/repos/faas-keepalive-20/asplos_camready/paper.tex" "/home/af/repos/faas-keepalive-20/asplos_camready/paper.pdf" "paper" 1614192074
+  "/etc/texmf/web2c/texmf.cnf" 1598012851 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/af/repos/faas-keepalive-20/asplos_camready/paper.aux" 1614192074 8 a94a2480d3289e625eea47cd1b285758 ""
+  "/home/af/repos/faas-keepalive-20/asplos_camready/paper.tex" 1614192074 4112 cd1b0df4e6595d92d2c5c2842e2143a3 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex" 1480098819 2725 fc34ef3ccb37ba15a640e8fca6190bca ""
+  "/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex" 1480098819 19231 26434a5656c684f5ffb1f26f98006baa ""
+  "/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex" 1480098819 7677 6f5ce7c1124cad7ec57d05b2562bd8fe ""
+  "/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty" 1480098843 4962 9c1069474ff71dbc47d5006555e352d3 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1613837591 813117 289b8757d54730698ffdb079d11b44d7 ""
+  "acmart.cls" 1613041807 100397 33ab3db5699c475d5435e28b7021d6c1 ""
+  "paper.tex" 1614192074 4112 cd1b0df4e6595d92d2c5c2842e2143a3 ""
+  "xstring.sty" 0 -1 0 ""
+  (generated)
+  "/home/af/repos/faas-keepalive-20/asplos_camready/paper.pdf"
+  "paper.log"
+  "/home/af/repos/faas-keepalive-20/asplos_camready/paper.log"

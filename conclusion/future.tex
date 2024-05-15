@@ -1,0 +1,90 @@
+\section{Future Work}
+\label{sec:future}
+
+This thesis is highlighted by the design and development of the \sysname~serverless control plane.
+I want to use \sysname~as a springboard for further work both in extension of research described here, and some that is wholly new.
+
+\subsection{Work Stealing Scheduling}
+\label{sec:work-steal}
+
+Load balancer cannot scale to serve millions of invocations and also have oracle-level knowledge of a cluster of thousands.
+We must accept some load imbalance on workers -- scenarios that become especially common in bursty FaaS scenarios.
+Work stealing~\cite{lin2020efficient, guo2010slaw, blumofe1999scheduling} allowing workers to adjust load amongst themselves.
+Idle nodes can \emph{steal} invocations from overloaded machines and run them to improve utilization.
+This can also be done in a locality-preserving manner, by borrowing the ideas from chapter~\ref{chap:chrlu}.
+A worker can steal work \quotes{up} the consistent hashing ring rather than it flowing \quotes{down} when a worker is overloaded.
+%  can move load between themselves in these cases.
+
+% Distributed scheduling \cite{tang2022distributed,exton2024raptor}
+
+% \subsection{\sysname~Improvements}
+% \label{sec:ilu-better}
+
+\subsection{Polymorphic Functions}
+\label{chap:new-poly}
+
+Chapter~\ref{chap:gpu-sched} of this thesis introduced scheduling of GPU functions, but also the idea that a function on different types of compute.
+It used Python functions capable of running on traditional CPU, or be accelerated by a GPU.
+The last experiment, shown in Figure~\ref{fig:poly}, selected functions to accelerate that saw significant speedup, choosing to run the rest on CPU.
+I wish to extend these two ideas, that functions
+\begin{enumerate}
+  \item Are \emph{polymorphic}, in that without changing code they are capable of running on several distinct compute platforms
+  \item And that we can \emph{opportunistically accelerate} them by scheduling on devices such as GPUs to improve latency.
+\end{enumerate}
+
+The latter goal of opportunistic acceleration is a complex scheduling problem, where a worker can place an invocation on any supported compute considering local conditions.
+It will have to accurately estimate the latency of running an invocation, knowing a GPU may have faster execution time, but could face queuing delays that would make us prefer the plentiful CPU.
+Heterogeneous function characteristics (see Table~\ref{tab:gpu-cpu}) become more complex as runtimes change from multiplexing the GPU.
+Calculating this estimate will need an accurate model of how functions are affected by GPU memory and compute sharing.
+The worker will also have to be future-looking, knowing that a GPU cold start is an expensive one-time cost that will ultimately lower latency.
+A simple calculation looking at warm CPU time vs cold GPU time in most cases will always choose the former, yet a popular function will benefit from moving to GPU.
+
+The functions looked at so far a polymorphic because they rely on libraries that implement algorithms for both compute platforms.
+Serverless can take advantage of its access to function source code to take a more agnostic approach.
+Many functions are small and take up rare CPU space, but a GPU has \emph{thousands} of cores to run such tasks.
+Previous work~\cite{ginzburg2023vectorvisor} has shown that Python code can be translated to run on GPU with a lot of caveats.
+I want to explore the possibilities of translation, alternate mechanisms to accomplish the same thing, and integrate them with the demonstrated scheduling and memory-manipulation techniques in chapter~\ref{chap:gpu-sched}.
+
+\subsection{Serverless for Distributed Computing}
+\label{sec:new-mpi}
+
+Platforms allow chaining functions via directed acyclic graphs (DAGs) to make larger \emph{applications} where outputs of a function are passed by the platform as arguments to the next one(s) in the DAG.
+These interactions are limited -- two concurrent functions cannot communicate directly with one another and all data sharing must be done via remote storage.
+Several platform-managed FaaS dataplanes have been designed to improve data sharing between concurrently running~\cite{giantsidi2023flexlog,sreekanti2020fault} or the input and outputs of DAG functions~\cite{mvondo2021ofc,romero2021faa,abdi2023palette}.
+Functions should not need to use intermediaries to communicate, especially when computing on a shared problem or dataset.
+
+I want to explore enhancements to the serverless stack to let them interact like true parallel applications ubiquitous to cloud and high-performance computing.
+This can be taken in several theoretical directions, the first of which is a Hadoop-style~\cite{hadoop} cluster scheduler that creates many workers operating on a shared dataset.
+Applications for these cluster distributed systems are programmed with API hooks to abstract away how they interact, as the platform coordinates placement and data.
+The other direction is to support MPI~\cite{mpi} functions, where many processes communicate via discrete messages to share data or synchronize themselves.
+MPI applications also utilize an API that handles all such communication details, abstracting the application away from the actual implementation.
+Both application types are designed to move between implementations with no code changes, making them easily portable to a serverless context.
+The platform would just have to interpose as the expected API and coordinate the possible hundreds of concurrent containers needed to match the scale such applications run at.
+
+\subsection{FaaS Security}
+
+The trusted computing base (TCB) in serverless computing is extremely large, especially when compared to other forms of cloud computing.
+To start with, a user uploads \emph{unencrypted source code} to the platform for it to use.
+This code is then run on the same virtualization stack use in cloud, with the addition of a complex containerization system.
+A new control plane exists, with pieces spread across nodes of varying functionality that move private arguments and outputs between them.
+Lastly, libraries and language runtimes are also controlled by the platform, with the only guarantee being version compatibility. 
+The platform also has a security concern in that they're running \emph{arbitrary} untrusted code on their hardware.
+
+These challenges make one question if secure FaaS is even possible, and once security measures are considered, new performance problems appear.
+Cold start costs are significantly higher, with a 512 MB memory enclave taking up to 30 seconds to prepare~\cite{trach2019clemmys}.
+A dynamic memory enclave has notable issues when trying to adjust size, but using a fixed allocation wastes memory via fragmentation.
+Others have pointed out that a function may service multiple end-users~\cite{kim2023cryonics,zhao2023reusable}, and that enclaves themselves cannot be trusted after an invocation and must be \quotes{cleaned} in some way.
+
+There are also multiple types of trusted execution environments (TEEs) with varied system designs as well~\cite{arnautov2016scone,wang2022virtee,tsai2017graphene,jia2022hyperenclave}.
+We must ask \emph{where does the control plane live?} and \emph{what is in the TCB?}
+Currently, the control plane has an agent inside each container that connections function user code via a pseudo-\quotes{ABI} (application binary interface) to the outside worker.
+Presumably this must be made part of the TCB and efficiently be able to move arguments and results between worker and function.
+
+\sysname~is in an ideal position to answer the control plane question.
+It could dynamically support multiple TEEs, already being able to handle several isolation mechanisms, adding TEEs is just a matter of engineering work.
+Then select the optimal TEE for a function becomes a consideration of a number of factors.
+Functions have different use cases leading to separate security and performance goals.
+A CPU-bound piece of code will want access to features that a web service won't, putting both in the same TEE negatively affects the entire system. 
+This break from a one-size-fits-all strategy aligns with the FaaS ethos and unlocks new optimization strategies.
+The multiple pieces of \sysname~can also be lifted to handle complex split system designs used by some TEEs~\cite{tsai2017graphene,jia2022hyperenclave}.
+They place parts of the control plane in the TCB to manage TEEs, and others in untrusted user space for the remainder of required work

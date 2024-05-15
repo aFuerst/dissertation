@@ -1,0 +1,70 @@
+\begin{thebibliography}{10}
+
+\bibitem{}
+{ }.
+\newblock \url{ }.
+
+\bibitem{lambda-limits}
+{AWS Lambda Limits}.
+\newblock
+  \url{https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html}.
+
+\bibitem{warm1}
+{Keeping Functions Warm - How To Fix AWS Lambda Cold Start Issues}.
+\newblock \url{https://serverless.com/blog/keep-your-lambdas-warm/}.
+
+\bibitem{lambda-warm-hour}
+{How long does AWS Lambda keep your idle functions around before a cold start?}
+\newblock
+  \url{https://read.acloud.guru/how-long-does-aws-lambda-keep-your-idle-functions-around-before-a-cold-start-bf715d3b810},
+  2017.
+
+\bibitem{warm2}
+{Lambda Warmer: Optimize AWS Lambda Function Cold Starts}.
+\newblock
+  \url{https://www.jeremydaly.com/lambda-warmer-optimize-aws-lambda-function-cold-starts/},
+  2018.
+
+\bibitem{aws-lambda}
+{AWS Lambda}.
+\newblock \url{https://aws.amazon.com/lambda/}, 2020.
+
+\bibitem{azure-functions}
+{Azure Functions}.
+\newblock \url{https://azure.microsoft.com/en-us/services/functions/ }, 2020.
+
+\bibitem{google-functions}
+{Google Cloud Functions}.
+\newblock \url{https://cloud.google.com/functions }, 2020.
+
+\bibitem{lambda-warm}
+Erwan Alliaume and Benjamin~Le Roux.
+\newblock Cold start / warm start with aws lambda.
+\newblock
+  \url{https://blog.octo.com/en/cold-start-warm-start-with-aws-lambda/}, 2018.
+
+\bibitem{hendrickson2016serverless}
+Scott Hendrickson, Stephen Sturdevant, Tyler Harter, Venkateshwaran
+  Venkataramani, Andrea~C Arpaci-Dusseau, and Remzi~H Arpaci-Dusseau.
+\newblock Serverless computation with openlambda.
+\newblock In {\em 8th $\{$USENIX$\}$ Workshop on Hot Topics in Cloud Computing
+  (HotCloud 16)}, 2016.
+
+\bibitem{jonas_cloud_2019}
+Eric Jonas, Johann Schleier-Smith, Vikram Sreekanti, Chia-Che Tsai, Anurag
+  Khandelwal, Qifan Pu, Vaishaal Shankar, Joao Carreira, Karl Krauth, Neeraja
+  Yadwadkar, Joseph~E. Gonzalez, Raluca~Ada Popa, Ion Stoica, and David~A.
+  Patterson.
+\newblock Cloud {Programming} {Simplified}: {A} {Berkeley} {View} on
+  {Serverless} {Computing}.
+\newblock {\em arXiv:1902.03383 [cs]}, February 2019.
+\newblock arXiv: 1902.03383.
+
+\bibitem{oakes_sock_2018}
+Edward Oakes, Leon Yang, Dennis Zhou, Kevin Houck, Tyler Harter, Andrea~C
+  Arpaci-Dusseau, and Remzi~H Arpaci-Dusseau.
+\newblock {SOCK}: {Rapid} {Task} {Provisioning} with {Serverless}-{Optimized}
+  {Containers}.
+\newblock USENIX ATC:14, 2018.
+
+\end{thebibliography}

@@ -1,0 +1,173 @@
+%\documentclass[pageno]{jpaper}
+\documentclass[sigconf,screen]{acmart}
+
+\usepackage{graphicx}
+\usepackage{subfig}
+%Removing the geometry package used for Tighter Format
+%\usepackage{geometry}
+%\usepackage{times}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{flushend}
+
+% \usepackage[hyphens]{url}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+%\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+%Used only for breaking hypenated URLs
+\usepackage{etoolbox}
+\gappto{\UrlBreaks}{\UrlOrds}
+%
+
+\hypersetup{breaklinks=true}
+
+\urlstyle{same}
+
+%\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=20,shrink=20]{microtype}
+
+
+\input{macros}
+
+
+
+\settopmatter{printfolios=true}
+
+\newcommand{\asplossubmissionnumber}{1225}
+
+%%% The following is specific to ASPLOS '21 and the paper
+%%% 'FaasCache: Keeping Serverless Computing Alive with Greedy-Dual Caching'
+%%% by Alexander Fuerst and Prateek Sharma.
+%%%
+\setcopyright{acmlicensed}
+\acmPrice{15.00}
+\acmDOI{10.1145/3445814.3446757}
+\acmYear{2021}
+\copyrightyear{2021}
+\acmSubmissionID{asplos21main-p1225-p}
+\acmISBN{978-1-4503-8317-2/21/04}
+\acmConference[ASPLOS '21]{Proceedings of the 26th ACM International Conference on Architectural Support for Programming Languages and Operating Systems}{April 19--23, 2021}{Virtual, USA}
+\acmBooktitle{Proceedings of the 26th ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS '21), April 19--23, 2021, Virtual, USA}
+% \copyrightyear{2021} 
+% \acmYear{2021} 
+% \setcopyright{acmlicensed}\acmConference[ASPLOS '21]{Proceedings of the 26th ACM International Conference on Architectural Support for Programming Languages and Operating Systems}{April 19--23, 2021}{Virtual, MI, USA}
+% \acmBooktitle{Proceedings of the 26th ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS '21), April 19--23, 2021, Virtual, MI, USA}
+% \acmPrice{15.00}
+% \acmDOI{10.1145/3445814.3446757}
+% \acmISBN{978-1-4503-8317-2/21/04}
+
+\usepackage[normalem]{ulem}
+
+
+\begin{document}
+\pagenumbering{gobble}
+%-------------------------------------------------------------------------------
+
+\title{FaasCache: Keeping Serverless Computing Alive with Greedy-Dual Caching}
+
+%don't want date printed
+\date{}
+
+% make title bold and 14 pt font (Latex default is non-bold, 16 pt)
+\author{Alexander Fuerst}
+\affiliation{%
+   \institution{Indiana University Bloomington}
+   \country{USA}}
+\email{alfuerst@iu.edu}
+\author{Prateek Sharma}
+\affiliation{%
+   \institution{Indiana University Bloomington}
+   \country{USA}}
+\email{prateeks@iu.edu}
+
+\begin{CCSXML}
+  <ccs2012>
+  <concept>
+  <concept_id>10010520.10010521.10010537.10003100</concept_id>
+  <concept_desc>Computer systems organization~Cloud computing</concept_desc>
+  <concept_significance>500</concept_significance>
+  </concept>
+  </ccs2012>
+\end{CCSXML}
+  
+\ccsdesc[500]{Computer systems organization~Cloud computing}
+
+\keywords{Functions as a Service, Serverless Computing, Cloud Computing, Caching}
+
+%\thispagestyle{empty}
+
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%hotcloud is 5 pages of text 
+%\vspace*{\subsecspace}
+\section{Introduction}
+\vspace*{\subsecspace}
+\input{intro} 
+
+% The idea is to write this like a propogsal with the crux of the idea..
+
+
+%\vspace*{\subsecspace}
+\section{Background}
+\label{sec:bg}
+\vspace*{\subsecspace}
+\input{bg} 
+
+\input{tradeoffs}
+
+\input{gd}
+
+\input{provision}
+
+\section{Implementation}
+\vspace*{\subsecspace}
+\input{impl}
+
+%\vspace*{\subsecspace}
+\section{Experimental Evaluation}
+%\vspace*{\subsecspace}
+\input{eval}
+
+
+\section{Related Work}
+\input{related}
+
+\input{discussion}
+
+\input{conclusion}
+
+\input{acknowledge}
+
+% \section{Artifact Appendix}
+\begin{appendix}
+\input{artifact-appendix}
+\end{appendix}
+
+\balance
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{faas}
+
+% Moved to appendix-submit.tex
+%\section{Appendix}
+%\input{appendix}
+
+
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

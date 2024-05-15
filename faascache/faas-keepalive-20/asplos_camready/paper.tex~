@@ -1,0 +1,111 @@
+\documentclass[pageno]{jpaper}
+
+
+\usepackage{graphicx}
+\usepackage{subfig}
+%Removing the geometry package used for Tighter Format
+%\usepackage{geometry}
+%\usepackage{times}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{listings}
+
+% \usepackage[hyphens]{url}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+%\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+%Used only for breaking hypenated URLs
+\usepackage{etoolbox}
+\gappto{\UrlBreaks}{\UrlOrds}
+%
+
+\hypersetup{breaklinks=true}
+
+\urlstyle{same}
+
+%\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=20,shrink=20]{microtype}
+
+
+\input{macros}
+
+\newcommand{\asplossubmissionnumber}{1225}
+
+\usepackage[normalem]{ulem}
+
+
+\begin{document}
+%-------------------------------------------------------------------------------
+
+\title{FaasCache: Keeping Serverless Computing Alive With Greedy-Dual Caching}
+
+%don't want date printed
+\date{}
+
+% make title bold and 14 pt font (Latex default is non-bold, 16 pt)
+\author{}
+
+\maketitle 
+
+\thispagestyle{empty}
+
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%hotcloud is 5 pages of text 
+%\vspace*{\subsecspace}
+\section{Introduction}
+\vspace*{\subsecspace}
+\input{intro} 
+
+% The idea is to write this like a propogsal with the crux of the idea..
+
+
+%\vspace*{\subsecspace}
+\section{Background}
+\vspace*{\subsecspace}
+\input{bg} 
+
+\input{tradeoffs}
+
+\input{gd}
+
+\input{provision}
+
+\section{Implementation}
+\vspace*{\subsecspace}
+\input{impl}
+
+%\vspace*{\subsecspace}
+\section{Experimental Evaluation}
+%\vspace*{\subsecspace}
+\input{eval}
+
+\section{Related Work}
+\input{related}
+
+\bibliographystyle{plain}
+\bibliography{faas}
+
+% Moved to appendix-submit.tex
+%\section{Appendix}
+%\input{appendix}
+
+\end{document}
+
+
+
+%Hotcloud template... 
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,390 @@
+\begin{thebibliography}{10}
+
+\bibitem{lambda-limits}
+{AWS Lambda Limits}.
+\newblock
+  \url{https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html}.
+
+\bibitem{warm1}
+{Keeping Functions Warm - How To Fix AWS Lambda Cold Start Issues}.
+\newblock \url{https://serverless.com/blog/keep-your-lambdas-warm/}.
+
+\bibitem{pid-wiki}
+{PID} controllers.
+\newblock \url{https://en.wikipedia.org/wiki/PID\_controller}.
+
+\bibitem{docker-main}
+Docker.
+\newblock \url{https://www.docker.com/}, June 2015.
+
+\bibitem{lambda-warm-hour}
+{How long does AWS Lambda keep your idle functions around before a cold start?}
+\newblock
+  \url{https://read.acloud.guru/how-long-does-aws-lambda-keep-your-idle-functions-around-before-a-cold-start-bf715d3b810},
+  2017.
+
+\bibitem{warm2}
+{Lambda Warmer: Optimize AWS Lambda Function Cold Starts}.
+\newblock
+  \url{https://www.jeremydaly.com/lambda-warmer-optimize-aws-lambda-function-cold-starts/},
+  2018.
+
+\bibitem{aws-warm-predictable}
+Aws lambda predictable start-up times with provisioned concurrency.
+\newblock
+  \url{https://aws.amazon.com/blogs/compute/new-for-aws-lambda-predictable-start-up-times-with-provisioned-concurrency/},
+  Dec 2019.
+
+\bibitem{azure-warmup-trigger}
+Azure functions warm-up trigger.
+\newblock
+  \url{https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-warmup},
+  2019.
+
+\bibitem{openwhisk}
+{Apache OpenWhisk: Open Source Serverless Cloud Platform}.
+\newblock \url{https://openwhisk.apache.org/}, 2020.
+
+\bibitem{aws-lambda}
+{AWS Lambda}.
+\newblock \url{https://aws.amazon.com/lambda/}, 2020.
+
+\bibitem{azure-functions}
+{Azure Functions}.
+\newblock \url{https://azure.microsoft.com/en-us/services/functions/ }, 2020.
+
+\bibitem{google-functions}
+{Google Cloud Functions}.
+\newblock \url{https://cloud.google.com/functions }, 2020.
+
+\bibitem{goog-functions-tricks}
+{Google Cloud Functions Tips and Tricks}.
+\newblock \url{https://cloud.google.com/functions/docs/bestpractices/tips},
+  2020.
+
+\bibitem{openfaas}
+{OpenFaaS : Server Functions, Made Simple.}
+\newblock \url{https://www.openfaas.com}, 2020.
+
+\bibitem{firecracker-nsdi20}
+Alexandru Agache, Marc Brooker, Alexandra Iordache, Anthony Liguori, Rolf
+  Neugebauer, Phil Piwonka, and Diana-Maria Popa.
+\newblock Firecracker: Lightweight virtualization for serverless applications.
+\newblock In {\em 17th $\{$USENIX$\}$ Symposium on Networked Systems Design and
+  Implementation ($\{$NSDI$\}$ 20)}, pages 419--434, 2020.
+
+\bibitem{akkus_sand_2018}
+Istemi~Ekin Akkus, Ruichuan Chen, Ivica Rimac, Manuel Stein, Klaus Satzke,
+  Andre Beck, Paarijaat Aditya, and Volker Hilt.
+\newblock {SAND}: {Towards} {High}-{Performance} {Serverless} {Computing}.
+\newblock {\em USENIX ATC}, page~14, 2018.
+
+\bibitem{lambda-warm}
+Erwan Alliaume and Benjamin~Le Roux.
+\newblock Cold start / warm start with aws lambda.
+\newblock
+  \url{https://blog.octo.com/en/cold-start-warm-start-with-aws-lambda/}, 2018.
+
+\bibitem{basu2017adaptive}
+Soumya Basu, Aditya Sundarrajan, Javad Ghaderi, Sanjay Shakkottai, and Ramesh
+  Sitaraman.
+\newblock Adaptive ttl-based caching for content delivery.
+\newblock In {\em Proceedings of the 2017 ACM SIGMETRICS/International
+  Conference on Measurement and Modeling of Computer Systems}, pages 45--46,
+  2017.
+
+\bibitem{cao_irani_1997}
+Pei Cao and Sandy Irani.
+\newblock Cost-{Aware} {WWW} {Proxy} {Caching} {Algorithms}.
+\newblock In {\em Proceedings of the USENIX Symposium on Internet Technologies
+  and Systems}, page~15, 1997.
+
+\bibitem{carreira2018case}
+Joao Carreira, Pedro Fonseca, Alexey Tumanov, Andrew Zhang, and Randy Katz.
+\newblock A case for serverless machine learning.
+\newblock In {\em Workshop on Systems for ML and Open Source Software at
+  NeurIPS}, volume 2018, 2018.
+
+\bibitem{carreira_cirrus_2019}
+Joao Carreira, Pedro Fonseca, Alexey Tumanov, Andrew Zhang, and Randy Katz.
+\newblock Cirrus: a {Serverless} {Framework} for {End}-to-end {ML} {Workflows}.
+\newblock In {\em Proceedings of the {ACM} {Symposium} on {Cloud} {Computing} -
+  {SoCC} '19}, pages 13--24, Santa Cruz, CA, USA, 2019. ACM Press.
+
+\bibitem{carver_search_2019}
+Benjamin Carver, Jingyuan Zhang, Ao~Wang, and Yue Cheng.
+\newblock In {Search} of a {Fast} and {Efficient} {Serverless} {DAG} {Engine}.
+\newblock {\em arXiv:1910.05896 [cs]}, October 2019.
+\newblock arXiv: 1910.05896.
+
+\bibitem{funcx_hpdc_20}
+Ryan Chard, Yadu Babuji, Zhuozhao Li, Tyler Skluzacek, Anna Woodard, Ben
+  Blaiszik, Ian Foster, and Kyle Chard.
+\newblock {FuncX:} a federated function serving fabric for science.
+\newblock In {\em Proceedings of the 29th International Symposium on
+  High-Performance Parallel and Distributed Computing}, HPDC '20, pages 65--76,
+  New York, NY, USA, 2020. Association for Computing Machinery.
+
+\bibitem{che2002hierarchical}
+Hao Che, Ye~Tung, and Zhijun Wang.
+\newblock Hierarchical web caching systems: Modeling, design and experimental
+  results.
+\newblock {\em IEEE journal on Selected Areas in Communications},
+  20(7):1305--1314, 2002.
+
+\bibitem{cheng2000lru}
+Kai Cheng and Yahiko Kambayashi.
+\newblock Lru-sp: a size-adjusted and popularity-aware lru replacement
+  algorithm for web caching.
+\newblock In {\em Proceedings 24th Annual International Computer Software and
+  Applications Conference. COMPSAC2000}, pages 48--53. IEEE, 2000.
+
+\bibitem{gdsf}
+Ludmila Cherkasova.
+\newblock {Improving WWW Proxies Performance with Greedy-Dual-Size-Frequency
+  Caching Policy}.
+\newblock In {\em {HP Labs Technical Report 98-69 (R.1)}}, 1998.
+
+\bibitem{gdfs_2001}
+Ludmila Cherkasova and Gianfranco Ciardo.
+\newblock Role of {Aging}, {Frequency}, and {Size} in {Web} {Cache}
+  {Replacement} {Policies}.
+\newblock In G.~Goos, J.~Hartmanis, J.~van Leeuwen, Bob Hertzberger, Alfons
+  Hoekstra, and Roy Williams, editors, {\em High-{Performance} {Computing} and
+  {Networking}}, volume 2110, pages 114--123. Springer Berlin Heidelberg,
+  Berlin, Heidelberg, 2001.
+\newblock Series Title: Lecture Notes in Computer Science.
+
+\bibitem{cherkasova2001role}
+Ludmila Cherkasova and Gianfranco Ciardo.
+\newblock Role of aging, frequency, and size in web cache replacement policies.
+\newblock In {\em International Conference on High-Performance Computing and
+  Networking}, pages 114--123. Springer, 2001.
+
+\bibitem{du2020catalyzer}
+Dong Du, Tianyi Yu, Yubin Xia, Binyu Zang, Guanglu Yan, Chenggang Qin, Qixuan
+  Wu, and Haibo Chen.
+\newblock Catalyzer: Sub-millisecond startup for serverless computing with
+  initialization-less booting.
+\newblock In {\em Proceedings of the Twenty-Fifth International Conference on
+  Architectural Support for Programming Languages and Operating Systems}, pages
+  467--481, 2020.
+
+\bibitem{einziger2017tinylfu}
+Gil Einziger, Roy Friedman, and Ben Manes.
+\newblock Tinylfu: A highly efficient cache admission policy.
+\newblock {\em ACM Transactions on Storage (ToS)}, 13(4):1--31, 2017.
+
+\bibitem{fouladi_laptop_2019}
+Sadjad Fouladi, Francisco Romero, Dan Iter, Qian Li, and Shuvo Chatterjee.
+\newblock From {Laptop} to {Lambda}: {Outsourcing} {Everyday} {Jobs} to
+  {Thousands} of {Transient} {Functional} {Containers}.
+\newblock {\em USENIX ATC}, page~15, 2019.
+
+\bibitem{gandhi2012autoscale}
+Anshul Gandhi, Mor Harchol-Balter, Ram Raghunathan, and Michael~A Kozuch.
+\newblock Autoscale: Dynamic, robust capacity management for multi-tier data
+  centers.
+\newblock {\em ACM Transactions on Computer Systems (TOCS)}, 30(4):1--26, 2012.
+
+\bibitem{ghosh_caching_2019}
+Bishakh~Chandra Ghosh, Sourav~Kanti Addya, Nishant~Baranwal Somy, Shubha~Brata
+  Nath, Sandip Chakraborty, and Soumya~K. Ghosh.
+\newblock Caching {Techniques} to {Improve} {Latency} in {Serverless}
+  {Architectures}.
+\newblock {\em arXiv:1911.07351 [cs]}, November 2019.
+\newblock arXiv: 1911.07351.
+
+\bibitem{hendrickson2016serverless}
+Scott Hendrickson, Stephen Sturdevant, Tyler Harter, Venkateshwaran
+  Venkataramani, Andrea~C Arpaci-Dusseau, and Remzi~H Arpaci-Dusseau.
+\newblock Serverless computation with {OpenLambda}.
+\newblock In {\em 8th {USENIX} Workshop on Hot Topics in Cloud Computing
+  (HotCloud 16)}, 2016.
+
+\bibitem{hu2016kinetic}
+Xiameng Hu, Xiaolin Wang, Lan Zhou, Yingwei Luo, Chen Ding, and Zhenlin Wang.
+\newblock Kinetic modeling of data eviction in cache.
+\newblock In {\em 2016 {USENIX} Annual Technical Conference ({USENIX ATC}
+  16))}, pages 351--364, 2016.
+
+\bibitem{jiang2018convergence}
+Bo~Jiang, Philippe Nain, and Don Towsley.
+\newblock On the convergence of the ttl approximation for an lru cache under
+  independent stationary request processes.
+\newblock {\em ACM Transactions on Modeling and Performance Evaluation of
+  Computing Systems (TOMPECS)}, 3(4):1--31, 2018.
+
+\bibitem{john_sweep_2019}
+Aji John, Kristiina Ausmees, Kathleen Muenzen, Catherine Kuhn, and Amanda Tan.
+\newblock {SWEEP}: {Accelerating} {Scientific} {Research} {Through} {Scalable}
+  {Serverless} {Workflows}.
+\newblock In {\em Proceedings of the 12th {IEEE}/{ACM} {International}
+  {Conference} on {Utility} and {Cloud} {Computing} {Companion} - {UCC} '19
+  {Companion}}, pages 43--50, Auckland, New Zealand, 2019. ACM Press.
+
+\bibitem{jonas2017occupy}
+Eric Jonas, Qifan Pu, Shivaram Venkataraman, Ion Stoica, and Benjamin Recht.
+\newblock Occupy the cloud: Distributed computing for the 99\%.
+\newblock In {\em Proceedings of the 2017 Symposium on Cloud Computing}, pages
+  445--451. ACM, 2017.
+
+\bibitem{jonas_cloud_2019}
+Eric Jonas, Johann Schleier-Smith, Vikram Sreekanti, Chia-Che Tsai, Anurag
+  Khandelwal, Qifan Pu, Vaishaal Shankar, Joao Carreira, Karl Krauth, Neeraja
+  Yadwadkar, Joseph~E. Gonzalez, Raluca~Ada Popa, Ion Stoica, and David~A.
+  Patterson.
+\newblock Cloud {Programming} {Simplified}: {A} {Berkeley} {View} on
+  {Serverless} {Computing}.
+\newblock {\em arXiv:1902.03383 [cs]}, February 2019.
+\newblock arXiv: 1902.03383.
+
+\bibitem{kim_functionbench_2019}
+Jeongchul Kim and Kyungyong Lee.
+\newblock {FunctionBench}: {A} {Suite} of {Workloads} for {Serverless} {Cloud}
+  {Function} {Service}.
+\newblock In {\em 2019 {IEEE} 12th {International} {Conference} on {Cloud}
+  {Computing} ({CLOUD})}, pages 502--504, July 2019.
+\newblock ISSN: 2159-6182.
+
+\bibitem{lin_mitigating_2019}
+Ping-Min Lin and Alex Glikson.
+\newblock Mitigating {Cold} {Starts} in {Serverless} {Platforms}: {A}
+  {Pool}-{Based} {Approach}.
+\newblock {\em arXiv:1903.12221 [cs]}, March 2019.
+\newblock arXiv: 1903.12221.
+
+\bibitem{unikernels}
+Anil Madhavapeddy, Richard Mortier, Charalampos Rotsos, David Scott, Balraj
+  Singh, Thomas Gazagnaire, Steven Smith, Steven Hand, and Jon Crowcroft.
+\newblock Unikernels: Library operating systems for the cloud.
+\newblock In {\em Proceedings of the Eighteenth International Conference on
+  Architectural Support for Programming Languages and Operating Systems},
+  ASPLOS '13, pages 461--472, New York, NY, USA, 2013. ACM.
+
+\bibitem{manner_cold_2018}
+Johannes Manner, Martin EndreB, Tobias Heckel, and Guido Wirtz.
+\newblock Cold {Start} {Influencing} {Factors} in {Function} as a {Service}.
+\newblock In {\em 2018 {IEEE}/{ACM} {International} {Conference} on {Utility}
+  and {Cloud} {Computing} {Companion} ({UCC} {Companion})}, pages 181--188,
+  Zurich, December 2018. IEEE.
+
+\bibitem{megiddo2003arc}
+Nimrod Megiddo and Dharmendra~S Modha.
+\newblock Arc: A self-tuning, low overhead replacement cache.
+\newblock In {\em {USENIX FAST}}, volume~3, pages 115--130, 2003.
+
+\bibitem{mohan_agile_2019}
+Anup Mohan, Harshad Sane, Kshitij Doshi, Saikrishna Edupuganti, Vadim
+  Sukhomlinov, and Naren Nayak.
+\newblock Agile {Cold} {Starts} for {Scalable} {Serverless}.
+\newblock {\em USENIX Workshop on Hot Topics in Cloud Computing (HotCloud)},
+  page~6, 2019.
+
+\bibitem{oakes_sock_2018}
+Edward Oakes, Leon Yang, Dennis Zhou, Kevin Houck, Tyler Harter, Andrea~C
+  Arpaci-Dusseau, and Remzi~H Arpaci-Dusseau.
+\newblock {SOCK}: {Rapid} {Task} {Provisioning} with {Serverless}-{Optimized}
+  {Containers}.
+\newblock USENIX ATC:14, 2018.
+
+\bibitem{o1993lru}
+Elizabeth~J O'neil, Patrick~E O'neil, and Gerhard Weikum.
+\newblock The lru-k page replacement algorithm for database disk buffering.
+\newblock {\em Acm Sigmod Record}, 22(2):297--306, 1993.
+
+\bibitem{shahrad_serverless_2020}
+Mohammad Shahrad, Rodrigo Fonseca, Inigo Goiri, Gohar Chaudhry, Paul Batum,
+  Jason Cooke, Eduardo Laureano, Colby Tresness, Mark Russinovich, and Ricardo
+  Bianchini.
+\newblock Serverless in the {Wild}: {Characterizing} and {Optimizing} the
+  {Serverless} {Workload} at a {Large} {Cloud} {Provider}.
+\newblock pages 205--218, July 2020.
+
+\bibitem{shankar2018numpywren}
+Vaishaal Shankar, Karl Krauth, Qifan Pu, Eric Jonas, Shivaram Venkataraman, Ion
+  Stoica, Benjamin Recht, and Jonathan Ragan-Kelley.
+\newblock Numpywren: Serverless linear algebra.
+\newblock {\em arXiv preprint arXiv:1810.09679}, 2018.
+
+\bibitem{deflation-eurosys19}
+Prateek Sharma, Ahmed Ali-Eldin, and Prashant Shenoy.
+\newblock Resource deflation: A new approach for transient resource
+  reclamation.
+\newblock In {\em Proceedings of the Fourteenth EuroSys Conference 2019},
+  EuroSys '19, pages 33:1--33:17, New York, NY, USA, 2019. ACM.
+
+\bibitem{sundarrajan2017footprint}
+Aditya Sundarrajan, Mingdong Feng, Mangesh Kasbekar, and Ramesh~K Sitaraman.
+\newblock Footprint descriptors: Theory and practice of cache provisioning in a
+  global cdn.
+\newblock In {\em Proceedings of the 13th International Conference on emerging
+  Networking EXperiments and Technologies}, pages 55--67, 2017.
+
+\bibitem{ensure_acsos20}
+Amoghavarsha Suresh, Gagan Somashekar, Anandh Varadarajan, Veerendra~Ramesh
+  Kakarla, Hima Upadhyay, and Anshul Gandhi.
+\newblock {ENSURE}: {Efficient} {Scheduling} and {Autonomous} {Resource}
+  {Management} in {Serverless} {Environments}.
+\newblock page~10, 2020.
+
+\bibitem{van_eyk_spec_2017}
+Erwin van Eyk, Alexandru Iosup, Simon Seif, and Markus Thommes.
+\newblock The {SPEC} cloud group's research vision on {FaaS} and serverless
+  architectures.
+\newblock In {\em Proceedings of the 2nd {International} {Workshop} on
+  {Serverless} {Computing} - {WoSC} '17}, pages 1--4, Las Vegas, Nevada, 2017.
+  ACM Press.
+
+\bibitem{shards}
+Carl~A Waldspurger, Nohhyun Park, Alexander Garthwaite, and Irfan Ahmad.
+\newblock Efficient {MRC} construction with {SHARDS}.
+\newblock In {\em 13th {USENIX} Conference on File and Storage Technologies
+  ({FAST} 15)}, pages 95--110, 2015.
+
+\bibitem{wang2018peeking}
+Liang Wang, Mengyuan Li, Yinqian Zhang, Thomas Ristenpart, and Michael Swift.
+\newblock Peeking behind the curtains of serverless platforms.
+\newblock In {\em 2018 {USENIX} Annual Technical Conference}, pages 133--146,
+  2018.
+
+\bibitem{welford}
+B.~P. Welford.
+\newblock Note on a method for calculating corrected sums of squares and
+  products.
+\newblock {\em Technometrics}, 4(3):419--420, 1962.
+
+\bibitem{counterstacks}
+Jake Wires, Stephen Ingram, Zachary Drudi, Nicholas~JA Harvey, and Andrew
+  Warfield.
+\newblock Characterizing storage workloads with counter stacks.
+\newblock In {\em 11th {USENIX} Symposium on Operating Systems Design and
+  Implementation ({OSDI} 14)}, pages 335--349, 2014.
+
+\bibitem{young_gd_orig_94}
+N.~Young.
+\newblock The {K}-server dual and loose competitiveness for paging.
+\newblock {\em Algorithmica}, 11(6):525--541, June 1994.
+
+\bibitem{young2002line}
+Neal~E Young.
+\newblock On-line file caching.
+\newblock {\em Algorithmica}, 33(3):371--383, 2002.
+
+\bibitem{osca_atc20}
+Yu~Zhang, Ping Huang, Ke~Zhou, Hua Wang, Jianying Hu, Yongguang Ji, and Bin
+  Cheng.
+\newblock {OSCA}: An online-model based cache allocation scheme in cloud block
+  storage systems.
+\newblock In {\em 2020 {USENIX} Annual Technical Conference ({USENIX} {ATC}
+  20)}, pages 785--798. {USENIX} Association, July 2020.
+
+\bibitem{zhang2020osca}
+Yu~Zhang, Ping Huang, Ke~Zhou, Hua Wang, Jianying Hu, Yongguang Ji, and Bin
+  Cheng.
+\newblock {OSCA}: An online-model based cache allocation scheme in cloud block
+  storage systems.
+\newblock In {\em 2020 {USENIX} Annual Technical Conference}, pages 785--798,
+  2020.
+
+\end{thebibliography}

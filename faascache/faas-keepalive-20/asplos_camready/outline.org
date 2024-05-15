@@ -1,0 +1,103 @@
+* Intro 
+
+** FaaS is here 
+
+** Startup overhead big problem
+
+** Contributions 
+- Caching analogy
+- Size, frequency etc. aware Keep-alive policies
+- Static Provisioning
+- /Can we do dynamic Provisioning?/
+
+* Background 
+
+** Keep-alive 
+
+** Caching 
+- Vast area.
+- Many eviction Algorithms. Mostly size oblivious such as LRU. Few size-aware
+- Provisioning using miss-ratio curves and reuse distance 
+
+* Keep-alive Policies 
+
+** Caching equivalence 
+
+** Size aware policies 
+
+*** Greedy Dual Size Frequency
+- Entire family of policies
+
+*** LandLord 
+- 
+
+* Provisioning
+**  Reuse distance
+** /Dynamic provisioning?/  
+
+- With windowing and sampling
+- SHARDS plus ? 
+- Show the server memory occupancy vs. time
+
+
+
+* Implementation 
+- Greedy Dual
+- Dynamic provisioning? Adjust the memory size.. /Can OpenWhisk do this?/
+- 
+
+* Evaluation 
+
+** Trace analysis
+
+1. Correlation of size and frequency  ( *Heatmap/Scatter-plot* )
+
+2. 
+
+** Keep-alive policy effectiveness
+*** Metrics: 
+1. Hit ratio
+2. Effective execution time
+3. % decrease in cold-starts
+4. Requests dropped
+
+*** Different traces
+1. Day trace analysis
+2. Frequent functions only?
+3. When are size-based policies good/bad? 
+
+*** Internal Validation
+1. Cost is cold-start time, total, difference, or something else?
+2. Size is memory, or cosine sim of cpu and memory?
+3. 
+
+** Provisioning 
+
+1. Reuse distance based HRC vs. empirical
+2. 
+
+** OpenWhisk System Experiments 
+
+*** Metrics
+1. Response time (breakdown for different application types)
+2. System utilization (CPU, memory)
+3. Requests dropped 
+
+*** Main
+1. Litmus test 1 with real applications
+2. Trace sample 1 with lookbusy 
+
+
+* Related Work
+
+** Keep-alive mechanisms
+
+** Caching
+
+** 
+
+* Future Work
+
+* Conclusion 
+
+

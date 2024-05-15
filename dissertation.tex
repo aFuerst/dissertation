@@ -1,0 +1,93 @@
+\documentclass[11pt]{thesis}
+
+\usepackage{thesis2}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{listings}
+\usepackage{comment}
+\usepackage{titling}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage[noend]{algpseudocode}
+\usepackage[nothing]{algorithm}
+\usepackage{tikz}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{microtype}
+\usepackage{tabularx}
+\usepackage[normalem]{ulem}
+%Used only for breaking hypenated URLs
+\usepackage{etoolbox}
+\gappto{\UrlBreaks}{\UrlOrds}
+\usepackage{setspace}
+\usepackage{pdfpages}
+\usepackage{multicol}
+\doublespacing
+\setcounter{secnumdepth}{3}
+
+
+\input{defs.tex}
+
+\begin{document}
+
+\title{%
+  % \sysname{}: For the Future of Serverless \& Cloud Research \\
+  % Serverless Computing: All Your Compute are Belong to Us \\
+  % Modernizing Cloud Resource Management \\
+  % Control Planes for Efficient Resource Allocation \\ in Serverless Cloud Systems \\
+  % Accelerating Serverless Control Planes \\ via Intelligent Resource Allocation
+  % Intelligent Resource Allocation for \\ Serverless Control Planes
+  % Intelligent Serverless Control Planes \\ and Resource Allocation
+  % Serverless Control Plane Orchestration \\ of Cluster Resources
+  Serverless Control Planes \\ for Orchestration of Cloud Resources
+  }
+\author{Alexander Joseph Fuerst}
+\date{June 10th, 2024}
+
+\principaladviser{Prateek Sharma, PhD}
+\firstreader{Martin Swany, PhD}
+\secondreader{Dingwen Tao, PhD}
+\thirdreader{Eleftherios Garyfallidis, PhD}
+
+% For Copyright Page
+\copyrightyear{2024} % Copyright year
+\submitdate{June 2024}
+
+\beforepreface
+
+\afterpreface
+
+\input{./introduction/intro.tex}
+
+\input{./serverless/serverless.tex}
+
+\input{./faascache/faascache.tex}
+
+\input{./chrlu/chrlu.tex}
+
+\input{./iluvatar/iluvatar.tex}
+
+\input{./mqfq/mqfq.tex}
+
+\input{./conclusion/summary.tex}
+
+\bibliographystyle{plain}
+\bibliography{refs.bib,
+            chrlu/faaslb-osdi22/camready/related.bib,
+            chrlu/faaslb-osdi22/camready/faas-asplos.bib,
+            chrlu/faaslb-osdi22/camready/faas.bib,
+            chrlu/faaslb-osdi22/camready/lb.bib,
+            iluvatar/camera-ready/efaas.bib,
+            iluvatar/camera-ready/faas.bib,
+            iluvatar/camera-ready/faas-asplos.bib,
+            faascache/faas-keepalive-20/asplos_camready/faas.bib,
+            mqfq/gpu-q-faas.bib}
+
+\cvsection
+
+\end{document}

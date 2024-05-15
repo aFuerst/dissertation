@@ -1,0 +1,248 @@
+HPDC 2023 Paper #72 Reviews and Comments
+===========================================================================
+Paper #72 Ilúvatar: A Fast Control Plane for Serverless Computing
+
+
+Review #72A
+===========================================================================
+
+Overall merit
+-------------
+3. This paper meets the contribution level of a typical HPDC paper, but may
+   have minor concerns that could be addressed via small changes.
+
+Reviewer expertise
+------------------
+4. Expert
+
+Reasons to accept (Strengths)
+-----------------------------
++ A strong implementation of a FaaS platform prototype for facilitating highly efficient function serving and FaaS system research.
+
++ Some evaluation results are interesting.
+
++ The paper is well written.
+
+Areas for improvement (Weaknesses)
+----------------------------------
+- The novelty is a bit limited in that Ilúvatar is essentially a platform that incorporates a series of state-of-the-art FaaS optimizations.
+
+- Evaluation could have been more comprehensive to truly demonstrate the efficiency part when serving warm functions.
+
+Detailed feedback for authors
+-----------------------------
+Thanks for submitting to HPDC'23. I enjoyed reading your paper. I like the way the paper is written. The engineering effort behind Ilúvatar is impressive and I agree that the community does need something like Ilúvatar for FaaS systems research. Below are some of my comments to hopefully further improve the paper.
+
+- Ilúvatar, in essence, combines a series of state-of-the-art techniques for optimizing the performance of the FaaS workloads. This includes function and container caching for tackling the cold start cost, function request scheduling, and low-level optimizations such as HTTP client reusing and connection pooling. While I agree that these are much needed optimizations that mitigate the efficiency problems of existing, widely-used open-source FaaS platforms such as OpenWhisk, the overall novelty of Ilúvatar is a bit lacking. To me, the most significant contribution of this work, is positing Ilúvatar as a research platform that could offers a modular design with much flexibility in configuration; and such a research FaaS platform is what is lacking in the community; and building such a platform may require new designs and new optimization techniques. I recommend the authors digging a bit deeper from this angle to further improve the potential impact of the proposed research. 
+
+- Evaluation does not well reflect the claimed contributions. The first half of the paper spends lots text stressing the efficiency problems of existing FaaS platforms. The high efficiency is in fact one of the biggest contributions claimed by authors. I would expect to see more cross-platform experimental comparisons on that front, which are lacking in the current evaluation. For example, OpenLambda is implemented using Go and has better efficiency than OpenWhisk. Similarly, Nuclio is a high-performance open-source FaaS platform. How about Faasm that uses WebAssembly for better performance? Comparing Ilúvatar against these existing systems could reveal more insights and could have strengthened the contributions. Even for the only comparison presented in Fig 1, it would have been better if you could show a breakdown of the overhead, which could have better backed up your claims of reduced invocation overhead at different levels of the function invocation critical path. 
+
+Several comments about presentation:
+- It's unclear what's the deployment setup used for Fig 1.
+
+- For Fig 6, it's unclear what Ilúvatar represents? In the text you mentioned "Introducing the namespace caching further reduce the cold start times by 15%". Is this optimization under Ilúvatar?
+
+- It's not straightforward to understand why increasing the concurrency would reduce the function invocation overhead for Fig 7(a). The text does not directly resolve this confusion. But my guess is that you start from zero warm containers so once a queue is built up, queued-up requests can enjoy the cached containers? That could use more text.
+
+Raised concerns require new experiments or significant methodological
+changes.
+
+---------------------------------------------------------------------------
+3. No
+
+
+
+Review #72B
+===========================================================================
+
+Overall merit
+-------------
+3. This paper meets the contribution level of a typical HPDC paper, but may
+   have minor concerns that could be addressed via small changes.
+
+Reviewer expertise
+------------------
+4. Expert
+
+Reasons to accept (Strengths)
+-----------------------------
+- This paper presents a strong analysis and solution for the problem of invocation latency in server less systems.
+- The performance results for a single worker are quite strong.
+- The paper is clear and enjoyable to read.
+
+Areas for improvement (Weaknesses)
+----------------------------------
+- The paper glosses over the performance effects of functions passing through the scheduling endpoint.   This is unlikely to be constant under heavy load.
+- It is unclear how much of the performance benefit is due to fundamental design decisions (e.g. worker manages a queue) versus technology decisions (Rust vs JVM).
+
+Detailed feedback for authors
+-----------------------------
+This paper presents Iluvatar, a control plane for implementing serverless computing, with a focus on reducing the latency of function invocation.  It is observed that cold starts are largely a solved problem, so that most invocations are a warm start, and so attention must shift to low latency dispatch to warm starts.  The key comparison point is to OpenWhisk, which is implemented in Java and makes use of general purpose supporting systems like Kafka and CouchDB.  The key design decision is to push as much work as possible to the worker, which has a queue, resource manager, container controls, and so forth.  The worker can be permitted to overcommit resources by running more functions than resources available, assuming that they do not all hit maximum.  A careful accounting of the time needed for each operation on the critical path is performed.  Several common techniques are used throughout to minimize the critical path: caching, container keep-alive, namespace caching, and shared http clients.
+
+The performance of a single worker is evaluated on 1-48 cores, and the distribution of latency is quite compact up to 32 cores, at which point latency starts to pile up. Queueing performance is evaluated from 1-48 clients, followed by an exploration of overcommitment, queueing performance, and a comparison of scheduling models.  The latter shows that the system conforms to Little's Law.
+
+Overall, this is a nice system engineering paper which describes the broad set of techniques in order to achieve low-latency invocation.  The performance improvement over OpenWhisk is certainly impressive, and that alone may be a solid reason to make use of this system.
+
+As a research contribution, it is less clear to me whether the paper has identified the right reasons that its performance is so much better than OpenWhisk.  There could be several contributors: 1) the use of rust instead of java; 2) the single integrated system (as opposed to relying on Kafka and CouchDB); or 3) the basic distributed architecture of the system.  I suspect that the OpenWhisk community would see Java+Kafka as a net positive, simply accepting that those choices give better long term project stability.  But reason #3 stands out as something more fundamental.  This reader wonders which components dominate the improvement.
+
+Some minor points:
+
+- Page 6: Simulation with sleep() functions is certainly a valid technique that can exercise scaling aspects of the scheduler.  But don't be fooled into thinking this is *exactly* like running a real function, which will have an impact on cpu, memory, and disk utilization that has an impact on the other components of the system on that node.
+
+- Section 4 suddenly starts using the term "servers" which was wasn't mentioned in the system description in section 3.  Do you mean workers?
+
+- Page 8: samplinh
+
+- While names chosen from literature and mythology are not unusual, Iluvatar isn't a great name.  For those familiar with Tolkien's work, the name of the distant almighty creator is a bit... over the top.  For those not familiar, it's just odd and hard to pronounce.  Choosing names is always a challenge, but I think this one needs some more thought.
+
+Raised concerns require new experiments or significant methodological
+changes.
+
+---------------------------------------------------------------------------
+3. No
+
+
+
+Review #72C
+===========================================================================
+
+Overall merit
+-------------
+4. This paper has new insights and contributions, I expect that it will be
+   interesting to the HPDC community.
+
+Reviewer expertise
+------------------
+3. Knowledgeable
+
+Reasons to accept (Strengths)
+-----------------------------
+•	Performance improvements over existing serverless platforms
+•	Detailed architecture, design, and implementation described
+•	Research platform enabling others to test their approaches
+
+Areas for improvement (Weaknesses)
+----------------------------------
+•	I wish more end-to-end applications were used
+•	Minor: More examples could have been used to motivate design choices
+
+Detailed feedback for authors
+-----------------------------
+I found it a very well-written paper, motivated, with the detailed description of the architecture, design, and implementation with the quantification of the choices through various experiments
+
+Minor Suggestions, English Errors, and Typos
+
+Could you move the Figures at the end closer to the place you reference them 
+
+Ofcourse -> of course
+Samplinh-> sampling
+we focus on single-worker performance to removes unnecessary confounding factors -> we focus on single-worker performance to remove unnecessary confounding factors
+At 16 cores, out workload saturates the system -> At 16 cores, our workload saturates the system
+
+Raised concerns require new experiments or significant methodological
+changes.
+
+---------------------------------------------------------------------------
+3. No
+
+
+
+Review #72D
+===========================================================================
+
+Overall merit
+-------------
+3. This paper meets the contribution level of a typical HPDC paper, but may
+   have minor concerns that could be addressed via small changes.
+
+Reviewer expertise
+------------------
+3. Knowledgeable
+
+Reasons to accept (Strengths)
+-----------------------------
+- The paper addresses a very timely topic and provides a solution that is
+  significantly faster than OpenWhisk, one of the most commonly used
+  opensource FaaS servers.
+- The paper is technically strong, it discusses various interesting low-level
+  issues of FaaS implementations in general.
+- Presentation wise the paper is well written and is easy to follow.
+
+Areas for improvement (Weaknesses)
+----------------------------------
+- The title, abstract and even the introduction are somewhat misleading as
+  they talk about the entire FaaS control plane but later it turns out that
+  the proposal really only is focusing on a specific piece of it, the worker
+  that runs on a single server.
+- Overall the paper feels like a strong engineering work, but several of the
+  design choices (e.g., container keep-alive, dealing with network namespaces,
+  etc.) appear to be based on previously published findings and thus the
+  question of what is fundamentally new remains open.
+
+Detailed feedback for authors
+-----------------------------
+Summary:
+This paper presents Iluvatar, a function as a service control plane
+implementation in Rust. Iluvatar deals with the dispatching of function
+invocations in a single server and is up to two orders of magnitude faster
+than OpenWhisk. The paper provides extensive documentation on various design
+choices the authors made while implementing the system.
+Evaluation is provided on a 48 cores Xeon using a number of functions from
+functionbench as well as using the Azure function traces showing results on
+end-to-end latency, the impact of different container backends, different
+queueing policies, etc.
+
+Comments/Questions:
+- Following up on the comment about the single server, a high level overview
+  of how an entire FaaS infrastructure looks like (across multiple servers)
+  and which part Iluvatar intends to cover would be helpful, the definition of
+  a worker in the overall architecture and the fact that the paper deals with
+  only a single server should be spelled out explicitly and early in the text.
+- There is really only one plot that compares Iluvatar and OpenWhisk, more
+  comparative evaluation on both would have been more demonstrative, have you
+  considered showing similar breakdown as shown in Table 1 for OpenWhisk as
+  well?
+- The null container approach sounds suspicious as it wouldn't be able to
+  simulate interference and resource contention across function invocations.
+  Is the assumption here that such affects are completely isolated from the
+  control plane itself?  For example, cache effects might impact the control
+  plane as well, but the simulator wouldn't account for that.
+- Are the client threads, Illuvatar itself and the containers pinned to specific
+  CPU cores or does that entirely depend on the Linux scheduler?
+  presumably thread binding (or the lack of it) would considerably impact tail
+  latency.
+- Given that in a practical setup function invocations originate over the
+  network, I would like to see some discussion on the expected impact of these
+  optimizations in comparison to the inherent latency of network
+  communication.  I.e., what it the end-to-end (i.e., from the client to the
+  cloud and back) expected overhead - in terms of latency - of a function
+  invocation? This is perhaps something you could provide some data on using
+  public cloud services.
+- What is the role of Rust in the overall design? You mentioned asynch
+  functions and futures, could you provide more discussion why Rust is a good
+  fit for such work in comparison to languages such as C, C++ or even higher
+  level ones such as Go?
+
+Raised concerns require new experiments or significant methodological
+changes.
+
+---------------------------------------------------------------------------
+3. No
+
+
+
+Comment @A1 by Reviewer B
+---------------------------------------------------------------------------
+This paper was discussed extensively at the PC meeting and the reviewers agreed to accept the paper.
+
+The committee members observed the following strengths:
+- It presents a working end-to-end system in extensive detail, with good justification for design decisions.
+- The challenges of reducing invocation latency are clearly described and addressed thoroughly.
+- The performance of the system improves upon the state of the art, at least for a single worker node.
+
+There were some common weaknesses observed:
+1 - The evaluation really only considers a single worker node, and there are likely to be other effects at scale.
+2 - The discussion does not fully disentangle what performance contributions are due to architectural decisions (e.g. queue at the worker) versus narrow technology choices (Rust vs Java)
+3 - The paper does not precisely highlight the novelty of this system compared to Nuclei, Open Lambda, OpenWhisk, and other contemporary systems.
+
+In the final revision, please clarify the limitations due to #1, and improve the discussion to address points #2 and #3.

@@ -1,0 +1,41 @@
+\paragraph{System model.} 
+We assume that each function invocation runs in its own container. 
+%
+A FaaS platform may use a cluster of physical servers, and forward the function invocation requests to different servers based on some load-balancing policy. 
+Our aim is to investigate general keep-alive techniques that are independent of the load-balancing, and we therefore focus on \emph{server-level} policies. 
+Even on a single server, a function can have multiple independent and concurrent instantiations, and hence containers.
+Each function has its own container image and initialization code, and thus containers cannot be used by multiple functions. 
+A function's containers are nearly identical in their resource utilization, since they are typically running the same function code.
+When a function finishes execution, its container may be terminated, or be kept alive and ``warm'' for any future invocations of the same function. 
+%
+At any instant of time, each container is either running a function, or is being kept alive/warm. % (see Figure~\ref{fig:server}). 
+%
+Thus, server resources are consumed by running containers, and containers being kept alive in anticipation for future invocations. 
+
+\paragraph{Cold-start overheads in OpenWhisk.} 
+
+Case study of OpenWhisk which is indicative of general FaaS frameworks.
+It keeps a pool of containers for recently invoked functions.
+Each invocation entails looking up in this container pool for a warmed container. 
+Otherwise, a new docker container is started, which incurs about 100ms of overhead as shown in Figure~\ref{fig:timeline}.
+%
+Brand new functions have to be initialized which entails registering them and downloading the docker image, which can be gigabytes in size and require seconds to download from a central repository like docker hub.
+
+
+Optionally, applications may also specify an explcit \texttt{init} routine that initializes and pre-warms the container.
+This can be used for downloading data dependencies ahead of time such as large neural network models for inference, or for runtime initialization such as downloading and importing package dependencies (such as Python packages). 
+Explicit initialization is not common---our empirical investigation into FaaS benchmarks~\cite{kim_functionbench_2019} and official examples showed that applications do not use this functionality. 
+Since the explicit initialization can amortize the initialization costs for popular functions, it can reduce the effective function latency. 
+
+
+Thus the cold-start overhead can entail multiple stages of initialization.
+We assume a general setup where the explicit initialization is optional, and assume that the functions are already registered.
+
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.4\textwidth]{../figures/timeline.pdf}
+  \caption{Sources of cold-start delay in OpenWhisk.}
+  \label{fig:timeline}
+\end{figure}
+

@@ -1,0 +1,124 @@
+\documentclass[sigconf]{acmart}
+% \documentclass[letterpaper,twocolumn,10pt]{article}
+%\usepackage{usenix-2020-09}
+\usepackage{graphicx}
+\usepackage{subfig}
+%Removing the geometry package used for Tighter Format
+%\usepackage{geometry}
+%\usepackage{times}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{comment}
+
+\usepackage[noend]{algpseudocode}
+\usepackage[nothing]{algorithm}
+
+% \usepackage[hyphens]{url}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+%\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+%Used only for breaking hypenated URLs
+\usepackage{etoolbox}
+\gappto{\UrlBreaks}{\UrlOrds}
+%
+
+
+\hypersetup{breaklinks=true}
+
+\urlstyle{same}
+
+\copyrightyear{2022}
+\acmYear{2022}
+\setcopyright{acmlicensed}
+\acmConference[HPDC '22] {Proceedings of the 31st International Symposium on High-Performance Parallel and Distributed Computing}{June 27--30, 2022}{Minneapolis, MN, USA.}
+\acmBooktitle{Proceedings of the 31st International Symposium on High-Performance Parallel and Distributed Computing (HPDC '22), June 27--30, 2022, Minneapolis, MN, USA}
+\acmPrice{15.00}
+\acmISBN{978-1-4503-9199-3/22/06}
+\acmDOI{10.1145/3502181.3531459}
+
+
+\settopmatter{printacmref=true}
+
+% \setcopyright{none}
+% \settopmatter{printacmref=false}
+% \acmConference{}{}{}
+% \acmPrice{}
+% \acmISBN{}
+% \acmDOI{}
+% \acmYear{}
+% \acmMonth{}
+% \settopmatter{printfolios=true}
+
+
+
+\begin{document}
+\fancyhead{}
+\date{}
+
+\title{Locality-aware Load-Balancing For Serverless Clusters}
+% \title{Serverless Cluster Management using Locality and Stale-load aware Policies}
+% \title{Combining Locality and Stale-load awareness for Serverless Load Balancing}
+
+\author{Alexander Fuerst}
+\affiliation{Indiana University}
+\email{alfuerst@iu.edu}
+
+\author{Prateek Sharma}
+\affiliation{Indiana University}
+\email{prateeks@iu.edu}
+
+\begin{CCSXML}
+  <ccs2012>
+  <concept>
+  <concept_id>10010520.10010521.10010537.10003100</concept_id>
+  <concept_desc>Computer systems organization~Cloud computing</concept_desc>
+  <concept_significance>500</concept_significance>
+  </concept>
+  </ccs2012>
+\end{CCSXML}
+  
+\ccsdesc[500]{Computer systems organization~Cloud computing}
+\keywords{Functions as a Service, Serverless Computing, Cloud Computing, Load Balancing}
+
+\begin{abstract}
+  \input{abstract}
+\end{abstract}
+
+\maketitle
+
+\input{intro.tex}
+
+\input{bg}
+
+\input{challenges}
+
+\input{design.prateek}
+
+\input{implementation}
+
+\input{eval}
+
+\input{related}
+
+\input{conclusion}
+
+{
+\bibliographystyle{acm}
+\interlinepenalty=10000 %%%%For fixing url-related errors only 
+\bibliography{faas,faas-asplos,lb}
+%\bibliography{bagsjobs}
+}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

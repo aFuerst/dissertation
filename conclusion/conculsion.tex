@@ -1,0 +1,34 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+This thesis detailed the new cloud computing paradigm called \textit{serverless computing}, and examined the control plane used to make it a reality.
+It also went into the challenges faced by this new service, proposing several algorithms, designs, and techniques to improve resource usage and enable new applications to run on it.
+
+Single-worker resource optimization was explored in Chapters~\ref{chap:faascache} and ~\ref{chap:gpu-sched}, and validated the criticality of warm-starts to low latency in FaaS.
+Chapter~\ref{chap:faascache} described a cache management design called \emph{FaasCache} that uses function characteristics to better manage in-memory containers for better performance.
+Knowing that some containers will provide better value if kept available longer, it prunes the cotnainer pool of those less useful to provide better locality and maximize memory utilization.
+A novel resource, GPU acceleration, was proposed in Chapter~\ref{chap:gpu-sched}.
+% These functions allow more opportunity in scheduling functions and allow further improvements to serverless efficiency and latency improvement.
+Several combined mechanisms allowed the efficient and fair scheduling of black-box functions to receive acceleration from GPUs.
+Memory is oversubscribed and multiplexed, allowing the control plane can adjust allocations on-demand to prevent device exhaustion and overhead.
+It also creates a novel GPU container pool that allows the first locality measures for accelerators.
+These are tied together with new queue design that favors data locality for performance, but ensures no function faces starvation.
+
+A cluster approach at managing worker load imbalance and even overloading was laid out in Chapter~\ref{chap:chrlu}.
+% Chapter~\ref{chap:chrlu} looks at the challenge of load-balancing FaaS functions due to heterogeneous workloads.
+Heterogeneous and bursty Faas workloads are a unique challenge in cloud management, and we created an algorithm to respond accordingly.
+CH-RLU starts by favoring locality and preferring to always run a function on the same worker.
+At the same time, it identifies those which might overwhelm workers, and spreads their invocations across several workers in a locality-friendly manner.
+Overload scenarios are prevented by tracking worker load, estimating the impact of dispatches, and redirecting dispatches when load becomes too high.
+% We presented a novel load-balancing algorithm called CH-RLU that takes advantage of workload characteristics to avoid worker overload and minimize latency.
+The locality focus combined with preventing worker exhaustion lower latency significantly over other FaaS load balancing policies.
+
+Chapter~\ref{chap:iluvatar} detailed a new serverless control plane design called \sysname~we created to fix problems with existing offerings.
+It can be used to accelerate FaaS research and make explore new possibilities that couldn't be done before.
+
+Serverless computing promises to be an efficient and valuable system in cloud computing.
+In this thesis we have demonstrated several techniques that can greatly enhance the resource management and utilization of FaaS control planes.
+The combined large scale, breadth of research topics, and heterogeneous workloads of FaaS leaves many more avenues to explore.
+By all measures it is expected to grow rapidly, meaning new features will need to be developed, performance issues addressed, and features developed to extend the classes of programs that are efficient on it.
+
+% Chapter~\ref{chap:summary} creates a recursive loop of chapter references.

@@ -1,0 +1,73 @@
+AES: Advanced Encryption Standard
+AI: Artificial Intelligence
+API: Application Programming Interface
+ARIMA: AutoRegressive Integrated Moving Average
+AWS: Amazon Web Services
+CDF: Cumulative Distribution Function
+CH-BL: Consistent Hashing with Bounded Loads
+CH-RLU: Consistent Hashing with Random Load Update
+CH: Consistent Hashing
+CNI: Container Netowrk Interface
+CNN: Convolutional Neural Network
+CPU: Central Processing Unit
+CRIU: Checkpoint/Restore In Userspace
+CSV: Comma-Separated Value
+DAG: Directed Acyclic Graph
+DNN: Dense Neural Network 
+DPU: Data Processing Unit
+ECDF: Empirical distribution function
+EEDF: Earliest Effective Deadline First
+FCFS: First-Come First-Serve
+FFT: Fixed-Fourier Transform
+FIFO: First-in-First-out
+FPGA: Field-Programmable Gate Array
+FaaS: Function as a Service
+GC: Garbage Colection
+GCP: Google Cloud Platform
+GD: Greedy-Dual
+GPU: Graphical Processing Unit
+HPC: High-Performance Computing
+HTTP: Hyper-Text Transport Protocol
+HW: Hardware
+IAT: Inter-arrival Time
+IP: Internet Protocol
+IPC: Instructions per Cycle / Inter-Processor Communication
+JSF: Shortest Job First
+JSON: JavaScript Object Notation
+JSQ: Join-Shortest-Queue
+JVM: Java Virtual Machine
+LFU: Least Frequently Used
+LL: Least Loaded
+LRU: Least Recently Used
+LWL: Least-Work-Left
+MIG: Multi-Instance GPU
+ML: Machine Learning
+MPI: Message-Passing Interface
+MPS: NVIDIA Multi-Process Service
+MQFQ: Multi-Queue Fair Queuing
+NVML: NVIDIA Management Library
+OCI: Open Container Initiative
+OS: Operating System
+OW: OpenWhisk
+PTE: Page-Table Entry
+RAM: Random Access Memory
+RAPL: Running Average Power Limit
+RPC: Remote Procedural Call
+SIMT: Single Instruction Multiple Threads
+SLA: Service-Level Agreement
+SW: Software
+TCP: Transmission Control Protocol
+TPU: Tensor Processing Unit
+TTL: Time-to-Live
+UVM: Unified Virtual Memory
+VM: Virtual Machine
+VT: Virtual Time
+WASM: WebAssembly
+CLI: Command Line Interface
+SJF: Shortest Job First
+CDN: Content Delivery Network
+MQ: Multi-Queuing
+RNN: Recurrent Neural Network
+TCB: Trusted Computing Base
+TEE: Trusted Execution Environment
+ABI: Application Binary Inferface

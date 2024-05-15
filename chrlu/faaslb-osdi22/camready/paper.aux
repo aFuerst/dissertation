@@ -1,0 +1,213 @@
+\relax 
+\providecommand\zref@newlabel[2]{}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\AtEndDvi@Check{}
+\AtEndDvi@Check
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {section}{Abstract}{1}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{karger1997consistent}
+\citation{mirrokni2018consistent}
+\citation{faascache-asplos21}
+\citation{shards}
+\citation{openwhisk}
+\citation{vhive-asplos21,faascache-asplos21}
+\citation{shahrad_serverless_2020}
+\citation{docker-main}
+\citation{firecracker-nsdi20}
+\citation{kim_functionbench_2019}
+\citation{kim_functionbench_2019}
+\citation{kim_functionbench_2019}
+\citation{gdsf}
+\citation{faascache-asplos21}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces FunctionBench \citep  {kim_functionbench_2019} functions run times' are significantly longer on cold starts. Ideally we want all of our functions to run warm to lower user latency. Cold starts also increase system load by creating runtime overhead.\relax }}{2}{table.caption.5}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:func-times}{{1}{2}{FunctionBench \cite {kim_functionbench_2019} functions run times' are significantly longer on cold starts. Ideally we want all of our functions to run warm to lower user latency. Cold starts also increase system load by creating runtime overhead.\relax }{table.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}FaaS Function Execution}{2}{subsection.2.1}\protected@file@percent }
+\citation{karger1999web}
+\citation{decandia2007dynamo}
+\citation{nygren2010akamai}
+\citation{decandia2007dynamo}
+\citation{karger1999web,karger1997consistent}
+\citation{shahrad_serverless_2020}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Load Balancing}{3}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Consistent Hashing}{3}{subsection.2.3}\protected@file@percent }
+\newlabel{subsec:ch}{{2.3}{3}{Consistent Hashing}{subsection.2.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Consistent hashing runs functions on the nearest clockwise server. Functions are forwarded along the ring if the server is overloaded.\relax }}{3}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:ch}{{1}{3}{Consistent hashing runs functions on the nearest clockwise server. Functions are forwarded along the ring if the server is overloaded.\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Function load is very heavy tailed (note the log X axis). Each line represents a different random subset and associated subset size from the Azure function trace. \relax }}{3}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:freqs}{{2}{3}{Function load is very heavy tailed (note the log X axis). Each line represents a different random subset and associated subset size from the Azure function trace. \relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Challenges In FaaS Load-balancing}{3}{section.3}\protected@file@percent }
+\newlabel{sec:challenges}{{3}{3}{Challenges In FaaS Load-balancing}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Function Heterogeneity and Skew}{3}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Inter arrival times of popular functions can be extremely low, and show a very wide variance (note the log-scale of the X axis).\relax }}{4}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:iats}{{3}{4}{Inter arrival times of popular functions can be extremely low, and show a very wide variance (note the log-scale of the X axis).\relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Bursty Invocations}{4}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Function Performance and Server Load}{4}{subsection.3.3}\protected@file@percent }
+\newlabel{subsec:function-perf}{{3.3}{4}{Function Performance and Server Load}{subsection.3.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Functions' warm latencies vary widely even under no system load, due to OpenWhisk jitter.\relax }}{4}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:UnstableEmpty}{{4}{4}{Functions' warm latencies vary widely even under no system load, due to OpenWhisk jitter.\relax }{figure.caption.9}{}}
+\citation{mirrokni2018consistent}
+\citation{chrj-aaai21}
+\newlabel{fig:AES}{{5a}{5}{Subfigure 5a}{subfigure.5.1}{}}
+\newlabel{sub@fig:AES}{{(a)}{a}{Subfigure 5a\relax }{subfigure.5.1}{}}
+\newlabel{fig:TRAIN}{{5b}{5}{Subfigure 5b}{subfigure.5.2}{}}
+\newlabel{sub@fig:TRAIN}{{(b)}{b}{Subfigure 5b\relax }{subfigure.5.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Latency increases due to system load, but is function-dependent.\relax }}{5}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:LatencyVsLoad}{{5}{5}{Latency increases due to system load, but is function-dependent.\relax }{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Load-aware Consistent-Hashing}{5}{section.4}\protected@file@percent }
+\newlabel{sec:chrlu}{{4}{5}{Load-aware Consistent-Hashing}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Tradeoff between Locality and Load}{5}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Key Principle: Load-based Forwarding}{5}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Server Load Information}{5}{subsection.4.3}\protected@file@percent }
+\citation{mirrokni2018consistent}
+\citation{mirrokni2018consistent}
+\citation{shards}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Why CH-BL Is Insufficient}{6}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Incorporating Function Performance Characteristics}{6}{subsection.4.5}\protected@file@percent }
+\newlabel{subsec:chch}{{4.5}{6}{Incorporating Function Performance Characteristics}{subsection.4.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Handling Bursts}{6}{subsection.4.6}\protected@file@percent }
+\newlabel{subsec:bursty}{{4.6}{6}{Handling Bursts}{subsection.4.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.6.1}Detecting Popular Functions with Spatial Sampling}{6}{subsubsection.4.6.1}\protected@file@percent }
+\citation{faascache-asplos21}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces SHARDS-inspired popular function detection. Functions with the top p percentile of IATs are 'popular'.\relax }}{7}{algorithm.1}\protected@file@percent }
+\newlabel{algo:shards-popular}{{1}{7}{SHARDS-inspired popular function detection. Functions with the top p percentile of IATs are 'popular'.\relax }{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.6.2}Randomly Updating Stale Loads}{7}{subsubsection.4.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Putting it all together: CH-RLU}{7}{subsection.4.7}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Random Load Update Forwarding Function\relax }}{7}{algorithm.2}\protected@file@percent }
+\newlabel{algo:PopularRLUPolicy}{{2}{7}{Random Load Update Forwarding Function\relax }{algorithm.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Implementation}{7}{section.5}\protected@file@percent }
+\newlabel{sec:impl}{{5}{7}{Implementation}{section.5}{}}
+\citation{faascache-asplos21}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces System diagram of relevant OpenWhisk components and communication used to schedule and run function invocations.\relax }}{8}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:sys-diag}{{6}{8}{System diagram of relevant OpenWhisk components and communication used to schedule and run function invocations.\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Performance Optimizations For OpenWhisk}{8}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Evaluation}{8}{section.6}\protected@file@percent }
+\newlabel{sec:eval}{{6}{8}{Evaluation}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Evaluation Environment}{8}{subsection.6.1}\protected@file@percent }
+\citation{kim_functionbench_2019}
+\citation{shahrad_serverless_2020}
+\citation{locust}
+\newlabel{fig:20-normalized-latencies}{{7a}{9}{Subfigure 7a}{subfigure.7.1}{}}
+\newlabel{sub@fig:20-normalized-latencies}{{(a)}{a}{Subfigure 7a\relax }{subfigure.7.1}{}}
+\newlabel{fig:20-invokes}{{7b}{9}{Subfigure 7b}{subfigure.7.2}{}}
+\newlabel{sub@fig:20-invokes}{{(b)}{b}{Subfigure 7b\relax }{subfigure.7.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Latency and throughput under low-load. Locality-agnostic least-loaded policy has more cold starts and a higher impact on latency.\relax }}{9}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:low-load}{{7}{9}{Latency and throughput under low-load. Locality-agnostic least-loaded policy has more cold starts and a higher impact on latency.\relax }{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Global Latency Impact}}}{9}{subfigure.7.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Invocation Throughput}}}{9}{subfigure.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Load-balancing Performance}{9}{subsection.6.2}\protected@file@percent }
+\newlabel{sec:policy-comare}{{6.2}{9}{Load-balancing Performance}{subsection.6.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Handling Bursty Traffic}{9}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:120-normalized-latencies}{{8a}{10}{Subfigure 8a}{subfigure.8.1}{}}
+\newlabel{sub@fig:120-normalized-latencies}{{(a)}{a}{Subfigure 8a\relax }{subfigure.8.1}{}}
+\newlabel{fig:120-invokes}{{8b}{10}{Subfigure 8b}{subfigure.8.2}{}}
+\newlabel{sub@fig:120-invokes}{{(b)}{b}{Subfigure 8b\relax }{subfigure.8.2}{}}
+\newlabel{fig:120-load-variance}{{8c}{10}{Subfigure 8c}{subfigure.8.3}{}}
+\newlabel{sub@fig:120-load-variance}{{(c)}{c}{Subfigure 8c\relax }{subfigure.8.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces At high server loads, our RLU policy reduces average latency by 2.2x at higher throughput, compared to OpenWhisk's default policy. It does so by keeping cold-starts and load-variances low.\relax }}{10}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:high-load}{{8}{10}{At high server loads, our RLU policy reduces average latency by 2.2x at higher throughput, compared to OpenWhisk's default policy. It does so by keeping cold-starts and load-variances low.\relax }{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Latency}}}{10}{subfigure.8.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Throughput}}}{10}{subfigure.8.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {Server Load variance}}}{10}{subfigure.8.3}\protected@file@percent }
+\newlabel{fig:bursty-latencies}{{9a}{10}{Subfigure 9a}{subfigure.9.1}{}}
+\newlabel{sub@fig:bursty-latencies}{{(a)}{a}{Subfigure 9a\relax }{subfigure.9.1}{}}
+\newlabel{fig:bursty-variance}{{9b}{10}{Subfigure 9b}{subfigure.9.2}{}}
+\newlabel{sub@fig:bursty-variance}{{(b)}{b}{Subfigure 9b\relax }{subfigure.9.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces RLU improves latency by 10\% compared to OpenWhisk under bursty load conditions, while keeping a low worker load variance.\relax }}{10}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:bursty-closedload}{{9}{10}{RLU improves latency by 10\% compared to OpenWhisk under bursty load conditions, while keeping a low worker load variance.\relax }{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Global Latency Impact}}}{10}{subfigure.9.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Worker Load Variance}}}{10}{subfigure.9.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Global latency impact under a 30-minute long rising burst load from an open-loop generator. RLU reduces latency by 17\% compared to OpenWhisk.\relax }}{10}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:bursty-openload}{{10}{10}{Global latency impact under a 30-minute long rising burst load from an open-loop generator. RLU reduces latency by 17\% compared to OpenWhisk.\relax }{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces The average normalized function latency over time for a dynamic workload. New invokers are launched at the dashed lines, keeping the latency in check.\relax }}{10}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:scaling-latency}{{11}{10}{The average normalized function latency over time for a dynamic workload. New invokers are launched at the dashed lines, keeping the latency in check.\relax }{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Scaling}{10}{figure.caption.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.3}Load-balancer Overhead}{10}{subsubsection.6.2.3}\protected@file@percent }
+\citation{serverless-harvest-sosp21}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces [Simulated] Function latency distribution. \relax }}{11}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:1k-lat}{{12}{11}{[Simulated] Function latency distribution. \relax }{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces [Simulated] Cold and dropped functions.\relax }}{11}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:1k-cd}{{13}{11}{[Simulated] Cold and dropped functions.\relax }{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Simulation Evaluation}{11}{subsection.6.3}\protected@file@percent }
+\newlabel{subsec:eval-sim}{{6.3}{11}{Simulation Evaluation}{subsection.6.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces [Simulated] Function latencies as cluster size is increased. Least-loaded performs \emph  {worse} because its locality and cold-starts become worse as more servers are added.\relax }}{11}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:1k-scaling}{{14}{11}{[Simulated] Function latencies as cluster size is increased. Least-loaded performs \emph {worse} because its locality and cold-starts become worse as more servers are added.\relax }{figure.caption.19}{}}
+\citation{faas-survey-jan-2022,raza2021sok,eismann2020serverless,hassan2021survey,mampage2021holistic}
+\citation{du2020catalyzer,firecracker-nsdi20,dukic2020photons,akkus_sand_2018,vhive-asplos21,carreira2021warm}
+\citation{shahrad_serverless_2020}
+\citation{faascache-asplos21}
+\citation{gunasekaran2020fifer,daw2021speedo,shen2021defuse}
+\citation{package-cristina-19}
+\citation{suresh2019fnsched,suresh2021servermore,ensure-faas-acsos20}
+\citation{hunhoff2020proactive,yu2021faasrank,puru_xanadu_20,przybylski2021data}
+\citation{zaharia2010delay}
+\citation{gupta2007analysis}
+\bibstyle{acm}
+\bibdata{faas,faas-asplos,lb}
+\bibcite{docker-main}{{1}{}{{}}{{}}}
+\bibcite{openwhisk}{{2}{}{{}}{{}}}
+\bibcite{firecracker-nsdi20}{{3}{}{{}}{{}}}
+\bibcite{akkus_sand_2018}{{4}{}{{}}{{}}}
+\bibcite{package-cristina-19}{{5}{}{{}}{{}}}
+\bibcite{carreira2021warm}{{6}{}{{}}{{}}}
+\bibcite{chrj-aaai21}{{7}{}{{}}{{}}}
+\bibcite{gdsf}{{8}{}{{}}{{}}}
+\bibcite{puru_xanadu_20}{{9}{}{{}}{{}}}
+\bibcite{daw2021speedo}{{10}{}{{}}{{}}}
+\bibcite{decandia2007dynamo}{{11}{}{{}}{{}}}
+\bibcite{du2020catalyzer}{{12}{}{{}}{{}}}
+\bibcite{dukic2020photons}{{13}{}{{}}{{}}}
+\bibcite{eismann2020serverless}{{14}{}{{}}{{}}}
+\bibcite{faascache-asplos21}{{15}{}{{}}{{}}}
+\bibcite{gunasekaran2020fifer}{{16}{}{{}}{{}}}
+\bibcite{gupta2007analysis}{{17}{}{{}}{{}}}
+\bibcite{hassan2021survey}{{18}{}{{}}{{}}}
+\bibcite{hunhoff2020proactive}{{19}{}{{}}{{}}}
+\bibcite{karger1997consistent}{{20}{}{{}}{{}}}
+\bibcite{karger1999web}{{21}{}{{}}{{}}}
+\bibcite{kim_functionbench_2019}{{22}{}{{}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Related Work}{12}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{12}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{12}{section*.21}\protected@file@percent }
+\bibcite{faas-survey-jan-2022}{{23}{}{{}}{{}}}
+\bibcite{locust}{{24}{}{{}}{{}}}
+\bibcite{mampage2021holistic}{{25}{}{{}}{{}}}
+\bibcite{mirrokni2018consistent}{{26}{}{{}}{{}}}
+\bibcite{nygren2010akamai}{{27}{}{{}}{{}}}
+\bibcite{przybylski2021data}{{28}{}{{}}{{}}}
+\bibcite{raza2021sok}{{29}{}{{}}{{}}}
+\bibcite{shahrad_serverless_2020}{{30}{}{{}}{{}}}
+\bibcite{shen2021defuse}{{31}{}{{}}{{}}}
+\bibcite{suresh2019fnsched}{{32}{}{{}}{{}}}
+\bibcite{suresh2021servermore}{{33}{}{{}}{{}}}
+\bibcite{ensure-faas-acsos20}{{34}{}{{}}{{}}}
+\bibcite{vhive-asplos21}{{35}{}{{}}{{}}}
+\bibcite{shards}{{36}{}{{}}{{}}}
+\bibcite{yu2021faasrank}{{37}{}{{}}{{}}}
+\bibcite{zaharia2010delay}{{38}{}{{}}{{}}}
+\bibcite{serverless-harvest-sosp21}{{39}{}{{}}{{}}}
+\newlabel{tocindent-1}{0pt}
+\newlabel{tocindent0}{0pt}
+\newlabel{tocindent1}{4.185pt}
+\newlabel{tocindent2}{10.34999pt}
+\newlabel{tocindent3}{18.198pt}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers
+\newlabel{TotPages}{{13}{13}{}{page.13}{}}
+\zref@newlabel{LastPage}{\default{8}\page{13}\abspage{13}}

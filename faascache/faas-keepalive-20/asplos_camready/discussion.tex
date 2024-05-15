@@ -1,0 +1,37 @@
+\section{Discussion}
+\label{sec:disc}
+
+In this section, we reflect on how our ideas fit into the broader serverless computing ecosystem. 
+
+\paragraph{Impact on colocated applications.}
+The short execution lifecycles of serverless functions makes them a good workload to colocate with other long-running containers, VMs, batch-jobs, etc.
+Such workload management architectures result in an additional layer of performance tradeoffs: the keep-alive policies not only influence function performance, but also the performance of other colocated applications.
+Our provisioning policies in Section~\ref{sec:provision} can be used to find the appropriate keep-alive cache size based on the performance vs. memory-consumption tradeoff captured in the hit-rate curves.
+Ultimately, the tradeoff between function and other colocated application performance is determined by their utility and revenue for the cloud provider. 
+Nevertheless, our provisioning policies can provide a principled way to examine these tradeoffs, and is part of our future work.
+ 
+
+\paragraph{Cluster-level analysis.}
+Cluster-level function load-balancing and scheduling also affects keep-alive. 
+Load-balancing policies determine the function load and distribution of function characteristics on servers. 
+The function workload characteristics have a major influence on performance, as we have extensively discussed in Section~\ref{sec:eval} (e.g., Figure~\ref{fig:exec-overheads-all}). 
+For instance, a stateful load-balancing policy which runs a function on the same subset of servers will result in better temporal locality, which in turn improves keep-alive effectiveness.
+On the other hand, randomized load-balancing is simpler to implement and scale, but offers worse temporal locality to individual servers. 
+We have deliberately focused our techniques and evaluation on a single-server setting, in order to provide modular and easily reproducible policies. 
+
+
+\paragraph{Explicit initialization.}
+There are many techniques for reducing the initialization cost, which can be combined with our policies. 
+The cold-start overhead can also be addressed by \emph{explicit initialization} of functions, in which the initialization code is provided as a separate, explicit call-back. 
+For instance, OpenWhisk supports an \texttt{init} call into the function runtime, which can be executed before the function is triggered with the \texttt{run} call. 
+%, which we described in Section~\ref{sec:tradeoffs}. 
+This explicit initialization allows functions to be pre-warmed, and can be used to reduce the cold-start overhead.  
+However, explicit initialization is not common---our empirical investigation into FaaS benchmarks~\cite{kim_functionbench_2019} and official examples showed that applications do not use this functionality. 
+We speculate that the slow adoption is due to the subtle differences in the various cloud function APIs, serverless platforms, and runtimes. 
+Nevertheless, it can be a powerful technique to amortize expensive operations such as package imports and downloading data dependencies, and increase the effectiveness of keep-alive policies even further.
+By separating out the initialization code and actual function code, explicit initialization can also increase the potency of function prefetching~\cite{shahrad_serverless_2020}. 
+
+%$Explicit initialization can \emph{increase} the effectiveness of keep-alive, since the function latency  for a pre-warmed function is 
+%However because it is not ubiquitous, we assume it is \emph{optional}, and our keep-alive and provisioning techniques work with and without it. 
+
+%Reasons: not uniformly supported. Different APIs on different cloud platforms. OpenWhisk's is /init, for example.

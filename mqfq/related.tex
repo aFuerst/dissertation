@@ -1,0 +1,44 @@
+\section{Related Work}
+\label{sec:related}
+
+\mhead{Cold Starts}
+Overheads from serverless computing primarily come from cold start delays, and research has tackled this problem from several directions.
+Reducing the time spent starting a new container has taken two approaches: snapshotting for shorter startup time~\cite{du2020catalyzer,vhive-asplos21}, or deploying functions inside faster-starting containers~\cite{unikernels,firecracker-nsdi20,shillaker2020faasm}.
+Alternatively, avoiding cold starts entirely has also proven popular and successful.
+Predicting the need for a container and pre-warming it has been explored using various techniques~\cite{shahrad2020serverless,vahidinia2022mitigating,ebrahimi2024cold}.
+Keeping containers around longer to maximize their performance~\cite{faascache-asplos21}, or load-balancing to guarantee more warm-hits~\cite{faaslb-hpdc22,balaji2021fireplace,abdi2023palette}.
+Bursty functions can cause load imbalance and queuing on systems, and intelligent queuing can avoid additional latency~\cite{yan2020hermes}.
+
+\mhead{Serverless GPU}
+One of the first works to integrate GPUs is~\cite{naranjo2020accelerated} using rCUDA~\cite{duato2010rcuda} to connect disaggregated GPUs in a cluster to containers.
+It only looks at the performance effect on individual function invocations, not exploring the resource management, queuing, or heterogeneous load issues in FaaS.
+DGSF~\cite{fingler2022dgsf} combines disaggregation and API remoting to improve utilization, and has the remote node load-balances GPUs.
+
+Software level scheduling of GPU kernels (device compute requests from programs) has been explored by several works, and requires GPU code be extracted separately and not be in a function with CPU code.
+Kernel-as-a-Service~\cite{pemberton2022kernel} treats individual kernels as first-class serverless functions, managing kernel scheduling and memory allocations directly from the platform.
+%  and uses DAGs to intersperse them with host code
+Paella~\cite{ng2023paella} also breaks apart model inference tasks into CUDA kernel launches to enable control plane software scheduling of GPUs and their resource management.
+Both of these automatically move memory off of the device when kernels are done, and don't have to worry about applications holding onto device memory when idle.
+
+FaST-GShare~\cite{gu2023fast} profiles ML workloads to monitor how much of the GPU it utilizes, then uses this information to schedule inference tasks on GPUs to maximize utilization.
+ML inference tasks have fixed sized memory and kernel usages (known tensor sizes, etc.) and this is an effective approach.
+Other applications can have arbitrary and changing requirements, especially when one considers that function arguments are the main determiner of resource usage, so this idea breaks down when shifting to black-box applications.
+
+\mhead{FaaS Scheduling}
+Most FaaS scheduling research has focused on load balancing the cluster, and has tackled it on a variety of directions~\cite{kaffes_hermod_2022, kim_scheduling_2021, abdi2023palette, package-cristina-19, serverless-harvest-sosp21, faaslb-hpdc22}.
+Existing platforms such as OpenWhisk~\cite{openwhisk} use FCFS queuing on workers and expect the load balancer will avoid queue delays entirely.
+Only one other work has explored worker-level queuing, comparing it with processor multiplexing during overload scenarios~\cite{kaffes2021practical}.
+
+% non-faas GPU scheduling section?
+
+\mhead{Serverless Use Cases}
+The number of serverless use cases than use or can benefit from acceleration is continuously growing.
+Encoding of videos~\cite{ao2018sprocket, zhang2019video} and analytics on live video streaming~\cite{romero2021llama, risco2021gpu} are perfect matches for both serverless's scaling and the workload's need for high compute parallelization.
+% Machine learning in all its forms has made its way into the serverless research.
+% Commonly to make scheduling decisions for containers~\cite{balaji2021fireplace} or resource allocation to them~ \cite{mvondo2021ofc,eismann2021sizeless}.
+Machine learning inference has need for low-latency results, and has seen much work in serverless~\cite{yang2022infless, ali2022optimizing, ali_batch_2020}, and can achieve lower latency with acceleration.
+% And finally are works that do training, taking advantage of the serverless scaling~\cite{wang2019distributed, gimeno2022mlless, xu2021lambdadnn}.
+%
+The exposure of supercomputing resources to run scientific workloads by~\cite{funcx_hpdc_20} highlights the demand for parallelization of functions.
+Such science workloads vary from biomedical research~\cite{kumanov2018serverless,hung2019rapid}, linear algebra~\cite{werner2018serverless,shankar2020serverless}, to optimization algorithms~\cite{aytekin2019harnessing}.
+

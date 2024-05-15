@@ -1,0 +1,91 @@
+\documentclass[sigconf,review]{acmart}
+% \documentclass[letterpaper,twocolumn,10pt]{article}
+%\usepackage{usenix-2020-09}
+\usepackage{graphicx}
+\usepackage{subfig}
+%Removing the geometry package used for Tighter Format
+%\usepackage{geometry}
+%\usepackage{times}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{comment}
+
+\usepackage[noend]{algpseudocode}
+\usepackage[nothing]{algorithm}
+
+% \usepackage[hyphens]{url}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+%\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+%Used only for breaking hypenated URLs
+\usepackage{etoolbox}
+\gappto{\UrlBreaks}{\UrlOrds}
+%
+
+\hypersetup{breaklinks=true}
+
+\urlstyle{same}
+
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\acmConference{}{}{}
+\acmPrice{}
+\acmISBN{}
+\acmDOI{}
+\acmYear{}
+\acmMonth{}
+\settopmatter{printfolios=true}
+
+
+\begin{document}
+\date{}
+
+\title{Locality-aware Load-Balancing For Serverless Clusters}
+% \title{Serverless Cluster Management using Locality and Stale-load aware Policies}
+% \title{Combining Locality and Stale-load awareness for Serverless Load Balancing}
+
+\author{Paper \# 36}
+
+
+\begin{abstract}
+  \input{abstract}
+\end{abstract}
+
+\maketitle
+
+\input{intro.tex}
+
+\input{bg}
+
+\input{challenges}
+
+\input{design.prateek}
+
+\input{implementation}
+
+\input{eval}
+
+\input{related}
+
+\input{conclusion}
+
+{
+\bibliographystyle{acm}
+\interlinepenalty=10000 %%%%For fixing url-related errors only 
+\bibliography{faas,faas-asplos,lb}
+%\bibliography{bagsjobs}
+}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

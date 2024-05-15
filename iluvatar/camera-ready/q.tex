@@ -1,0 +1,122 @@
+\section{Function Invocation Queuing}
+\label{sec:q}
+
+As a way to regulate and control function execution and worker load, \sysname~ incorporates a per-worker invocation queue architecture. 
+Function invocations go through this queuing system before reaching the container manager, which either locates the warm container and runs the function or creates a new container.
+Each worker manages its own queue, differentiating our design from OpenWhisk's shared Kafka queue. 
+
+\noindent \textbf{Motivation.}
+%
+This queuing architecture is motivated by three main factors: i) the bursty nature of the workload , and ii) Reducing cold starts due to concurrent invocations, and iii) to give workers additional mechanisms for controlling their load, implementing prioritization, etc. 
+Note that once the function passes through the queue, it is effectively ``scheduled'' for execution by the OS CPU scheduler.
+The CPU scheduler of course has its own throttling and controling mechanisms, such as cgroups and the various scheduler tuning knobs.
+The invocation queue thus acts as a kind of a regulator or a filter before the CPU scheduler, and ideally, ``feeds'' it the right functions at the right rates for maximizing throughput and minimizing latency.
+%
+
+Because function workloads are so bursty and heterogeneous, running each function immediately can significantly increase the worker load and result in severe resource contention and increase  function tail latencies.
+%
+The queue also helps as an explicit back-pressure mechanism for load-balancing, admission control, and elastic scaling.
+The queue length is  used for accurately determining the true load on the worker, which is a vital input to consistent hashing with bounded loads~\cite{faaslb-hpdc22}.
+This reduces the staleness and noise of using system load average as the load indicator, and makes load balancing more robust.
+
+
+Queuing invocations also allows us to reduce cold-starts.
+While repeated function invocations are good and increase warm starts, 
+\emph{concurrent} invocations of the same function results in cold-starts for all the concurrent invocations, since each invocation needs to be run in its own container.
+This is also the ``spawn start''~\cite{ristov_colder_warmer}, which causes severe latency increase of 10s of  seconds in public FaaS. 
+If there are $n$ concurrent invocations that arrive at the same time, then the $n$ concurrent cold-starts can significantly increase the system load and affect latency of other functions.
+Instead, by queuing and throttling the functions, we can wait for the invocation to finish, and then use the warm container for the next function in this ``herd'', and so on and so forth. % Lol zizek 
+%Having a queue allows us to regulate the invocations by this and other means. (?) 
+
+% \vspace*{-8pt}
+\subsection{Queue Architecture}
+\label{sec:q:arch}
+
+\sysname's queue architecture is shown in Figure~\ref{fig:arch}.
+We have three main components.
+%
+From right to left, first, we have a concurrency regulator (or just regulator), which enforces the \textbf{concurrency limit}: the  upper-bound on the number of concurrently running functions. 
+%
+This lets functions execute ``on cpu'' without timesharing, and effectively determines the overcommitment ratio.
+Higher concurrency limits (more than the number of CPUs) means  more CPU overcommitment.
+Note that even with overcommitment, the cgroup quotas still provide proportional allocation (thus a 2 CPU container will still get twice the CPU cycles compared to a 1 CPU container). 
+%
+In addition to concurrency, other factors can also be used to regulate the queue discharge rate. 
+The regulator can be used to run functions of only when sufficient resources (such as CPU bandwidth, warm containers, or even accelerators like GPUs) are available. 
+
+
+%Note that technically the queue service backend is a processor sharing system, so can tolerate immediate execution albiet under heavy load.
+%The concurrent cold start mitigation is one important component of the regulator policy.
+%Its inputs are the number of currently running functions, the state of the container map to see which functions are executing, and the system resource utilization (load average, cpu\%, etc).
+%This allows custom policies: we may want to limit the load average to under some limit, or the number of functions ``in flight'', etc.
+\sysname~ can be deployed with a fixed concurrency limit based on the usage requirements, or use its dynamic concurrency limit mode. 
+In the dynamic mode, we use a simple TCP-like AIMD~\cite{yang2000general} policy which increases the concurrency limit until we hit congestion, which in our case is hit if the system load average increases above some specified threshold. 
+Other metrics are possible: looking at the increase in execution time (i.e., stretch) of the functions could also be used as a congestion metric.
+The concurrency limit affects the tail-latency, and more advanced policies can be implemented. 
+
+
+\begin{comment}
+Having the container map also allows us to implement \textbf{concurrent cold-start mitigation}.
+If the function at the head of the queue has no warm containers available, and one of its instantiations is running, then we put the function back in the queue.
+As a function's warm start is typically orders of magnitude shorter than cold starts, it is better for it to wait for warm container than to cold start one.
+We implement this by asking the container pool for a warm container, and if it fails to give us one we can re-queue the invocation for the future.
+Optionally, we can allow for a cold start to increase the number of warm containers for a function, naturally scaling if there is an increase in frequency.
+\end{comment}
+
+% This is currently implemented by looking at the container pool and estimating the likelihood of a warm vs. cold start, and using that expected execution time.
+% The number of current concurrent executions are stored in the system statemap.
+
+
+The second component is a \textbf{queuing discipline.} 
+In the simplest case, we can use simple FCFS, and process functions in arrival order.
+However, because functions are heterogeneous, this is not always the most appropriate.
+Instead, we can use the past function execution characteristics such as their cold/warm running times for size-aware queuing such as shortest job first (SJF).
+We elaborate more on the queuing policies in the next subsection. 
+
+Finally, we note that queuing may increase the waiting time for small functions.
+We thus have a \textbf{queue bypass} mechanism, which allows certain functions to bypass the queue and immediately and directly run on the CPU. 
+Bypass policies take the function running time and the current system state as input. 
+Currently, we implement a short-function bypass, where functions smaller than a certain duration are immediately scheduled, as long as the system is under a load-average limit.  
+More effective bypass policies can also consider reinforcement learning approaches, since the action space is simple (bypass or enqueue), and the system state is well defined (functions running and in-queue, etc.).
+
+
+% \vspace*{-8pt}
+\subsection{Queuing Policies}
+\label{sec:q:pol}
+
+We implement multiple queue policies which leverage the repeated invocations of functions and use their learned execution characteristics to determining each function's priority.
+To accomplish this, we maintain per-function characteristics such as cold time, warm time, and inter-arrival-time (IAT). 
+%We maintain a sorted priority queue of invocations. 
+We maintain a priority queue sorted by the function priorities, which are computed using their characteristics like arrival and execution time. 
+%We can priority calculation to yeild differnt policy results.
+%Different priority calculation yields different priorities. 
+
+FIFO is simplest and invocations are just sorted by their arrival time.
+For prioritizing small functions, we leverage our bypass mechanism, where the short functions can skip the queue and be scheduled directly on the CPU. 
+Optimizing queuing policies for heterogeneous functions is challenging, and is an NP complete problem even in the offline case~\cite{bender1998flow}.
+
+
+For improving throughput, we use shortest job first (SJF), which helps reduce the waiting time for short functions, but can lead to starvation for longer functions if the queue never drains. 
+As a tradeoff between function duration and arrival, \sysname~ by default tries to minimize the ``effective deadline'' of a function, which is equal to the sum of its arrival time and (expected) execution time.
+This earliest effective deadline first (EEDF) approach balances both short functions and starvation.
+In both SJF and EEDF, an invocations' execution time is determined by its (moving window) warm time.
+New/unseen functions have their times set to 0, to prioritize their execution.  
+If we expect to find available containers for a function, we use its (moving window) warm time as the execution time in both SJF and EEDF.
+Otherwise, we use its cold time---this also helps in reducing the concurrent cold starts, since the expected cold invocations of some functions in a burst separates them in the queue, and reduces the number of concurrently executing identical functions.
+This spreading of function invocations over time increases the warm starts and overall performance. 
+%
+%Finally, we can  also prioritize functions with the highest inter-arrival-time. 
+Finally, the RARE policy prioritizes the most unexpected functions (i.e., functions with the highest IAT). 
+
+%All these policies can be combined with the short-function bypass technique.
+%This also reduces the queue size and thus the overheads associated with maintaining a priority queue.
+%In practice, the concurrency limit is larger than the number of the CPUs, so the queuing is expected to minimal under steady-state conditions. 
+
+
+%L-p fairness:  $(\sum F^p)^{1/p}$
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

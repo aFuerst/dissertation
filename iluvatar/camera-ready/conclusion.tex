@@ -1,0 +1,40 @@
+
+
+% \textbf{Performance Gains.}
+
+% \textbf{Why \sysname~?}
+\begin{comment}
+  \section{Discussion}
+There are a number of open-sourced FaaS platforms out there now, so why do we feel the need to make and release yet another?
+Nearly all the platforms out there are targeted at end users of FaaS, not built with researchers in mind.
+The only one to break this trend is OpenLambda~\cite{hendrickson2016serverless}.
+We find it insufficient as it is implemented in Go, whose garbage collection we feel is a significant issue in the latency critical environment of FaaS.
+Importantly it lacks both the ability to operate as a cluster and an integrated load generation system, both of which we have implemented both in \sysname~.
+% , and has code that is less amenable to research and experimentation.
+
+OpenFaas~\cite{openfaas} and nuclio~\cite{nuclio} both rely on Docker/Kubernetes as their deployment and scaling mechanisms.
+These existing tech stacks are highly useful, but limit the research possibilities of a platform, e.g. cold-start optimizations and deploying to edge nodes become intractable.
+While \sysname~ does have a Docker implementation, it is to showcase the ability implement multiple containerization mechanisms and compare between them.
+
+OpenWhisk~\cite{openwhisk} also relies on a Docker/Kubernetes setup, and has we have shown above has highly unpredictable performance.
+The JVM garbage collection, plus high latency variance coming from both their custom platform pieces and third-party CouchDB and Kafka detract from its capability as a research platform.
+We have eliminated the third party services from the invocation path, and our design and Rust implementation contribute to the low-overhead low-variance of the platform.
+\end{comment}
+% A number of other research papers have made one-off serverless systems, but their designs are predicated 
+
+\section{Conclusion}
+% \vspace*{-6pt}
+\sysname~ a fast, modular, and extensible FaaS control plane. 
+It is implemented in Rust in about 13,000 lines of code, and introduces only 3ms of latency overhead under a wide range of loads.
+Its worker-centric architecture, resource caching based design, queue-based overcommitment and scheduling, and careful asynchronous implementation, all contribute to low latency and jitter. 
+
+\sysname~ is open source, and intended to serve as a platform for future high-performance FaaS research and deployments.
+In the near future, we intend to incorporate support for  Firecracker~\cite{firecracker-nsdi20}  VMs and GPUs; investigate load balancing optimizations; and deploy \sysname~ on HPC and cloud clusters. 
+
+\noindent \textbf{Acknowledgements.}
+This research was supported by the NSF grant 2112606. 
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

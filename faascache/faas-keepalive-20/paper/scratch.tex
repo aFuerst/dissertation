@@ -1,0 +1,281 @@
+%New and emerging computing model 
+Function-as-a-service (also called serverless computing) has emerged as a popular cloud computing model. 
+%
+Serverless computing is a new paradigm in which small units of computation ("functions") are the building blocks of distributed computation. 
+
+% Used for wide range of applications: ML inference, API, parallel and scientific computing, ... 
+
+%Functions are small footprint in terms of lifetime, CPU, and memory utilization. And thus heavily multiplexed onto physical servers. 
+
+Instead of application code running on long-lived (virtual) servers, functions are executed on ephemeral resources 
+
+% Fundamental mechanics of operation. Function invocation requires setting up an ephemeral virtualized execution environment either as container or virtual machine. Because function execution is stateless, this execution environment can be torn down after function returns.
+
+
+% resource allocation duration is tied to the function latency
+% Problem exacerbated by : all state and dependencies must be part of the function. All files, libraries must be fetched each time the function is invoked.
+
+% A common way to minimize this function startup overhead is to keep the execution environment (container or VM) alive.
+% This can reduce invocation latency by reducing repeated execution of expensive and common initialization operations.
+
+% For efficiency, it is imperative to increase the multiplexing. However keeping containers alive means computing resources are tied up and can reduce the number of concurrent functions being serviced. 
+
+% However, this is not enough. 
+
+A common serverless design is to define functions (or lambdas), for handling requests of different types. 
+These functions are instantiated invoked upon every single request, and destroyed immediately thereafter. 
+
+
+Multiple serverless functions run on a single physical server, and to provide  isolation, these functions are run inside a virtualized environment. 
+Containers, virtual machines, and unikernels have been proposed to run serverless functions. 
+
+
+The performance of these serverless architectures is strongly determined by the latency to instantiate the virtualized instances of these functions, since each request entails function instantiation and execution. 
+Past work has therefore looked at reducing the creation latency of different virtualization platforms: VMs [Middleware16], unikernels [SOSP17-nec, HotOS17], and containers [Openlambda]. 
+However, even after the proposed optimizations, spinning up these functions can still take 10-100 ms, which is prohibitively high for latency-sensitive applications such as IoT and cyber-physical systems such as augmented reality and connected cars. 
+
+In this paper, we argue that the performance of serverless architectures can be significantly improved through the use of /reusing/ the virtualized instances of functions. 
+Function reuse caches a virtualized function, so that future requests that invoke the function can be served without the overhead of function instantiation. 
+Reusing functions reduces function start-up costs by more than 10x, and thus can greatly improve the request-processing latency of serverless designs. 
+We further argue that focusing on start-up latencies is perhaps misplaced, and looking at the end-to-end problems of serverless designs is a promising avenue of research. 
+
+
+This paper is a call to action: Using a two-step invocation (activate then run) can be extremely useful.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BG
+
+
+Can also provide custom runtime, in the form of a docker file.
+Useful even when the function uses libraries that are not part of the standard language-specific runtime provided by the FaaS platform. These dependencies then have to be installed when building the container for the function. The container building itself can be high overhead, and is explored elsewhere such as OpenWhisk or SOCK. 
+
+Thus while FaaS can greatly simplify resource management for applications, it can result in significant performance (i.e., total function execution latency) overheads compared to conventional models of execution where applications can reuse state and do not face the high initialization overheads. 
+
+%
+Entails starting the container if the image already exists. 
+%
+And then initializing it (see Figure).
+
+
+
+
+The execution is orchestrated by the runtime.
+%
+For instance, in OpenWhisk, containers run a Flask HTTP server.
+Containers are ``activated'' by initializing them through an \texttt{/init/} call.
+%
+An alternative design, used by Lambda, is to have user provide a file which contains the actual lambda function and the other initialization code. 
+%
+Functions are run by calling \texttt{/run/} along with the function arguments.
+
+
+
+
+Can be used for a wide range of applications.
+%
+Conventional use: hosting web services. Attractive because only pay per use. Idling periods are therefore not charged.
+%
+Also parallel and Scientific computing, by scaling out and running 1000s of functions in parallel, especially useful for embarassingly parallel workloads such as video processing.
+%
+Other common usecase is to use them for ML inference. The model to be used is provided as part of the function.
+%
+For example, download the model from some cloud storage service (such as S3), and then run the TensorFlow inference on the data item provided as part of the function input parameters. 
+
+Because the functions need to be self contained, they must include all dependencies and packages.
+%
+This can ofcourse add to the execution overhead since the package must be loaded every time. 
+
+
+
+
+
+\textbf{Reducing cold-start overhead.}
+
+Many approaches. Image build times through caching~\cite{openlamda}~\cite{sock}.
+%
+Reducing the container startup time, by using lightweight virtualization or unikernels.
+%
+Keeping alive is a major technique.
+%
+
+
+FaaS services are not obliged to keep the container running for longer than the function execution.
+%
+Keep-alive entails not terminating the container.
+%
+Talk about current keep-alive policies for various clouds and OpenWhisk. 
+
+%
+The container is thus ``idle''.
+%
+It consumes negligible CPU resources, since apart from the FaaS agent, nothing is typically running.
+%
+More importantly, the container's allocated memory cannot be freed up until it is terminated.
+%
+We resolve this tradeoff in the next section. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Impact of keepalive}
+
+Some empirical results can come here 
+
+%\section{System Architecture and Primary Components}
+
+\subsection{What does keep alive entail?}
+
+Dive into the container launch lifecycle.
+
+
+\begin{enumerate}
+\item Lambda invocation
+\item Build container. Copy necessary files over the network. This may be the ``stem cell'' containers in openwhisk---not sure!
+\item Configure container from the database
+\item Run the container
+\item  ``Activate'' the function using the HTTP interface
+\item Run the lambda function 
+\item Lambda exits
+\item Container stopped and terminated
+\end{enumerate}
+
+
+If container is not stopped and terminated, then it still occupies memory, but remains active. Thus any file imports invoked during the activate operation should be in the container disk and memory cache atleast.
+
+\subsubsection{What gets cached and what doesn't} 
+
+This is assuming conventional single-step use. The dependency imports are all included in the main function body and not explicitly imported in the activation step.
+
+\begin{enumerate}
+\item Packages installed using pip will not have to be fetched from the network again. 
+\item Big files downloaded via the network (ML models etc.) will be in the container file system and memory. However, the network access will still be required, unless some content-caching etc is used. Model files should be fetched using the activate function....
+\end{enumerate}
+
+
+
+
+
+Some key questions: different points of saving state results in different caching benefits.
+
+\textbf{Ideally:} Keep all necessary state, which means checkpoint just before the ``run the lambda function'' step.
+
+Presumably, the container is a ``base'' generic container that then spawns the lambda function/action. So, keeping the container alive via docker pause etc, may keep the lambda dependencies cached? This needs to be verified. The alternative could be that the base container only loads the dependencies for openwhisk, and the lambda's dependencies are loaded later. If so, caching would have minimal benefits. \textbf{Verify that base container also loads the lambda's dependencies.}
+
+
+\subsection{Caching Mechanisms}
+
+When and what to cache? How to cache it and harness it?
+
+Good tradeoffs here: benefit of the caching vs. reuse potential vs. checkpoint size vs. checkpointing overhead vs. ease of checkpointing. 
+
+
+
+
+\section{Greedy Dual Function Caching}
+
+Inspired by greedy dual function caching, our fundamental technique
+
+\section{Implementation}
+
+Might be easier to implement the policies in a custom framework, instead of OpenWhisk?
+We can borrow the openwhisk docker images, the flask API endpoints, etc.
+
+First iteration: Explicit preloading and caching ``hints'' via the activation---making function invocation into a two step process. First, preload/prewarm, and then run the function.
+
+In later iterations, this could be ``statically analyzed''. A simple solution could be preload all file imports and file accesses. This idea could be the basis of a full system/paper.
+
+So in this paper, we only establish how much the greedy dual caching helps. And measure the preload costs in different circumstances, mainly the workloads (such as DNN inference, scientific computing), and the degree of prewarming (imports, files, both).
+
+
+
+\begin{itemize}
+\item Implementing and using the caching mechanism(s).
+\item Run ML inference actions and deploy models in actions to replace/augment TensorFlow serving. 
+\item 
+\end{itemize}
+
+
+
+
+\section{Evaluation}
+
+\subsection{Impact of keepalive}
+
+Different applications and functions.
+Different levels of keepalive:
+\begin{enumerate}
+\item Two-step use: first activate, then use. Could use fmap and iterator abstraction? 
+\item Conventional single-step use. The dependency imports are all included in the main function body and not explicitly imported in the activation step. Container cache can still help. Packages installed using pip, for example will remain installed. 
+\end{enumerate}
+
+\subsection{Empirical measurements}
+\begin{enumerate}
+\item \textbf{Latency in the public clouds. GCP and Amazon?}
+
+\item \textbf{Function invocation latency.}
+  
+\end{enumerate}
+
+
+\subsection{Simulation Results}
+
+This is using the simulator in ../code in this repo.
+
+\textbf{Input trace generation.}
+There are no traffic logs available, so we generate synthetic traces to evaluate the caching policies. \textbf{Look at other papers to see what they use.}
+
+
+Lambda action memory sizes are based on pareto distribution.
+The sizes are then used to get the running time of the actions by using the exponential distribution with the memory size as the parameter.
+The warm time is a constant (0.3) multiple of the running time.
+Finally, the inter arrival time for the next request in the trace is some multiple of the average running times of all the actions and is exponentially distributed.
+
+
+\textbf{Simulation Framework Details.}
+Some important and interesting modifications required to conventional GD.
+
+Container clones requires us update the priority of \emph{all} clones, not just the container that was last accessed.
+
+Currently we do assume infinite concurrency. Otherwise, would need to have a queue. Queue is more realistic and what openwhisk also does, so this is \textbf{TODO}. 
+
+We currently report:
+\begin{enumerate}
+\item Hits and misses for each activation
+\item Total time spent in warming up the containers for each action---i.e., total ``wasted'' time
+\item The effective access time for each action (miss*misstime + hits*hittime)
+\item \% Increase in latency 
+\end{enumerate}
+
+
+Many interesting results so far
+
+\begin{enumerate}
+\item GDSF is able to minimize the misses for the objects with the largest warmtime. \emph{QS: Currently cost==warmtime.  Maybe some other metric can be tried, like run-warm/run,...}
+\item FREQ (size = 1) is effectively LRU, and minimizes the \% increase in latency
+\item SIZE (cost = 1) minimizes misses of largest object.
+  \item RAND is random its performance in the different metrics seems most balanced? 
+\end{enumerate}
+
+
+
+\section{Related Work}
+
+\input{related}
+
+\section{Discussion}
+
+New API? two stage invocation to increase and cache the shared state between consecutive executions? 
+
+\section{Conclusion}
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

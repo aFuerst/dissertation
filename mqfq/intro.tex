@@ -1,0 +1,103 @@
+\section{Introduction}
+
+Function as a Service (also called FaaS or serverless computing) is one of the fastest growing abstractions in cloud computing today with usage increasing by 2x in the past two years alone~\cite{wen2023rise}.
+% Users create self-contained \textit{functions} whose lifecycle is orchestrated by the FaaS provider.  
+Users are enticed by its dynamic scaling, low cost, and ease of management, as the lifecycle of self-contained \textit{functions} is orchestrated by the FaaS provider.
+% Cloud providers benefit because functions use ephemeral resources unlike traditional virtual machines (VMs) and the provider has find-grained control over scheduling and placement.
+Cloud providers leverage the ephemeral nature of functions into fine-grained control over scheduling, placement, and resource allocation.
+
+% 1)
+Current FaaS applications are limited by the capabilities exposed by providers, mostly consisting of short-running functions~\cite{shahrad2020serverless} using limited compute.
+% Functions are given limited CPU resources and have no way efficient of coordinating with one another, precluding classic parallel computing.
+Providers have not exposed GPUs or other parallel processing paradigms to their serverless platforms, a need for which is growing as users migrate new, intensive, workflows to cloud FaaS.
+These applications see a \emph{minimum} 2.5x throughput improvement when accelerated, strong encouragement to enable such devices in serverless platforms.
+
+% 2-3)
+Accomplishing this transition requires the control plane to address several resource management problems.
+Achieving high device utilization and low latency require device multiplexing~\cite{pemberton2022kernel, ng2023paella, fingler2022dgsf, gu2023fast}, but unmodified functions preclude such sharing of GPU resources.
+% To make matters more complicated, GPU resources are managed by an esoteric device driver that isn't controllable by the OS.
+Once a function is given access to the GPU, it can allocate the entire memory range or hog compute in a run-to-completion model.
+% Idle periods mean allocated resources on the GPU are blocked off, other functions being unable to use them for their executions.
+% Removing containers to release held resources results in heavy churn and increased latency from the repeated container initialization.
+Swapping functions requires starting a new container, costing several seconds on the critical path, making the well-known \quotes{cold start} problem of FaaS an even larger latency bottleneck.
+% We avoid cold starts by being the first to enable GPU keep-alive~\cite{faascache-asplos21} policies via GPU resource multiplexing.
+Avoiding cold starts (i.e. a warm start) to get viable performance requires enabling GPU keep-alive~\cite{faascache-asplos21} policies via GPU resource multiplexing.
+
+\begin{comment}
+Machines used to host FaaS systems are expected to serve thousands of unique functions with low latency.
+This is accomplished by running user function code inside a container (or VM), then keeping the container in memory but idle for future uses. 
+A na\"ive adaption of this to the GPU problem would assign an entire GPU to each container for its lifetime.
+Unfortunately an idle container then wastes GPU resources, and the limited number of GPUs per server leads to churn when we need to create a new container for another function.
+% but this causes low utilization and high turnover when going to run a new function.
+Virtualization for these devices exists, provisioning fixed slices of GPU resources to containers that they then have exclusive access to.
+% This also results in low utilization, as nothing else can use that section when it is idle, and also limits the resources available to give to any one function that might take advantage of them.
+While allowing more containers to exist concurrently, this solution does not address idleness and introduces a new limitation by reducing the maximum allocation any single function is allowed to make.
+\end{comment}
+  
+% 4-6)
+Multiplexed resources are not a performance panacea: the platform must now contend with function fairness and locality.
+% The FaaS control plane must also guarantee that all functions will run in a timely and fair manner.
+% GPUs must also be shared temporally 
+Optimal performance is achieved by running one function repeatedly, as its data dependencies will be available on-device.
+Yet a popular function can easily starve others of device time and violate fairness guarantees if not eventually blocked.
+% Temporal GPU sharing between the highly heterogeneous serverless workloads must be balanced with execution \quotes{locality}.
+New queuing policies tailored to the unique scenario of GPU-serverless computing must be designed to ensure fairness while maintaining high throughput.
+% Warm hits, i.e. executing using an already existing container, have up to 100x lower latency compared to their cold counterparts.
+% Such execution \quotes{locality} can only come 
+% want warm starts.
+% locality good -> 'batching'.
+% but need spatial/temporal multiplexing as well.
+
+% 7
+Previous research work into enabling GPU acceleration in FaaS has focused on ML inference~\cite{pemberton2022kernel, ng2023paella, fingler2022dgsf, gu2023fast}; understandable given its popularity.
+These approaches have abandoned the black-box nature of FaaS in favor of extremely fine-grained control of GPU usage and scheduling.
+Supporting functions of all types is critical, as more use cases like scientific computing~\cite{kumanov2018serverless,hung2019rapid}, video encoding~\cite{ao2018sprocket, zhang2019video}, and optimization problems~\cite{aytekin2019harnessing,werner2018serverless,shankar2020serverless}, migrate to the platform.
+% Our work uniquely enables all these to run natively with minimal overhead.
+% Custom solutions have been proposed~\cite{}, but rely on targeted workloads or bespoke platforms, a general-purpose approach is needed.
+
+% 7)
+Given these known problems, in this work we seek to answer several research questions:
+\begin{enumerate}[leftmargin=*]
+  % \item Can we provide GPU acceleration to black-box, unmodified, serverless functions?
+  % \item How can GPU support be integrated into high-performance FaaS control planes?
+  \item Can we provide GPU acceleration to black-box, unmodified, serverless functions?
+  \item Can we multiplex GPU resources between functions in a low overhead manner?
+  \item How do we balance locality, fairness, and performance in the face of heterogeneous functions?
+  % \item Is this possible without the cost of full virtualization?
+\end{enumerate}
+% \todo{Better RQs to frame novelty}
+
+In this work, we propose and designed a series of techniques and policies that resolve all of these issues.
+They enable black-box serverless functions to utilize GPUs for acceleration while concurrently sharing its resources.
+We built our system on top of the \sysname~platform~\cite{fuerst2023iluvatar}, utilizing Nvidia's integration with Docker~\cite{docker-main}. %, but is generic to any accelerator or isolation system.
+Importantly, they don't rely on specific hardware or software versioning support, and work on heterogeneous hardware regardless of age or capability. 
+
+% \mhead{RQ1}
+Starting from the lowest level component, we interpose an intercept shim between function code and the GPU driver.
+Using this, we capture all memory allocation calls and transform them into Unified Virtual Memory (UVM)~\cite{nvidia-uvm} calls.
+UVM memory allows applications to allocate beyond the device limits, letting the driver use host memory as swap space, migrating memory on demand. 
+Once all allocations are converted to UVM memory, we use the shim to move memory between host and device under direction from the control plane.
+
+% \mhead{RQ2}
+Controlling memory positioning allows us to both oversubscribe device memory and keep containers warm while other functions execute on the GPU.
+To enable multiple functions to run concurrently, a new queuing policy is required that better matches the new device's capabilities and workload characteristics.
+We accomplish this with a modified implementation of a Mutli-Queue Fair Queue (MQFQ)~\cite{hedayati2019multi}, which prevents starvation, scales invocations across multiple GPUs, and minimizes execution overhead.
+To prevent contention interference, we monitor device utilization using NVML~\cite{nvml} and track memory usage to throttle invocations.
+
+With these controls we improve function latency by orders of magnitude over previous solutions and expand the pool of serverless applications.
+In short, this work proposes the following enhancements to serverless computing:
+\begin{enumerate}[leftmargin=*]
+  \item We create a custom driver that intercepts function allocation calls to multiplex device memory.
+  \item With no limit on device memory, we can keep idle containers resident, creating the first warm pool of GPU containers.
+  \item Our memory management techniques allow us to reduce device pressure from idle functions, mitigating overcommitment overhead.
+  \item We design a queuing policy that enables concurrent execution while ensuring fairness under heterogeneous workloads.
+  % \item W
+  % \item Benchmark suite of GPU-enabled serverless functions, including many non-machine learning applications.
+\end{enumerate}
+
+This paper is ordered as follows.
+Section~\ref{sec:bg} covers background of serverless work and GPU virtualization.
+Our motivation behind work is explained in detail in Section~\ref{sec:motiv}.
+Section~\ref{sec:design} details our design of queuing, memory control, and resource management.
+We examine the implementation of these pieces in Section~\ref{sec:impl}.
+Lastly, Section~\ref{sec:eval} shows the effectiveness of our systems with a thorough experiment suite.

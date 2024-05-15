@@ -1,0 +1,177 @@
+* Meta 
+- FaaS control plane: what it does and importance. 
+- Scheduling vs. system design
+- 
+
+* Related 
+- Efficient Scheduling Policies for Microsecond-Scale Tasks. NSDI 2022 and related.
+- 
+
+* Ideas 
+- Use same function abstraction for also issuing control plane commands to change/update scheduling policies etc. 
+
+* Intro
+
+** Contributions
+
+Broad categories:
+
+1. Importance of control plane. OWhisk jitter
+2. Implementation and optimization of control plane
+3. Research platform for high performance policies
+4. New scheduling contributions:
+   1. Per-worker queue for mitigting bursts, cold-starts, and concurrency
+   2. Concurrency limitation with processor-sharing CPU scheduling
+   3. Using function historical information for arrival time, rate, and duration based policies.
+   4. Queue-bypass for small functions 
+ 
+
+
+4. Breakdown of time overhead in the control-plane
+5. Bottleneck analysis 
+6. New scheduling policies: SJF and bypass 
+7. ? OS integration? NUMA? cpu pinning? 
+
+
+* Background & Motivation 
+
+** FaaS control planes: Why OWhisk is not appropriate 
+
+** Function Performance
+- Scheduling
+- Locality and keep-alive
+- Load-balancing 
+
+
+* Iluvatar Design 
+** Key Design Principles 
+- Minimize jitter and control-plane overheads 
+- Container based. Most general sandboxing "runtime"
+- Modular and extendible as a research and development platform 
+- Data-aware resoure management. (ala OS)
+- Resource caching 
+- Prewarming and reducing work on critical path
+
+** Data-aware Resource management
+- OS stuff.
+- But FaaS especially ideal platform for data based optimizations. Repeated invocations etc
+- Control-plane provides the required data via the APIs for implementing various policies
+- 
+
+
+* Function Scheduling Policies 
+  
+** Adding a function queue 
+- Concurrent cold starts
+- Reduce effective load and CPU scheduler overhead 
+- Large Azure traces: highly skewed popularity: very bursty. 
+- Need queueing and buffering.
+- Buffering at server is better than at the LB. Discuss OW design...
+- vs. Work stealing 
+
+** Concurrency capping G/G/K and PS in tandem
+
+** Shortest Function First 
+
+** General Heuristics
+- Most infrequent
+- Earliest deadline
+- 
+
+** Short function bypass control algorithm 
+- Function duration
+- Cold start prediction
+- Load? Overloaded -> enqueue? 
+
+* Implementation 
+** Implementation/components 
+- Containerd
+- Rust
+- Caching namespaces etc
+- 
+
+** Platform Extensibility 
+- Mechanisms for scheduling, sandboxing, ...
+- 
+
+** Other Optimizations:
+
+*** Networking 
+
+*** CPU pinning 
+
+*** Memory: NUMA? 
+
+* Experimental Evaluation 
+
+** Workload characterization 
+1. Number of functions
+2. IAT distributions (average, variance) 
+3. Scaling/load factor
+4. Little's law characterization? Expected load? 
+
+** Performance tracing 
+- Where is the time spent? Timeline figure 
+  - Sandboxing overhead?
+  - Control plane components and interaction? How to show? 
+- Flame graphs? 
+
+** Microbenchmarks 
+- Time to launch
+- Scaling: increase number of concurrent launches of same function
+- 
+
+** Scheduling Policy
+1. PS
+2. FCFS
+3. FCFS/k
+4. SJF
+5. SJF/k
+6. FCFS/k + short-bypass
+7. SJF/k + short-bypass
+8. Earliest Deadline
+
+
+*** Evaluation/Research Questions 
+- Concurrency capping effectiveness (includes queueing on/off k=inf)
+  - /How much does queueing help?/
+  - for k=10,20,40,50,inf : execution time, overhead, load 
+  - 
+- Bypass effectiveness 
+  - for bypass_fraction = 0, 10%, 50%, 100% : execution time, load 
+
+
+*** Metrics 
+- End-to-end latency
+- Queueing time
+- Overhead
+- CPU scheduler overhead (sys%, load average?)
+
+*** Workloads 
+- Medium load
+- High load
+- Bursty
+- Skewed popularity? 
+
+*** Knobs 
+- Bypass ratio
+- concurrency level k
+- 
+
+** Simulated Comparison for Control-plane overhead 
+- Shorten experiment duration with just control-plane overhead analysis
+- Simulated vs. real overheads
+- Use real results to seed the simulation for the full-scale azure trace?
+- Performance model for functions based on load etc
+- 
+
+** Other optimizations
+
+*** Networking? 
+
+*** HTTP vs. unix sockets for worker--container communication 
+
+
+
+** OpenWhisk comparison 
+

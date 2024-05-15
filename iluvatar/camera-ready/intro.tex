@@ -1,0 +1,76 @@
+\section{Introduction}
+
+
+Serverless computing, or Functions as a Service, has emerged as a key cloud abstraction which is enabling the rapid development and cloud deployment of many applications~\cite{serverless-cacm-21, castro2019rise, adzic2017serverless}. 
+Functions are small, self-contained programs, whose entire execution and scaling is managed by the FaaS provider. 
+%Due to their low cost, auto-scaling, and a ``serverless'' model where users dont have to worry about explicit resource management, many other applications , such as parallel workloads and scientific computing, are also being ``ported'' to the FaaS abstraction. 
+FaaS has emerged as a major and growing cloud workload~\cite{shahrad_serverless_2020}, and serves as the resource abstraction for a wide range of event-driven applications (such as web and API services, IoT, and ML inference), workflows~\cite{funcx_hpdc_20, mahgoub_wisefuse_2022}, and even throughput-intensive parallel workloads~\cite{xu2021lambda,carreira_cirrus_2019,fouladi_laptop_2019, fouladi2017encoding}.
+
+
+The FaaS programming and deployment model, along with the highly heterogeneous nature of FaaS workloads, presents many fundamental performance challenges for FaaS providers.
+This has motivated huge and rapid strides in many areas of systems research: advances in FaaS scheduling~\cite{ensure-faas-acsos20}, load-balancing~\cite{faaslb-hpdc22}, workflow-management~\cite{roy2022mashup}, and lightweight sandboxing~\cite{du2020catalyzer} can all improve various facets of FaaS performance by orders of magnitude.
+%
+
+In most cases, these FaaS performance optimizations and resource management policies are implemented and evaluated using existing popular FaaS frameworks such as OpenWhisk~\cite{openwhisk}. 
+These frameworks are also used in real-world deployments, and thus FaaS performance research can have a large direct impact by improving and enhancing these frameworks. 
+These frameworks provide a ``FaaS control plane'', which runs on top of a large cluster of servers, and manages all facets of function execution such as scheduling, monitoring,  accounting, etc.  
+
+
+In this paper, we focus on the performance of the FaaS control plane itself, a critical but mostly overlooked component in the FaaS ecosystem.
+They are an important new class of middleware, and are interesting and novel from a system design, implementation, and optimization perspective. 
+At one end, they have to handle the extreme scale and heterogeneity of functions, where the execution and inter arrival times can vary by several orders of magnitude.
+At the other end, they have to work with many intricately connected software components for operating system virtualization, container runtimes (such as Docker), networking, etc.
+%Thus, understanding and optimizing them is challenging. 
+
+We posit that current FaaS control planes such as OpenWhisk have become unsuitable due to the rapid growth of FaaS workloads and advances in FaaS research.
+Historically, functions suffered very high cold-start overheads associated with initializing their execution runtimes and dependencies in a sandboxed environment (such as a container or a VM).
+However, techniques such as keep-alive, prefetching, VM snapshots, and specialized lightweight sandboxing have reduced the \emph{effective} cold-start overheads, and the spatial and temporal locality of FaaS workloads means that over 99\% invocations are \emph{warm}~\cite{faascache-asplos21}.
+We find that fundamental design and implementation issues hinder good performance, adding 100s of milliseconds of tail latency even to warm-start invocations served from fully-initialized containers in memory. 
+Due to this \emph{control plane overhead}, function performance is now increasingly bottlenecked by the control plane itself.
+
+
+To rectify that, we present \sysname, our clean-slate design of a low-latency control plane for high performance FaaS research and deployments.
+\sysname~ is intended as a simple, extensible, general-purpose FaaS control plane which runs functions inside OCI-compliant containers (such as containerd, Docker, etc.), and makes minimal assumptions about the workload or function sandboxing.
+The combination of our design principles, performance optimizations, worker-centric architecture, and carefully optimized Rust implementation, reduces our overhead to less than 3ms, more than 2 orders of magnitude lower than OpenWhisk. 
+\sysname's design tackles these fundamental performance challenges by using simple design principles: for instance, we use resource caching heavily across the control plane for mitigating the ``slow path''. 
+
+
+For regulating worker load and improving latency, we develop new function-size-aware queuing policies.
+Queuing in \sysname~ provides a new principled overcommitment knob, allowing FaaS providers to improve both utilization and latency.
+The worker-level queue design also helps in mitigating bursts, reducing concurrent cold starts, and prioritizing functions. 
+\sysname's queue design makes it easy to implement advanced data-driven queuing and scheduling policies, which are highly appealing because of the high temporal locality of FaaS workloads. 
+
+
+
+% \sysname~ introduces a new first-class component to function execution: a per-worker queue which is used for mitigating workload bursts, enabling function prioritization, and for controlling the degree of resource overcommitment.
+% \sysname~ allows multiple queuing policies to be implemented (such as FCFS, SJF, Earliest Effective Deadline First, etc.).
+% %To minimize queuing delays and improve system utilization, we introduce a new ``queue bypass'' mechanism, where short functions can run immediately on CPU without increasing their end-to-end latency. 
+% Our policies for regulating the overcommitment and queue bypass use AIMD~\cite{yang2000general} techniques for dealing with dynamic and bursty workloads. 
+% \sysname's queue design makes it easy to implement advanced data-driven queuing and scheduling policies, which are highly appealing because of the high temporal locality of FaaS workloads. 
+
+
+\sysname~ is intended to serve as a platform for empirical FaaS research, and provides a low latency, low jitter experimentation environment.
+It implements and introduces state-of-the-art policies for load-balancing, function scheduling, keep-alive, and provides easy to use data and control APIs for developing advanced data and machine learning driven policies. 
+It provides a variety of resource management and overcommitment options, and supports multiple container backends (such as containerd and Docker). 
+We have designed \sysname~ to be modular and compatible with the recent and anticipated advances in FaaS resource management such as snapshots, overcommit, statistical learning based scheduling, etc. 
+We also introduce a new technique for \emph{in-situ} simulations, where \sysname~ can double as a full-fledged  FaaS simulator for protoyping and evaluating policies.  
+%
+Through the design and implementation of \sysname, we make the following major contributions: 
+\begin{enumerate}[wide,labelwidth=!,labelindent=0pt,topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
+\item \sysname~ provides fast, predictable, jitter-resistant function execution using a worker-centric architecture, resource caching, and an asynchronous implementation in a non garbage collected language.  \sysname~ is 13,000 lines of Rust code. It is open source, and available at \url{https://github.com/cos-in/iluvatar-faas} . 
+\item Our research novelty lies in optimizing warm starts and queuing-based scheduling and overcommitment policies for heterogeneous and bursty function workloads (such as Azure's~\cite{shahrad_serverless_2020}). 
+\item We reduce latency overhead by up to $100\times$ vs. OpenWhisk. 
+\item We show how our worker-level queue architecture and policies can provide new knobs for controlling overcommitment, average latency, and fairness. 
+%\item Our queue-based scheduling policies provide new knobs for adjusting overcommitment, function latency, and fairness.
+\item \sysname~ provides a reliable and extendible FaaS platform, and our performance matches the idealized Little's law model. 
+%Our new in-place simulation technique provides accurate high-fidelity 
+%\item Through performance tracing we highlight the performance bottlenecks and optimization opportunities for modern FaaS control planes. We find that widely used frameworks like OpenWhisk have extremely high overhead and jitter, which can jeopardize high performance FaaS research and deployments. 
+%\item Extensive performance evaluation reveals \sysname~ to have low overhead even in saturated workloads. Our queue policies can provide knobs for adjusting function latency, fairness, system utilization, and overcommitment. 
+%\item We open source \sysname~ so the wider FaaS community can have a reliable and extensible research and deployment platform.
+\end{enumerate}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

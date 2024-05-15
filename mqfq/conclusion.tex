@@ -1,0 +1,19 @@
+\begin{comment}
+
+\section{Future Work}
+
+\begin{enumerate}
+  \item Integrate more fine-grained GPU compute control~\cite{strati2024orion}.
+  Individual kernel launches can be intercepted, and the used number of GPU threads/blocks check and/or modified.
+  \item cluster load balancing of GPU invokes
+  % \item tailor flow TTL to its IAT
+\end{enumerate}
+
+\end{comment}
+
+\section{Conclusion}
+
+In this paper we have proposed a series of mechanisms and policies that enable black-box GPU serverless functions.
+Our oversubscription of GPU memory allows the creation of the first-ever warm pool of GPU containers, and techniques for managing this memory prevent execution overhead.
+Leveraging these, we build new queue policy called \QName, optimizes for locality to maximize repeat function execution performance, while ensuring fairness across functions with heterogeneous invocation frequencies and runtimes.
+Put together, these extend GPU capability to as-yet untapped workloads in FaaS with near-optimal performance while avoiding idle resources.

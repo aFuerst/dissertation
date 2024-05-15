@@ -1,0 +1,125 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper.aux
+The style file: acm.bst
+Database file #1: faas.bib
+Repeated entry---line 983 of file faas.bib
+ : @inproceedings{suresh2021servermore
+ :                                    ,
+I'm skipping whatever remains of this entry
+Database file #2: faas-asplos.bib
+Repeated entry---line 92 of file faas-asplos.bib
+ : @article{akkus_sand_2018
+ :                         ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 305 of file faas-asplos.bib
+ :  
+ :  file = {Zhang et al. - HyperFaaS A Truly Elastic Serverless Computing Fr.pdf:/home/prateeks/Zotero/storage/QR8A2WT8/Zhang et al. - HyperFaaS A Truly Elastic Serverless Computing Fr.pdf:application/pdf}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 616 of file faas-asplos.bib
+ : @misc{openwhisk
+ :                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 636 of file faas-asplos.bib
+ : @inproceedings{gdsf
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 643 of file faas-asplos.bib
+ : @inproceedings{firecracker-nsdi20
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 670 of file faas-asplos.bib
+ : @misc{docker-main
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 742 of file faas-asplos.bib
+ : @article{shahrad_serverless_2020
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1318 of file faas-asplos.bib
+ : @phdthesis{yu2021faasrank
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1468 of file faas-asplos.bib
+ : @article{mampage2021holistic
+ :                             ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 1646 of file faas-asplos.bib
+ :  
+ :  pages = {9},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 1696 of file faas-asplos.bib
+ : @inproceedings{hunhoff2020proactive
+ :                                    ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 1979 of file faas-asplos.bib
+ : 
+ : @misc{azure-iot-edge,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 1988 of file faas-asplos.bib
+ : 
+ : @misc{singularity-net,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 1994 of file faas-asplos.bib
+ : 
+ : @inproceedings{vid-edge-serverless-mmsys21,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Database file #3: lb.bib
+Repeated entry---line 30 of file lb.bib
+ : @inproceedings{suresh2019fnsched
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 73 of file lb.bib
+ : @inproceedings{yu2021faasrank
+ :                              ,
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in openwhisk
+Warning--to sort, need author or key in docker-main
+Warning--can't use both volume and number fields in chrj-aaai21
+You've used 39 entries,
+            2253 wiz_defined-function locations,
+            745 strings with 12802 characters,
+and the built_in function-call counts, 17444 in all, are:
+= -- 1657
+> -- 946
+< -- 0
++ -- 390
+- -- 348
+* -- 1342
+:= -- 2650
+add.period$ -- 117
+call.type$ -- 39
+change.case$ -- 292
+chr.to.int$ -- 0
+cite$ -- 42
+duplicate$ -- 692
+empty$ -- 1314
+format.name$ -- 348
+if$ -- 3744
+int.to.chr$ -- 0
+int.to.str$ -- 39
+missing$ -- 35
+newline$ -- 198
+num.names$ -- 74
+pop$ -- 362
+preamble$ -- 1
+purify$ -- 252
+quote$ -- 0
+skip$ -- 531
+stack$ -- 0
+substring$ -- 1022
+swap$ -- 262
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 156
+warning$ -- 3
+while$ -- 150
+width$ -- 41
+write$ -- 397
+(There were 17 error messages)

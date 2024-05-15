@@ -1,0 +1,24 @@
+| Component        	 |   0.500 |   0.900 | 	0.990 | 	0.999 |
+|---------------------------+---------+---------+---------------+---------------|
+| E2E              	 |  0.0280 |  3.7480 |     136.84560 |    333.875126 |
+| ControllerCache  	 |  0.0010 |  0.0010 |       0.01300 |      2.552112 |
+| ControllerLB     	 |  0.0020 |  0.0030 |       0.01300 |      0.072932 |
+| Controller       	 |  0.0020 |  0.0170 |       6.71056 |     13.723852 |
+| Invoker          	 |  0.0190 |  2.0651 |     133.57238 |    332.391953 |
+| InvokerDockerLog 	 |  0.0010 |  0.0520 |       1.43041 |      6.568615 |
+| InvokerWriteCouchDB       |  0.6890 |  4.2480 |      10.61400 |     16.112978 |
+| InvokerDockerLaunch       | 10.0805 | 44.6098 |      83.56331 |    123.741484 |
+| InvokerContainerInit      |  0.6850 |  5.6621 |      14.33934 |     44.230735 |
+| InvokerReadCache 	 |  0.0510 |  1.5751 |       6.70210 |     14.910004 |
+
+E2E                    	- total time between entry to system and exit, less time spent in function invocation
+ControllerCache  - reading some function metadata from CouchDB
+ControllerLB     	- time spent load balancing and forwarding invocation
+Controller        	- total time in controller
+Invoker           	 - total time in controller
+InvokerDockerLog  	 - reading docker log from container post-invoke
+InvokerWriteCouchDB   - writing invoke result to couch db (technically done async after notifying controller)
+InvokerDockerLaunch    - time to launch docker container
+InvokerContainerInit     - time to init function in container
+InvokerReadCache  	   - get function data from CouchDB before invoke
+ 

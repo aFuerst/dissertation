@@ -1,0 +1,62 @@
+* Meta 
+1. First five minutes should be a summary of sorts, suitable for a wider audience to motivate the interest in FaaS control planes
+
+** Key Questions to Answer:
+1. Why are FaaS control planes interesting?
+2. Why did we build our own one?
+3. What are the key design techniques?
+4. How is the performance?
+5. Why and how you should use Iluvatar? 
+
+* Open with a quick FaaS background 
+- Applications, usecases, sandboxing
+
+* FaaS Control Planes 
+- Crucial resource allocation role
+- Middle of heavy workloads and containerization layer
+- Deal with heterogeneity, burstiness, etc 
+- OpenWhisk popular example, widely used across research and in industry
+- Used in dozens of papers (even at current HPDC) 
+
+* Control Plane becoming a bottleneck
+- OW scalability and variance
+
+* Teaser
+- Going from OW to Iluvatar performance 
+
+* Control Plane Challenges 
+- Between VM packing and microservice-based
+- Challenges of both worlds, but with the latency constraints 
+
+* Iluvatar Design Principles 
+- Container based for general use
+- Focus on warm starts 
+- Worker-centric
+- Queue
+- Enable FaaS research
+
+* Containerization 
+- ContainerD vs. Docker and the tradeoffs 
+
+* Queueing Policies 
+
+* Performance Results 
+
+** Microbenchmarks and latency breakdown 
+
+** Queueing policies 
+
+** Scaling (?) 
+
+* Research Support 
+1. Load generation 
+2. Simulation backend 
+
+* How to use it 
+1. Simple workflow demo?
+2. Either video or create more documentation in repo for reproducing a couple of figures. 
+
+* Related Work 
+1. Research Control Planes
+2. Production Control Planes
+3. Function scheduling 

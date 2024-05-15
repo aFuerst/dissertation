@@ -1,0 +1,137 @@
+%Background and related work. 
+%background on serverless platforms and keep-alive
+
+% This is an introductory paragraph talking about serverless computing and some context. Seems repetitive wrt introduction? 
+
+\subsection{Function Keep-Alive}
+\vspace*{\subsecspace}
+
+Serverless computing is now being provided by all large public cloud providers, and 
+%Amazon Lambda~\cite{aws-lambda}, Google Functions~\cite{google-functions}, and Azure Functions~\cite{azure-functions} are becoming an
+is increasingly popular way to deploy applications on the cloud.  
+Functions as a Service (FaaS) can also be realized on private clouds and dedicated clusters using frameworks such as OpenWhisk~\cite{openwhisk}, OpenFaas~\cite{openfaas},  OpenLambda~\cite{hendrickson2016serverless}, etc. 
+In this new cloud paradigm, users provide functions in languages such as Python, Javascript, Go, Java, and others. 
+The functions are executed by the FaaS platform, greatly simplifying resource management for the application. 
+
+
+
+% Need to explain how it all works. But first provide some context for why this is important.
+
+
+%In order to provide FaaS, the way it is implemented by platforms, results in certain performance challenges.
+%However, the execution of FaaS functions entails performance overheads that we must be cognizant of. 
+%
+%FaaS functions cannot assume that state will persist across invocations, and functions need to be self contained in terms of their dependencies. 
+%
+FaaS functions cannot assume that state will persist across invocations, and function definitions must first import and load all code and data dependencies on each execution. 
+Each functions is run inside a containers such as Docker~\cite{docker-main}, or a lightweight VM such as Firecracker~\cite{firecracker-nsdi20}. 
+By encapsulating all of the function state and any side-effects, the virtual execution environment provides isolation among multiple functions, and also allows for concurrent invocations of the same function. 
+Due to the overhead of starting a new virtual execution environment (i.e., container or VM), and initializing the function by importing libraries and other data dependencies, function execution thus incurs a significant ``cold-start'' penalty.
+Table~\ref{tab:workloads} shows the breakdown of initialization time (last column) vs. the total running time of different FaaS applications, and we can that the initialization overhead can as much as 80\% of the total running time. 
+Thus, FaaS can result in significant performance (i.e., total function execution latency) overheads compared to conventional models of execution where applications can reuse state and do not face the high initialization and cold-start overheads. 
+
+
+
+\begin{table}
+  \begin{tabular}{lrrr}
+    \hline 
+    Application & Mem size & Run time & Init. time \\
+    \hline
+    ML Inference (CNN) & 512 MB & 6.5 s & 4.5 s \\
+    Video Encoding & 500 MB & 56 s & 3 s \\
+    Matrix Multiply & 256 MB & 2.5 s & 2.2 s \\
+    Disk-bench (\texttt{dd})  & 256 MB & 2.2 s & 1.8 s \\
+    % Image Manip & 300 MB & 9 s & 6 s \\
+    Web-serving & 64 MB & 2.4 s & 2 s \\
+    Floating Point & 128 MB & 2 s & 1.7 s \\
+
+    \hline
+  \end{tabular}
+  % \vspace*{\myfigspace}
+  \caption{FaaS workloads are highly diverse in their resource requirements and running times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies. More application details can be found in the Appendix.}
+  \label{tab:workloads}
+  %\vspace*{\myfigspace}
+\end{table}
+
+
+
+% Replace two main techniques -> Only one technique. 
+%Two main techniques are used to alleviate the cold-start penalty. 
+Once a container for a function is created and the function finishes execution, the container can be kept alive instead of immediately terminating it. 
+Subsequent invocations of the function can then \emph{reuse} the already running container.
+This \emph{keep-alive} mechanism can alleviate the cold-start overhead due to container launching (which can be $\sim 100$ ms). %Might be confusing, keep-alive also helps in other initialization.
+
+
+
+However, keep-alive is not a panacea for all FaaS latency problems. 
+Keeping a container alive consumes valuable computing resources on the servers. %, and reduces the number of functions that can be executed concurrently. 
+Specifically, a running container occupies memory, and ``warm'' containers being kept alive in anticipation of future function invocations can reduce the multiplexing and efficiency of the servers. 
+Thus, we develop keep-alive \emph{policies} that reduce the cold-start overhead while keeping the server utilization high.
+%
+
+Designing general keep-alive policies is challenging due to the extreme heterogeneity in the different function popularities, resource requirements, and cold-start overheads.
+For instance, a recent analysis of FaaS workloads from Azure~\cite{shahrad_serverless_2020} shows that function inter-arrival times and memory sizes can vary by more than three orders of magnitude. 
+%
+This workload heterogeneity magnifies the performance vs. utilization tradeoff faced by keep-alive policies, as we shall describe in the next section. 
+Additionally, FaaS workloads also show a high temporal dynamism, which requires new approaches to resource provisioning and elastic scaling, which we also develop. 
+
+
+
+
+
+% only pay per use. Idling periods are therefore not charged. 
+% %
+% Also parallel and Scientific computing, by scaling out and running 1000s of functions in parallel, especially useful for embarassingly parallel workloads such as video processing.
+% %
+
+
+
+\subsection{Caching}
+\vspace*{\subsecspace}
+
+% This whole thing needs to be rewritten. What is the message?
+
+% This is nice, but here and not in the technical sections? 
+Our answer to solving the twin conundrum of keep-alive and provisioning that is robust to workload heterogeneity and dynamism, is to use concepts from a related, well-known field with the same challenges. 
+%
+Caching has a long history of robust eviction algorithms that use temporal locality such as  LRU (Least Recently Used). 
+The effectiveness of a caching algorithm depends on the workload's inter arrival time distribution, the relative popularities of different objects, and thus many variants of LRU such as LRU-k~\cite{o1993lru}, segmented LRU~\cite{cheng2000lru}, ARC~\cite{megiddo2003arc}, and frequency based eviction such as LFU~\cite{einziger2017tinylfu}, are widely used in caching systems. 
+Because functions show a lot of diversity in their memory footprints, and since keep-alive is primarily constrained by server memory, we seek to use \emph{size-aware} caching methods. 
+%Conventional caching \emph{largely} deals with constant-sized objects. For example: LRU, sampling techniques like SHARDS, counterstacks, etc.
+%Therefore, we investigate the use of \emph{size-aware} techniques for keep-alive policies and provisioning.
+While conventional caching algorithms and analytical models largely deal with constant-sized objects, many size-aware caching policies have been developed for web-pages and data~\cite{cao_irani_1997}. 
+In particular, we use the Greedy-Dual~\cite{young_gd_orig_94} online caching framework that deals with objects with different eviction costs, that are determined based on size and other factors.
+The Greedy-Dual family of eviction algorithms for non-identical objects can be extended in many ways.
+We use a common variant, Greedy-Dual-Size-Frequency~\cite{gdsf, gdfs_2001,cherkasova2001role}, which considers the size and frequency of objects. 
+
+
+%
+
+%\textsc{Couple of sentences on greedy dual caching.}
+
+
+Caching has a rich collection of analytical and modeling techniques to determine the efficacy of caches for different workloads.
+%Analysis techniques such as stack distances help in cache provisioning, are based on hit-ratio curves, and provide the fraction of accesses which are cache-hits for different cache sizes.
+Hit (or miss) ratio curves are widely used for cache sizing to achieve a target performance, and for understanding and modeling cache performance. 
+Hit-ratio curves can be constructed both in an offline and online manner, using techniques involving reuse distances~\cite{osca_atc20}, eviction times~\cite{hu2016kinetic}, Che's approximation~\cite{che2002hierarchical}, footprint descriptors~\cite{sundarrajan2017footprint}, and estimation techniques such as SHARDS~\cite{shards}, counterstacks~\cite{counterstacks}, etc. 
+
+
+
+
+%\textbf{END}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+% Sources of cold-start overhead
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

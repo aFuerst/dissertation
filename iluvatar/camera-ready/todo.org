@@ -1,0 +1,17 @@
+- [done] Add footnote on page1 explaining what iluvatar is (LoTR ref)
+- [Alex, done] Say 2/3 times we will opensource it
+- [Prateek, 26 evening, done] Arch figure. Put LB
+- [Alex, done] Fix all missing refs [kafka containerd oci etc] 
+- [done] 13,000 lines everywhere not 12K
+- [ehh] WKload table!
+- [Alex, done] Replace 10c by breakdown by fn type
+- [-] Add some more numeric results in eval, intro and conclusion
+- [Alex, done] Fig 7. Move legend above fig and on 3 columns. Change colors. Call them Docker, Containerd, Illuvatar 
+- [X] Eval hw and sw environment!!!
+- [X] Eval bursty text description and chameleon etc explanation. 
+- [Alex, done] Trace little's law load vs the real concurrent invoks + q len timeseries graph. 
+- [Alex, done] faas.bib last few entries are broken. Probably syntax {, somewhere. 
+- [Alex, done] Violin plots: RARE? BYpass? only in 10b, 11b
+- [X] prewarm at start of trace. how many etc. 
+- [Alex, done]tracing overheads 
+- [ ] RL in sim descr 

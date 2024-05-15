@@ -1,0 +1,49 @@
+\section{Related Work}
+
+\noindent \textbf{FaaS Resource Management.}
+The initialization overheads of serverless functions and their repeated invocations have spawned a great deal of research into optimizing their resource management.
+Recent surveys~\cite{faas-survey-jan-2022, raza2021sok, eismann2020serverless, hassan2021survey, mampage2021holistic} provide an overview of the challenges and solutions in this very active research area. 
+
+Reducing the overhead of serverless functions through various systems and virtualization-level mechanisms and  optimizations~\cite{du2020catalyzer, firecracker-nsdi20, dukic2020photons, akkus_sand_2018, vhive-asplos21, carreira2021warm}. 
+%
+Locality for FaaS resource management has been explored in the form of function keep-alive policies~\cite{shahrad_serverless_2020}. 
+Our work builds on and uses the caching-based Greedy-Dual policy from FaasCache~\cite{faascache-asplos21}. 
+%
+Single-server environments have been the focus of these mechanisms and policies: we have made an initial attempt to understand their interactions in a distributed cluster context.
+%
+Inter-function dependencies can also be used for predictive resource management and reducing function communication and startup costs~\cite{gunasekaran2020fifer, daw2021speedo, shen2021defuse}: incorporating these policies into our load-balancer is part of future work. 
+
+\noindent \textbf{Function Load Balancing:}
+Package-aware load balancing~\cite{package-cristina-19}  identifies and uses function code dependencies (software packages) as an important source of data locality.
+While this is an important factor, we focus on in-memory locality of kept-alive functions, since memory capacity is much smaller than permanent storage and caching functions in memory has a very large performance impact.
+%
+CPU contention and interference is a major source of performance bottlenecks for co-located functions, and adjusting CPU-shares using cgroups can provide significant benefits~\cite{suresh2019fnsched, suresh2021servermore, ensure-faas-acsos20}.
+%
+The load-locality tradeoff we explore is complementary to these CPU scheduling optimizations. 
+%
+The repetitive nature of functions and their workflows can also be used to improve resource utilization and latency~\cite{hunhoff2020proactive, yu2021faasrank, puru_xanadu_20, przybylski2021data}: our load-balancer is stateless for the sake of simplicity and can be enhanced with these techniques if necessary.
+
+
+The tradeoff between locality and performance has also been explored in the context of delay scheduling~\cite{zaharia2010delay} for data-parallel applications like MapReduce.
+%
+Load-balancing is seen as a ``dispatch'' problem in queuing theory, and the Faas cluster system most closely approximates G/G/PS, since the arrivals and service times are not Markovian.
+Techniques such as ``join the shortest queue'', and ``least work left''~\cite{gupta2007analysis} have been shown to be effective.
+The online-greedy policy evaluated in the previous Section closely approximates least-work-left.
+However, it is difficult to implement in practice since the running times of functions is hard to predict due to their volatile arrival distribution mixtures and high variances in running time due to various system interference effects.
+
+
+
+% In general, 
+% CH, dynamo,
+% CH-RJ not applicable because of lack of locality.
+% Stale loads dahlin, mitzen,
+% power of 2 choices: but not locality aware and load has an uncertain bearing on performance.
+% \subsection{Queuing and Dispatch}
+% Remaining time times the original size (RS) ~\cite{scully2022bounding}
+% Guardrails:~\cite{}
+% Although we focus on the heavy-traffic regime with server loads far exceeding one. 
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

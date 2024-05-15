@@ -1,0 +1,87 @@
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage{usenix2019_v3}
+
+\usepackage{graphicx}
+\usepackage{subfig}
+%Removing the geometry package used for Tighter Format
+%\usepackage{geometry}
+%\usepackage{times}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+\input{macros}
+
+\begin{document}
+%-------------------------------------------------------------------------------
+
+%don't want date printed
+\date{}
+
+% make title bold and 14 pt font (Latex default is non-bold, 16 pt)
+\title{Keeping Serverless Computing Alive With Greedy-Dual Caching}
+
+\author{Anon}
+
+\maketitle 
+
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%hotcloud is 5 pages of text 
+\vspace*{\subsecspace}
+\section{Introduction}
+\vspace*{\subsecspace}
+\input{intro} 
+
+% The idea is to write this like a proposal with the crux of the idea..
+
+
+\vspace*{\subsecspace}
+\section{FaaS Keep-alive Background}
+\vspace*{\subsecspace}
+\input{bg} 
+
+
+\vspace*{\subsecspace}
+\section{Keep-alive Policies}
+\vspace*{\subsecspace}
+\input{gd}
+
+\vspace*{\subsecspace}
+\section{Evaluation}
+\vspace*{\subsecspace}
+\input{eval}
+
+\clearpage 
+
+\vspace*{\subsecspace}
+\section{Discussion}
+\vspace*{\subsecspace}
+\input{disc}
+
+
+\bibliographystyle{plain}
+\bibliography{faas}
+
+
+
+\end{document}
+
+
+
+%Hotcloud template... 
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

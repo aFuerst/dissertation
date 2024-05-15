@@ -1,0 +1,23 @@
+\subsection{Caching Background}
+
+% This whole thing needs to be rewritten. What is the message?
+
+% This is nice, but here and not in the technical sections? 
+Our answer to solving the twin conundrum of keep-alive and provisioning that is robust to workload heterogeneity and dynamism, is to use concepts from a related, well-known field with the same challenges. 
+%
+Caching has a long history of robust eviction algorithms that use temporal locality such as  LRU (Least Recently Used). 
+The effectiveness of a caching algorithm depends on the workload's inter arrival time distribution, the relative popularities of different objects, and thus many variants of LRU such as LRU-k~\cite{o1993lru}, segmented LRU~\cite{cheng2000lru}, ARC~\cite{megiddo2003arc}, and frequency based eviction such as LFU~\cite{einziger2017tinylfu}, are widely used in caching systems. 
+Because functions show a lot of diversity in their memory footprints, and since keep-alive is primarily constrained by server memory, we seek to use \emph{size-aware} caching methods. 
+%Conventional caching \emph{largely} deals with constant-sized objects. For example: LRU, sampling techniques like SHARDS, counterstacks, etc.
+%Therefore, we investigate the use of \emph{size-aware} techniques for keep-alive policies and provisioning.
+While conventional caching algorithms and analytical models largely deal with constant-sized objects, many size-aware caching policies have been developed for web-pages and data~\cite{cao_irani_1997}. 
+In particular, we use the Greedy-Dual~\cite{young_gd_orig_94} online caching framework that deals with objects with different eviction costs, that are determined based on size and other factors.
+The Greedy-Dual family of eviction algorithms for non-identical objects can be extended in many ways.
+We use a common variant, Greedy-Dual-Size-Frequency~\cite{gdsf, gdfs_2001,cherkasova2001role}, which considers the size and frequency of objects. 
+
+
+Caching has a rich collection of analytical and modeling techniques to determine the efficacy of caches for different workloads.
+%Analysis techniques such as stack distances help in cache provisioning, are based on hit-ratio curves, and provide the fraction of accesses which are cache-hits for different cache sizes.
+Hit (or miss) ratio curves are widely used for cache sizing to achieve a target performance, and for understanding and modeling cache performance. 
+Hit-ratio curves can be constructed both in an offline and online manner, using techniques involving reuse distances~\cite{osca_atc20}, eviction times~\cite{hu2016kinetic}, Che's approximation~\cite{che2002hierarchical}, footprint descriptors~\cite{sundarrajan2017footprint}, and estimation techniques such as SHARDS~\cite{shards}, counterstacks~\cite{counterstacks}, etc. 
+

@@ -1,0 +1,1619 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: dissertation.aux
+The style file: plain.bst
+Reallocated field_info (elt_size=4) to 10773 items from 5000.
+Database file #1: refs.bib
+Warning--entry type for "docker-main" isn't style-file defined
+--line 891 of file refs.bib
+Warning--entry type for "kubernetes" isn't style-file defined
+--line 897 of file refs.bib
+Warning--entry type for "oci" isn't style-file defined
+--line 1064 of file refs.bib
+Warning--entry type for "lambda" isn't style-file defined
+--line 1085 of file refs.bib
+Warning--entry type for "alibaba-compute" isn't style-file defined
+--line 1092 of file refs.bib
+Warning--entry type for "gcp-functions" isn't style-file defined
+--line 1099 of file refs.bib
+Warning--entry type for "azure-functions" isn't style-file defined
+--line 1106 of file refs.bib
+Warning--entry type for "lambda-pricing" isn't style-file defined
+--line 1113 of file refs.bib
+Warning--entry type for "openwhisk" isn't style-file defined
+--line 1127 of file refs.bib
+Database file #2: chrlu/faaslb-osdi22/camready/related.bib
+Database file #3: chrlu/faaslb-osdi22/camready/faas-asplos.bib
+Repeated entry---line 556 of file chrlu/faaslb-osdi22/camready/faas-asplos.bib
+ : @misc{warm2
+ :             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 563 of file chrlu/faaslb-osdi22/camready/faas-asplos.bib
+ : @misc{warm1
+ :             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 577 of file chrlu/faaslb-osdi22/camready/faas-asplos.bib
+ : @misc{lambda-limits
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 617 of file chrlu/faaslb-osdi22/camready/faas-asplos.bib
+ : @inproceedings{firecracker-nsdi20
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 693 of file chrlu/faaslb-osdi22/camready/faas-asplos.bib
+ : @article{lin_mitigating_2019
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1109 of file chrlu/faaslb-osdi22/camready/faas-asplos.bib
+ : @article{einziger2017tinylfu
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1337 of file chrlu/faaslb-osdi22/camready/faas-asplos.bib
+ : @article{che2002hierarchical
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1396 of file chrlu/faaslb-osdi22/camready/faas-asplos.bib
+ : @article{mampage2021holistic
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1468 of file chrlu/faaslb-osdi22/camready/faas-asplos.bib
+ : @incollection{mocskos_faaster_2018
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1531 of file chrlu/faaslb-osdi22/camready/faas-asplos.bib
+ : @article{eismann2020serverless
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1659 of file chrlu/faaslb-osdi22/camready/faas-asplos.bib
+ : @article{sreekanti2020cloudburst
+ :                                 ,
+I'm skipping whatever remains of this entry
+Database file #4: chrlu/faaslb-osdi22/camready/faas.bib
+Repeated entry---line 22 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @article{lin_mitigating_2019
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 58 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @inproceedings{hall_execution_2019
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 131 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @article{carver_search_2019
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 296 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @article{ghosh_caching_2019
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 411 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @incollection{mocskos_faaster_2018
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 466 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @article{oakes_sock_2018
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 540 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @misc{warm2
+ :             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 547 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @misc{warm1
+ :             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 561 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @misc{lambda-limits
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 589 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @inproceedings{firecracker-nsdi20
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 597 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @inproceedings{unikernels
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 662 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @article{mohan_agile_2019
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 674 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @inproceedings{funcx_hpdc_20
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 838 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @inproceedings{yu2021faasrank
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 875 of file chrlu/faaslb-osdi22/camready/faas.bib
+ : @inproceedings{hunhoff2020proactive
+ :                                    ,
+I'm skipping whatever remains of this entry
+Database file #5: chrlu/faaslb-osdi22/camready/lb.bib
+Repeated entry---line 30 of file chrlu/faaslb-osdi22/camready/lb.bib
+ : @inproceedings{suresh2019fnsched
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 57 of file chrlu/faaslb-osdi22/camready/lb.bib
+ : @inproceedings{zhao2021understanding
+ :                                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 73 of file chrlu/faaslb-osdi22/camready/lb.bib
+ : @inproceedings{yu2021faasrank
+ :                              ,
+I'm skipping whatever remains of this entry
+Database file #6: iluvatar/camera-ready/efaas.bib
+I was expecting a `,' or a `}'---line 2052 of file iluvatar/camera-ready/efaas.bib
+ : 
+ : author={Thomas Anderson, Adam Belay, Mosharaf Chowdhury, Asaf Cidon, Irene Zhang},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 2134 of file iluvatar/camera-ready/efaas.bib
+ : 
+ : author={Anon.}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 2145 of file iluvatar/camera-ready/efaas.bib
+ : @inproceedings{shillaker2020faasm
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2181 of file iluvatar/camera-ready/efaas.bib
+ : @inproceedings{roy2022icebreaker
+ :                                 ,
+I'm skipping whatever remains of this entry
+Database file #7: iluvatar/camera-ready/faas.bib
+Repeated entry---line 1 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{hendrickson2016serverless
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{jonas2017occupy
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 37 of file iluvatar/camera-ready/faas.bib
+ : @article{lin_mitigating_2019
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 73 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{hall_execution_2019
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 92 of file iluvatar/camera-ready/faas.bib
+ : @article{akkus_sand_2018
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 160 of file iluvatar/camera-ready/faas.bib
+ : @article{carver_search_2019
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 325 of file iluvatar/camera-ready/faas.bib
+ : @article{ghosh_caching_2019
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 440 of file iluvatar/camera-ready/faas.bib
+ : @incollection{mocskos_faaster_2018
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 495 of file iluvatar/camera-ready/faas.bib
+ : @article{oakes_sock_2018
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 569 of file iluvatar/camera-ready/faas.bib
+ : @misc{warm2
+ :             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 576 of file iluvatar/camera-ready/faas.bib
+ : @misc{warm1
+ :             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 590 of file iluvatar/camera-ready/faas.bib
+ : @misc{lambda-limits
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 602 of file iluvatar/camera-ready/faas.bib
+ : @misc{azure-functions
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 615 of file iluvatar/camera-ready/faas.bib
+ : @misc{openwhisk
+ :                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 627 of file iluvatar/camera-ready/faas.bib
+ : @misc{containerd
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 633 of file iluvatar/camera-ready/faas.bib
+ : @misc{oci
+ :          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 670 of file iluvatar/camera-ready/faas.bib
+ : @misc{openfaas
+ :               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 684 of file iluvatar/camera-ready/faas.bib
+ : @techreport{gdsf
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 691 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{firecracker-nsdi20
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 699 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{unikernels
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 718 of file iluvatar/camera-ready/faas.bib
+ : @misc{docker-main
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 726 of file iluvatar/camera-ready/faas.bib
+ : @article{shankar2018numpywren
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 776 of file iluvatar/camera-ready/faas.bib
+ : @article{shahrad_serverless_2020
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 795 of file iluvatar/camera-ready/faas.bib
+ : @article{mohan_agile_2019
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 807 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{funcx_hpdc_20
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 931 of file iluvatar/camera-ready/faas.bib
+ : @article{faas-survey-jan-2022
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 943 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{ensure-faas-acsos20
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 962 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{suresh2021servermore
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 970 of file iluvatar/camera-ready/faas.bib
+ : @article{raza2021sok
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 979 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{yu2021faasrank
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 997 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{daw2021speedo
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1005 of file iluvatar/camera-ready/faas.bib
+ : @article{hassan2021survey
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1016 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{hunhoff2020proactive
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1024 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{shen2021defuse
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1033 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{suresh2021servermore
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1041 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{zaharia2010delay
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1049 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{serverless-harvest-sosp21
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1067 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{faascache-asplos21
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1113 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{vhive-asplos21
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1121 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{ao2022faasnap
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1228 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{zuk_call_2022
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1243 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{zuk_call_2022
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1517 of file iluvatar/camera-ready/faas.bib
+ : @misc{guo_decomposing_2022
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1533 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{ustiugov_analyzing_2021
+ :                                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1551 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{jia2021nightcore
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1637 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{eismann2021sizeless
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1645 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{ustiugov2021benchmarking
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1653 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{ao2022faasnap
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1699 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{kim2019functionbench
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1735 of file iluvatar/camera-ready/faas.bib
+ : @inproceedings{roy2022icebreaker
+ :                                 ,
+I'm skipping whatever remains of this entry
+Database file #8: iluvatar/camera-ready/faas-asplos.bib
+Repeated entry---line 1 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{hendrickson2016serverless
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{jonas2017occupy
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 37 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{lin_mitigating_2019
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 73 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{hall_execution_2019
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 92 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{akkus_sand_2018
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 160 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{carver_search_2019
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 326 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{ghosh_caching_2019
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 441 of file iluvatar/camera-ready/faas-asplos.bib
+ : @incollection{mocskos_faaster_2018
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 496 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{oakes_sock_2018
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 570 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{warm2
+ :             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 577 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{warm1
+ :             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 591 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{lambda-limits
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 603 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{azure-functions
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 616 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{openwhisk
+ :                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 622 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{openfaas
+ :               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 636 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{gdsf
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 643 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{firecracker-nsdi20
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 651 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{unikernels
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 670 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{docker-main
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 678 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{shankar2018numpywren
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 726 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{lin_mitigating_2019
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 742 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{shahrad_serverless_2020
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 760 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{openfaas
+ :               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 779 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{hendrickson2016serverless
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 787 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{mohan_agile_2019
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 799 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{funcx_hpdc_20
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 817 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{john_sweep_2019
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 837 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{kim_functionbench_2019
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 870 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{manner_cold_2018
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 889 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{young_gd_orig_94
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 908 of file iluvatar/camera-ready/faas-asplos.bib
+ : @incollection{gdfs_2001
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 929 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{cao_irani_1997
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 940 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{cherkasova2001role
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 949 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{young2002line
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 960 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{shards
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 968 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{counterstacks
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 976 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{sundarrajan2017footprint
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 984 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{hu2016kinetic
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 992 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{che2002hierarchical
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1003 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{o1993lru
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1014 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{megiddo2003arc
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1023 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{einziger2017tinylfu
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1034 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{cheng2000lru
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1081 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings {osca_atc20
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1093 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{gandhi2012autoscale
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1104 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{deflation-eurosys19
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1122 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{pid-wiki
+ :               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1128 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{ensure_acsos20
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1140 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{basu2017adaptive
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1148 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{jiang2018convergence
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1168 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{einziger2017tinylfu
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1218 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{choi2020lambda
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1243 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{dukic2020photons
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1251 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{vhive-asplos21
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1259 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{carreira2021warm
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1289 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{puru_xanadu_20
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1327 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{mampage2021holistic
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1335 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{przybylski2021data
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1344 of file iluvatar/camera-ready/faas-asplos.bib
+ : @phdthesis{yu2021faasrank
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1404 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{che2002hierarchical
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1415 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{faascache-asplos21
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1465 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{mirrokni2018consistent
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1475 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{package-cristina-19
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1494 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{mampage2021holistic
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1501 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{romero2021faa
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1572 of file iluvatar/camera-ready/faas-asplos.bib
+ : @incollection{mocskos_faaster_2018
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1635 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{eismann2020serverless
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1705 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{du2020catalyzer
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1713 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{shillaker2020faasm
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1722 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{hunhoff2020proactive
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1730 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{mvondo2021ofc
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1746 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{kotni2021faastlane
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1788 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{sreekanti2020cloudburst
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1812 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{harvest-osdi20
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1820 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{wang2021smartharvest
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1882 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{ali_batch_2020
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1987 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{locust
+ :             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2020 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{containerd
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2025 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{kafka
+ :            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2030 of file iluvatar/camera-ready/faas-asplos.bib
+ : @misc{oci
+ :          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2042 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{crun
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2059 of file iluvatar/camera-ready/faas-asplos.bib
+ : @article{mytkowicz2009producing
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2118 of file iluvatar/camera-ready/faas-asplos.bib
+ : @inproceedings{suresh2019fnsched
+ :                                 ,
+I'm skipping whatever remains of this entry
+Database file #9: faascache/faas-keepalive-20/asplos_camready/faas.bib
+Repeated entry---line 2 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{hendrickson2016serverless
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{jonas2017occupy
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 38 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{lin_mitigating_2019
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 74 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{hall_execution_2019
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 93 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{akkus_sand_2018
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 161 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{carver_search_2019
+ :                            ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 306 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ :  
+ :  file = {Zhang et al. - HyperFaaS A Truly Elastic Serverless Computing Fr.pdf:/home/prateeks/Zotero/storage/QR8A2WT8/Zhang et al. - HyperFaaS A Truly Elastic Serverless Computing Fr.pdf:application/pdf}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 327 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{ghosh_caching_2019
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 442 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @incollection{mocskos_faaster_2018
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 497 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{oakes_sock_2018
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 571 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @misc{warm2
+ :             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 578 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @misc{warm1
+ :             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 592 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @misc{lambda-limits
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 604 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @misc{azure-functions
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 617 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @misc{openwhisk
+ :                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 623 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @misc{openfaas
+ :               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 637 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{gdsf
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 644 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{firecracker-nsdi20
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 652 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{unikernels
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 671 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @misc{docker-main
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 679 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{shankar2018numpywren
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 727 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{lin_mitigating_2019
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 743 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{shahrad_serverless_2020
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 764 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{mohan_agile_2019
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 776 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{funcx_hpdc_20
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 795 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{john_sweep_2019
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 815 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{kim_functionbench_2019
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 848 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{manner_cold_2018
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 867 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{young_gd_orig_94
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 886 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @incollection{gdfs_2001
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 907 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{cao_irani_1997
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 918 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{cherkasova2001role
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 927 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{young2002line
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 938 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{shards
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 946 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{counterstacks
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 954 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{sundarrajan2017footprint
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 962 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{hu2016kinetic
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 970 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{che2002hierarchical
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 981 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{o1993lru
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 992 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{megiddo2003arc
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1001 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{einziger2017tinylfu
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1012 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{cheng2000lru
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1059 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings {osca_atc20
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1071 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{gandhi2012autoscale
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1082 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{deflation-eurosys19
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1100 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @misc{pid-wiki
+ :               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1106 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{ensure_acsos20
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1118 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{basu2017adaptive
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1126 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @article{jiang2018convergence
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1145 of file faascache/faas-keepalive-20/asplos_camready/faas.bib
+ : @inproceedings{du2020catalyzer
+ :                               ,
+I'm skipping whatever remains of this entry
+Database file #10: mqfq/gpu-q-faas.bib
+Repeated entry---line 28 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{werner2018serverless
+ :                                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 36 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{shankar2020serverless
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 63 of file mqfq/gpu-q-faas.bib
+ : @article{kaffes2021practical
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 84 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{romero2021llama
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 91 of file mqfq/gpu-q-faas.bib
+ : ###@article{risco2021gpu
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 101 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{yang2022infless
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 108 of file mqfq/gpu-q-faas.bib
+ : ###@article{ali2022optimizing
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 117 of file mqfq/gpu-q-faas.bib
+ : ###@article{balaji2021fireplace
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 138 of file mqfq/gpu-q-faas.bib
+ : ###@article{kumanov2018serverless
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 144 of file mqfq/gpu-q-faas.bib
+ : ###@article{hung2019rapid
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 152 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{zhang2019video
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 159 of file mqfq/gpu-q-faas.bib
+ : ###@article{aytekin2019harnessing
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 165 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{ao2018sprocket
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 172 of file mqfq/gpu-q-faas.bib
+ : @inproceedings{duato2010rcuda
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 188 of file mqfq/gpu-q-faas.bib
+ : @inproceedings{yu2019automatic
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 207 of file mqfq/gpu-q-faas.bib
+ : @article{naranjo2020accelerated
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 221 of file mqfq/gpu-q-faas.bib
+ : @misc{nvidia-mps
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 234 of file mqfq/gpu-q-faas.bib
+ : @misc{nvidia-mig
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 248 of file mqfq/gpu-q-faas.bib
+ : ###@article{pemberton2022kernel
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 278 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{gu2023fast
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 294 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{copik2023fmi
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 567 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   akhtar_cose_2020
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 615 of file mqfq/gpu-q-faas.bib
+ : ###@article{   akkus_sand_2018
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 664 of file mqfq/gpu-q-faas.bib
+ : @inproceedings{   ali_batch_2020
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 709 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    alzayat_groundhog_2022
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 811 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   ao2022faasnap
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 988 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    azure-functions
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1298 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   basu2017adaptive
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1320 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   bender1998flow
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1684 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   cao_irani_1997
+ :                                    ,
+I'm skipping whatever remains of this entry
+You're missing a field name---line 1711 of file mqfq/gpu-q-faas.bib
+ : 
+ : ###  title  = {Dynamic load balancing on web-server systems},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 1762 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   carreira2021warm
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1987 of file mqfq/gpu-q-faas.bib
+ : ###@article{   carver_search_2019
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2069 of file mqfq/gpu-q-faas.bib
+ : ###@article{   che2002hierarchical
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2133 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   cheng2000lru
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2144 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   cherkasova2001role
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2175 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   choi2020lambda
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2265 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   chrj-aaai21
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2390 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    containerd
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2454 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   cortez2017resource
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2466 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   counterstacks
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2530 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    crun
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2553 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   daw2021speedo
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2572 of file mqfq/gpu-q-faas.bib
+ : ###@article{   decandia2007dynamo
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2586 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   deflation-eurosys19
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2690 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    docker-main
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2839 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   du2020catalyzer
+ :                                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2852 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   dukic2020photons
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2919 of file mqfq/gpu-q-faas.bib
+ : ###@article{   einziger2017tinylfu
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2941 of file mqfq/gpu-q-faas.bib
+ : ###@article{   eismann2020serverless
+ :                                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2954 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   eismann2021sizeless
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2965 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   ensure-faas-acsos20
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2980 of file mqfq/gpu-q-faas.bib
+ : ###@article{   ensure_acsos20
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3035 of file mqfq/gpu-q-faas.bib
+ : ###@article{   faas-survey-jan-2022
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3049 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   faascache-asplos21
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3137 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   faaslb-hpdc22
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3286 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   firecracker-nsdi20
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3567 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   fu2022sfs
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3578 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    functionbench
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3584 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   funcx_hpdc_20
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3718 of file mqfq/gpu-q-faas.bib
+ : ###@article{   gandhi2012autoscale
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3917 of file mqfq/gpu-q-faas.bib
+ : ###@incollection{   gdfs_2001
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3965 of file mqfq/gpu-q-faas.bib
+ : ###@techreport{   gdsf
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4235 of file mqfq/gpu-q-faas.bib
+ : ###@article{   ghosh_caching_2019
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4398 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    graalvm
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4452 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   gunasekaran2020fifer
+ :                                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4568 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    guo_decomposing_2022
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4728 of file mqfq/gpu-q-faas.bib
+ : ###@article{   gupta2007analysis
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4814 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   hall_execution_2019
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4935 of file mqfq/gpu-q-faas.bib
+ : @inproceedings{   harvest-osdi20
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4948 of file mqfq/gpu-q-faas.bib
+ : ###@article{   hassan2021survey
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4994 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   hendrickson2016serverless
+ :                                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5102 of file mqfq/gpu-q-faas.bib
+ : ###@article{   hotcarbon22-faas
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5111 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   hu2016kinetic
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5120 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   hunhoff2020proactive
+ :                                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5182 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   jia2021nightcore
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5193 of file mqfq/gpu-q-faas.bib
+ : ###@article{   jiang2018convergence
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5302 of file mqfq/gpu-q-faas.bib
+ : @inproceedings{   john_sweep_2019
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5347 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   jonas2017occupy
+ :                                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5565 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   kaffes2019shinjuku
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5577 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   kaffes_centralized_2019
+ :                                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5621 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   kaffes_hermod_2022
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5673 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    kafka
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5818 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   karger1997consistent
+ :                                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5829 of file mqfq/gpu-q-faas.bib
+ : ###@article{   karger1999web
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6081 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   kim2019functionbench
+ :                                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6092 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   kim_functionbench_2019
+ :                                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6128 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   kim_scheduling_2021
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6191 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    knative
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6242 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   kotni2021faastlane
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6703 of file mqfq/gpu-q-faas.bib
+ : @misc{    lambda-limits
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7220 of file mqfq/gpu-q-faas.bib
+ : ###@article{   lin_mitigating_2019
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7449 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    locust
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7455 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    lookbusy
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7508 of file mqfq/gpu-q-faas.bib
+ : ###@article{   mahgoub_wisefuse_2022
+ :                                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7583 of file mqfq/gpu-q-faas.bib
+ : ###@article{   mampage2021holistic
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7601 of file mqfq/gpu-q-faas.bib
+ : @inproceedings{   manner_cold_2018
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7677 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   megiddo2003arc
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7697 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   mirrokni2018consistent
+ :                                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7759 of file mqfq/gpu-q-faas.bib
+ : @incollection{   mocskos_faaster_2018
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7894 of file mqfq/gpu-q-faas.bib
+ : ###@article{   mohan_agile_2019
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8132 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   mvondo2021ofc
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8144 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   mytkowicz2009producing
+ :                                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8298 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    nuclio
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8305 of file mqfq/gpu-q-faas.bib
+ : ###@article{   nygren2010akamai
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8317 of file mqfq/gpu-q-faas.bib
+ : ###@article{   o1993lru
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8330 of file mqfq/gpu-q-faas.bib
+ : ###@article{   oakes_sock_2018
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8400 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    oci
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8421 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    openfaas
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8439 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    openwhisk
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8453 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   osca_atc20
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8494 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{abdi2023palette
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8502 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   package-cristina-19
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8516 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   palade-edge-22
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8539 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   pfandzelter_tinyfaas_2020
+ :                                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8570 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    pid-wiki
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8597 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   popa_http_2010
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8657 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   prekas2017zygos
+ :                                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8667 of file mqfq/gpu-q-faas.bib
+ : ###@article{   przybylski2021data
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8796 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   puru_xanadu_20
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8855 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   quevedo_evaluating_2019
+ :                                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8924 of file mqfq/gpu-q-faas.bib
+ : ###@article{   raza2021sok
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9056 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   ristov_colder_warmer
+ :                                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9101 of file mqfq/gpu-q-faas.bib
+ : ###@article{   romero2021faa
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9135 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   roy2022icebreaker
+ :                                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9190 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    scheuner_lets_2022
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9348 of file mqfq/gpu-q-faas.bib
+ : @inproceedings{   serverless-harvest-sosp21
+ :                                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9439 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   shahrad_architectural_2019
+ :                                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9489 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{shahrad2020serverless
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9497 of file mqfq/gpu-q-faas.bib
+ : ###@article{   shankar2018numpywren
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9558 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   shards
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9611 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   shen2021defuse
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9623 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   shen_defuse_2021
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9699 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   shillaker2020faasm
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9747 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   silva_prebaking_2020
+ :                                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9771 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   singhvi2021atoll
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9899 of file mqfq/gpu-q-faas.bib
+ : ###@article{   sreekanti2020cloudburst
+ :                                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9964 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   sundarrajan2017footprint
+ :                                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9975 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   suresh2019fnsched
+ :                                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9993 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   suresh2021servermore
+ :                                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10172 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   tian_owl_2022
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10230 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   unikernels
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10289 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   ustiugov2021benchmarking
+ :                                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10301 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   ustiugov_analyzing_2021
+ :                                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10487 of file mqfq/gpu-q-faas.bib
+ : @inproceedings{   vhive-asplos21
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10586 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   wang2021lass
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10596 of file mqfq/gpu-q-faas.bib
+ : @inproceedings{   wang2021smartharvest
+ :                                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10685 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    warm1
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10699 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    warm2
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10883 of file mqfq/gpu-q-faas.bib
+ : @inproceedings{   yan2020hermes
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10893 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   yang2000general
+ :                                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10977 of file mqfq/gpu-q-faas.bib
+ : ###@article{   young2002line
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 10988 of file mqfq/gpu-q-faas.bib
+ : ###@article{   young_gd_orig_94
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11013 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   yu2021faasrank
+ :                                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11045 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   zaharia2010delay
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11557 of file mqfq/gpu-q-faas.bib
+ : @inproceedings{   zhao2021understanding
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11568 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   zhou2022aquatope
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11580 of file mqfq/gpu-q-faas.bib
+ : ###@misc{    zhou_qos-aware_2022
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11663 of file mqfq/gpu-q-faas.bib
+ : ###@inproceedings{   zuk_call_2022
+ :                                   ,
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in docker-main
+Warning--to sort, need author or key in kubernetes
+Warning--to sort, need author or key in openwhisk
+Warning--to sort, need author or key in openfaas
+Warning--to sort, need author or key in nuclio
+Warning--to sort, need author or key in knative
+Warning--to sort, need author or key in gvisor
+Warning--to sort, need author or key in warm2
+Warning--to sort, need author or key in influx
+Warning--to sort, need author or key in functionbench
+Warning--to sort, need author or key in warm1
+Warning--to sort, need author or key in goog-functions-tricks
+Warning--to sort, need author or key in aws-warm-predictable
+Warning--to sort, need author or key in azure-warmup-trigger
+Warning--to sort, need author or key in pid-wiki
+Warning--to sort, need author or key in kafka
+Warning--to sort, need author or key in containerd
+Warning--to sort, need author or key in crun
+Warning--to sort, need author or key in pyhpc-bench
+Warning--to sort, need author or key in ffmpeg
+Warning--to sort, need author or key in nvidia-mig
+Warning--to sort, need author or key in nvidia-mps
+Warning--to sort, need author or key in nvml
+Warning--to sort, need author or key in nvidia-uvm
+Warning--to sort, need author or key in cuda-ctx-overhead
+Warning--to sort, need author or key in hadoop
+Warning--to sort, need author or key in mpi
+Warning--to sort, need author or key in burber
+Warning--can't use both volume and number fields in chrj-aaai21
+Warning--empty journal in chhatrapati2021towards
+Warning--empty journal in donkervlietservo
+Warning--empty year in donkervlietservo
+Warning--empty journal in fuerst2023iluvatar
+Warning--empty journal in giantsidi2023flexlog
+Warning--empty journal in leegreedy
+Warning--empty year in leegreedy
+Warning--empty journal in oakes_sock_2018
+Warning--empty year in hotcarbon22-faas
+Warning--empty journal in strati2024orion
+Warning--empty journal in ensure_acsos20
+You've used 251 entries,
+            2118 wiz_defined-function locations,
+            1692 strings with 56440 characters,
+and the built_in function-call counts, 105798 in all, are:
+= -- 10265
+> -- 5663
+< -- 147
++ -- 2255
+- -- 1990
+* -- 7290
+:= -- 16244
+add.period$ -- 763
+call.type$ -- 251
+change.case$ -- 1738
+chr.to.int$ -- 0
+cite$ -- 291
+duplicate$ -- 4178
+empty$ -- 7942
+format.name$ -- 1990
+if$ -- 23003
+int.to.chr$ -- 0
+int.to.str$ -- 251
+missing$ -- 208
+newline$ -- 1217
+num.names$ -- 450
+pop$ -- 2289
+preamble$ -- 1
+purify$ -- 1488
+quote$ -- 0
+skip$ -- 3431
+stack$ -- 0
+substring$ -- 5868
+swap$ -- 1559
+text.length$ -- 147
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 1004
+warning$ -- 40
+while$ -- 901
+width$ -- 254
+write$ -- 2680
+(There were 375 error messages)

@@ -1,0 +1,256 @@
+\begin{thebibliography}{10}
+
+\bibitem{docker-main}
+Docker.
+\newblock \url{https://www.docker.com/}, June 2015.
+
+\bibitem{openwhisk}
+{Apache OpenWhisk: Open Source Serverless Cloud Platform}.
+\newblock \url{https://openwhisk.apache.org/}, 2020.
+
+\bibitem{firecracker-nsdi20}
+{\sc Agache, A., Brooker, M., Iordache, A., Liguori, A., Neugebauer, R.,
+  Piwonka, P., and Popa, D.-M.}
+\newblock Firecracker: Lightweight virtualization for serverless applications.
+\newblock In {\em 17th {USENIX} Symposium on Networked Systems Design and
+  Implementation ({NSDI} 20)\/} (2020), pp.~419--434.
+
+\bibitem{akkus_sand_2018}
+{\sc Akkus, I.~E., Chen, R., Rimac, I., Stein, M., Satzke, K., Beck, A.,
+  Aditya, P., and Hilt, V.}
+\newblock {SAND}: {Towards} {High}-{Performance} {Serverless} {Computing}.
+\newblock {\em USENIX ATC\/} (2018), 14.
+
+\bibitem{package-cristina-19}
+{\sc Aumala, G., Boza, E., Ortiz-Avilés, L., Totoy, G., and Abad, C.}
+\newblock Beyond load balancing: Package-aware scheduling for serverless
+  platforms.
+\newblock In {\em 2019 19th IEEE/ACM International Symposium on Cluster, Cloud
+  and Grid Computing (CCGRID)\/} (2019), pp.~282--291.
+
+\bibitem{carreira2021warm}
+{\sc Carreira, J., Kohli, S., Bruno, R., and Fonseca, P.}
+\newblock From warm to hot starts: leveraging runtimes for the serverless era.
+\newblock In {\em Proceedings of the Workshop on Hot Topics in Operating
+  Systems\/} (2021), pp.~58--64.
+
+\bibitem{chrj-aaai21}
+{\sc Chen, J., Coleman, B., and Shrivastava, A.}
+\newblock Revisiting consistent hashing with bounded loads.
+\newblock In {\em Proceedings of the AAAI Conference on Artificial
+  Intelligence\/} (2021), vol.~35, pp.~3976--3983.
+
+\bibitem{gdsf}
+{\sc Cherkasova, L.}
+\newblock {Improving WWW Proxies Performance with Greedy-Dual-Size-Frequency
+  Caching Policy}.
+\newblock Tech. rep., {HP Labs Technical Report 98-69 (R.1)}, 1998.
+
+\bibitem{puru_xanadu_20}
+{\sc Daw, N., Bellur, U., and Kulkarni, P.}
+\newblock Xanadu: Mitigating cascading cold starts in serverless function chain
+  deployments.
+\newblock In {\em Proceedings of the 21st International Middleware
+  Conference\/} (New York, NY, USA, 2020), Middleware '20, Association for
+  Computing Machinery, pp.~356--–370.
+
+\bibitem{daw2021speedo}
+{\sc Daw, N., Bellur, U., and Kulkarni, P.}
+\newblock Speedo: Fast dispatch and orchestration of serverless workflows.
+\newblock In {\em Proceedings of the ACM Symposium on Cloud Computing\/}
+  (2021), pp.~585--599.
+
+\bibitem{decandia2007dynamo}
+{\sc DeCandia, G., Hastorun, D., Jampani, M., Kakulapati, G., Lakshman, A.,
+  Pilchin, A., Sivasubramanian, S., Vosshall, P., and Vogels, W.}
+\newblock Dynamo: Amazon's highly available key-value store.
+\newblock {\em ACM SIGOPS operating systems review 41}, 6 (2007), 205--220.
+
+\bibitem{du2020catalyzer}
+{\sc Du, D., Yu, T., Xia, Y., Zang, B., Yan, G., Qin, C., Wu, Q., and Chen, H.}
+\newblock Catalyzer: Sub-millisecond startup for serverless computing with
+  initialization-less booting.
+\newblock In {\em Proceedings of the Twenty-Fifth International Conference on
+  Architectural Support for Programming Languages and Operating Systems\/}
+  (2020), pp.~467--481.
+
+\bibitem{dukic2020photons}
+{\sc Dukic, V., Bruno, R., Singla, A., and Alonso, G.}
+\newblock Photons: Lambdas on a diet.
+\newblock In {\em Proceedings of the 11th ACM Symposium on Cloud Computing\/}
+  (2020), pp.~45--59.
+
+\bibitem{eismann2020serverless}
+{\sc Eismann, S., Scheuner, J., Van~Eyk, E., Schwinger, M., Grohmann, J.,
+  Herbst, N., Abad, C.~L., and Iosup, A.}
+\newblock Serverless applications: Why, when, and how?
+\newblock {\em IEEE Software 38}, 1 (2020), 32--39.
+
+\bibitem{faascache-asplos21}
+{\sc Fuerst, A., and Sharma, P.}
+\newblock Faascache: Keeping serverless computing alive with greedy-dual
+  caching.
+\newblock In {\em Proceedings of the 26th ACM International Conference on
+  Architectural Support for Programming Languages and Operating Systems\/} (New
+  York, NY, USA, 2021), ASPLOS 2021, Association for Computing Machinery,
+  pp.~386–--400.
+
+\bibitem{gunasekaran2020fifer}
+{\sc Gunasekaran, J.~R., Thinakaran, P., Nachiappan, N.~C., Kandemir, M.~T.,
+  and Das, C.~R.}
+\newblock Fifer: Tackling resource underutilization in the serverless era.
+\newblock In {\em Proceedings of the 21st International Middleware
+  Conference\/} (2020), pp.~280--295.
+
+\bibitem{gupta2007analysis}
+{\sc Gupta, V., Balter, M.~H., Sigman, K., and Whitt, W.}
+\newblock Analysis of join-the-shortest-queue routing for web server farms.
+\newblock {\em Performance Evaluation 64}, 9-12 (2007), 1062--1081.
+
+\bibitem{hassan2021survey}
+{\sc Hassan, H.~B., Barakat, S.~A., and Sarhan, Q.~I.}
+\newblock Survey on serverless computing.
+\newblock {\em Journal of Cloud Computing 10}, 1 (2021), 1--29.
+
+\bibitem{hunhoff2020proactive}
+{\sc Hunhoff, E., Irshad, S., Thurimella, V., Tariq, A., and Rozner, E.}
+\newblock Proactive serverless function resource management.
+\newblock In {\em Proceedings of the 2020 Sixth International Workshop on
+  Serverless Computing\/} (2020), pp.~61--66.
+
+\bibitem{karger1997consistent}
+{\sc Karger, D., Lehman, E., Leighton, T., Panigrahy, R., Levine, M., and
+  Lewin, D.}
+\newblock Consistent hashing and random trees: Distributed caching protocols
+  for relieving hot spots on the world wide web.
+\newblock In {\em Proceedings of the twenty-ninth annual ACM symposium on
+  Theory of computing\/} (1997), pp.~654--663.
+
+\bibitem{karger1999web}
+{\sc Karger, D., Sherman, A., Berkheimer, A., Bogstad, B., Dhanidina, R.,
+  Iwamoto, K., Kim, B., Matkins, L., and Yerushalmi, Y.}
+\newblock Web caching with consistent hashing.
+\newblock {\em Computer Networks 31}, 11-16 (1999), 1203--1213.
+
+\bibitem{kim_functionbench_2019}
+{\sc Kim, J., and Lee, K.}
+\newblock {FunctionBench}: {A} {Suite} of {Workloads} for {Serverless} {Cloud}
+  {Function} {Service}.
+\newblock In {\em 2019 {IEEE} 12th {International} {Conference} on {Cloud}
+  {Computing} ({CLOUD})\/} (July 2019), pp.~502--504.
+\newblock ISSN: 2159-6182.
+
+\bibitem{faas-survey-jan-2022}
+{\sc Li, Z., Guo, L., Cheng, J., Chen, Q., He, B., and Guo, M.}
+\newblock The serverless computing survey: A technical primer for design
+  architecture.
+\newblock {\em ACM Computing Surveys\/} (Jan 2022).
+
+\bibitem{locust}
+{\sc Locust}.
+\newblock Locust: A modern load testing framework.
+\newblock \url{https://locust.io/}.
+
+\bibitem{mampage2021holistic}
+{\sc Mampage, A., Karunasekera, S., and Buyya, R.}
+\newblock A holistic view on resource management in serverless computing
+  environments: Taxonomy, and future directions.
+\newblock {\em arXiv preprint arXiv:2105.11592\/} (2021).
+
+\bibitem{mirrokni2018consistent}
+{\sc Mirrokni, V., Thorup, M., and Zadimoghaddam, M.}
+\newblock Consistent hashing with bounded loads.
+\newblock In {\em Proceedings of the Twenty-Ninth Annual ACM-SIAM Symposium on
+  Discrete Algorithms\/} (2018), SIAM, pp.~587--604.
+
+\bibitem{nygren2010akamai}
+{\sc Nygren, E., Sitaraman, R.~K., and Sun, J.}
+\newblock The akamai network: a platform for high-performance internet
+  applications.
+\newblock {\em ACM SIGOPS Operating Systems Review 44}, 3 (2010), 2--19.
+
+\bibitem{przybylski2021data}
+{\sc Przybylski, B., {\.Z}uk, P., and Rzadca, K.}
+\newblock Data-driven scheduling in serverless computing to reduce response
+  time.
+\newblock {\em arXiv preprint arXiv:2105.03217\/} (2021).
+
+\bibitem{raza2021sok}
+{\sc Raza, A., Matta, I., Akhtar, N., Kalavri, V., and Isahagian, V.}
+\newblock Sok: Function-as-a-service: From an application developer’s
+  perspective.
+\newblock {\em Journal of Systems Research 1}, 1 (2021).
+
+\bibitem{shahrad_serverless_2020}
+{\sc Shahrad, M., Fonseca, R., Goiri, �., Chaudhry, G., Batum, P., Cooke, J.,
+  Laureano, E., Tresness, C., Russinovich, M., and Bianchini, R.}
+\newblock Serverless in the {Wild}: {Characterizing} and {Optimizing} the
+  {Serverless} {Workload} at a {Large} {Cloud} {Provider}.
+\newblock {\em arXiv:2003.03423 [cs]\/} (June 2020).
+\newblock arXiv: 2003.03423.
+
+\bibitem{shen2021defuse}
+{\sc Shen, J., Yang, T., Su, Y., Zhou, Y., and Lyu, M.~R.}
+\newblock Defuse: A dependency-guided function scheduler to mitigate cold
+  starts on faas platforms.
+\newblock In {\em 2021 IEEE 41st International Conference on Distributed
+  Computing Systems (ICDCS)\/} (2021), IEEE, pp.~194--204.
+
+\bibitem{suresh2019fnsched}
+{\sc Suresh, A., and Gandhi, A.}
+\newblock Fnsched: An efficient scheduler for serverless functions.
+\newblock In {\em Proceedings of the 5th International Workshop on Serverless
+  Computing\/} (2019), pp.~19--24.
+
+\bibitem{suresh2021servermore}
+{\sc Suresh, A., and Gandhi, A.}
+\newblock Servermore: Opportunistic execution of serverless functions in the
+  cloud.
+\newblock In {\em Proceedings of the ACM Symposium on Cloud Computing\/}
+  (2021), pp.~570--584.
+
+\bibitem{ensure-faas-acsos20}
+{\sc Suresh, A., Somashekar, G., Varadarajan, A., Kakarla, V.~R., Upadhyay, H.,
+  and Gandhi, A.}
+\newblock Ensure: Efficient scheduling and autonomous resource management in
+  serverless environments.
+\newblock In {\em 2020 IEEE International Conference on Autonomic Computing and
+  Self-Organizing Systems (ACSOS)\/} (2020), pp.~1--10.
+
+\bibitem{vhive-asplos21}
+{\sc Ustiugov, D., Petrov, P., Kogias, M., Bugnion, E., and Grot, B.}
+\newblock Benchmarking, analysis, and optimization of serverless function
+  snapshots.
+\newblock In {\em Proceedings of the 26th ACM International Conference on
+  Architectural Support for Programming Languages and Operating Systems\/}
+  (2021), pp.~559--572.
+
+\bibitem{shards}
+{\sc Waldspurger, C.~A., Park, N., Garthwaite, A., and Ahmad, I.}
+\newblock Efficient {MRC} construction with {SHARDS}.
+\newblock In {\em 13th {USENIX} Conference on File and Storage Technologies
+  ({FAST} 15)\/} (2015), pp.~95--110.
+
+\bibitem{yu2021faasrank}
+{\sc Yu, H., Irissappane, A.~A., Wang, H., and Lloyd, W.~J.}
+\newblock Faasrank: Learning to schedule functions in serverless platforms.
+\newblock In {\em 2021 IEEE International Conference on Autonomic Computing and
+  Self-Organizing Systems (ACSOS)\/} (2021), IEEE, pp.~31--40.
+
+\bibitem{zaharia2010delay}
+{\sc Zaharia, M., Borthakur, D., Sen~Sarma, J., Elmeleegy, K., Shenker, S., and
+  Stoica, I.}
+\newblock Delay scheduling: a simple technique for achieving locality and
+  fairness in cluster scheduling.
+\newblock In {\em Proceedings of the 5th European conference on Computer
+  systems\/} (2010), pp.~265--278.
+
+\bibitem{serverless-harvest-sosp21}
+{\sc Zhang, Y., Goiri, I.~n., Chaudhry, G.~I., Fonseca, R., Elnikety, S.,
+  Delimitrou, C., and Bianchini, R.}
+\newblock Faster and cheaper serverless computing on harvested resources.
+\newblock In {\em Proceedings of the ACM SIGOPS 28th Symposium on Operating
+  Systems Principles\/} (New York, NY, USA, 2021), SOSP '21, Association for
+  Computing Machinery, p.~724–739.
+
+\end{thebibliography}

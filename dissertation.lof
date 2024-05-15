@@ -1,0 +1,76 @@
+\addvspace {10pt}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces The major components of the control plane, and the areas of each this thesis impacts.\relax }}{4}{figure.caption.7}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces A common architecture for serverless control planes. A controller distributes invocations to workers who run them inside containers.\relax }}{11}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces A classic serverless function: performing ML inference on image data. In this example library and model initialization are done before execution starts.\relax }}{12}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Different layers of abstraction between hardware and kernel based virtualization.\relax }}{15}{figure.caption.11}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Virtual Machines}}}{15}{subfigure.3.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Containers}}}{15}{subfigure.3.2}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces A CDF of daily invocations for functions. Invocation frequencies range from sub-second to less than one per day. Figure from \cite {shahrad_serverless_2020}\relax }}{16}{figure.caption.12}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Timeline of function execution and sources of cold-start delay in OpenWhisk for an ML inference application.\relax }}{28}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Initializing functions by importing and downloading code and data dependencies can reduce function latency by hiding the cold-start overhead.\relax }}{28}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Hit ratio curve using reuse distances show slight deviations from the observed hit ratios due to dropped requests at lower sizes, and concurrent executions at higher sizes.\relax }}{39}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces FaasCache system components. We build on OpenWhisk and augment it with new keep-alive policies and a provisioning controller. \relax }}{41}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Increase in execution time due to cold-starts for different workloads derived from the Azure function trace.\relax }}{43}{figure.caption.20}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces { Representative functions. }}}{43}{subfigure.5.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Rare functions. }}}{43}{subfigure.5.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Random sampling. }}}{43}{subfigure.5.3}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Fraction of cold-starts is lower with caching-based keep-alive. \relax }}{44}{figure.caption.21}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Representative functions.}}}{44}{subfigure.6.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Rare functions. }}}{44}{subfigure.6.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Random sampling. }}}{44}{subfigure.6.3}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces FaasCache runs 50 to 100\% more cold and warm functions, for skewed workload traces.\relax }}{48}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces FaasCache increases warm-starts by more than $2\times $, which also reduces system load and dropped functions.\relax }}{50}{figure.caption.26}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces With dynamic cache size adjustment, the cold starts per second are kept close to the target (horizontal line), which reduces the average server size by 30\%. \relax }}{51}{figure.caption.27}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Consistent hashing runs functions on the nearest clockwise server. Functions are forwarded along the ring if the server is overloaded.\relax }}{54}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces System diagram of relevant OpenWhisk components and communication used to schedule and run function invocations.\relax }}{65}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Latency and throughput under low-load. Locality-agnostic least-loaded policy has more cold starts and a higher impact on latency.\relax }}{67}{figure.caption.32}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Global Latency Impact}}}{67}{subfigure.3.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Invocation Throughput}}}{67}{subfigure.3.2}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces At high server loads, our RLU policy reduces average latency by 2.2x at higher throughput, compared to OpenWhisk's default policy. It does so by keeping cold-starts and load-variances low.\relax }}{69}{figure.caption.33}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Latency}}}{69}{subfigure.4.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Throughput}}}{69}{subfigure.4.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Server Load variance}}}{69}{subfigure.4.3}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces RLU improves latency by 10\% compared to OpenWhisk under bursty load conditions, while keeping a low worker load variance.\relax }}{71}{figure.caption.35}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Global Latency Impact}}}{71}{subfigure.5.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Worker Load Variance}}}{71}{subfigure.5.2}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Global latency impact under a 30-minute long rising burst load from an open-loop generator. RLU reduces latency by 17\% compared to OpenWhisk.\relax }}{71}{figure.caption.36}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces The average normalized function latency over time for a dynamic workload. New invokers are launched at the dashed lines, keeping the latency in check.\relax }}{72}{figure.caption.38}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The latency overhead of the control plane, as the number of concurrent invocations increases. OpenWhisk overhead is significant and has high variance, resulting in high tail latency. Il\'{u}vatar\nobreakspace {} reduces this overhead by 100x. \relax }}{77}{figure.caption.40}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Il\'{u}vatar\nobreakspace {}has a worker-centric architecture. A per-worker queue helps schedule functions, and regulate load and overcommitment. \relax }}{81}{figure.caption.41}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The main components of the Il\'{u}vatar\nobreakspace {} overheads.\relax }}{84}{figure.caption.42}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The latency overhead of the control plane, as the number of concurrent invocations increases. OpenWhisk overhead is significant and has high variance, resulting in high tail latency. Il\'{u}vatar\nobreakspace {} reduces this overhead by 100x. \relax }}{97}{figure.caption.46}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces End-to-end latency and execution times for different functions as we increase the concurrency levels.\relax }}{97}{figure.caption.47}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {PyAES }}}{97}{subfigure.5.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {JSON }}}{97}{subfigure.5.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Video }}}{97}{subfigure.5.3}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Most functions benefit from using a lower-level containerization and OS object caching on cold starts.\relax }}{99}{figure.caption.48}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Queuing performance on the stationary Azure workload. Size-based policies can provide significant latency benefits.\relax }}{100}{figure.caption.49}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Overcommit }}}{100}{subfigure.7.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Distribution of function latencies }}}{100}{subfigure.7.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Latency breakdown }}}{100}{subfigure.7.3}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces The per-invocation function latencies for different system sizes (\# CPUs). We see a sharp inflection point at 16 CPUs, and use that in our queuing evaluation.\relax }}{101}{figure.caption.50}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Small and bursty functions can get disproportionately impacted due to queuing. A little overcommitment can go a long way to reduce latency.\relax }}{101}{figure.caption.51}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Overcommit }}}{101}{subfigure.9.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Distribution of function latencies }}}{101}{subfigure.9.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Latency Breakdown }}}{101}{subfigure.9.3}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Il\'{u}vatar\nobreakspace {}running in-silico closely models the in-situ performance. Making it a viable exploration opportunity supplementing real experiments.\relax }}{104}{figure.caption.52}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Time spent in a cold start without (top) and with (bottom) a GPU attached to a container hosting TensorFlow inference code. GPU attachment adds over a second to initialization time, and user code setup of the GPU increases agent startup inside the container. \relax }}{109}{figure.caption.54}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Average invocation latency for a trace is 2x better on a small GPU platform running our desigin compared to a CPU-only system.\relax }}{111}{figure.caption.55}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces MQFQ-Sticky\nobreakspace {}system design.\relax }}{117}{figure.caption.58}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces More intelligent memory management improves execution latency. \texttt {Prefetch To} moves memory on-device before a function container executes. \texttt {Prefetch} additionally moves it off again when the container will be idle.\relax }}{128}{figure.caption.60}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Functions see little to no impact from our interception and substitution of allocation calls. This matches performance promised by Nvidia for UVM applications.\relax }}{129}{figure.caption.61}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces MQFQ-Sticky\nobreakspace {}greatly reduces cold hits compared to FCFS, and is improved with a large container pool size. More cold hits are also caused when \emph {D}\nobreakspace {}(concurrency) is raised, needing private containers to serve concurrent invocations.\relax }}{131}{figure.caption.62}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Adjusting \emph {T}\nobreakspace {}allows flows to overrun one another, increasing data locality and therefore performance. The performance changes when a function's GPU wall time is used to change \emph {VT}, or the increment is fixed.\relax }}{132}{figure.caption.63}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Enabling a time-to-live for flows prevents them from becoming inactive, to keep resources warm on-device. This improves both latency and on-device execution time for functions. Note the non-linear scale on the X axis.\relax }}{133}{figure.caption.64}%
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Execution overhead grows as concurrency is increased. The gray line uses a fixed device concurrency, and the remaining lines represent the GPU utilization below which we allow a new dispatch.\relax }}{135}{figure.caption.65}%
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Latency for invocations is affected by concurrency. Increasing \emph {D}\nobreakspace {}when utilization is low improves latency, but if the threshold is too high, significant queuing delays occur.\relax }}{135}{figure.caption.66}%
+\contentsline {figure}{\numberline {6.11}{\ignorespaces Latency of various queue policies compared.\relax }}{136}{figure.caption.67}%
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Per-function latency comparison between FCFS and MQFQ-Sticky.\relax }}{137}{figure.caption.68}%
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Dispatching to multiple GPUs greatly improves latency and execution overhead compared to a single GPU. \relax }}{138}{figure.caption.69}%
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Dynamically selecting what compute a function runs on can reduce GPU queuing and improve global latency.\relax }}{139}{figure.caption.70}%
+\addvspace {10pt}

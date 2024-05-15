@@ -1,0 +1,14 @@
+PWD /home/af/repos/faas-keepalive-20/asplos_camready
+INPUT /etc/texmf/web2c/texmf.cnf
+INPUT /usr/share/texmf/web2c/texmf.cnf
+INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT /home/af/repos/faas-keepalive-20/asplos_camready/paper.tex
+OUTPUT /home/af/repos/faas-keepalive-20/asplos_camready/paper.log
+INPUT /home/af/repos/faas-keepalive-20/asplos_camready/acmart.cls
+INPUT /home/af/repos/faas-keepalive-20/asplos_camready/acmart.cls
+INPUT /usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+INPUT /usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+INPUT /usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+INPUT /usr/share/texlive/texmf-dist/tex/generic/xkeyval/keyval.tex

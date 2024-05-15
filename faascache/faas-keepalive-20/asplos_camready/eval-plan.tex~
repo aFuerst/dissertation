@@ -1,0 +1,8 @@
+
+\subsection{Azure Trace Simulations}
+
+\begin{itemize}
+\item Hit-ratio,
+\item Latency increase due to cold-starts
+\item Requests dropped 
+\end{itemize}

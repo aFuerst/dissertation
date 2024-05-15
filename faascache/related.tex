@@ -1,0 +1,143 @@
+\section{Related Works}
+\label{sec:faascache-related}
+
+% \section{Related Work}
+
+% \noindent \textbf{Function Keep-alive.}
+Mitigating cold-starts is one of the central performance problems in FaaS, and has received commensurate attention in both academia and industry.
+%
+The initialization or startup time of functions can be reduced  by reducing container startup overheads~\cite{oakes_sock_2018,mohan_agile_2019, akkus_sand_2018}, or deploying functions inside ultra-light containers, VMs, or unikernels~\cite{unikernels,firecracker-nsdi20}.
+%
+While these mechanisms can reduce the cold-start overhead associated with the virtual environment creation, the other sources of overheads remain, such as losing all application initialized variables, cached files, etc.
+As we have shown, keep-alive essentially serves the role of caching, and fast startup only reduces the ``miss'' penalty, and does not eliminate it.
+
+% Rev 1 
+Catalyzer~\cite{du2020catalyzer} implements new mechanisms for checkpointing and restoring application and sandbox state, which significantly reduce the initialization cost of functions deployed in their gvisor-based sandbox environment. 
+Our approach is complementary to these techniques, since we focus on retaining the entire execution environment instead of optimizations for restoring/recreating it. 
+Keep-alive policies can be combined with these optimized mechanisms to improve system-wide performance even further. 
+
+%for functions by forking a lightweight execution environment after function initialization. %still uses memory though?
+%This reduces duplicate computation, 
+%It uses a complementary set of techniques, since we tradeoff extra memory for simpler system and deployment complexity. 
+
+Principled keep-alive policies for functions have recently gained attention: the recent dataset and policy from the Azure function trace~\cite{shahrad_serverless_2020} shows the importance and effectiveness of keep-alive policies. 
+In contrast to our work, their policy does not take the function size into consideration, and uses a time-series predcition approach (effectively capturing recency and frequency), and combines it with a predictive ``prefetching'' approach. 
+As we have shown, function sizes are a crucial characteristic, and the use of caching allows the use of advanced analytical and modeling approaches for serverless computing in general. 
+% rev 1 
+Earlier work has focused on simple ``warm container pools''~\cite{lin_mitigating_2019}, in which Kubernetes cluster runs a certain number of warm containers for functions. 
+Our caching-based policies take this one step further and decide \emph{which} container to keep-alive, and for how long. 
+Polling to keep cloud functions warm has also been a popular method~\cite{warm2,warm1}.
+
+
+
+%
+Our work considers functions individually---function scheduling with DAG based approaches~\cite{carver_search_2019} is effective for function-chains, and are orthogonal and complementary to our work. 
+%
+Hiding function latency using data caching (such as redis) for database applications is investigated in~\cite{ghosh_caching_2019}. 
+The ENSURE~\cite{ensure_acsos20} system handles keep-alive and resource provisioning for CPU resources using queuing theory techniques.
+Our focus is on memory-constrained keep-alive and provisioning, and CPU-focused approaches are complementary to our work. 
+
+\begin{comment}
+\noindent \textbf{Caching.}
+Our choice of Greedy-Dual-Size-Frequency was motivated by the ease with which its parameters mapped to function keep-alive, in particular the frequency vs. size tradeoff.
+Cache eviction algorithms have a long history, although the focus has predominantly on uniform sized objects (such as disk blocks, RAM pages, cache lines, etc.).
+Certain caching optimizations relying on spatial locality (such as look-ahead and ARC) are not directly applicable to keep-alive. 
+The size-aware cache algorithms and models used for web-caches, proxies, and CDNs form the basis of our work. 
+Cache provisioning using hit/miss ratio curves is a common approach, and these curves can also be constructed dynamically, which is part of our future work.
+%
+\end{comment}
+
+\begin{comment}
+
+The Azure function traces and keep-alive approach 
+
+Prior work has investigated reducing container startup overheads, which can reduce the 
+
+\noindent \textbf{Usecases}
+
+~\cite{cartas_reality_2019} questions the need for edge computing for ML inference, because of the decreasing inference latency and costs, and network latency becomes the primary bottleneck.
+
+Berkeley view~\cite{jonas2017occupy, jonas_cloud_2019}
+
+Interactive applications---RunBox ~\cite{glikson_runbox_2019}.
+
+Data analytics with ServerMix~\cite{garcia-lopez_servermix_2019}
+
+ExCamera
+
+PyWren
+
+Serverless analytics with Flint wtf
+
+From laptop to lambda ~\cite{fouladi_laptop_2019}
+
+Monolithic to serverless with Ripple~\cite{joyner_ripple_2020}
+
+HPC~\cite{mocskos_faaster_2018}
+
+SPEC group report~\cite{van_eyk_spec_2017}
+
+\noindent \textbf{cold-start problem}
+
+~\cite{lin_mitigating_2019} is a project report that uses ML inference, webserver workloads as we are. Knative platform. Maintain a pool of warm containers. No real policy though.
+
+HyperFaas claims to address cold start problem? ~\cite{zhang_hyperfaas_2019}. 
+
+\noindent \textbf{Keep-alive Mechanisms.} Most closely related work goes here.. 
+
+\noindent \textbf{Frameworks}
+
+Cirrus~\cite{carreira_cirrus_2019} does end to end ML model training, hyperparam tuning on a new serveless framework. Not inference though?
+
+SAND~\cite{akkus_sand_2018} is based on openwhisk, but focused more on the inter function messaging?
+
+Wukong~\cite{carver_search_2019} has an interesting DAG scheduling solution---decentralized scheduling. Evalutes on numerical computing problems and compares with Dask (Python).
+
+SPOCK~\cite{gunasekaran_spock_2019} combines VMs and serverless functions. 
+
+Named functions as a service~\cite{krol_nfaas_2017}---uses unikernels!!
+More work along similar lines~\cite{lin_computation_2019,mtibaa_towards_2018,xylomenos_named_2019,krol_computation_2018}
+
+
+Peeking behind the curtains
+
+SOCK~\cite{oakes_sock_2018}
+
+OpenLambda~\cite{hendrickson2016serverless}
+
+GrandSlam ~\cite{kannan_grandslam_2019} ~\cite{} tries to provide SLA guarantees for microservices.
+
+Performance comparison by Geoffrey~\cite{lee_evalution_2018}
+
+
+\noindent \textbf{Resource management}
+
+Auction based function placement in serverless~\cite{bermbach_towards_2019}.
+
+Checkpointing and migration with CRIU for IoT devices in~\cite{karhula_checkpointing_2019}. What's the motivation with stateless functions? Nothing---they focus on stateful functions.
+
+
+``Living on the edge''~\cite{kulkarni_living_2019} explores transaction support and fault tolerance for stream processing. 
+
+
+Data management (really caching?) with the Locus shuffling system~\cite{pu_shuffling_2019}. 
+
+
+Caching strategies for data in~\cite{ghosh_caching_2019}
+
+More storage optimizations?~\cite{zhang_narrowing_2019}
+
+\noindent \textbf{Formal }
+
+~\cite{hall_execution_2019} provides an architecture with WASM on the edge.
+
+~\cite{riis_nielson_no_2019} provides a serverless kernel calculus combining lambda calculus for computation and pi-calculus for communication.
+
+\end{comment}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

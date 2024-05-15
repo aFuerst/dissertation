@@ -1,0 +1,77 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: paper.aux
+The style file: plain.bst
+Database file #1: faas.bib
+I was expecting a `,' or a `}'---line 306 of file faas.bib
+ :  
+ :  file = {Zhang et al. - HyperFaaS A Truly Elastic Serverless Computing Fr.pdf:/home/prateeks/Zotero/storage/QR8A2WT8/Zhang et al. - HyperFaaS A Truly Elastic Serverless Computing Fr.pdf:application/pdf}
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 727 of file faas.bib
+ : @article{lin_mitigating_2019
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1031 of file faas.bib
+ : @inproceedings{carreira_cirrus_2019
+ :                                    ,
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in aws-lambda
+Warning--to sort, need author or key in google-functions
+Warning--to sort, need author or key in azure-functions
+Warning--to sort, need author or key in warm1
+Warning--to sort, need author or key in warm2
+Warning--to sort, need author or key in lambda-limits
+Warning--to sort, need author or key in lambda-warm-hour
+Warning--to sort, need author or key in openwhisk
+Warning--to sort, need author or key in openfaas
+Warning--to sort, need author or key in docker-main
+Warning--to sort, need author or key in goog-functions-tricks
+Warning--to sort, need author or key in aws-warm-predictable
+Warning--to sort, need author or key in azure-warmup-trigger
+Warning--to sort, need author or key in pid-wiki
+Warning--empty journal in oakes_sock_2018
+Warning--empty journal in shahrad_serverless_2020
+Warning--empty journal in ensure_acsos20
+You've used 61 entries,
+            2118 wiz_defined-function locations,
+            805 strings with 16858 characters,
+and the built_in function-call counts, 23780 in all, are:
+= -- 2294
+> -- 1281
+< -- 32
++ -- 515
+- -- 450
+* -- 1660
+:= -- 3682
+add.period$ -- 187
+call.type$ -- 61
+change.case$ -- 405
+chr.to.int$ -- 0
+cite$ -- 78
+duplicate$ -- 911
+empty$ -- 1802
+format.name$ -- 450
+if$ -- 5148
+int.to.chr$ -- 0
+int.to.str$ -- 61
+missing$ -- 46
+newline$ -- 300
+num.names$ -- 96
+pop$ -- 532
+preamble$ -- 1
+purify$ -- 344
+quote$ -- 0
+skip$ -- 730
+stack$ -- 0
+substring$ -- 1214
+swap$ -- 303
+text.length$ -- 32
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 244
+warning$ -- 17
+while$ -- 187
+width$ -- 63
+write$ -- 654
+(There were 3 error messages)

@@ -1,0 +1,17 @@
+% Serverless computing has grown in popularity by orders of magnitude in recent years, and with it comes a continual call for enhanced performance.
+A variety of applications have been ported to severless computing for its ease of use and dynamic load scaling, but some are limited by the reduced CPUs offered on these platforms.
+These including machine learning, video processing, and scientific computing, which can leverage accelerators (GPUs) to decrease latency and improve user performance.
+% These devices do not scale like traditional compute, nor do functions use them in a similar fashion.
+% A single function will not use all available GPU resources, nor will it run constantly, in conjunction leading to high underutilization.
+However, most functions will not utilize all available GPU resources, requiring us to address the challenge of multiplexing resources across many functions.
+% Running a new function also requires removing the previous one from the GPU to start a fresh container, causing a high cold-start ratio and spikes in latency.
+Current serverless mechanisms poorly share GPUs between functions, causing high cold-start ratios and spikes in latency.
+Novel techniques for managing GPU resources are needed to make them suitable for generic serverless functions.
+
+In this paper we enable GPU acceleration for black-box serverless functions by designing several mechanisms to improve latency and multiplex device resources.
+% The limited resources of a GPU are multiplexed using fine-grained control to create a warm-pool of GPU containers, avoiding resource churn and significant cold starts.
+Using CUDA's UVM, we overcommit GPU memory and create a warm pool of GPU containers to avoid churn and cold starts.
+Our memory techniques and compute monitoring prevent overhead caused by competition for GPU resources and poor memory locality.
+The ability to keep a warm pool of containers is critical, latency is improved by two orders of magnitude.
+We finally propose a new queuing design suited to GPUs' ability to handle concurrent invocations that enforces fairness on diverse workloads, that also gives a 3x latency improvement over common serverless scheduling policies.
+% Our GPU manipulation improves latency by two orders of magnitude, and our scheduling policy by a further 3x compared to previous serverless GPU acceleration.

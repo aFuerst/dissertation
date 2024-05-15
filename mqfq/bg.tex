@@ -1,0 +1,141 @@
+\section{Background}
+\label{sec:bg}
+
+\begin{comment}
+\subsection{Serverless}
+
+Serverless control planes execute snippets of user code inside isolated sandboxes, handling data movement and resource allocation needs to service them.
+The creation of such function-specific containers costs several seconds on the critical execution path, and is known as a \quotes{cold start}.
+To amortize the sandbox startup time, they are kept resident in memory to execute subsequent invocations in a \quotes{container pool}.
+A simple one-sized fits all design of assigning an entire GPU to each container breaks down when trying to handle heterogeneous FaaS~\cite{shahrad2020serverless} workloads.
+% It results in high container churn and cold starts, constantly serving invocations with no resident container increases latency significantly. 
+One cannot have a viable container pool when the limited GPUs on a machine are each assigned to a single container.
+This results in constant removal of containers to serve new invocations, causing high numbers of cold starts.
+Any idle function would also result in significant underutilization of resources -- a major waste of hardware from the provider's perspective.
+\end{comment}
+
+\subsection{GPU Support for Serverless}
+
+\begin{table}
+  \centering
+  \caption{The functions in Tables~\ref{tab:gpu-attatch} and~\ref{tab:gpu-cpu} come from several sources. 
+  They are a subset of the ones we ported to \sysname.}
+  \label{tab:fun-list}
+  \begin{tabular}{c|p{6cm}}
+    \hline
+    Collection & Functions \\
+    \hline
+    ML~\cite{kim2019functionbench} & Imagenet, Roberta \\ %  RNN, Squeezenet
+    PyHPC~\cite{pyhpc-bench} & FFT, Isoneural \\ % Eos, 
+    Rodinia~\cite{che2009rodinia} & Lud, Myocyte, Needle, Pathfinder \\ % , Srad
+    Other & Ffmpeg~\cite{ffmpeg} \\
+  \end{tabular}
+\end{table}
+
+\begin{table}
+  \centering
+  \caption{Functions' get great performance benefits from running on GPU over CPU. All times are in seconds.}
+  \label{tab:gpu-cpu}
+  \begin{tabular}{lccc}
+    \hline
+    Function & GPU & CPU & GPU Speedup \\
+    \hline
+  Imagenet & 2.253 & 5.477 & 2.44x \\
+  % Squeezenet & 1.168 & 1.099 & 0.95x \\
+  % RNN & 0.366 & 0.048 & 0.14x \\
+  Roberta & 0.268 & 5.162 & 19.26x \\
+  Ffmpeg & 4.483 & 32.997 & 7.37x \\
+  FFT & 0.897 & 11.584 & 12.92x \\
+  % Eos & 0.017 & 0.045 & 2.66x \\
+  Isoneural & 0.026 & 0.501 & 19.57x \\
+  % Lavamd & 1.989 & 15.199 & 7.64x \\
+  Lud & 2.050 & 70.915 & 34.6x \\
+  Myocyte & 2.784 & 39.277 & 14.11x \\
+  Needle & 1.979 & 144.639 & 73.09x \\
+  Pathfinder & 1.472 & 134.358 & 91.3x \\
+  % Srad & 3.893 & 119.759 & 30.77x \\
+  \end{tabular}
+\end{table}
+
+Many applications that have adopted FaaS for its on-demand scaling will also benefit from acceleration, as shown by Table~\ref{tab:gpu-cpu}.
+Machine learning inference requires iterations of matrix multiplication and transformations, common tasks for which modern GPUs are designed around.
+Imagenet and Roberta respectively see a 3x and 20x reduction in latency thanks to acceleration, common numbers for ML improvements.
+Video encoding via \emph{ffmpeg} has become the a popular task on AWS Lambda, which can leverage specialized hardware found in most GPUs to get a minimum 7x speedup.
+Scientific computing has started to be used in FaaS~\cite{john_sweep_2019,mocskos_faaster_2018,werner2018serverless,shankar2020serverless}, but needs acceleration to quickly run expensive algorithms.
+One such ubiquitious algorithm, Fixed-Fourier-Transform (FFT), sees 13x improvement, and larger, complete applications (Needle, Pathfinder, etc.) are 80-90x faster with acceleration.
+These are performance gains and application opportunities which are currently being left on the table, and which we are the first to enable.
+
+
+\subsection{GPU Sharing Mechanisms}
+
+\mhead{Spatial Sharing}
+Nvidia has created several technologies for sharing their GPUs that split compute and memory between clients.
+% via virtualization that vary with different hardware generations.
+% Virtualization passthrough of vGPUs~\cite{nvidia-passthrough} uses direct device assignment common to hardware virtualization, where a guest VM has total control of the device with no sharing.
+Nvidia MIG~\cite{nvidia-mig} (Multi-Instance GPU) pre-partitions device resources at  manufacturing time, and one or more of these virtualized GPU partitions can be assigned to a VM or container via direct device assignment.
+Once slice(s) of the GPU are assigned, the only way to adjust allocations is to cold start a new container.
+Fixed sizes place arbitrary restrictions on the dynamic resource allocations we want to be able to give to functions.
+Over-allocation causes fragmentation, and the opposite approach will reduce performance or could break functions due to insufficient resources.
+% Assigned partitions can lead to underutilization due to fragmentation from poor placement and function idle periods.
+Idle functions cause immediate underutilization, which could be alleviated via temporal sharing complicating fixed hardware partition management even further.
+%  and fragmentation when a function does not use all the resources it has been asigned.
+%  and place arbitrary limits on resource allocations we can make to functions.
+% Multiple containers could temporally share GPU partitions to improve utilization, but this is an unnecessary complication of userspace temporal sharing.
+% The partitions sizes are fixed as manufacturing time, and lead to resource fragmentation and underutilization.
+
+Multi-Process Service~\cite{nvidia-mps} (MPS) allows multiple processes to make share the device concurrently and has been proposed for FaaS~\cite{gu2023fast}.
+An MPS server and the hardware device perform resource partitioning based on configuration at application start time.
+MPS is explicitly designed to let cooperative processes share GPU resources, and documentation specifies that it is intended to work with OpenMP/MPI applications.
+If any process encounters a critical error, all processes connected to the MPS server will crash, meaning one faulty serverless function will break all functions using that GPU.%, regardless of the function it is for.
+
+\mhead{Temporal Sharing}
+% Several software things.
+There has been much work by others in the virtualization of accelerators~\cite{duato2010rcuda, yu2019automatic, hong2017gpu} to allow for temporal sharing.
+Virtualization allows total control over device resources and scheduling, but imposes significant performance overheads~\cite{yu2017full}.
+These approaches~\cite{yu2019automatic, hong2017gpu} must duplicate application state in host memory, and allocate/de-allocate all resources when switching between applications.
+% , and most target disaggregation~\cite{duato2010rcuda,fingler2022dgsf} or API imposition~\cite{yu2019automatic}.
+% These support memory and compute sharing 
+
+
+% Actual scheduling of code on GPUs happens at several levels of the orchestration stack.
+The GPU driver itself accepts individual compute \emph{kernels} from applications and has a device-internal scheduler which maps them to available compute blocks as they arrive.
+% Replacement schedulers~\cite{mccoy2024gallatin} have been devised, as well as systems that schedule kernel launches from inside an application~\cite{strati2024orion}.
+Kernel schedulers for domain-specific optimizations~\cite{strati2024orion,chen2017effisha,kim2020navigator,gu2023fast} have been designed to coordinate kernels from several applications to improve on device scheduler performance.
+These operate only on compute kernels to prevent contention and assume active concurrent workloads are coordinated elsewhere to not exceed the device memory.
+% At the highest level, a process or job can be scheduled on a specific GPU and allowed to run to completion, accepting the application's arbitrary kernel launches. 
+% As many workloads can't consume all available GPU resources, some schedulers control both kernel launches and device memory.
+Other schedulers~\cite{ng2023paella,pemberton2022kernel,strati2024orion} include manipulating and oversubscribing memory as they schedule kernel launches, but they violate the black-box principles we target by breaking apart the application to have tighter control.
+Interposition and disaggregation techniques~\cite{fingler2022dgsf,duato2010rcuda} allow for multiplexing memory and compute similar to our design, thanks to the level of control gained by replacing the GPU driver, and are black-box because they do not replace the actual application.
+
+
+\begin{comment}
+\mhead{Memory Multiplexing}
+Limitations caused by requiring driver interaction to control the device makes it a challenge to multiplex memory.
+Virtualization approaches~\cite{yu2019automatic, hong2017gpu} must duplicate application state in host memory, and allocate/de-allocate all resources when switching between applications.
+Kernel level schedulers~\cite{ng2023paella,pemberton2022kernel,strati2024orion} are able to manipulate and oversubscribe memory as any GPU application would, but violate the black-box principles we target.
+Interposition and disaggregation techniques~\cite{duato2010rcuda,fingler2022dgsf} allow for true multiplexing similar to our design, thanks to their level of control equal to that of a kernel scheduler while not being part of the actual application.
+\end{comment}
+% \mhead{Usage}
+% GPUs are throughput-oriented architectures, executing a single instruction across multiple threads (SIMT).
+% They are designed to execute thousands of threads in parallel on large datasets coming from a single application.
+% Not designed for switching between several small applications or smaller datasets.
+
+
+\begin{comment}
+% All of these techniques give total control to one function, or allows it to allocate physical memory on a device and leave insufficient memory for other functions to run.
+% The only way to adjust resource imbalances is with removal and creation of new containers, a high-overhead scenario with many function cold-starts.
+Applications cannot manipulate GPUs directly, they must use a manufacturer-provided driver for all operations.
+GPU compute is launched by host programs using \emph{kernels} which execute a code block with given memory inputs and a number of parallel threads to use.
+Multiple kernels can be launched concurrently, with the device handling scheduling of kernels and threads internally.
+Kernels run until completion, with execution time varying widely depending on the number of threads, input size, and complexity of the code being run.
+Nvidia introduced Unified Virtual Memory (UVM)~\cite{nvidia-uvm} to allow applications to both simplify memory management and be a workaround to insufficient device memory.
+Traditionally, \funcname{cuMemAlloc} is used for device-only memory allocations, and the program manually moves data between the device and host.
+% Programs allocate memory using \funcname{cuMemAllocManaged} instead of \funcname{cuMemAlloc}, and the device driver moves memory between the device and host in response to usage and memory pressure.
+When using \funcname{cuMemAllocManaged}, the same memory pointer can be used on both host and device, and the driver is responsible for data migration and coherency.
+This capability is also used by UVM to allow over-subscription of memory, as it will move data pages around on-demand, using host memory as \quotes{swap} space.
+We integrate our control plane with UVM to actively oversubscribe memory, allowing many function containers to remain warm on a device without interference, dramatically reducing cold starts.
+% Each device generation has a variable number of streaming multiprocessors (SMs) that can support blocks of threads at a time.
+% Devices report utilzation in 
+\end{comment}
+
+% \subsection{GPU Scheduling}

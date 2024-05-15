@@ -1,0 +1,81 @@
+\section{Introduction}
+%\noindent \textbf{Motivation.}
+An ever-increasing range of applications and workflows are now using  Functions as a Service (FaaS).
+By handling all aspects of function execution, including resource allocation, cloud platforms can provide a ``serverless'' computing model where users do not have to explicitly provision and manage cloud resources (i.e., virtualized servers). 
+Applications such as web services, machine learning, data analytics, and even high-performance computing can benefit greatly from the resource elasticity, lower pricing, auto-scaling, and development convenience provided by FaaS platforms. 
+
+For cloud providers, FaaS has emerged as an important and challenging workload. 
+While it provides more convenient abstractions for developing and deploying applications, the FaaS programming model presents new fundamental performance and efficiency tradeoffs.
+% what is that tradeoff? 
+When coupled with the extreme scale (public clouds execute millions of functions a day) and heterogeneity (applications have widely varying function invocation rates and resource footprints), FaaS presents cloud providers with several performance challenges. 
+
+%\textbf{Limitations of state-of-art approaches.}
+A direct consequence of the FaaS programming model and a fundamental performance attribute is the high startup latency of functions. 
+Before the user-provided function code can be executed, several initialization steps must first be performed by the FaaS platform. 
+Operations such as initializing a virtual execution environment (such as a lightweight VM or a container), and installing data and code dependencies (packages and libraries), can take a significant amount of time. % relative to the actual function execution time.
+These initialization overheads can be significant, and increase the function latency by orders of magnitude. 
+These startup overheads can be ameliorated and amortized by keeping the initialized function state ``warm'' in server memory.
+However, this function ``keep-alive'' presents an important tradeoff between memory usage and effective function latency. 
+
+
+%\textbf{Key insights and contributions.}
+In this paper, we present the design and implementation of an auto-scaling load balancer for FaaS platforms (such as OpenWhisk, OpenFaaS, and others).
+We address the challenges of routing and scheduling functions on a cluster of servers, and how such clusters can be horizontally scaled. 
+When deciding which server a function should be run on, our key design principle is to use \emph{locality} to reduce function cold-starts.
+Running a function on the same subset of servers increases the probability that a ``warm'' in-memory invocation of the same function can be reused, which reduces function latency. 
+However, we find that locality alone is insufficient: server load is also an important parameter which influences the slowdown of functions due to queuing delays and resource contention on overloaded servers. 
+
+Our key finding is that the tradeoff between function-locality and server-load is critical to achieve good function latency and cluster utilization.
+This tradeoff results in a large design space of load-balancing policies and algorithms, and presents three main challenges.
+First, functions are highly \textbf{heterogeneous} in terms of their initialization overheads, resource footprints, and invocation frequencies. 
+However, most classic load-balancing approaches for clusters of web-servers and data storage tend to assume homogeneous requests, and thus cannot directly be used.
+Second, production FaaS workloads tend to have extremely high \textbf{skew}: a tiny fraction of functions tend to account for a vast majority of invocations.
+This has severe ramifications for hashing-based load-balancing (such as consistent hashing), which assumes homogeneous object popularities to provide guarantees about server loads.
+And finally, large FaaS clusters cannot assume that exact and timely information about server loads will always be available: and thus load-balancing policies must deal with stochastic and \textbf{stale server loads}.
+
+Our goal is to design simple load-balancing and scaling policies that address these challenges in a rigorous and practical manner.
+Because of the importance of locality in improving function latency, we use consistent hashing~\cite{karger1997consistent} as the building block, which preserves locality even when the cluster is scaled by adding or removing servers, which is critical since function workloads are highly bursty. 
+In particular, we extend Consistent Hashing with Bounded Loads~\cite{mirrokni2018consistent}, where the key idea is to run a function on its ``home'' server as long as the server is not overloaded.
+This preserves locality and allows for functions to be ``forwarded'' to other servers in case of overload.
+Our load-balancing policy is cognizant of the different utility of locality for functions based on their cold and warm running times: functions that have a high benefit from keep-alive are more likely to be run on their home servers. 
+To deal with stale server load information and bursty function invocations, we use stochastic random loads, such that very popular functions can be spread out among more servers and minimize the herd-effect of overloading servers running bursty popular functions. % instead of overloading their home servers. 
+
+We make use of the recent equivalence between function keep-alive and caching~\cite{faascache-asplos21}, and develop a new simplified version of SHARDS~\cite{shards} for our load-balancing policy for detecting and handling popular functions. 
+Our policies are designed to be simple and practical, have a small number of user-controlled parameters, which allows them to be a drop-in replacement for the default load-balancing implementation in OpenWhisk \cite{openwhisk}. 
+
+%\textbf{Experimental methodology and artifact availability.}
+Prior work in serverless computing has largely focused on optimizing performance on a \emph{single} server using various cold-start mitigating mechanisms and policies \cite{vhive-asplos21,faascache-asplos21}. 
+We build on past insights on the importance of function locality, and extend them to a large cluster of servers instead of a single server. 
+While load-balancing has a long history of rigorous solutions, we find that the heterogeneity, skew, and stale-loads of the FaaS environment present unique challenges. 
+Classic load-aware techniques that use randomization such as power of 2 random choices do not capture locality and lead to high cold-starts, and hashing-based techniques cannot deal with the extreme skew in function popularity.
+%To evaluate the tradeoffs and performance of various policies that prioritize load and locality, we implement and evaluate them in a discrete-event simulator on a large number of traces sampled from the Azure function traces~\cite{shahrad_serverless_2020}.
+
+%\textbf{Limitations of the proposed approach.}
+%Several. Per individual function basis, no chains/workflows. Limited by current simple FaaS benchmarks.
+
+% Something about under high load. Which requires: auto-scaling, forwarding, Owhisk optimizations, low-overhead simple load-balancing, .. 
+
+In summary, we make the following contributions:
+
+\begin{enumerate}
+\item We find that the locality vs. load tradeoff is central to function performance, and show how it can be combined with consistent hashing. Our resultant load-balancing policy, Consistent Hashing with Random Load Updates (CH-RLU), is simple, and tackles practical challenges of highly heterogeneous functions, bursty workloads, and stale/imprecise load information on a large cluster of servers.
+\item We implement and evaluate our CH-RLU policy in OpenWhisk. It provides more than $2.2\times$ reduction in average function latency.
+\item We conduct an empirical investigation into OpenWhisk's performance at various load levels, and find extremely high jitter due to resource contention (latencies can increase by more than $10\times$).
+  With the help of our optimizations, OpenWhisk can serve $5\times$ more traffic. 
+\item We evaluate various load and locality-sensitive policies in a discrete-event simulator using the Azure function traces~\cite{shahrad_serverless_2020}, and find that CH-RLU can outperform even a omniscient, impractical, online greedy approach by more than 20\% under a wide range of conditions. 
+\end{enumerate}
+
+\begin{comment}
+\begin{enumerate}
+\item We conduct a large systematic study of function workload traces and evaluate the contention between function locality and server loads for a wide range of load and locality-aware policies that we adapt for FaaS workloads. 
+\item We develop Random Load Update (RLU): a new consistent hashing policy that provides the strong theoretical foundations of consistent hashing with bounded loads, but can also handle heterogeneous and bursty functions, and stale server load information.
+\item We show how the equivalence between function keep-alive and caching can be used to adapt techniques in sampling-based miss-rate-curve (MRC) generation for finding and dealing with popular functions. 
+\item We develop a simple load-based horizontal scaling technique for adjusting cluster-size based on function load. %, which to the best of our knowledge, is the first auto-scaling solution for FaaS. 
+\item Finally we implement and evaluate our policy using OpenWhisk and a cluster of workers. Results show a 2x improvement even for highly overloaded servers. 
+\end{enumerate}
+\end{comment}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

@@ -1,0 +1,86 @@
+
+Functions as a Service (FaaS) is an emerging and popular cloud computing model, where applications use cloud resources through user defined ``functions'' that execute application code~\cite{jonas_cloud_2019}.
+%
+By handling all aspects of function execution, including resource allocation, cloud platforms can thus provide a ``serverless'' computing model where users do not have to explicitly provision and manage cloud resources (i.e., virtualized servers).
+%
+FaaS employs a fine-grained pricing model allowing applications to pay for the resources they use, and provides many other advantages such as near-infinite horizontal scaling. 
+%
+FaaS services are being offered by all major cloud platforms (such as Amazon Lambda~\cite{aws-lambda}, Google Functions~\cite{google-functions}, and Azure Functions~\cite{azure-functions}), and are being used by different applications such as web services, API services,  parallel and scientific computing, and in machine learning pipelines. 
+
+
+Cloud platforms execute each function invocation in a virtualized execution environment such as a container or a virtual machine (VM). %, which allows functions to be executed in an independent and isolated manner.
+%
+Using virtualization techniques, a single physical server can execute many functions concurrently and safely. 
+%
+Each function invocation entails creating and launching a container or a VM, and fetching and installing the necessary libraries and dependencies, before the function itself can be executed.
+%
+This ``initialization'' phase can take non negligible time, and adds to the overall function execution latency observed by the user. 
+%
+Reducing this function ``startup overhead'' is a key challenge in serverless computing~\cite{oakes_sock_2018, hendrickson2016serverless, warm1, warm2}. 
+
+
+
+To mitigate the startup overhead, a common technique is to keep the execution environment alive or ``warm'' for a small duration, so that future invocations of the same function do not incur the cold-start overhead. 
+%
+Keeping functions warm can reduce the function latency by up to $10\times$. 
+%
+However, keeping the execution environment alive and running, instead of immediately terminating it, has some drawbacks. 
+%
+Keeping a container or a VM alive consumes computing resources on the physical servers, and reduces the  number of functions that can be concurrently executed. 
+%
+Thus, while keep-alive can reduce the effective function execution latency, it can also reduce the overall system utilization and efficiency. 
+%
+
+
+In this paper, we explore this tradeoff, and argue for and develop principled keep-alive techniques. 
+%
+Current cloud platforms and FaaS systems employ simple keep-alive policies. 
+%
+For example, AWS Lambda will keep functions ``warm'' for $\sim 15-60$ minutes, and users have to resort to ad-hoc ``polling'' techniques to keep functions warm to avoid the cold-start penalty~\cite{lambda-warm, lambda-limits, lambda-warm-hour}. 
+%for the maximum duration of the function, which is currently 15 minutes~\cite{lambda-warm, lambda-limits, lambda-warm-hour}. 
+% 
+An optimized keep-alive policy must balance the overhead of keeping a function warm with the likelihood that the function will be called again in the near future, and the duration of keep-alive should depend on the function's characteristics. 
+%
+Designing keep-alive policies is challenging because of the diverse range of functions with different initialization overheads, resource footprints (i.e., CPU and memory consumption),  and request frequencies. 
+%These simple keep-alive policies are not ideally suited for handling a diverse range of functions with different initialization overheads, resource footprints (i.e., CPU and memory consumption),  and request frequencies. 
+%
+
+
+%
+\emph{Our primary insight is that the problem of which function to keep alive/warm, is analogous to object caching.} 
+% 
+Keeping a function warm is equivalent to caching an object, and a warm function execution is equivalent to a cache hit. 
+%
+Terminating a function's execution environment means that the next invocation will incur the cold-start penalty, and is thus equivalent to evicting an object from a cache. 
+% 
+The objective is to keep functions warm such that the effective function latency is reduced, which is equivalent to caching's goal of reducing object access time. 
+%
+\emph{By mapping keep-alive to the exhaustively studied caching problem, we can leverage principles and techniques from caching, and apply them to serverless computing.}
+
+
+%
+Specifically, we use and adapt the ``Greedy-Dual'' caching framework~\cite{gdsf}, and develop a keep-alive policy based on it. 
+%
+Our keep-alive policy is cognizant of the memory footprint, access frequency, and execution latency of different functions. 
+%
+We show that this Greedy-Dual approach can improve both the function latency and the server utilization compared to the current simple keep-alive policies. 
+
+
+
+%We implement our policy as part of a new FaaS framework based on OpenWhisk.
+%
+%We show that keep-alive can significantly improve function performance, especially for computationally heavy workloads such as deep-learning inference.
+%
+%We also propose a new ``two step'' function execution abstraction, where functions can be first explicitly initialized, which increases the effectiveness of keep-alive even more, since repetitive parts of the function execution can be reduced.
+
+
+
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

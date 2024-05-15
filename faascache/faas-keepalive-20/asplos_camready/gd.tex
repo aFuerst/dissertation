@@ -1,0 +1,213 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Caching-based Keep-Alive Policies}
+\label{sec:cache-keep-alive}
+\vspace*{\subsecspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\paragraph{Keep-alive is Equivalent to Caching.}
+%\vspace*{\subsecspace}
+
+Formulating a keep-alive policy that balances priorities based on all competing characteristics of functions seems daunting. 
+% \vspace*{-6pt}
+\begin{framed}
+  \vspace*{-6pt}
+  \noindent \emph{The central insight of this paper is that keeping functions alive is equivalent to keeping objects in a cache.}
+  \vspace*{-6pt}
+\end{framed}
+\vspace*{-2pt}
+%The problem of what functions to keep alive and for how long, is equivalent to what objects to cache. 
+
+\noindent Keeping a function alive reduces its effective execution (or response) latency, in the same way as caching an object reduces its access latency. 
+When all server resources are fully utilized, the problem of which functions \emph{not} to keep alive is equivalent to which objects to \emph{evict} from the cache. 
+The high-level goal in caching is to improve the distribution of object access times, which is analogous to our goal of reducing the effective function latencies. 
+
+
+This caching analogy provides us a framework and tools for understanding the tradeoffs in keep-alive policies, and improving server utilization. 
+%The problem of cache eviction in object caching is a thoroughly studied for a wide range of constraints, systems, and environments. 
+Caching has been studied in wide range of contexts and many existing caching techniques can be applied and used for function keep-alive. 
+Our insight is that we can use classic observations and results in object caching to formulate equivalent keep-alive policies that can provide us with well-proven and sophisticated starting point for understanding and improving function keep-alive.  
+
+
+In the rest of this section, we will show how cache eviction algorithms can be adapted to keep-alive policies.
+Caching systems typically seek to improve hit ratios (the fraction of accesses that are cache hits).
+However, focusing on hit-rates alone does not necessarily translate to improved \emph{system} level performance, if the objects have different sizes and miss costs.
+For instance, caching all small objects may yield a high hit ratio, but the infrequent misses of larger objects results in higher miss costs and poor system throughput. 
+Therefore, we will also focus on minimizing the overall cold-start overhead, which is equivalent to the ``byte hit ratio'' used in caching systems.
+
+
+
+% We assume that each function in its own container.
+% When the function is ``registered'', this container image is created.
+% Multiple concurrent invocations to the same function are possible, but each invocation is in its own container.
+% Containers are in one of two states. Either running the function, or are idling when they are being kept warm. 
+% When a function is called by the user, if a corresponding container is ``free'', then it is used to run the function.
+% Otherwise, a new container is instantiated.
+
+% When a container is launched, the initilization code runs.
+% Depending on the application and the FaaS platform, the amount of initilization can be different.
+% For example, a truly ``stateless'' function will include all required dependencies on every invocation.
+% In any case, there is some initilization and start-up overhead, which consumes 
+
+
+% While any caching/eviction algorithm can be used with the help of this analogy after the mapping, the algorithm must be cognizant of the different resource footprints and access frequencies and execution latencies of different functions.
+% %
+% The greedy dual approach is a good mapping, which we use below. 
+
+%\vspace*{\subsecspace}
+\subsection{Greedy-Dual Keep-Alive Policy}
+\label{subsec:gdsf}
+\vspace*{\subsecspace}
+
+While many caching techniques can be applied to the function keep-alive policies, we now present one such caching-inspired policy that is simple and yet captures all function characteristics and their tradeoffs.
+Our \textbf{GDSF} policy is based on Greedy-Dual-Size-Frequency object caching~\cite{gdsf}, which was designed for caches with objects of  different sizes, such as web-proxies and caches. 
+Classical caching policies such as LRU or LFU do not consider object sizes, and thus cannot be completely mapped to the keep-alive problem where the resource footprint of functions is an important characteristic. 
+As we shall show, the Greedy-Dual approach provides a general framework to design and implement keep-alive policies that are cognizant of the  frequency and recency of invocations of different functions, their initialization overheads, and sizes (resource footprints). 
+
+
+Fundamentally, our keep-alive policy is a function \emph{termination} policy, just like caching focuses on eviction policies.  
+Our policy is resource conserving: we keep the functions warm whenever possible, as long as there are available server resources. 
+This is a departure from current constant time-to-live policies implemented in FaaS frameworks and public clouds, that are \emph{not} resource conserving, and may terminate functions even if resources are available to keep them alive for longer. 
+
+%We assume that each functions is deployed in a container, and o
+Our policy decides which container to terminate if a new container is to be launched and there are insufficient resources availabile. 
+The total number of containers (warm + running) is constrained by the total server physical resources (CPU and memory). 
+We compute a ``priority'' for each container based on the cold-start overhead and resource footprint, and terminate the container with the lowest priority.
+%
+%Below, we describe our termination policy in detail.
+
+
+%\noindent \textbf{Execution model.}
+%Assume that there are $n$ different functions.
+%
+%We assume that each function runs in its own container.
+%
+%Each function can have multiple independent and concurrent instantiations, and hence containers. 
+%
+%At any instant of time, each container is either running a function, or is being kept alive/warm. 
+%
+
+%What is the point of this? 
+%Assume that a  function $i$ has a initialization or startup time of $s_i$. 
+%Once initialized, the running time of the function is  $r_i$, and thus total running time for the cold-start case is $s_i + r_i = T_i$.  
+%When executing on a warm container, the time is simply $w_i$.
+%
+
+
+%Let $m_i$ be the memory footprint of the function.
+
+
+%The total number of containers (warm + running) is constrained by the total server physical resources (cpu and memory). 
+%Each container has a resource footprint, which we also call the \emph{size} of the container, denoted by $\mathbf{d_i}$.
+%The size may be a multi-dimensional resource vector comprising of the CPU, memory, and I/O resources used by the running or warm container.
+%In most scenarios, the number of containers that can run is limited by the physical memory availability, since CPUs can be multiplexed easily, and memory swapping can result in severe performance degradation.
+%Thus for ease of exposition, we can consider only the container \emph{memory} use as the size, instead of a multi-dimensional vector. 
+
+
+\noindent \textbf{Priority Calculation.} 
+The GDSF keep-alive policy is based on Greedy-Dual  caching~\cite{young_gd_orig_94}, where objects may have  different eviction costs. 
+%
+For each container, we assign a \emph{keep-alive priority}, which is computed based on the frequency of function invocation, its running time, and its size:
+%
+% The priority is given by:
+\vspace*{-7pt}
+\begin{equation}
+  \vspace*{-3pt}
+  \text{Priority} = \text{Clock} + \frac{\text{Freq} \times \text{Cost}} {\text{Size}}
+    \label{eq:prio-prop}
+\end{equation}
+%
+% 
+
+On every function invocation, if a warm container for the function is available, it is used, and its frequency and priority are updated.
+Reusing a warm container is thus a ``cache hit'', since we do not incur the initialization overhead. 
+When a new container is launched due to insufficient resources, some other containers are terminated based on their priority order---lower priority containers are terminated first. 
+We now explain the intuition behind each parameter in the priority calculation:
+
+
+
+\noindent \textbf{Clock} is used to capture the recency of execution.
+We maintain a ``logical clock'' per server that is updated on every eviction. 
+Each time a container is used, the server clock is assigned to the container and the priority is updated.  
+Thus, containers that are not recently used will have smaller clock values (and hence priorities), and will be terminated before more recently used containers. 
+
+% Didnt understand the need for this
+%Although this is termination, it is something about clock. so here. 
+Containers are terminated only if there are insufficient resources to launch a new container and if existing warm containers cannot be used.  
+Specifically, if a container  $j$ is terminated (because it has the lowest priority), then $\text{Clock} = \text{Priority}_j$.
+All subsequent uses of other, non-terminated containers then use this clock value for their priority calculation.
+In some cases, \emph{multiple} containers may need to be terminated to make room for new containers.
+If $E$ is the set of these terminated containers, then $\text{Clock} = \max_{j \in E}{\text{Priority(j)}}$
+
+We note that the priority computation is on a per-container basis, and containers of the same function share some of the attributes (such as size, frequency, and cost). 
+However, the clock attribute is updated for each container individually. 
+This allows us to evict the oldest and least recently used container for a given function, in order to break ties. 
+
+
+\noindent \textbf{Frequency} is the number of times a given function is invoked.
+A given function can be executed by multiple containers, and frequency denotes the \emph{total} number of function invocations across all of its containers. 
+The frequency is set to zero when all the containers of a function are terminated.
+The priority is proportional to the frequency, and thus more frequently executed functions are kept alive for longer. 
+%
+%This is a departure from object caching, where each object is distinct. In our case, because of concurrent executions of functions, multiple containers for the same function may exist, and we thus take into account all the 
+%
+
+
+\noindent \textbf{Cost} represents the termination-cost, which is equal to the total initialization time. 
+This captures the benefit of keeping a container alive and the cost of a cold-start. 
+% There are other cost formulations also, such as $c/T$ etc that capture the ratio, that yield different policies.
+The priority is thus proportional to the initialization overhead of the function. 
+
+
+
+\noindent \textbf{Size} is the resource footprint of the container. 
+%If we only care about the memory size, then we can simply use a single dimensional metric $m_i$ to denote the size.
+The priority is inversely proportional to the size, and thus larger containers are terminated before smaller ones. 
+In most scenarios, the number of containers that can run is limited by the physical memory availability, since CPUs can be multiplexed easily, and memory swapping can result in severe performance degradation.
+Thus for ease of exposition and practicality, we consider only the container \emph{memory} use as the size, instead of a multi-dimensional vector. 
+
+
+We can also use multi-dimensional resource vectors to represent the size, in which case we convert them to scalar representations by using the existing formulations from multi-dimensional \emph{bin-packing.}
+For instance, if the container size is $\mathbf{d}$, then the size can be represented by the magnitude of the vector $||\mathbf{d}||$.
+Other size representations can also be used.
+A common technique is to normalize the container size by the physical server's total resources ($\mathbf{a}$), and then compute the size as $\sum_j \frac{d_j}{a_j}$ where $d_j, a_j$ are the container size and total resources of a given type (either CPU, memory, I/O) respectively.
+Cosine similarity between $\mathbf{d}$ and $\mathbf{a}$ can also be used, as is widely used in multi-dimensional bin-packing.  
+
+
+\noindent \textbf{FaaS-specific considerations.}
+The application of cache eviction algorithms to FaaS keep-alive is fairly straight-forward.
+The various inputs Greedy-Dual (memory size, cold-start time, frequency) are available once a function has finished execution, and thus the keep-alive policy is completely online. 
+Our policy calculates eviction priorities at the function level, but evicts at the container level. 
+Recall that a particular function may have multiple containers associated with concurrent function invocations. 
+We assume that all containers of a function are identical, i.e., they have the same initialization cost, footprint, etc. 
+Thus, any one of the identical containers can be evicted. 
+
+
+
+\subsection{Other Caching-Based Policies}
+\label{subsec:variants}
+\vspace*{\subsecspace}
+
+The Greedy-Dual approach also permits many specialized and simpler policies.
+For instance, allowing for different parameters in Equation~\ref{eq:prio-prop} results in different caching algorithms.
+If only the access clock is used as a priority, and other parameters are ignored, then we get \textbf{LRU}, with its ease of analysis and generality which has been well established with over half a century of empirical and analytical work. 
+Using only frequency yields \textbf{LFU.}
+Similarly, a size aware keep-alive policy can be obtained by using 1/size as the priority, which would be useful in scenarios where memory size is at a premium. 
+
+
+Other size-aware online algorithms with tight online theoretical guarantees can also be applied.
+We also implement the \textbf{LANDLORD}~\cite{young2002line} algorithm, which can be understood as a variant of the Greedy-Dual approach.
+Landlord also considers the frequency, size and initialization cost of functions.
+When the server is full and some container is to be evicted, a ``rent'' is charged from each function based on its size and initialization cost (specifically, it is equal to $\min \frac{\text{initialization cost}}{\text{size}}$.
+This subtly differs from Greedy-Dual-Size-Frequency: the decrease in priority is computed based on the state of all the cached containers, and not independently applied. 
+Upon a function invocation, its containers get a ``credit'', and their priority is set to their initialization cost. 
+The containers with the lowest credits are evicted. 
+Landlord has appealing and well-proven properties of its online performance: its competitive ratio (the performance compared to an optimal \emph{offline} algorithm that knows future requests) has been well analyzed~\cite{young2002line}. 
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

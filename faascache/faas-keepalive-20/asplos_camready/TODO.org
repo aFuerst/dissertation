@@ -1,0 +1,92 @@
+
+** Caching Policy 
+
+::DONE:: GD implementation in simulator
+::DONE:: Simple distribution based testing 
+
+::TODO:: Are there 
+
+** Empirical measurements 
+
+Latency of different functions and with different caching mechanisms. 
+
+* Experiments 
+
+** TF Inference Docker 
+https://github.com/IBM/visual-recognition-for-cozmo-with-tensorflow/blob/master/4-classify/Dockerfile
+
+This has a hilarious dockerfile: 
+
+#+BEGIN_SRC 
+
+FROM tensorflow/tensorflow:1.4.0-py3
+WORKDIR /tensorflow
+COPY requirements.txt requirements.txt
+RUN  pip install -r   requirements.txt
+COPY classifier.py classifier.py
+CMD python -u classifier.py
+
+#+END_SRC 
+
+Pulling in the docker image, installing TF via pip, would take a few minutes. 
+But this *is* an official TF example. 
+
+
+** Proposed AI action 
+Has a bunch of packages
+
+https://cwiki.apache.org/confluence/display/OPENWHISK/AI+Actions
+
+** Dockerhub images 
+
+https://hub.docker.com/u/openwhisk 
+
+
+*** Python AI Action 
+
+This seems like a good candidate: 
+https://github.com/apache/openwhisk-runtime-python/tree/master/core/python3AiAction 
+
+
+https://github.com/apache/openwhisk-runtime-python/blob/master/core/python3AiAction/samples/smart-body-crop/inference.py
+
+** Custom Runtime howto 
+
+http://jamesthom.as/blog/2018/08/13/serverless-machine-learning-with-tensorflow-dot-js/ 
+
+* Results 
+image loaded in:      0.1096
+Loading the model...
+model imported in :     1.0658
+tf session executed in:      4.1420
+pose estimated in:      0.0054
+
+Model is 200 M, download speed is 25 MB/s , so about 8 seconds via CURL 
+
+-----------------
+
+{'from_upper': 'Eyes', 'to_lower': 'Elbows', 'image': 'https://i.pinimg.com/originals/9c/96/87/9c968732595e965619ef7b0b7e4807e0.jpg', 'model_url': 'models/optimized_openpose.pb'}
+SmartBodyCrop.initialized= False
+image downloaded in :     0.1330
+image (2192x4299) loaded in:      0.3096
+Loading the model...
+model imported in :     0.8256
+tf session executed in:      3.6371
+pose estimated in:      0.0038
+image cropped in:      0.0004
+{'Y': 467.2826086956522, 'W': 1031.5294117647059, 'X': 550.9304812834225, 'H': 1028.0217391304348}
+CPU times: user 10.7 s, sys: 3.04 s, total: 13.7 s
+Wall time: 3.97 s
+
+python3aiaction                    smartcrop1
+
+Memory footprint is 1.35 GB 
+
+* AWS Lamdba
+
+https://aws.amazon.com/blogs/machine-learning/how-to-deploy-deep-learning-models-with-aws-lambda-and-tensorflow/ 
+
+#+BEGIN_QUOTE 
+We do this to take advantage of AWS Lambda container reuse. Any code executed outside of the handler method will be invoked only once upon container creation and kept in memory across calls to the same Lambda container, making subsequent calls to Lambda faster.
+#+END_QUOTE 
+

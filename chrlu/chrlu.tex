@@ -1,0 +1,42 @@
+\chapter{Load- and Locality-Aware Load Balancing}
+\label{chap:chrlu}
+
+% While serverless computing provides more convenient abstractions for developing and deploying applications, the Function-as-a-Service (FaaS) programming model presents new resource management challenges for the FaaS provider. 
+In this chapter, we investigate load-balancing policies for serverless clusters and find that the locality vs. load tradeoff is crucial and presents a large design space.
+Locality, i.e., running repeated invocations of a function on the same server, is a key determinant of performance because it increases warm-starts and reduces cold-start overheads. 
+% We find that the locality vs. load tradeoff is crucial and presents a large design space. 
+
+We enhance consistent hashing for FaaS, and develop CH-RLU: Consistent Hashing with Random Load Updates, a simple practical load-balancing policy which provides more than $2\times$ reduction in function latency. 
+Our policy deals with highly heterogeneous, skewed, and bursty function workloads, and is a drop-in replacement for OpenWhisk's existing load-balancer.
+We leverage techniques from caching such as SHARDS for popularity detection, and develop a new approach that places functions based on a tradeoff between locality, load, and randomness. 
+
+
+\input{chrlu/related.tex}
+
+\input{chrlu/bg.tex}
+
+\input{chrlu/design.prateek.tex}
+
+\input{chrlu/implementation.tex}
+
+\input{chrlu/eval.tex}
+
+% \cite{lbfaas-hpdc2022}
+
+\begin{comment}
+\begin{figure}
+  \includegraphics[width=.9\columnwidth]{./figures/consistent-hashing.png}
+  \caption{Consistent hashing ring featuring function forwarding \cite{lbfaas-hpdc2022}.}
+  \label{fig:ch-rlu}
+\end{figure}
+
+In my work just accepted to HPDC \cite{lbfaas-hpdc2022}, we take a different approach to load and locality balancing.
+% Some functions are more \textit{popular} than others, and therefore will take up more system resources.
+Previous work \cite{shahrad2020serverless} revealed that a few functions make up the lion's share of invocations in FaaS systems.
+Per Figure~\ref{fig:serverless-invocations} over 99\% of invocations are from just 19\% of functions, and load balancers need to take this pattern into account.
+To start our balancing policy we use consistent hashing to always route a function to a home worker, favoring locality especially for those rarely invoked functions.
+In the event a home worker is overloaded, we want to conditionally migrate work to other workers in an affinity-aware manner.
+This load based migration locality is achieved by \textit{pushing} work around the has ring as shown in Figure~\ref{fig:ch-rlu}.
+As a server's load increases, invocations are randomly pushed around the ring with popular functions being more likely to be forwarded.
+This spreads work around preventing load imbalance, maintains locality for functions, and avoids latency increases from high CPU load on any individual worker.
+\end{comment}

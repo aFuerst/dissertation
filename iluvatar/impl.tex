@@ -1,0 +1,107 @@
+\section{Implementation}
+\label{sec:impl}
+
+% Use a lot of provided stuff as a starting point
+%   Containerd for isolation/container startup
+%   CNI for networking
+%   prebuilt Docker images
+%   Rust language for efficient compiled language, without garbage collection interference
+%   Tokio async handling & userspace threads
+
+\sysname~ is implemented in Rust in about 13,000 lines of code.
+It will be open-sourced upon paper acceptance. 
+Its low latency and lack of jitter are attributable to the various low-level profile-guided performance optimizations we have implemented during the course of its development and testing.
+Function handling and container management in the worker make up a majority of the implementation footprint and focus. 
+Ours is a heavily asynchronous implementation using the \texttt{tokio} library in Rust, and various function lifecycle events spawn new userspace threads and trigger callbacks. 
+The major data structure shared by the various worker threads is the container pool, which is implemented using the \texttt{dashmap} crate, which is a concurrent associative hashmap--- this provides noticeable latency improvements compared to a mutex or read-write lock.
+Conversely, we still use a mutex for the queue, since we found minimal performance degradation compared to a no-queue architecture during profiling. 
+These, and many other small optimizations, keep the \sysname~
+resource consumption small: even under a heavy and sustained load that saturates a 48 CPU server, the worker process uses less than 20\% of a single CPU core. 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\noindent \textbf{Agent Optimization.}
+%All our functions are written Python, and we do some Python-specific optimizations during their prewarm.
+%The agent imports the function Python code, loading it and any library dependencies into memory, plus executing statements not in functinos, such as downloading an ML model.
+
+
+% \paragraph{Deployment}
+% For ease of repeatable and scalable use, we have set up our system to be deployable with Ansible \cite{}.
+% In a command it can configure, set up, and tear down the applications that make up \sysname{}, and even capture artifacts like logs.
+% It ties in nicely with the detailed configuration supported by our worker and controller services.
+% Our services support configuration via a json file, convenient for development and local testing, but less so for large research experiments.
+% Ansible, plus some clever config loading, allow us to inject arbitrary values as part of a larger command, making deployment for different experiments a breeze.
+
+% With this setup, \sysname{} can be configured and deployed to any number of nodes with a single command.
+% With this we easily scripted a variety of setups for our experiments in Section \ref{Evaluation}, giving us consistent and controlled environments and results.
+% Workers are configured with a json file on startup, with the various policy options (such as queuing), keep-alive, timeouts, networking, logging, etc.
+
+% CNI and container-spec are also provided as json files. For the container-spec, we change....
+
+% Workers have four main services: Containers, invocation, network, and status.
+
+% \vspace*{-8pt}
+\subsection{Support for FaaS research}
+\label{sec:impl:support}
+
+One of our major design goals is for a reliable and extensible control plane for performance-focused FaaS research.
+We now describe some of the \sysname~ features and our experiences in extending it.
+
+
+\noindent \textbf{Performance Metrics.}
+We keep track of all internal and external function metrics (such as their cold/warm execution time histories, inter arrival times, memory footprints, etc.) and provide them to all components of the control plane, and also to external services.
+%
+One of \sysname's implementation goals was to reduce the reliance on external services for system monitoring etc.
+We thus track key system metrics like CPU usage, load averages, and even CPU performance counters and system energy usage using RAPL and external power meters.
+These metrics are collected using async worker threads, and provide a single consistent view of the system performance.
+%
+Additionally, we also use and provide Rust-function tracing for fine-grained performance logging and analysis.
+We use the \texttt{tracing} crate to instrument the passage of invocations through the control plane components, and obtain detailed function level timing information, which is used for identifying control plane and container-layer bottlenecks. 
+%These logged details helped us with performance bottlenecks, but by default we keep disabled because it can increase per-invocation latency due to the overheads and CPU contention from creating so many logging events and it increases log file output size dramatically. 
+
+\noindent \textbf{Adding New Policies and Backends.}
+%
+Using function and system metrics allows for easy development of data and statistical learning based resource management policies to be implemented.
+Our baseline policy implementations for keep-alive eviction, queuing, load-balancing, are all easily extensible using Rust traits, polymorphism, and code generation. 
+In our experience, adding new policies is relatively straight-forward, even for new-comers.
+For example, all the priority-based queuing policies (SJF, EEDF, RARE, etc.) were implemented by extending the base FCFS policy.
+Implementing and testing these policies took less than a few dozen lines and about four hours for a graduate student unfamiliar with the code-base. 
+
+The default container runtime backend is \texttt{containerd}, but the interface is small, and supporting new backends is relatively easy.
+We added Docker support in about 400 lines and one person-day of development effort.
+
+
+\textbf{Load-generation and Testing.}
+In the spirit of providing a full-featured system for FaaS experimentation, we have developed a load-generation framework.
+It can do closed and open loop load generation, and be parameterized by the number and mixture of functions, their IAT distributions, etc. 
+The testing framework can use functions from FaaS suites like FunctionBench~\cite{kim2019functionbench}, or custom sized functions that run lookbusy~\cite{lookbusy} for generating specific CPU and memory load.
+%
+The open-loop generation produces a timeseries of function invocations, which is helpful for repeatable experiments.
+The functions' IAT distributions can be exponential, or be derived from empirical FaaS traces like the Azure trace~\cite{shahrad_serverless_2020}.
+
+
+For the Azure trace, we start by randomly sampling functions and computing the CDF of their IATs.
+We compute the expected load level in the system using Little's law, by finding the expected number of concurrent invocations for each function and adding them for all functions.
+This expected load can be significantly different from the capabilities of the system under testing (for example, 100 concurrent functions will overload a 12 core system). 
+Therefore, we can scale the individual function IAT CDFs to find a suitable load. This also allows us to change the relative popularities of individual functions, and conduct fine-grained sensitivity experimentation (like examining system performance when the popularity of one single function
+changes, etc.).
+We can generate larger traces by layering, and merging the traces from multiple smaller workloads.  
+
+
+For synthetic functions (using lookbusy), we use their distribution of running times and memory consumption when generating the workload.
+When using real functions from a benchmark-suite like FunctionBench, for each randomly sampled function, we use its average execution time (from the full trace), and assign it the closest function in the suite.
+For example, if the average running time of a candidate function in the Azure trace is 8 seconds, we represent it using the ML-training function, which has the closest running time of 6 seconds.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

@@ -1,0 +1,107 @@
+\section{Related Work}
+\label{sec:related}
+% \vspace*{-6pt}
+
+\sysname~ occupies a somewhat unique spot in the crowded FaaS landscape because of its focus on warm starts and some key constraints in our system design.
+%
+Techniques for reducing cold-start overheads, like snapshots, language isolation,  unikernels, all sit ``below'' the control plane, and can be complemented with fast control planes.
+At the other extreme end, the predictable nature of serverless workloads has been used to great effect for predictive load-balancing, prefetching, sizing, etc.
+\sysname~ is mostly reactive and is worker-centric, and tries to make minimal assumptions about workload predictability and focuses on more general optimizations that can work for arbitrary workload patterns.
+%
+
+\noindent \textbf{FaaS Control Planes.}
+%
+SOCK~\cite{oakes_sock_2018} is closely related to \sysname, and makes similar observations about network namespace overheads, and introduced storage and cgroup optimizations for serverless optimized containers. 
+SOCK is based on OpenLambda~\cite{hendrickson2016serverless} and achieves great cold-start performance with Zygotes that are cloned into new containers.
+These optimizations to the container runtime are also applicable to \sysname~ and are complementary. 
+Using the standard containerd interface allows us to use multiple current and future container backends, and is a deliberate tradeoff. 
+%Importantly it lacks both the ability to operate as a cluster and an integrated load generation system, both of which we have implemented both in \sysname~.
+
+
+Nightcore~\cite{jia2021nightcore} is an integrated control plane and runtime system for low-latency microsecond-scale microservices.
+It essentially implements containerized RPC, and uses fast message passing between the control plane and the agent.
+Its special container runtime precludes generic ``black box'' functions, and it provides a weaker isolation model by running functions concurrently within the same container.
+In the microservice context, container management and scheduling, dealing with heterogenenous functions, and other challenges are not relevant.
+
+
+Atoll~\cite{singhvi2021atoll} is a fast and highly scalable control plane, and hugely benefits from pre-allocation and prediction.
+It has a two level load-balancing setup with functions scheduled to a cluster group which then places them on a worker. 
+\sysname's design and contributions are orthogonal to Atoll's more top-down and predictive approach, and we focus on the ``low-level'' worker problems.
+
+
+Open-source control planes like OpenWhisk, OpenFaaS~\cite{openfaas}, nuclio~\cite{nuclio}, and kNative~\cite{knative}, are widely used to provide functions as a service. 
+They tackle the competing demands of modularity and features, along with supporting function executions in generic environments.
+Many FaaS systems use Kubernetes as the resource and container management layer, and its complexity and high latency further inhibits deep understanding and optimizations. 
+OpenWhisk's cold and warm performance has been analyzed in many prior works such as~\cite{quevedo_evaluating_2019} and also as part of other systems~\cite{scheuner_lets_2022, alzayat_groundhog_2022, faaslb-hpdc22, faascache-asplos21}. 
+OpenWhisk scheduling design and improvements can be found in ~\cite{kim_scheduling_2021, faaslb-hpdc22}.
+Tighter latency requirements exist when deploying functions at the edge, and OpenWhisk's use on lower powered devices presents even more latency troubles~\cite{palade-edge-22, pfandzelter_tinyfaas_2020, hall_execution_2019, wang2021lass}. 
+Interestingly, public cloud latencies are also significant, of the order of 50 ms~\cite{ustiugov_analyzing_2021}, hinting that the problems also extend their control planes. 
+%All four of these control planes rely on Docker and Kubernetes for their deployment and scaling mechanisms.
+%These existing tech stacks are highly useful, but limit the research possibilities of a platform, e.g. cold-start optimizations and deploying to edge nodes become intractable.
+%While \sysname~ does have a Docker isolation implementation, it is to showcase the ability implement multiple containerization mechanisms and compare between them.
+
+
+\noindent \textbf{Function Scheduling.}
+Concurrent to our efforts, queuing of function invocations has been proposed in~\cite{zuk_call_2022}, which implements various size-aware policies like SJF. 
+Surprisingly, and perhaps due to OpenWhisk overheads, their function slowdowns are extremely high: of more than $10,000\times$. 
+An earlier theoretical queuing analysis of flow and stretch metrics is also presented in~\cite{zuk_scheduling_2020}. 
+In contrast to \sysname's worker-centric design, a centralized core-level allocation design is presented in~\cite{kaffes_centralized_2019}.
+In FaaS clusters, the tradeoffs in load balancing and early/late binding are evaluated in~\cite{kaffes_hermod_2022}.
+Locality~\cite{faaslb-hpdc22}  and ML-based~\cite{yu2021faasrank} techniques for FaaS load-balancing take advantage of the high temporal locality and predictability of the FaaS workloads.
+Our effort is more focused on reactive systems, and adding predictive allocation will only improve it. 
+
+OS scheduler improvements can also improve FaaS workloads~\cite{fu2022sfs}. 
+Regulating Linux CPU cgroups shares is also effective in overcommitment~\cite{ensure-faas-acsos20}.
+Evaluating the effectiveness of these scheduling improvements when juxtaposed with queuing will be interesting. 
+Scheduling function workflows and DAGs are a growing area~\cite{shen_defuse_2021,mahgoub_wisefuse_2022,zhou_qos-aware_2022}, and we focus on single-invocation optimizations. 
+
+\begin{comment}
+Restoring from snapshots~\cite{vhive, faasnap, catalyzer}
+
+
+%The architectural implications are analyzed in~\cite{shahrad_architectural_2019}. We look at the higher levels of the stack, i.e., at the control plane. The paper identifies the fundamental factors affecting function performance at the hardware level due to cache misses, bad locality, etc. 
+\paragraph{Edge.}
+The lower resource availability of edge platforms also motivates lighter control planes. 
+Tinyfaas is a apecialized FaaS platform for the edge 
+\cite{pfandzelter_tinyfaas_2020}, but uses existing control planes like OpenWhisk and Kubless.
+\cite{hall_execution_2019}
+
+
+\paragraph{Scheduling.}
+
+ANY papers that use previous running time/task size information!? Atoll. Aquatope. 
+
+Tail latency: 50ms for warm-starts for the cloud. \cite{ustiugov_analyzing_2021} 
+
+RL scheduling~\cite{yu2021faasrank}. 
+
+Lets trace it\cite{scheuner_lets_2022} , platform overheads etc.
+
+
+Workflow and serverless DAG scheduling is complementary to \sysname. 
+
+FnSched. Anshul \cite{}. Centralized Scheduling? 
+
+Sharing containers in SAND \cite{akkus_sand_2018}
+
+Hierarchical scheduling (within container) in HyperFaas. 
+
+\paragraph{OpenWhisk.}
+\cite{quevedo_evaluating_2019} evaluates the cold and warm times under OpenWhisk. 
+OW Hash based scheduling described in \cite{kim_scheduling_2021}.
+
+Container sizing lot of attention, why! Uses OpenWhisk atleast\cite{guo_decomposing_2022}.
+Also uses it and claims massive speedups. \cite{kotni2021faastlane}
+
+Aquatope\cite{zhou_qos-aware_2022} also uses prewarming for keepalive and is based on OpenWhisk.
+
+%%%%%%%%%
+
+Overcommittment: Owl~\cite{tian_owl_2022} also does interference.
+So does ENSURE and fnsched. Overcommittment has impact on both the function execution time and control plane overhead (more functions to execute and more contention of cplane processes with functions.) We do overcommitment for only short functions with the bypass. Longer functions likely to be CPU intensive.
+
+
+Our work: control plane sandwiched between isolation optimizations and data-driven overcommit and predictive. 
+
+Completely orthogonal to optimal sizing like sizeless~\cite{}, OFC~\cite{}, COSE~\cite{akhtar_cose_2020}, \cite{guo_decomposing_2022}, etc.
+\end{comment}

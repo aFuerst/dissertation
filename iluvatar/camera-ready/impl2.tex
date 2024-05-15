@@ -1,0 +1,163 @@
+\section{Implementation}
+
+% Use a lot of provided stuff as a starting point
+%   Containerd for isolation/container startup
+%   CNI for networking
+%   prebuilt Docker images
+%   Rust language for efficient compiled language, without garbage collection interference
+%   Tokio async handling & userspace threads
+
+\paragraph{Rust}
+
+
+
+Our language of choice was Rust, as we wanted to avoid garbage-collected languages and take advantage of the compile-time efficiencies.
+The remainder of the system that we wrote ourselves is implemented in $\sim$13k lines of Rust.
+Half of that, $\sim$6k lines, is in the worker, matching our emphasis on it's importance in features and performance.
+1000 lines of that is tests to ensure correctness and quashing introduced bugs.
+The containerd interface is $\sim$800 lines, Docker is only $\sim$400 lines.
+Roughly a third is spend on the whole container pipeline; management, containerization, pools, tracking characteristics, etc.
+Just under a third is the invocation, queuing, and concurrency regulator.
+Much of this is helper functions around queuing and dequeuing, individual policies are relatively short.
+
+To manage the expected concurrency for such a system, the \emph{Tokio} Rust package.
+It implements a userspace mulit-threading model and subsequent scheduling that we found very efficient easy to integrate with.
+We make liberal use of the features and types that come with the \emph{Tokio} package.
+It implements the ``async`` features in Rust...
+RPC and HTTP use it...
+Separate thread space for enqueued invokes to prevent exhaustion...
+
+
+
+Eliminating inconsistencies caused by the Serverless platform are critical for its use in research.
+Highly variable results make reasoning with them challenging and one can never be sure if they are from intentional changes or simply background instability.
+% Having low variance and low overhead invocations didn't require us to implement needed components ourselves.
+Concurrent data structures, from \emph{DashMap}, using sharded read-write locks compose our major pieces, helping us avoid lock contention between threads.
+As object creation happens on registration and cold starts, which are uncommon, we continue to use read-write locks elsewhere to avoid contention on global objects.
+The primary "bottleneck" comes from our enqueueing of every invocation into a global queue protected by a basic mutex.
+A mutex in Rust is extremely efficient, and the quick nature of adding and removing to the queue ensures time is not lost in contention.
+Our results below show that even handling many thousands of requests per second, it is no worse than a queue-less implementation \ref{}.
+
+The efficient nature of compiled Rust code and our implementation moderates the CPU usage of the worker process.
+Keeping this low is important to avoid interference on functions and minimize overhead.
+Even under a heavy and sustained load that fills our servers \ref{}, the \sysname{} worker process never uses more than 20\% of a CPU core.
+
+\textbf{Platform Optimizations}.
+We made a number of optimizations that we discovered along the way, often specific to our design.
+We switched the queue used by the invoker to be notified on new items, rather than strictly polling for new items.
+This both reduced latency (nothing waiting to be discovered), and reduced CPU usage because we can avoid busy waiting.
+Rust \emph{async} items are actually resolved via polling, and originally we implemented a polling background thread per-invocation to notify the client thread of completion.
+Later this was switched to using a Tokio type for notifications, simplifying our code and improving performance by using framework members.
+Caching the HTTP client used to send invocations to containers dramatically improved latencies, as the library uses connection pooling under the hood.
+We switched the ContainerPool to use a concurrent dictionary library to reduce contention on a hot data structure.
+Lastly, the load generator proved to be a bottleneck source by excessively opening RPC connections.
+It multi-plexes connections, making it cheaper to share an existing connection between load threads than it is to open a new connection for each RPC request.
+% Optimizations: polling queue -> notification queue, tokio semaphore for invoke complete notification, caching http client for container call, container mgr to dashmap, load gen API to use API factory.
+
+\noindent \textbf{Agent Optimization.}
+All our functions are written Python, and we do some Python-specific optimizations during their prewarm.
+The agent imports the function Python code, loading it and any library dependencies into memory, plus executing statements not in functinos, such as downloading an ML model.
+
+
+
+\paragraph{Deployment}
+For ease of repeatable and scalable use, we have set up our system to be deployable with Ansible \cite{}.
+In a command it can configure, set up, and tear down the applications that make up \sysname{}, and even capture artifacts like logs.
+It ties in nicely with the detailed configuration supported by our worker and controller services.
+Our services support configuration via a json file, convenient for development and local testing, but less so for large research experiments.
+Ansible, plus some clever config loading, allow us to inject arbitrary values as part of a larger command, making deployment for different experiments a breeze.
+
+% With this setup, \sysname{} can be configured and deployed to any number of nodes with a single command.
+% With this we easily scripted a variety of setups for our experiments in Section \ref{Evaluation}, giving us consistent and controlled environments and results.
+% Workers are configured with a json file on startup, with the various policy options (such as queuing), keep-alive, timeouts, networking, logging, etc.
+
+% CNI and container-spec are also provided as json files. For the container-spec, we change....
+
+% Workers have four main services: Containers, invocation, network, and status.
+
+
+\subsection{Support for FaaS research}
+
+
+\noindent \textbf{Data-driven Policy Support.} \label{sec:data-support}
+In order for policies to make online decisions they must have high quality information about what is happening in and around the system.
+Thus we track a combination of internal and external metrics to support understanding the system and allow it to adjust itself online.
+
+Functions exhibit a variety of characteristics that queuing, scaling, and balancing policies need to make effective decisions.
+Each worker keeps a datastructure of per-function metrics: their cold start time, warm execution time, IAT, memory usage, and most recent execution.
+These are stored in a fast concurrent dictionary and are updated via moving averages.
+These visible throught the program allowing different pieces to update or access relevant information, especially to enable advanced queuing policies in the worker.
+% It tracks various function characteristics: cold start time, warm execution, IATs, and more; for use in advanced queuing policies.
+% Data structures: StateMap and container history access. Fast concurrent.
+
+Other internal data points that are tracked include the existing queue length, number of executing functions, and container memory usage.
+External metrics are just as important to track as those inside \sysname~ as they impact performance and can again be inform system decisions.
+We get updated one-minute load averages, node CPU utilization breakdowns and \sysname~ process CPU usage.
+Alongside these, we capture some more esoteric information such as cpu frequencies, some energy-releated \texttt{perf} counters, and a number of hardware values tracking energy usage of the worker's node.
+
+\textbf{Extensible nature.}
+
+% Easy to make more policies.
+% Queue policies: only 1 man hour for a new graduate student unfamiliar with Rust.
+
+We had two goals for implementing \sysname{} 1. Make an effective a research platform and 2. Have it produce valid and consistent results.
+Researchers must be able to modify and control the system with little effort to efficiently conduct research and test out new ideas.
+Additionally, if experiments require lots of hands-on time or vary between iterations, one cannot tell the impact of new ideas.
+
+A high degree of control means plenty of configuration knobs and runtime tunability, of which we have added plenty throughout \sysname{}.
+Resource limits for different sized experiments and hardware, metric logging frequencies, and more are provided out of the box.
+Making and using code modifications is extremely easy as well, using the polymorphism and code generation capabilities of Rust.
+For this work we implemented multiple containerization backends, queuing policies, and load balancers to serve both as comparisons and guides.
+
+We have written our queue policies and load balancers such that they can be written and tested in just a few man-hours and some dozens of lines of code.
+Rust's inheritance system limits code reuse, we can't have a parent ''class'' with children using the parent's properties, but you can have the parent implement member functions.
+We take advantage of this to move the invocation state management, leaving only the queue ordering and balancing to be implemented.
+Writing each policy took a new graduate student unfamiliar with Rust only a few dozen lines of code and just a few man hours of development and testing,
+
+Container management has been cleanly separated from the isolation mechanisms and their lifecycle.
+We can thus compare new isolations, cold start improvements, and more such new research possibilities \emph{on the same hardware}, with just a configuration change and a restart.
+New isolation mechanisms naturally take more effort, but can be cleanly dropped-in at runtime taking a couple days of writing and throrough testing.
+Adding Docker support for containers took one man-day of development and testing.
+We only needed to use small the portions of the Docker API that are required to support \sysname~, and do not need a wrapper for all its features.
+
+
+\textbf{Tracing and logging.}
+Understanding what occurs inside the system offline is equally important to research.
+One must be able to examine the effects of changes and improvements internally and externally to prove effectiveness.
+Therefore we export a variety of information in all the services of \sysname~ during it's execution.
+We liberally use Rust's \texttt{tracing} crate for all our logging needs.
+All the metrics described in Section~\ref{sec:data-support} are regularly added to the log file.
+To monitor the passage of invocations through the system, we tag each with a unique ID and emit log statements container that ID at major points to enable deeper post-analysis.
+\texttt{tracing} has a briliant feature in it's \texttt{instrument} attribute that creates log messages each time a function is called.
+Using these, we can track when an invocation enters and exist each function in the codebase.
+To ensure logging isn't a bottleneck on the critical path, writing message to the log file is done asynchronously.
+
+
+\textbf{Load-generation and testing.}
+Our load generator is closely coupled with the platform, being able to target a cluster fronted by the controller, or a single worker.
+At it's simplest we can test the running characteristics of a variety of functions, which we used to inform both our design and debugging directions.
+We then leverage those function metrics to execute realistic loads against the system under test.
+For deciding what user code is actually executed on workers, we have provided several possibilities.
+The function characteristics from above are used to intelligently ''map'' ported FaasBench \cite{} functions to the trace being run, so the running times are similar.
+Supplementing this, users can either specify code to be run in each function or utilize \emph{lookbusy} \cite{} for wall-clock accurate, cpu-using, and memory-usage matching invocations.
+
+% Trace generation
+% Use the azure stuff
+% Can generate traces a few diff ways: iat, ecdf, actual invokes
+% function sizes based on # of functions taken from the Azure trace or expected # of outstanding requests per second (little's law)
+% Any hand-rolled trace with specific functions and IATs for testing and creating specific scenarios: e.g. big burst
+
+To generate loads, we pull real-world data from pub Azure \cite{} datasets.
+\sysname{} can generate basic traces using the mean inter-arrival times of functions, such that functions will appear with consistent frequency, plus some Gausian noise distribution.
+% and even directly replicate invocation patterns.
+The most advanced are traces use ECDFs \cite{}, where the range of IATs of a function form a sample distribution to when it will be invoked next.
+This allows us to capture the bursty nature of many functions, having alternating periods of high and low invocation frequencies.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

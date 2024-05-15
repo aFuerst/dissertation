@@ -1,0 +1,218 @@
+% LaTeX template for Artifact Evaluation V20201122
+%
+% Prepared by 
+% * Grigori Fursin (cTuning foundation, France) 2014-2020
+% * Bruce Childers (University of Pittsburgh, USA) 2014
+%
+% See examples of this Artifact Appendix in
+%  * SC'17 paper: https://dl.acm.org/citation.cfm?id=3126948
+%  * CGO'17 paper: https://www.cl.cam.ac.uk/~sa614/papers/Software-Prefetching-CGO2017.pdf
+%  * ACM ReQuEST-ASPLOS'18 paper: https://dl.acm.org/citation.cfm?doid=3229762.3229763
+%
+% (C)opyright 2014-2020
+%
+% CC BY 4.0 license
+%
+
+%\pagebreak[4]
+\clearpage
+\section{Artifact Appendix}
+% \appendix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Artifact check-list (meta-information)}
+
+{\small
+\begin{itemize}
+  \item {\bf Program: FaasCache }
+  \item {\bf Data set: see \ref{data-sets} }
+  \item {\bf Run-time environment:  Ubuntu 16.04.5 }
+  \item {\bf Hardware: 250 GB RAM, 48 cores }
+  \item {\bf Experiments: Simulation \& OpenWhisk implementation }
+  \item {\bf How much disk space required (approximately)?: 10 GB }
+  \item {\bf How much time is needed to prepare workflow (approximately)?: 2 hours }
+  \item {\bf How much time is needed to complete experiments (approximately)?: 6 hours }
+  \item {\bf Publicly available?: Yes }
+  \item {\bf Archived (provide DOI)?: 10.5281/zenodo.4321766 }
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Description}
+
+We have two main software artifacts.
+
+The first is a discrete-event simulator for FaaS workloads written in Python.
+This simulator implements various keep-alive policies, all of which are described in the full paper.
+Its inputs are workload trace files that are publicly available at the Azure trace site, and serialized into a custom format by scripts in {\em code/split/gen}.
+The simulator takes server memory size, keep-alive policy, input trace file as arguments, and outputs various statistics on warm and cold starts, memory usage, and other accounting information. 
+These outputs are run through the data-graphing scripts in {\em code/split/plotting}, to produce figures such as Figure 5 in the paper.
+
+The second artifact is a custom OpenWhisk (i.e., FaasCache).
+It is a drop-in replacement of OpenWhisk with the same installation procedures.
+It optimizes OpenWhisk scheduling with GD keep-alive policy.
+FaasCache or vanilla OpenWhisk can both be used to generate the information from Table 1 in the paper.
+
+Our artifact also includes some FaasCache performance tests in {\em faas-keepalive/code/wsk-actions/load-test/traces}.
+These can be run with scripts in {\em faas-keepalive/code/wsk-actions/load-test} that invoke LookBusy work-simulating FaaS functions at regular intervals to load test the FaasCache design.
+
+Full details on how to run these two artifacts are in Section \ref{experiments} below.
+For brevity, portions talking about the simulator or OW load generation will be referencing folder {\em faas-keepalive}.
+Those sections on running the customized OpenWhisk server are based in folder {\em openwhisk-caching}.
+
+\subsubsection{How to access}
+
+10.5281/zenodo.4321766
+
+The code for both experiemts is in the zenodo zip, but also available on GitHub:
+
+Simulator code is here:
+https://github.com/aFuerst/faascache-sim
+
+FaasCache OpenWhisk implementation:
+
+https://github.com/aFuerst/openwhisk-caching/commit/38ff898d45da57726da38c00f735cb449e7f8595
+
+
+\subsubsection{Hardware dependencies}
+
+To reproduce the FaasCache load test results, you will nead 64 GB RAM, and 48 cpu cores for OW to use.
+The simulator needs ~1 GB RAM/cpu, and will be made faster with higher number of parallel processes.
+
+
+\subsubsection{Software dependencies}
+
+\begin{enumerate}
+  \item Python 3.7+
+  \item Docker
+  \item Java
+\end{enumerate}
+
+
+\subsubsection{Data sets} \label{data-sets}
+
+https://github.com/Azure/AzurePublicDataset/
+
+blob/master/AzureFunctionsDataset2019.md
+
+The representative trace used in the paper is in the zip, called {\em 392-b.pckl}.
+Pre-computed simulator results are also in the zip, in the folder {\em 392-pckls}. 
+These are high-resolution results, memory-wise, as the simulation is compute-intensive (i.e. slow).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Installation}
+
+\subsubsection{Simulator Setup}
+
+The original trace dataset can be found here:
+
+https://github.com/Azure/AzurePublicDataset/
+
+blob/master/AzureFunctionsDataset2019.md
+
+The simulator code is available here, as well as in the zip:
+https://github.com/aFuerst/faascache-sim
+
+The script {\em ./code/split/trace\_split\_funcs.py} will combine the first day's info into one file.
+Edit {\em datapath} and {\em store} in the script to adjust input and output locations.
+
+
+{\em ./code/split/gen\_representative\_trace.py} will create traces that are generally representative of the larger trace sample.
+Edit {\em datapath} and {\em store} in the script to adjust input for trace CSVs and split pickles (made by {\em trace\_split\_funcs.py} above) respectively.
+{\em save\_dir} points to the folder where the resulting combined trace(s) will be saved.
+Change lines 131-133 if you want specific trace sizes.
+
+{\em ./code/split/gen\_rare.py} will create traces using the rarest half and quarter of functions.
+You can edit line 99 to adjust which quartiles it picks functions from.
+	
+
+\subsubsection{FaasCache OpenWhisk Setup}
+
+FaasCache OpenWhisk implementation:
+
+https://github.com/aFuerst/openwhisk-caching/commit/38ff898d45da57726da38c00f735cb449e7f8595
+
+Install the OpenWhisk CLI:
+
+https://github.com/apache/openwhisk\#quick-start
+
+OpenWhisk testing code: https://github.com/aFuerst/faascache-sim/tree/master/code/wsk-actions
+(subset of FaasCache sim repo)
+
+{\em core/containerpool/ContainerPool.scala} contains all the edits made to the OW source.
+
+
+Have docker \& java installed
+{\em ./code/wsk-actions/py/build.sh} will create zip packages for all the actions that OW can use.
+
+To run the load tests on OpenWhisk you will also have to build the LookBusy Docker container in {\em ./code/wsk-actions/load-test/lookbusy}.
+Make sure the new Docker container is added as a runtime to the OW {\em ansible/files/runtimes.json}.
+The default AI container OW uses still may be missing packages, if this is the case you will also have to build the Dockerfile at {\em wsk-actions/py/cust\_ai} and add it as a custom runtime.
+
+Edit the {\em ./sample-app.conf} in the root and put it in {\em ./bin/}.
+Rename it to {\em application.conf}.
+OW requires this configuration file to run and allow function creation.
+You can adjust {\em container-pool.user-memory} depending on local resources.
+
+{\em ./openwhisk-caching/blob/master/run.sh} will build and run the custom OpenWhisk.
+
+Make sure the {\em .conf} {\em whisk.user} info matches between the scripts that talk to OW.
+
+{\em code/wsk-actions/load-test/wsk\_interact.py} contains helper functions that interact with the OW CLI to set up functions and authentication.
+If you use a different username or auth key then you will need to edit this file.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experiment workflow} \label{experiments}
+
+\subsubsection{Run Simulator}
+
+The {\em ./code/run\_sim.sh} file will run a trace in the simulator and graph the results.
+
+\begin{enumerate}
+  \item trace\_dir => folder where trace file needs to be
+  \item trace\_output\_dir => folder where sim results will end up
+  \item log\_dir => file where sim log data will end up
+\end{enumerate}
+
+The location pf the trace output and log output {\bf must} be different.
+
+Edit the number of functions in {\em ./code/run\_sim.sh} to match the number of functions in the trace you want to run (this number will be in the file name).
+Make sure the trace file letter (-b-, etc.) matches line 65 of {\em ./code/split/many\_run.py}, this is set by the trace generation script.
+
+\subsubsection{Run FaasCache OpenWhisk}
+
+You can follow the items in run.sh to run individual actions or run {\em ./code/wsk-actions/load-test/testing/find\_avgs.py} to get average run times for all the different actions.
+
+{\em ./code/wsk-actions/load-test/gen\_litmus.py} will generate the litmus test pckls for the full OW tests.
+Then run {\em code/wsk-actions/load-test/sub\_litmi.py} to invoke the litmus test.
+
+Cold vs warm hit metrics are output to OW log (stdout from sh/jar). 
+Make sure to pipe the output to a file.
+You can grep on {\em cold hits:} to look at current results.
+
+If you run the any of the litmus test, stop the test after 2 hours have past.
+OW may or may not complete all invoked actions, stopping it significantly late is ok, just wastes time.
+Then grep for the first hit event, record the time, then grep for the event closest to 2 hours later.
+This will match how the paper results were gathered.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Evaluation and expected results}
+
+Results should be similar to those in the paper. 
+
+The simulator results will not be exact if a new trace sampling is used, and if a coarser grained memory step is used.
+The paper used 500 MB steps, but this dramatically increases needed simulation time.
+
+Timings and numbers for the FaasCache OpenWhisk implementation will vary marginally due to the stochastic nature of web request handling and the inner workings of OW.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Methodology}
+
+Submission, reviewing and badging methodology:
+
+\begin{itemize}
+  \item \url{https://www.acm.org/publications/policies/artifact-review-badging}
+  \item \url{http://cTuning.org/ae/submission-20201122.html}
+  \item \url{http://cTuning.org/ae/reviewing-20201122.html}
+\end{itemize}

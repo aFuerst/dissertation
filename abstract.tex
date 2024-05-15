@@ -1,0 +1,32 @@
+\begin{abstract}
+\vspace{-1cm}
+% Cloud service providers offer rentable hardware and compute time to customers, allowing them to run arbitrary applications at large and dynamic scales.
+% These providers have been working to offer new or more efficient features and services in competition for customers.
+% Serverless computing has grown in popularity by orders of magnitude, and with it comes a continual call for enhancing performance to handle the increased load.
+Cloud computing comprises a variety of services and abstractions to reduce the complexity of building and running applications.
+% One of the latest, and most distinct of these, is \textit{serverless computing}.
+% Instead of users managing scaling, virtual machines, operating system patches, containers, and more, a serverless application is orchestrated by the cloud provider and run only when needed.
+Function as a Service is a unique abstraction amongst the many: user supplied code entirely managed by the cloud provider.
+% This new abstraction has the opportunity to redefine cloud computing, a paradigm where application designer's only concern is their application, not complicated machine management and deployment.
+Providers are met with new challenges caused by the highly heterogeneous workloads predominant in Serverless.
+Users run ML inference, web services, multimedia analysis, and even scientific computing, to the tune of billions of invocations per day.
+These, in turn, vary widely in resource usage, execution time, and frequency of invocation, which the control plane must be prepared for.
+It must also handle internal problems like cold start overheads caused by isolation creation, and resource underutilization during idle periods.
+
+This thesis addresses these challenges by developing novel system designs and tailoring algorithms to handle these workloads.
+% In this thesis I propose several enhancements, extensions, and modifications to serverless computing control planes.
+% I describe several algorithms and policies that dramatically improve the resource utilization of such control planes.
+% These tackle poor resource allocation and load scheduling at both individual server and cluster levels.
+In it, we detail several algorithms and policies that tackle poor resource allocation and load scheduling at both individual server and cluster levels.
+The key finding of orchestration at both levels was the reliance on function characteristics in decision-making.
+% The algorithms described here use take function characteristics .
+% The latency of serverless invocations is reduced by 50\% as a result of these enhancements.
+In addition, we describe a redesigned control plane, \sysname, that rectifies latency issues in existing open-source systems.
+This is primarily accomplished by disaggregating scheduling decisions to avoid contention between distributed services of the control plane.
+% My improved design reduces the latency of individual invocations by 10s-100s of ms, and allows for easy experimentation and accelerated research.
+% Finally, I use this system to integrate GPU acceleration into serverless to showcase the computational flexibility and high degree of resource control found in serverless.
+Finally, we leverage the high degree of resource control made possible by this new system to integrate GPU acceleration into the Serverless ecosystem.
+This uses a variety of novel mechanisms to minimize overhead despite limited device resources, boosting performance by several orders of magnitude over baseline solutions.
+Altogether, the contributions of this thesis improve latency by 75\% and cluster resource utilization by up to 20x.
+
+\end{abstract}

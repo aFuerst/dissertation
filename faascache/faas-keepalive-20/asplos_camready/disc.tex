@@ -1,0 +1,83 @@
+% Discussion for HotCloud
+
+In this paper, we have focused on the keep-alive policies for FaaS systems.
+%
+However, the effectiveness and validity of these policies fundamentally depends on many uncertain aspects such as  FaaS usecases, abstractions, workloads, virtualization techniques, and cloud pricing models. 
+%
+Ongoing developments in research and production FaaS platforms will affect how these aspects evolve, and understanding their impact requires community-wide discussion. 
+
+
+
+\noindent \textbf{FaaS Workload Characterization.}
+Our preliminary evaluation uses synthetic traces partially informed by FaaS application characteristics. 
+However, there is a dearth of FaaS workload traces and benchmarks that can be used to drive realistic and empirically sound research. 
+An empirical understanding of the diverse FaaS applications and their characteristics such as their computational requirements, initialization overhead, and inter-arrival times, will be key in developing, understanding, and evaluating more sophisticated keep-alive policies. 
+Empirically informed FaaS workload traces can play a similar crucial role as YCSB~\cite{ycsb-socc2010} or the Google data center traces~\cite{clusterdata:Reiss2011}. 
+To overcome the challenge of constantly evolving applications and platforms, it may be necessary to develop parametrized workload generators. 
+
+
+
+\noindent \textbf{Keep-alive mechanisms and virtualization techniques.}
+The cold-start overhead can also be reduced using many virtualization and container image caching optimizations. 
+Keep-alive mechanisms for emerging special-purpose ``light weight VMs''such as Firecracker~\cite{firecracker-nsdi20} may be an interesting area of future work. 
+While hardware virtualization typically increases the cold-start overhead, it also provides opportunities to use techniques like page deduplication~\cite{sharma2012singleton} and VM forking~\cite{lagar2011snowflock}, that can reduce the effective footprint of functions and startup times.
+Keep-alive mechanisms can provide an interesting point of comparison for different virtualization technologies such as containers, VMs, unikernels.
+In any case, the cold-start overhead depends on underlying keep-alive mechanisms that will change over time, and thus requires general and tunable keep-alive policies such as Greedy-Dual. 
+%Keep-alive policies can be adjusted to the mechanism, but this depends on the virtualization technology (containers, VMs, unikernels). 
+
+
+
+
+\noindent \textbf{Programming and cost models.}
+Given the critical role of function initialization, different programming and execution models may be required.
+It will be interesting to explore the burden of explicit function initialization (like provided by OpenWhisk) on the application developers. 
+%. Maybe shared initialization for function families (such as loading the same ML model).
+Incentivizing applications to make use of initialization also promises to be an interesting research area.
+Performance is a good incentive, but do we need to consider new FaaS cost models that are tied to the caching effectiveness? Or will that complicate things and be far removed from the spirit of FaaS? Tiered pricing models in which users pay more for longer keep-alive is another potential solution. 
+
+
+
+% We have presented a keep-alive analogy that holds true for many FaaS environments. However it would be interesting to discuss specific FaaS features or usecases that are not directly translatable to caching.
+
+
+% %Maybe pose a series of questions? 
+
+% Mechanisms for keepalive and maximizing reuse. Container ``fork''. App assisted Mem deduplication. Role of virtualization. 
+% Workload characterization like YCSB. 
+% Incentivizing initialization. Explicit initialization like in OpenWhisk vs. AWS Lambda way. 
+
+% Although we have p
+% Benefits of keep-alive policies 
+
+% FaaS platforms still evolving. 
+% Different programming models may be adapted, and thus the role of keep-alive may change. 
+
+% Workloads are being adapted to FaaS, and new usecases are being explored.
+
+
+% Currently, initialization overhead can be very high due to the programming model and also the way the functions are written.
+% Will this continue into the future?
+% Especially in the case of ML inference, which may be a big FaaS workload, the model fetching overhead can be significant.
+
+% A systematic study requires workload traces and characterization.
+% Just as workload characterization is crucial in caching and other areas, do we need a FaaS workload trace or a benchmark suite?
+% Relative popularity and inter arrival times will be harder, but distributions used in caching may help?
+
+% Importance of workload characterization and empirical methods to understand and improve the workload performance. 
+% What is the function hit rate for large server farms? If locality is preferred, then what is the 
+
+% Role of virtualization in FaaS keep-alive. Can deduplication be used? Fast cloning of containers? Better mechanisms for mitigating the cold-start overhead. Or are policies enough?
+
+% Can initialized container memory state be checkpointed, and then resume containers from this state instead of always starting over?
+
+% The cold-start overhead will change in all these scenarios, and thus a general keep-alive policy like GD may be required that has different pluggable parameters. 
+
+
+% Charging models etc. Does it make sense to have tiered charging models at all? Pay more for keep-alive etc.
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

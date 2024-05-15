@@ -1,0 +1,56 @@
+\newcommand{\quotes}[1]{``#1''}
+\newcommand{\sysname}{Il\'{u}vatar} % \xspace}
+\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+% https://tex.stackexchange.com/a/7045
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+  \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+  \newcommand{\D}{\emph{D}}
+\newcommand{\Dmax}{\emph{D\_max}}
+\newcommand{\T}{\emph{T}}
+\newcommand{\VT}{\emph{VT}}
+\newcommand{\GlobVT}{\emph{Global\_VT}}
+\newcommand{\FinVT}{\todo{REMOVE: finish\_vt}}
+% \newcommand{\QName}{MQ-FLQ}
+% \newcommand{\QNameFull}{Multi-Queue Fair \& Local Queuing}
+\newcommand{\QName}{MQFQ-Sticky}
+\newcommand{\QNameFull}{\QName}
+\newcommand{\batch}{\texttt{Batch}}
+\newcommand{\naive}{\texttt{FCFS Naïve}}
+\newcommand{\fcfs}{\texttt{FCFS}}
+
+\newcommand{\myfigspace}[0]{-0.3cm}
+\newcommand{\bigfigspace}[0]{-0.9cm}
+\newcommand{\captionspace}[0]{-0.3cm}
+\newcommand{\subsecspace}[0]{-0.15cm}
+\newcommand{\largesubsecspace}[0]{-0.42cm}
+
+\newcommand{\prat}[1]{\textcolor{red}{(Prateek: #1)}}
+\newcommand{\alex}[1]{\textcolor{blue}{Alex: #1}}
+
+
+\newcommand{\funcname}[1]{\texttt{#1}}
+\newcommand{\mhead}[1]{\textbf{#1.}}
+
+\newcommand{\squishlist}{
+ \begin{list}{$\bullet$}
+  { \setlength{\itemsep}{0pt}
+     \setlength{\parsep}{3pt}
+     \setlength{\topsep}{3pt}
+     \setlength{\partopsep}{0pt}
+     \setlength{\leftmargin}{1.5em}
+     \setlength{\labelwidth}{1em}
+     \setlength{\labelsep}{0.5em} } }
+	
+\newcommand{\squishlisttwo}{
+ \begin{list}{$\bullet$}
+  { \setlength{\itemsep}{0pt}
+     \setlength{\parsep}{0pt}
+    \setlength{\topsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\leftmargin}{2em}
+    \setlength{\labelwidth}{1.5em}
+    \setlength{\labelsep}{0.5em} } }
+
+\newcommand{\squishend}{
+  \end{list}  }

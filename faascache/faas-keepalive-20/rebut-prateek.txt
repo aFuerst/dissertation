@@ -1,0 +1,44 @@
+
+
+If I understood correctly, "explicit intialization" is code such as lines 2-6 in Figure 2, which deals with importing packages and such. Why is this not common in general? I'm confused.
+
+> Not common because different functions (say, a Python matrix processing vs. nodejs web function). 
+
+Can you state more explicitly which part of the evaluation are done in a real system vs. simulation? I assume Section 7.1 is done with simulation while 7.2 and 7.3 are experiments in the real system -- can you confirm?
+
+>  Please fix 
+
+Do you consider how the impact of your caching policy may change by considering different cold vs. warm start startup times? A sensitivity study would be insightful here.
+
+> Discord answer 
+
+Can you please clarify whether cold-start refers to initializing or launching a container (or both)? Do keep-alive approaches target initialization, launching, or both latencies?
+
+> Both, I presume? Keep-alive approaches target both latencies. 
+
+Please address the questions under "Design" and "Evaluation" above.
+
+Faascache's container termination policy puts container eviction on the critical path ("Containers are terminated only if there are insufficient resources to launch a new container and if existing warm containers cannot be used."). I was wondering whether a slightly more proactive approach could further improve performance?
+
+> A similar design tradeoff is found in in caching systems such as the page cache. 
+
+In the case of static server provisioning (S5.1), I could not understand the practical use of computing reuse distances of a trace. Is it reasonable to expect that a given trace of function invocations on a server is representative of the future? I would expect invocations to wildly change over time, especially given that a given server in a datacenter is in the general case hosting functions of different, completely independent services with independent temporal activity patterns.
+
+> The microsoft trace shows that workload prediciton can indeed be used for functions (please see Figure XXX in the microsoft paper), in the same way as temporal locality is the backbone of data caching systems. 
+
+Instead of reduction in server size, can you frame your provisioning benefits as additional accommodated load? I find that a much more useful metric.
+
+> Certainly. We presented evaluation of the "inverse" problem only because it is easier to run the same exact workload, whereas scaling workloads up requires some more assumptions about workload scaling (such as whether all function invocations increase proportionally, etc.) 
+
+
+Please explain whether the FaasCache assumption (i.e., containers that have finished their execution can still occupy physical resources) is valid for public/private FaaS installations and what are the implications/limitations in resource management from the FaaS provider point of view that seeks to increase the system utilization with other/best-effort jobs.
+
+> The microsoft paper explicitly says that function invocations can occupy physical resources. Firecracker and peeking-behind-serverless platforms and other papers also mention that function containers are retained. 
+
+How would FaasCache behave if operating at function level, instead of container level?
+
+> Dunno what that means. 
+
+How would OpenWhisk without TTL perform i.e., an approach that does not evict containers until the physical resources (or a predefined amount of them) are filled up compared to FaasCache?
+
+> We compare against such resource-conserving policies by using LRU and other algorithms. 

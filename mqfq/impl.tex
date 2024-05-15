@@ -1,0 +1,89 @@
+\section{Implementation}
+\label{sec:impl}
+
+
+\subsection{Function Queue}
+\label{sec:q-impl}
+
+Queuing and dispatching happen inside the FaaS worker where the function will be executed.
+We implemented our queuing policy and GPU monitoring inside the \sysname~\cite{fuerst2023iluvatar} worker in 2000 lines of Rust.
+
+% Comparatively, our use case here does not make as many dispatches per second, nor does it run a process on every core.
+To keep dispatch time low, we have a dedicated thread inside the worker running Algorithm~\ref{algo:dispatch}.
+This thread will pause and wait for a signal when GPU tokens aren't available or no invocations are available to run.
+New invocations sent to the worker are enqueued by separate threads, which also book-keep the flow's \VT~as necessary.
+Function flows and \VT~tracking are kept in one data structure, and protected behind Read/Write locks.
+Once invocations are dequeued, they are sent to asynchronous threads to let the dispatcher thread prepare future dispatches.
+Completed invocations signal the dispatcher thread, as their completion means new invocations can likely be started with their released resources.
+The dispatcher thread picks up these changes when it runs next and doesn't become a bottleneck, having to micromanage individual flows.
+
+This differs from original MQFQ~\cite{hedayati2019multi} design that was distributed across every CPU core, and relies on lockless and highly-scalable data structures to eliminate contention.
+We find our adjustments enough to allow concurrent queuing and dispatching without blocking, at the rates our worker will be handling.
+% The original MQFQ~\cite{hedayati2019multi} uses several lockless and highly-scalable data structures to allow concurrent access across many CPU cores on a machine.
+
+% and use a simplified design better suited to the performance needs of a FaaS worker and GPU scheduling.
+% This is the primary difference from MQFQ, which has per-core queues and lock-less structures for these tasks.
+% A single GPU can only serve and dispatch a handful of invocations per second, so the lock-less and tree data structures aren't necessary.
+% We protect shared structures with Read/Write locks which give sufficient protection against blocking.
+
+% Rust, rust, rust \dots
+
+
+
+\subsection{GPU Driver Shim}
+\label{sec:shim-impl}
+
+We control and monitor GPU memory by intercepting calls to the native driver using a custom shim.
+This is written in 500 lines of C code, and to ensure nothing accesses the GPU without us being aware of it, we preload it before launching function code inside each container.
+
+\mhead{Memory Oversubscription}
+We use CUDA's Unified Virtual Memory (UVM) to oversubscribe device memory.
+When using UVM, the application sees a unified host-device memory space, and memory pointers are valid in both spaces.
+The CUDA driver moves and ensures coherency of UVM memory between the host and device as use and pressure demands, mimicking disk-based swap space in traditional OS computing.
+% Each function container loads with a custom driver shim we have writtin which intercepts all regular \funcname{cuMemAlloc} calls, and turns them into UM \funcname{cuMemAllocManaged} calls.
+% Our shim intercepts all regular \funcname{cuMemAlloc} calls and turns them into UVM \funcname{cuMemAllocManaged} calls.
+Our shim intercepts all calls to the driver for allocations for physical memory made via \funcname{cuMemAlloc}, and makes a UVM allocation of the same size using \funcname{cuMemAllocManaged}.
+We record the size and memory pointer position, then return the pointer to the application, which is left none the wiser to our interposition.
+It can use this memory as if it were physically allocated, reading, writing, or copying it to the host using traditional driver calls.
+We also intercept and forward UVM allocations, recording their metadata for our use too.
+% We track each allocation, allowing us to properly free the memory when required and manipulate memory without the function being involved.
+
+
+\mhead{Memory Movement}
+We fortunately do not need to rely on the CUDA driver to move memory, who's memory swapping strategies we cannot control.
+% Memory that is allocated with UVM can be moved between the host and device manually, without waiting for the driver to do it on-demand.
+% The agent running inside each function container allows the control plane to control function GPU memory usage via the driver .
+It exposes \quotes{madvise} and memory prefetching capabilities, which we combine with the shim's metadata to have total control over memory. 
+% we take advantage of these to avoid concurrent functions from exceeding the physical memory of the device.
+% function memory onto the device its queue is marked active 
+% As the latter name implies, this call is asynchronous, which we use to overlap making our memory directives with other overheads.
+% When a flow is active and we're about to use a container for it, we direct the shim to call these functions on all the tracked memory.
+% Using the recorded memory information, we call \funcname{cuMemAdvise} to tell the driver we prefer the memory on the device, and \funcname{cuMemPrefetchAsync} to order it moved there.
+When we want a container's memory moved onto the device, we direct the shim to call \funcname{cuMemAdvise} to tell the driver we prefer its memory on the device, and \funcname{cuMemPrefetchAsync} to order it moved there.
+After we choose a flow for dispatch, we send this command asynchronously to the container it will execute in.
+% The prefetch driver call also is non-blocking, allowing us to rapidly call it on each allocation.
+% allowing us to overlap the time it takes to prepare the memory
+Doing this in a non-blocking manner allows us to overlap prefetching with the control plane marshalling invocation arguments to send to the container.
+Not having to block while waiting for memory to be moved saves significant time on the critical path.
+% so we make this call and then send the invocation and its arguments to the container.
+% Performing them in this order allows us to overlap this host-to-device memory movement with our platform actions.
+When a flow is throttled or memory is needed to run other functions, we direct the shim to use those same API calls move memory off the device.
+
+% The platform agent inside the container ensures that it is loaded before the application starts.
+% The addresses of allocations are recorded, and the memory pointer is returned to the application, being none the wiser.
+% When a flow becomes active, we send a directive to the driver via the agent to move allocated memory onto the device.
+% Inversely, when the flow is inactive or gets throttled, another command is sent to move the memory off the device.
+
+\mhead{Utilization monitoring}
+% Using t
+We track both GPU compute utilization and per-container and total device physical memory usage.
+Using NVML~\cite{nvml} bindings in Rust, we query compute utilization and record its instantaneous and moving average, for use in determining \D.
+% Originally, we used the \emph{nvidia-smi}~\cite{nvidia-smi} CLI program for this, but found it took 1-2 seconds per update, caused high overhead, and was neither effective at tracking utilization nor easily parsable.
+% If the updates are too infrequent, the platform will think more compute is available than reality, and over-schedule functions on a GPU.
+% With NVML only taking roughly 100 $\mu{}s$, we query this information every 200 ms to balance having up-to-date information while avoiding excessive CPU utilization on the host.
+We query this information every 200 ms to balance having up-to-date information while avoiding excessive CPU utilization on the host.
+% The in-worker recored utilzation is also incremented on each dispatch by a factor of $1/D_{max}$ to avoid a thundering herd.
+To track memory usage, our shim includes a report of memory allocations still held by the application to the worker alongside other invocation results. 
+This data updates the container's record in the worker, which then tracks memory pressure on the device.
+When a container needs to run, or a flow is made active, we can evict containers belonging to inactive flows to make room.
+% , memory reporting, etc.
