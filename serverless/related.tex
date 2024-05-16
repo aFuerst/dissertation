@@ -40,10 +40,10 @@ Control planes must be able to handle these high variations in frequency and res
 \end{figure}
 
 Functions exist in a data-driven architecture, being required to download inputs to handle each invocation.
-The same group at Azure released another dataset in~\cite{romero2021faa}, focusing on data usage of functions.
+The same group at Azure released another dataset in~\cite{romero2021faa}, focusing on data usage of functions and DAG applications.
 They found a split of functions with some having high cloud storage usage and others almost none.
-Surveys have shown that applications of all types have been deployed on FaaS~\cite{raza2021sok,hossein2022survey,eismann2020serverless}.
-Some examples are explored in Section~\ref{sec:serverless-apps}.
+Surveys have shown that increasingly diverse applications are deployed on FaaS, which will rely on data movement by the platform~\cite{raza2021sok,hossein2022survey,eismann2020serverless}.
+Some examples of these applications are explored in Section~\ref{sec:serverless-apps}.
 % Control planes must cater to a host of diverse applications with equally varied runtime needs.
 
 % The warm and cold time for different functions from the FunctionBench~\cite{kim_functionbench_2019} workload suite are shown in Table~\ref{tab:func-times}.
@@ -154,12 +154,9 @@ Functions may compete for certain resources like network, so scheduling them on 
 
 Package-aware load balancing~\cite{package-cristina-19}  identifies and uses function code dependencies (software packages) as an important source of data locality.
 While this is an important factor, we focus on the in-memory locality of kept-alive functions since memory capacity is much smaller than permanent storage and caching functions in memory has a very large performance impact.
-%
 CPU contention and interference is a major source of performance bottlenecks for co-located functions, and adjusting CPU-shares using cgroups can provide significant benefits~\cite{suresh2019fnsched, suresh2021servermore, ensure-faas-acsos20}.
-%
-The load-locality trade off we explore is complementary to these CPU scheduling optimizations. 
-%
-The repetitive nature of functions and their workflows can also be used to improve resource utilization and latency~\cite{hunhoff2020proactive, yu2021faasrank, puru_xanadu_20, przybylski2021data}: our load-balancer is stateless for the sake of simplicity and can be enhanced with these techniques if necessary.
+The repetitive nature of functions and their workflows can also be used to improve resource utilization and latency~\cite{hunhoff2020proactive, yu2021faasrank, puru_xanadu_20, przybylski2021data} to select workers and sandboxes before they are needed. %: our load-balancer is stateless for the sake of simplicity and can be enhanced with these techniques if necessary.
+% The load-locality trade off we explore is complementary to these CPU scheduling optimizations. 
 
 
 The tradeoff between locality and performance has also been explored in the context of delay scheduling~\cite{zaharia2010delay} for data-parallel applications such as MapReduce.
