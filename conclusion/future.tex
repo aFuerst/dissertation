@@ -2,20 +2,21 @@
 \label{sec:future}
 
 This thesis is highlighted by the design and development of the \sysname~serverless control plane.
-I want to use \sysname~as a springboard for further work both in extension of research described here, and some that is wholly new.
+I want to keep using \sysname~as a springboard for further work both in extension of research described here, and some that is wholly new.
 
 \subsection{Work Stealing Scheduling}
 \label{sec:work-steal}
 
-Load balancer cannot scale to serve millions of invocations and also have oracle-level knowledge of a cluster of thousands.
+Load balancers cannot scale to serve billions of invocations while keeping an oracle-level knowledge of a cluster of thousands of workers.
 We must accept some load imbalance on workers -- scenarios that become especially common in bursty FaaS scenarios.
 Work stealing~\cite{lin2020efficient, guo2010slaw, blumofe1999scheduling} allowing workers to adjust load amongst themselves.
-Idle nodes can \emph{steal} invocations from overloaded machines and run them to improve utilization.
+Idle nodes can \emph{steal} invocations from overloaded machines and run them to locally improve both their utilization and global latency.
 This can also be done in a locality-preserving manner, by borrowing the ideas from chapter~\ref{chap:chrlu}.
-A worker can steal work \quotes{up} the consistent hashing ring rather than it flowing \quotes{down} when a worker is overloaded.
+A worker can steal work \quotes{up} the consistent hashing ring in addition to the load balancer flowing invocations \quotes{down} when a worker is overloaded.
 %  can move load between themselves in these cases.
 
-% Distributed scheduling \cite{tang2022distributed,exton2024raptor}
+Distributed scheduling~\cite{tang2022distributed,exton2024raptor} has been explored, and the ability of nodes to make on-the-fly decisions has proven highly beneficial.
+They are naturally more aware of local load and container pool conditions, and can make immediate and more optimal balancing choices.
 
 % \subsection{\sysname~Improvements}
 % \label{sec:ilu-better}
@@ -23,9 +24,9 @@ A worker can steal work \quotes{up} the consistent hashing ring rather than it f
 \subsection{Polymorphic Functions}
 \label{chap:new-poly}
 
-Chapter~\ref{chap:gpu-sched} of this thesis introduced scheduling of GPU functions, but also the idea that a function on different types of compute.
-It used Python functions capable of running on traditional CPU, or be accelerated by a GPU.
-The last experiment, shown in Figure~\ref{fig:poly}, selected functions to accelerate that saw significant speedup, choosing to run the rest on CPU.
+Chapter~\ref{chap:gpu-sched} of this thesis introduced scheduling of GPU functions, but also the idea that a function can run on different compute types.
+It used Python functions capable of running on traditional CPU or be accelerated by a GPU.
+The last experiment, shown in Figure~\ref{fig:poly}, only selected functions to accelerate that saw significant speedup, choosing to run the rest on CPU.
 I wish to extend these two ideas, that functions
 \begin{enumerate}
   \item Are \emph{polymorphic}, in that without changing code they are capable of running on several distinct compute platforms
@@ -42,8 +43,8 @@ A simple calculation looking at warm CPU time vs cold GPU time in most cases wil
 The functions looked at so far a polymorphic because they rely on libraries that implement algorithms for both compute platforms.
 Serverless can take advantage of its access to function source code to take a more agnostic approach.
 Many functions are small and take up rare CPU space, but a GPU has \emph{thousands} of cores to run such tasks.
-Previous work~\cite{ginzburg2023vectorvisor} has shown that Python code can be translated to run on GPU with a lot of caveats.
-I want to explore the possibilities of translation, alternate mechanisms to accomplish the same thing, and integrate them with the demonstrated scheduling and memory-manipulation techniques in chapter~\ref{chap:gpu-sched}.
+Previous work~\cite{ginzburg2023vectorvisor,baghdadi2019tiramisu,gpu-to-cpu} has shown that code can be transpiled or generated to run on GPU, CPU, and more.
+I want to explore the possibilities of translation, alternate mechanisms to accomplish the same goal, and integrate them with the demonstrated scheduling and memory-manipulation techniques in chapter~\ref{chap:gpu-sched}.
 
 \subsection{Serverless for Distributed Computing}
 \label{sec:new-mpi}

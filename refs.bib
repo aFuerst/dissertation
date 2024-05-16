@@ -1,3 +1,29 @@
+@inproceedings{gpu-to-cpu,
+author = {Moses, William S. and Ivanov, Ivan R. and Domke, Jens and Endo, Toshio and Doerfert, Johannes and Zinenko, Oleksandr},
+title = {High-Performance GPU-to-CPU Transpilation and Optimization via High-Level Parallel Constructs},
+year = {2023},
+isbn = {9798400700156},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3572848.3577475},
+doi = {10.1145/3572848.3577475},
+abstract = {While parallelism remains the main source of performance, architectural implementations and programming models change with each new hardware generation, often leading to costly application re-engineering. Most tools for performance portability require manual and costly application porting to yet another programming model.We propose an alternative approach that automatically translates programs written in one programming model (CUDA), into another (CPU threads) based on Polygeist/MLIR. Our approach includes a representation of parallel constructs that allows conventional compiler transformations to apply transparently and without modification and enables parallelism-specific optimizations. We evaluate our framework by transpiling and optimizing the CUDA Rodinia benchmark suite for a multi-core CPU and achieve a 58\% geomean speedup over handwritten OpenMP code. Further, we show how CUDA kernels from PyTorch can efficiently run and scale on the CPU-only Supercomputer Fugaku without user intervention. Our PyTorch compatibility layer making use of transpiled CUDA PyTorch kernels outperforms the PyTorch CPU native backend by 2.7\texttimes{}.},
+booktitle = {Proceedings of the 28th ACM SIGPLAN Annual Symposium on Principles and Practice of Parallel Programming},
+pages = {119–134},
+numpages = {16},
+keywords = {CUDA, MLIR, barrier synchronization, polygeist},
+location = {, Montreal, QC, Canada, },
+series = {PPoPP '23}
+}
+@inproceedings{baghdadi2019tiramisu,
+  title={Tiramisu: A polyhedral compiler for expressing fast and portable code},
+  author={Baghdadi, Riyadh and Ray, Jessica and Romdhane, Malek Ben and Del Sozzo, Emanuele and Akkas, Abdurrahman and Zhang, Yunming and Suriana, Patricia and Kamil, Shoaib and Amarasinghe, Saman},
+  booktitle={2019 IEEE/ACM International Symposium on Code Generation and Optimization (CGO)},
+  pages={193--205},
+  year={2019},
+  organization={IEEE}
+}
+
 @inproceedings{arnautov2016scone,
   title={$\{$SCONE$\}$: Secure linux containers with intel $\{$SGX$\}$},
   author={Arnautov, Sergei and Trach, Bohdan and Gregor, Franz and Knauth, Thomas and Martin, Andre and Priebe, Christian and Lind, Joshua and Muthukumaran, Divya and O'keeffe, Dan and Stillwell, Mark L and others},
