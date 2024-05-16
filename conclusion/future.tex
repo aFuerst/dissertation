@@ -50,7 +50,7 @@ I want to explore the possibilities of translation, alternate mechanisms to acco
 \label{sec:new-mpi}
 
 Platforms allow chaining functions via directed acyclic graphs (DAGs) to make larger \emph{applications} where outputs of a function are passed by the platform as arguments to the next one(s) in the DAG.
-These interactions are limited -- two concurrent functions cannot communicate directly with one another and all data sharing must be done via remote storage.
+Concurrent computing interactions are limited -- two concurrent invocations cannot communicate directly with one another and all data sharing must be done via remote storage.
 Several platform-managed FaaS dataplanes have been designed to improve data sharing between concurrently running~\cite{giantsidi2023flexlog,sreekanti2020fault} or the input and outputs of DAG functions~\cite{mvondo2021ofc,romero2021faa,abdi2023palette}.
 Functions should not need to use intermediaries to communicate, especially when computing on a shared problem or dataset.
 
