@@ -13,7 +13,7 @@
 This thesis describes the current state of a new computing paradigm, \emph{serverless computing}, and proposes improvements to various aspects of the control planes that orchestrate serverless computing systems.
 Serverless computing, otherwise known as Function as a Service (FaaS) has the possibility to revolutionize cloud computing.
 % It evolved out of the want to abstract away hardware from users, and increase the ability of cloud providers to manage resource utilization.
-It evolved from out of the ethos of cloud computing where hardware is abstracted and \emph{rented} to customers.
+It emerged from out of the ethos of cloud computing where hardware is abstracted and \emph{rented} to customers.
 % Serverless platforms totally manage users' applications using a FaaS \emph{control plane}, orchestrating deployment, execution, scaling, resources, and more.
 Serverless computing is the epitome of this abstraction, where the cloud provider totally manages users' applications using a FaaS \emph{control plane}, orchestrating deployment, execution, scaling, resources, and more.
 
@@ -64,8 +64,8 @@ The transition to more fine-grained resource management allows for more advanced
 Achieving this detailed level of control such features comes with an equal complexity cost for the control plane that is to orchestrate it.
 The value in serverless comes from its ability offer low-latency \emph{performance}, which requires a \emph{simple yet scalable} control plane providing \emph{locality}.
 The primary components of such a control plane are outlined in Figure~\ref{fig:control-plane}, citing where this thesis has impacted.
-A worker executing serverless functions can host dozens of concurrent executions and thousands of idle functions to fully utilize resources (Chs.~\ref{chap:faascache}\&\ref{chap:gpu-sched}).
-The entire control plane coordinates the execution of billions of invocations per day~\cite{sahraei2023xfaas} and must scale to clusters of thousands of machines, guaranteeing good performance under uncertain conditions (Chs.~\ref{chap:chrlu}\&\ref{chap:iluvatar}).
+A worker executing serverless functions can host dozens of concurrent executions and thousands of idle functions to fully utilize resources (Chs.~\ref{chap:faascache}~\&~\ref{chap:gpu-sched}).
+The entire control plane coordinates the execution of billions of invocations per day~\cite{sahraei2023xfaas} and must scale to clusters of thousands of machines, guaranteeing good performance under uncertain conditions (Chs.~\ref{chap:chrlu}~\&~\ref{chap:iluvatar}).
 Active work on serverless spans from low-level virtualization and OS abstractions to high-level scheduling and load-balancing (Ch.~\ref{chap:chrlu}) algorithms.
 This thesis discusses issues existing in current FaaS control planes and proposes methods, new designs, and future-thinking systems to tackle them.
 
@@ -112,7 +112,7 @@ Maintaining locality to provide acceptable performance while maximizing use of r
 
 FaaS by design exists at a cluster level, so we cannot consider its challenges solely from a single-worker perspective.
 Functions have a variety of characteristics: execution time, inter-arrival-time of invocations, memory usage, and more.
-These can all vary in orders of magnitude, from 0.1 s - 60 s runtimes to sub-second to daily invocation arrivals~\cite{shahrad2020serverless}.
+These can all vary in orders of magnitude, from sub-second to several minute runtimes and sub-second to daily invocation arrivals~\cite{shahrad2020serverless}.
 % The control plane is expected to guarantee low latency in all cases and scale applications up or down with changing demand.
 Even worse, functions are notoriously bursty, rapidly changing how frequently invocations occur.
 % In all, a FaaS control plane must handle millions of invocations per day and run them on clusters of thousands of machines.
@@ -122,7 +122,7 @@ One could schedule function sandboxes~\cite{balaji2021fireplace,kaffes2021practi
 Load balancing invocations~\cite{aumala2019beyond,leegreedy,faaslb-hpdc22} is a more scalable way to address the complex load and large cluster uncertainty, trusting workers to make ideal decisions.
 The cluster control plane targets locality in both cases, knowing that running invocations in existing sandboxes is much more performant.
 
-Cloud providers currently do not expose compute capabilities outside of CPU computation, but users want to put latency-critical applications like ML inference onto FaaS platforms to take advantage its high scalability.
+Cloud providers currently do not expose compute capabilities outside of CPU computation, but users want to put latency-critical applications like machine learning (ML) inference onto FaaS platforms to take advantage its high scalability.
 % Serverless functions currently cannot viably access CPU parallelism, and are configurable to use a limited number of CPU cores during execution. 
 Accelerators come in many flavors: SmartNICs~\cite{choi2020lambda}, GPUs~\cite{pemberton2022kernel,guleria2019emf}, FPGAs~\cite{bacis2020blastfunction}, and more~\cite{du2022serverless,romero2021llama} -- each with unique characteristics and types of applications they can support.
 A host of applications are lining up~\cite{yang2022infless,ali2022optimizing,zhang2019video,risco2021gpu,hung2019rapid,shankar2020serverless} to run on faster FaaS hardware.
@@ -158,7 +158,7 @@ Users interact with the controller to create functions, invoke them, and receive
 It, in turn, load balances invocations amongst the cluster of workers that execute them using the aforementioned isolation tools.
 The many and varied designs presented by researches are shown and compared here.
 Techniques to improve isolation mechanism performance and load balancing are frequent.
-Wholly new systems have also been built, typically targeting a specific workload class such as machine learning (ML), which has become popular in serverless.
+Wholly new systems have also been built, typically targeting a specific workload class such as ML, which has become popular in serverless.
 This exploration ends with a detailing of the many use cases serverless has been put towards, including ML, scientific computing, and even distributed computing.
 
 Chapter~\ref{chap:faascache} has the first contribution of this thesis and describes a container cache management design called \emph{FaasCache}.
@@ -181,7 +181,7 @@ The next chapter, chapter~\ref{chap:chrlu}, moves up a level in the control plan
 As FaasCache shows, functions benefit from running in warm containers, which is referred to as function \emph{locality}.
 The heterogeneous nature of functions would imbalance workers if we sent each function's invocations to a single worker.
 Some would be overloaded and suffer significant performance degradation, others sitting idle.
-Our CH-RLU algorithm targets locality for functions while at the same time avoiding worker overload.
+Our \emph{CH-RLU} algorithm targets locality for functions while at the same time avoiding worker overload.
 We use \emph{consistent hashing}~\cite{karger1997consistent} to give perfect locality and distribute functions amongst workers.
 To detect overloads, we keep usage reports from each worker and add anticipated load from dispatched invocations to such reports.
 Extremely popular functions, those with the highest frequency of invocations, also model Gaussian noise of the load impact before sending an invocation, to model overloading scenarios.
@@ -199,7 +199,7 @@ Next, Chapter~\ref{chap:iluvatar} details a new serverless control plane design 
 % Current open-source FaaS control planes \cite{openwhisk} are deficient in key areas for promoting scalable research in the area.
 This new control plane is written in Rust and seeks to solve the deficiencies in current open-source control planes used for research~\cite{openwhisk}.
 Its worker is designed to be highly modular, allowing swap-able implementations to support heterogeneous platforms and ease comparisons for research.
-It supports a novel queue mechanism to support new designs that may not run all workloads immediately, or handle cases of severe resource demand/
+It supports a novel queue mechanism to support new designs that may not run all workloads immediately, or handle cases of severe resource demand.
 The controller is built on a stateless design and uses the load balancing algorithm from Chapter~\ref{chap:chrlu}, relying on the worker's local knowledge for scheduling.
 The third runtime component is a time-series database~\cite{influx} used to aggregate function and worker metrics, reducing communication overhead between platform components.
 Finally, and a first for such systems, it has a built-in load generation suite that integrates seamlessly with both worker and load balancer.
