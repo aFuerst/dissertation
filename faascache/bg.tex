@@ -1,5 +1,5 @@
 \subsection{Caching Background}
-
+\label{sec:faascache:bg}
 % This whole thing needs to be rewritten. What is the message?
 
 % This is nice, but here and not in the technical sections? 
@@ -10,8 +10,8 @@ The effectiveness of a caching algorithm depends on the workload's inter arrival
 Because functions show a lot of diversity in their memory footprints, and since keep-alive is primarily constrained by server memory, we seek to use \emph{size-aware} caching methods. 
 %Conventional caching \emph{largely} deals with constant-sized objects. For example: LRU, sampling techniques like SHARDS, counterstacks, etc.
 %Therefore, we investigate the use of \emph{size-aware} techniques for keep-alive policies and provisioning.
-While conventional caching algorithms and analytical models largely deal with constant-sized objects, many size-aware caching policies have been developed for web-pages and data~\cite{cao_irani_1997}. 
-In particular, we use the Greedy-Dual~\cite{young_gd_orig_94} online caching framework that deals with objects with different eviction costs, that are determined based on size and other factors.
+While conventional caching algorithms and analytical models largely deal with constant-sized objects, many size-aware caching policies have been developed for webpages and data~\cite{cao_irani_1997}. 
+In particular, we use the Greedy-Dual~\cite{young_gd_orig_94} online caching framework that deals with objects with different eviction costs that are determined based on size and other factors.
 The Greedy-Dual family of eviction algorithms for non-identical objects can be extended in many ways.
 We use a common variant, Greedy-Dual-Size-Frequency~\cite{gdsf, gdfs_2001,cherkasova2001role}, which considers the size and frequency of objects. 
 

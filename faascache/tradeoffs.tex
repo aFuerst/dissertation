@@ -7,11 +7,11 @@ In this section, we first present an empirical analysis of cold-start overheads 
 \noindent \textbf{System model.} 
 We assume that each function invocation runs in its own container. 
 %
-A FaaS control plane may use a cluster of physical servers, and forward the function invocation requests to different servers based on some load-balancing policy. 
+A FaaS control plane may use a cluster of physical servers and forward the function invocation requests to different servers based on some load-balancing policy. 
 Our aim is to investigate general techniques that are independent of cluster-level load-balancing, and we therefore focus on \emph{server-level} policies. 
 Even on a single server, a function can have multiple independent and concurrent invocations, and hence containers. 
 Each function has its own container disk-image and initialization code, and thus containers cannot be used by different functions. 
-A function's containers are nearly identical in their initialization overheads and resource utilization, since they are typically running the same function code. 
+A function's containers are nearly identical in their initialization overheads and resource utilization since they are typically running the same function code. 
 %
 When a function finishes execution, its container may be terminated, or be kept alive and ``warm'' for any future invocations of the same function. 
 %
@@ -21,7 +21,7 @@ Thus, server resources are consumed by running containers, and containers being 
 
 
 %rev1 
-Keeping functions alive/warm presents a fundamental tradeoff: it can reduce application-latency and CPU and I/O overhead, but it increases memory pressure. 
+Keeping functions alive/warm presents a fundamental tradeoff: it can reduce application latency and CPU and I/O overhead, but it increases memory pressure. 
 Nevertheless, recycling the execution environment and keeping function containers alive is a useful performance optimization that is supported by large public cloud platforms~\cite{goog-functions-tricks,aws-warm-predictable,azure-warmup-trigger}. 
 %
 In some scenarios, server resources may also be shared with long-running containers and VMs. 
@@ -116,20 +116,20 @@ Function workloads are also heavy-tailed: a few ``heavy hitting'' functions are 
 \subsection{Policy Goals and Considerations}
 
 
-The primary goal of keep-alive is to reduce the initialization and cold-start latency, by keeping functions alive for different durations based on their characteristics. 
-% Servers that run these functions are heavily multiplexed, and run hundreds of short lived functions concurrently. %backend FaaS servers?
-% too sudden 
-Because servers run hundreds of short lived functions concurrently, keep-alive policies must be generalizable and yield high server utilization. 
-Functions can have vastly different characteristics, and keep-alive polices must work efficiently in highly dynamic and diverse settings. % (Table~\ref{tab:workloads}). 
-We use the following characteristics of functions for keep-alive policies.
+% The primary goal of keep-alive is to reduce the initialization and cold-start latency, by keeping functions alive for different durations based on their characteristics. 
+% % Servers that run these functions are heavily multiplexed, and run hundreds of short lived functions concurrently. %backend FaaS servers?
+% % too sudden 
+% Because servers run hundreds of short lived functions concurrently, keep-alive policies must be generalizable and yield high server utilization. 
+% Functions can have vastly different characteristics, and keep-alive polices must work efficiently in highly dynamic and diverse settings. % (Table~\ref{tab:workloads}). 
+% We use the following characteristics of functions for keep-alive policies.
 
 
-The \textbf{initialization time} of functions can vary based on the code and data dependencies of the function.  
-For example, a function for machine learning inference may be initialized by importing large ML libraries (such as TensorFlow, etc.), and fetching the ML model, which can be hundreds of megabytes in size and take several seconds to download. 
-Functions also differ in terms of their \textbf{total running time}, which includes the initialization time and the actual execution time. 
-Again, functions for deep-learning inference can take several seconds, whereas functions for HTTP servers and microservices are extremely short-lived (few milliseconds). 
-The \textbf{resource footprint} comprises of the CPU, memory, and I/O use, and also differs widely based on the application's requirements. 
-Finally, functions have different \textbf{frequencies} and invocation rates. Some functions may be invoked several times a second, whereas other functions may only be invoked rarely (if they are used to serve a very low-traffic web-site, for instance). 
+% The \textbf{initialization time} of functions can vary based on the code and data dependencies of the function.  
+% For example, a function for machine learning inference may be initialized by importing large ML libraries (such as TensorFlow, etc.), and fetching the ML model, which can be hundreds of megabytes in size and take several seconds to download. 
+% Functions also differ in terms of their \textbf{total running time}, which includes the initialization time and the actual execution time. 
+% Again, functions for deep-learning inference can take several seconds, whereas functions for HTTP servers and microservices are extremely short lived (few milliseconds). 
+% The \textbf{resource footprint} comprises of the CPU, memory, and I/O use, and also differs widely based on the application's requirements. 
+% Finally, functions have different \textbf{frequencies} and invocation rates. Some functions may be invoked several times a second, whereas other functions may only be invoked rarely (if they are used to serve a very low-traffic web-site, for instance). 
 
 % \begin{figure}[t]
 %   \centering
@@ -142,7 +142,7 @@ Finally, functions have different \textbf{frequencies} and invocation rates. Som
 % \end{figure}
 
 
-Because server resources are finite, it is important to prioritize functions which should be kept alive, based on the aforementioned characteristics. 
+Because server resources are finite, it is important to prioritize functions which should be kept alive, based on their \textbf{initialization time}, \textbf{total running time}, \textbf{resource footprint}, and \textbf{frequencies}.
 A function which is not popular and is unlikely to be called again in the near future, sees little benefits from keep-alive, and wastes server memory. 
 %In fact, keeping such functions alive consumes valuable server computing resources for no gain in efficiency. %energy.. hmm
 %Thus, keep-alive policies should prioritize popular functions. 
@@ -150,14 +150,14 @@ Similarly, the resource consumption of the functions is also important: since ke
 Finally, functions can also be prioritized based on their initialization overhead, since it is effectively wasted computation.
 
 % This paragraph is key. Different priorities and there is no one single ranking scheme for keepalive... 
-The problem of designing keep-alive policies is complicated by the fact that functions may have vastly different keep-alive priorities for the different characteristics.
+The problem of designing keep-alive policies is complicated by the fact that functions may have vastly different keep-alive priorities across the different characteristics.
 Consider a function with a large memory footprint (like those used in ML inference), high initialization overhead, and a low popularity.
 Such a function should have a low keep-alive priority due to its size, high priority due to large initialization overhead, and a low priority due to its low popularity.
 Thus, keep-alive policies must carefully balance all the different function characteristics and prioritize them in a coherent manner. 
 
 
 % This still reads like making a case. But its only two sentences and bears repeating?
-Current FaaS systems have shirked from this challenge and use primitive keep-alive policies that are not designed with the diversity and dynamism in mind. 
+Current FaaS systems have shirked this challenge and use primitive keep-alive policies that are not designed with the diversity and dynamism in mind. 
 FaaS frameworks such as OpenWhisk, keep all functions alive for a \emph{constant} period of time (10 minutes). 
 This is agnostic to different function characteristics such as resource footprint and initialization overheads, and only loosely captures popularity. 
 More principled approaches are needed, which we provide next. 

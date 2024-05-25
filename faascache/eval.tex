@@ -5,7 +5,7 @@
 
 
 We now present the experimental evaluation of our caching-based keep-alive technique by using function workload traces and serverless benchmarks.
-Our goal is to investigate the effectiveness of the these techniques under different workload and system conditions. 
+Our goal is to investigate the effectiveness of these techniques under different workload and system conditions. 
 
 
 \begin{figure*}
@@ -143,7 +143,7 @@ We generate three day-long traces using the Azure Functions dataset to showcase 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Trace-Driven Keep-Alive Evaluation}
 
-In this subsection, we use the Azure function traces to evalaute different keep-alive policies in our discrete-event simulator. 
+In this subsection, we use the Azure function traces to evaluate different keep-alive policies in our discrete-event simulator. 
 % Primary Comparison? Competitors? 
 We compare all caching-based variants against the default keep-alive policy in OpenWhisk (10 minute TTL).
 % rev 1
@@ -153,15 +153,16 @@ The others are the caching-based variants described in Section~\ref{subsec:varia
 
 
 %rev 1 
-We also compare against the histogram based keep-alive policy in~\cite{shahrad_serverless_2020}, which is the state of the art technique.
+We also compare against the histogram-based keep-alive policy in~\cite{shahrad_serverless_2020}, which is the state of the art technique.
 % Section 4.2 of serverless paper 
 We have reproduced this policy (HIST) from the details in the paper, and have implemented it in a ``best-effort'' manner without any knowledge of the optimizations in the actual implementation.
 This is effectively a ``TTL+Prefetching'' policy: it uses a histogram of \emph{inter-arrival times} to predict future function invocations and eagerly evict warm functions.
-It uses timeseries-forecasting to capture temporal locality, but does not consider the other function characteristics such as function size and initialization cost. 
+It uses timeseries forecasting to capture temporal locality, but does not consider the other function characteristics such as function size and initialization cost. 
 The IAT, computed by taking a function's execution time plus the subsequent idle time, between each actual invocation is recorded in minute granularity buckets, tracking up to four hours between executions.
 The policy uses ARIMA modeling for those invocations that fall outside this four hour window, we chose not to implement this specific feature due to its complexity, and the fact that it accounted for a minor fraction (\textasciitilde 0.56\%) of all invocations.
 From these buckets, a function's coefficient of variation (CoV) is calculated using Welford's online algorithm~\cite{welford}. 
-When the function's IAT is predictable (CoV $\leq 2$), the function's historical/customized preload and TTL time are used. Otherwise the function has a generic TTL of two hours. 
+When the function's IAT is predictable (CoV $\leq 2$), the function's historical/customized preload and TTL time are used.
+Otherwise, the function has a generic TTL of two hours. 
 When an invocation is anticipated, it is brought into memory and kept there until its TTL expires.
 A function is evicted when the policy predicts it will not have an invocation in the near future. 
 %We chose not to implement the ARIMA modeling for IAT's exceeding four hours for simplicity and the fact it is only applicable to a tiny number of functions.
@@ -197,11 +198,11 @@ The equivalence of LRU and TTL-based caching for rare objects has been noted~\ci
 We can observe from Figure~\ref{fig:exec-overheads-all} that the increase in execution time is generally small ($<10\%$).
 This is because of two main factors: the evaluation metric chosen, and the properties of the workload trace. 
 The execution time is averaged across \emph{all} function invocations.
-However, serverless workloads consists of a large number of very frequently invoked functions. 
+However, serverless workloads consist of a large number of very frequently invoked functions. 
 The performance of these functions is generally not affected by keep-alive policies, since any policy is going to keep them in the cache because of their high frequency. 
-Thus, the difference between non work-conserving policies such as TTL and Greedy-Dual is masked because of the frequent and popular functions. 
+Thus, the difference between non-work-conserving policies such as TTL and Greedy-Dual is masked because of the frequent and popular functions. 
 For instance, the average inter-arrival time for all three workloads is less than 36ms, or about 27 function invocations per second. 
-Thus the server is overloaded, and TTL does well even though it is not work-conserving. 
+Thus, the server is overloaded, and TTL does well even though it is not work-conserving. 
 As the IAT grows, the effectiveness of work-conserving caching-based approaches increases compared to TTL, as we shall see in the next subsection. 
 
 %%%%
@@ -213,7 +214,7 @@ We see a similar relation and behavior in the miss-ratio curves shown in Figure~
 Due to function heterogeneity, the cold-start overheads are not strictly correlated with cache miss ratios, and thus the differences between policies is different compared to the previously described actual cold-start overheads. 
 % \prat{Write after colors are fixed.}
 Classic miss-ratio curves do not consider the miss \emph{cost} (i.e., initialization cost), which is an important metric that is optimized by the Greedy-Dual approach.
-Thus in general, even in object caching contexts, miss-ratio curves deviate from the actual performance---a behavior that we also observe. 
+Thus, in general, even in object caching contexts, miss-ratio curves deviate from the actual performance---a behavior that we also observe. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{OpenWhisk Evaluation}

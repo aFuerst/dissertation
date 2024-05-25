@@ -8,12 +8,12 @@ Mitigating cold-starts is one of the central performance problems in FaaS, and h
 %
 The initialization or startup time of functions can be reduced  by reducing container startup overheads~\cite{oakes_sock_2018,mohan_agile_2019, akkus_sand_2018}, or deploying functions inside ultra-light containers, VMs, or unikernels~\cite{unikernels,firecracker-nsdi20}.
 %
-While these mechanisms can reduce the cold-start overhead associated with the virtual environment creation, the other sources of overheads remain, such as losing all application initialized variables, cached files, etc.
+While these mechanisms can reduce the cold-start overhead associated with the virtual environment creation, other sources of overheads remain, such as losing all application initialized variables, cached files, etc.
 As we have shown, keep-alive essentially serves the role of caching, and fast startup only reduces the ``miss'' penalty, and does not eliminate it.
 
 % Rev 1 
 Catalyzer~\cite{du2020catalyzer} implements new mechanisms for checkpointing and restoring application and sandbox state, which significantly reduce the initialization cost of functions deployed in their gvisor-based sandbox environment. 
-Our approach is complementary to these techniques, since we focus on retaining the entire execution environment instead of optimizations for restoring/recreating it. 
+Our approach is complementary to these techniques since we focus on retaining the entire execution environment instead of optimizations for restoring/recreating it. 
 Keep-alive policies can be combined with these optimized mechanisms to improve system-wide performance even further. 
 
 %for functions by forking a lightweight execution environment after function initialization. %still uses memory though?
@@ -21,8 +21,8 @@ Keep-alive policies can be combined with these optimized mechanisms to improve s
 %It uses a complementary set of techniques, since we tradeoff extra memory for simpler system and deployment complexity. 
 
 Principled keep-alive policies for functions have recently gained attention: the recent dataset and policy from the Azure function trace~\cite{shahrad_serverless_2020} shows the importance and effectiveness of keep-alive policies. 
-In contrast to our work, their policy does not take the function size into consideration, and uses a time-series predcition approach (effectively capturing recency and frequency), and combines it with a predictive ``prefetching'' approach. 
-As we have shown, function sizes are a crucial characteristic, and the use of caching allows the use of advanced analytical and modeling approaches for serverless computing in general. 
+In contrast to our work, their policy does not take the function size into consideration and uses a time-series prediction approach (effectively capturing recency and frequency), and combines it with a predictive ``prefetching'' approach. 
+As we have shown, function memory footprints are a crucial characteristic, and the use of caching allows the use of advanced analytical and modeling approaches for serverless computing in general. 
 % rev 1 
 Earlier work has focused on simple ``warm container pools''~\cite{lin_mitigating_2019}, in which Kubernetes cluster runs a certain number of warm containers for functions. 
 Our caching-based policies take this one step further and decide \emph{which} container to keep-alive, and for how long. 

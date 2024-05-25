@@ -18,7 +18,7 @@ We therefore present a \emph{static} provisioning policy that determines the ser
 \subsection{Static Provisioning}
 \label{subsec:static}
 
-In Section \ref{sec:bg}, we have seen how keeping function containers warm in a keep-alive cache can help mitigate the cold-start overheads. 
+In Section \ref{sec:faascache:bg}, we have seen how keeping function containers warm in a keep-alive cache can help mitigate the cold-start overheads. 
 The effectiveness of any keep-alive policy depends on the size of this keep-alive cache, and thus the server resources available, i.e., the server size. 
 Our \emph{static} provisioning policy thus selects a server size for handling a given workload. 
 % Not peak, since that would be infinite sized. 90 percentile, but we dont do that. 
@@ -82,7 +82,7 @@ caching deals with unique objects, whereas there can be  multiple containers for
 %
 At lower cache sizes, a high miss rate results in higher server load, and hence a higher number of dropped requests, that the classical reuse-distance approaches do not capture.
 If all warmed containers of a function are in use, then a new invocation results in a cold-start---which would be counted as a cache ``hit''.
-Thus at lower sizes, the real hit-ratio is lower than the ideal. 
+Thus, at lower sizes, the real hit-ratio is lower than the ideal. 
 At larger sizes, \emph{multiple} containers corresponding to concurrent invocations of a function will be present, which results in a deviation from the hit-rate curve. 
 %: which is again different from the caching model where objects are unique. 
 Reconciling these differences is an interesting area of future work. %but does not impact our work significantly. 
@@ -100,9 +100,9 @@ We also use the hit-ratio curve approach for a \emph{dynamic} auto-scaling polic
 We assume that the FaaS server backend is running functions as containers either inside a virtual machine (VM), or is sharing the physical server with other cloud applications. 
 In either case, it is important to be able to reclaim unused keep-alive cache resources and reduce its footprint, in order to increase the efficiency of the cloud platform. 
 
-Our vertical elastic scaling policy is simple and is intended to demonstrate the efficacy of a general caching based approach. 
+Our vertical elastic scaling policy is simple and is intended to demonstrate the efficacy of a general caching-based approach. 
 We implement a  proportional controller~\cite{pid-wiki} which periodically adjusts the VM memory size based on the rate of cold-starts.  
-Thus during periods of low rate of function invocations (i.e., arrival rate), the cache size can be reduced. 
+Thus, during periods of low rate of function invocations (i.e., arrival rate), the cache size can be reduced. 
 This may \emph{increase} the miss-ratio---but we care about the cold-starts (i.e., misses) per second, which is product of miss-ratio and invocations per second.
 Our controller monitors the arrival and cold-start rate, and uses the hit-ratio curve to decrease or increase VM size dynamically. 
 We use VM resource deflation~\cite{deflation-eurosys19} to shrink or expand the VM by using a combination of hypervisor level page swapping, or guest-OS memory hot-plug and unplug. 

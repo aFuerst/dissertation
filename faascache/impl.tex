@@ -18,7 +18,7 @@ Each invocation of a function (OpenWhisk action) in ContainerPool records the la
 
 
 If the container was prewarmed before the invocation arrived, we record it as the function's warm runtime.
-For new functions, the initialization overhead is caputred and assumed to be the worst-case runtime until a warmed invocation is recorded. % is approximated as the minimum overhead of Docker and OpenWhisk's Python runtime initialization.
+For new functions, the initialization overhead is captured and assumed to be the worst-case runtime until a warmed invocation is recorded. % is approximated as the minimum overhead of Docker and OpenWhisk's Python runtime initialization.
 In the subsequent invocations, the initialization overhead is computed by subtracting the cold from the warm time. 
 %Otherwise it was a cold start.
 %The maximum cold and warm runtimes are kept per function to compute the priority.
@@ -58,7 +58,7 @@ We shrink the ContainerPool first, and reclaim the free memory using guest OS-le
 
 \noindent \textbf{Keep-alive Simulator.}
 We have implemented a trace-driven discrete event simulator for implementing and validating different keep-alive policies.
-Our simulator is written in Python in about 2,000 lines of code, and implements the various Greedy-Dual variants. 
+Our simulator is written in Python in about 2,000 lines of code, and implements the various variants described in Section~\ref{subsec:variants}. 
 It allows us to determine the cache hit ratios and the cold-start overheads for different workloads and memory sizes.
 Additionally, it also implements the static and dynamic provisioning policies for adjusting server size.
 

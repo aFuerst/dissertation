@@ -6,7 +6,7 @@ The FaaS computing paradigm sees providers running user code on-demand when a re
 Each invocation must be run in isolation from co-located invocations and must ensure provider control over system resources.
 Both security goals are thus achieved by running each invocation in a sandboxed environment. 
 Sandboxes are generally implemented using containers (such as Docker~\cite{docker-main}) or lightweight VMs (such as Firecracker~\cite{firecracker-nsdi20}) created on the server that runs the invocation.
-Unfortunately, creation time for both any type of sandbox can be significant, adding latency to the in-flight request. 
+Unfortunately, creation time for any type of sandbox is often significant, always adding latency to the in-flight request. 
 
 Many techniques have been proposed to reduce the initialization overhead from such \emph{cold starts}.
 Cold start invocations, because of the large initialization overheads, are typically $1-10\times$ larger than the function execution time.
@@ -17,7 +17,7 @@ Keeping the function \quotes{warm} thus allows a provider to amortize the startu
 
 \mhead{Workload Characterization}
 Published traces from major providers give a glimpse into the scale of serverless computing.
-Shahrad et al.~\cite{shahrad_serverless_2020} publicized the first dataset of the functions served by Azure Fucntions, with a detailed characterization breakdown.
+Shahrad et al.~\cite{shahrad_serverless_2020} publicized the first dataset of the functions served by Azure Functions, with a detailed characterization breakdown.
 As seen in Figure~\ref{fig:wild-invokes}, invocation rates are \emph{extremely} heavy tailed.
 % 0.1\% of functions account for half of all invocations, and the top 19\% account for a total of 99.6\% of invocations.
 The most frequently invoked functions are executed several times a second, while the rarest perhaps once per day.

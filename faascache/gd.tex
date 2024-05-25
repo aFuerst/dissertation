@@ -28,13 +28,13 @@ The high-level goal in caching is to improve the distribution of object access t
 
 This caching analogy provides us a framework and tools for understanding the tradeoffs in keep-alive policies, and improving server utilization. 
 %The problem of cache eviction in object caching is a thoroughly studied for a wide range of constraints, systems, and environments. 
-Caching has been studied in wide range of contexts and many existing caching techniques can be applied and used for function keep-alive. 
+Caching has been studied a in wide range of contexts and many existing caching techniques can be applied and used for function keep-alive. 
 Our insight is that we can use classic observations and results in object caching to formulate equivalent keep-alive policies that can provide us with well-proven and sophisticated starting point for understanding and improving function keep-alive.  
 
 
 In the rest of this section, we will show how cache eviction algorithms can be adapted to keep-alive policies.
 Caching systems typically seek to improve hit ratios (the fraction of accesses that are cache hits).
-However, focusing on hit-rates alone does not necessarily translate to improved \emph{system} level performance, if the objects have different sizes and miss costs.
+However, focusing on hit-rates alone does not necessarily translate to improved \emph{system} level performance if the objects have different sizes and miss costs.
 For instance, caching all small objects may yield a high hit ratio, but the infrequent misses of larger objects results in higher miss costs and poor system throughput. 
 Therefore, we will also focus on minimizing the overall cold-start overhead, which is equivalent to the ``byte hit ratio'' used in caching systems.
 
@@ -72,7 +72,7 @@ Our policy is resource conserving: we keep the functions warm whenever possible,
 This is a departure from current constant time-to-live policies implemented in FaaS frameworks and public clouds, that are \emph{not} resource conserving, and may terminate functions even if resources are available to keep them alive for longer. 
 
 %We assume that each functions is deployed in a container, and o
-Our policy decides which container to terminate if a new container is to be launched and there are insufficient resources availabile. 
+Our policy decides which container to terminate if a new container is to be launched and there are insufficient resources available. 
 The total number of containers (warm + running) is constrained by the total server physical resources (CPU and memory). 
 We compute a ``priority'' for each container based on the cold-start overhead and resource footprint, and terminate the container with the lowest priority.
 %
@@ -166,7 +166,7 @@ The priority is thus proportional to the initialization overhead of the function
 %If we only care about the memory size, then we can simply use a single dimensional metric $m_i$ to denote the size.
 The priority is inversely proportional to the size, and thus larger containers are terminated before smaller ones. 
 In most scenarios, the number of containers that can run is limited by the physical memory availability, since CPUs can be multiplexed easily, and memory swapping can result in severe performance degradation.
-Thus for ease of exposition and practicality, we consider only the container \emph{memory} use as the size, instead of a multi-dimensional vector. 
+Thus, for ease of exposition and practicality, we consider only the container \emph{memory} use as the size, instead of a multi-dimensional vector. 
 
 
 We can also use multi-dimensional resource vectors to represent the size, in which case we convert them to scalar representations by using the existing formulations from multi-dimensional \emph{bin-packing.}
@@ -198,8 +198,8 @@ Similarly, a size aware keep-alive policy can be obtained by using 1/size as the
 
 Other size-aware online algorithms with tight online theoretical guarantees can also be applied.
 We also implement the \textbf{LANDLORD}~\cite{young2002line} algorithm, which can be understood as a variant of the Greedy-Dual approach.
-Landlord also considers the frequency, size and initialization cost of functions.
-When the server is full and some container is to be evicted, a ``rent'' is charged from each function based on its size and initialization cost (specifically, it is equal to $\min \frac{\text{initialization cost}}{\text{size}}$.
+Landlord also considers the frequency, size, and initialization cost of functions.
+When the server is full and some container is to be evicted, a ``rent'' is charged from each function based on its size and initialization cost (specifically, it is equal to $\min(\frac{\text{initialization cost}}{\text{size}})$.
 This subtly differs from Greedy-Dual-Size-Frequency: the decrease in priority is computed based on the state of all the cached containers, and not independently applied. 
 Upon a function invocation, its containers get a ``credit'', and their priority is set to their initialization cost. 
 The containers with the lowest credits are evicted. 
