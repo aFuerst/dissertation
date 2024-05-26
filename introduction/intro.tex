@@ -15,7 +15,8 @@ Serverless computing, otherwise known as Function as a Service (FaaS) has the po
 % It evolved out of the want to abstract away hardware from users, and increase the ability of cloud providers to manage resource utilization.
 It emerged from out of the ethos of cloud computing where hardware is abstracted and \emph{rented} to customers.
 % Serverless platforms totally manage users' applications using a FaaS \emph{control plane}, orchestrating deployment, execution, scaling, resources, and more.
-Serverless computing is the epitome of this abstraction, where the cloud provider totally manages users' applications using a FaaS \emph{control plane}, orchestrating deployment, execution, scaling, resources, and more.
+Serverless computing is the most recent and exemplary of this abstraction, where the cloud provider totally manages users' applications using a FaaS \emph{control plane}, orchestrating deployment, execution, scaling, resources, and more.
+Major cloud providers such as Amazon Web Services~\cite{lambda}, Google Cloud~\cite{gcp-functions}, Microsoft Azure~\cite{azure-functions}, and Alibaba Cloud~\cite{alibaba-compute}, have taken up and popularized serverless since first appeared in 2016.
 
 Traditionally, an application would be hosted by the developer using hardware that they personally owned and managed.
 This causes problems when trying to rapidly scale up the number of users for the application -- additional hardware must be purchased (slowly), or the system must be over-provisioned to handle peak user load.
@@ -29,7 +30,7 @@ When user load decreases, say at night, these VMs can be deleted and do not have
 At the same time, software development practices were pushing to split up large monolithic applications into functionality-specific \emph{microservices}.
 Deploying microservices onto individual VMs lead to wasted resources and high orchestration overhead.
 Developers started to ship their applications inside pre-packaged \emph{containers}~\cite{docker-main}, that contained all necessary dependencies for it to run.
-Platforms~\cite{kubernetes} were also created that could deploy these containers and manage the services within them using some simple configuration.
+Control planes like Kubernetes~\cite{kubernetes} and OpenStack~\cite{openstack}, along with many others, were also created that could deploy these containers and manage the services within them using some simple configuration.
 Cloud providers could then run these orchestration tools on their hardware, and deploy user-provided containers directly.
 
 This approach is highly popular today, but has several drawbacks and overheads.
@@ -57,22 +58,33 @@ Cloud providers are pushing users to this new platform because they get several 
 %  monetizing unused compute resources and maximizing control over their resources.
 % The small and ephemeral nature of functions allows for fine-grained control by the provider along a number of axes. 
 A function's resources are considered \emph{ephemeral}, and can be removed at the provider's discretion when not being used.
-The resource demands of a function are much smaller than that of a VM or container, allowing many hundreds to be hosted on a single \emph{worker}.
+The resource demands of a function are much smaller than that of a VM or container, allowing many hundreds to be hosted on a single \emph{server} (also called a \emph{worker}).
 Many invocations can be run on a worker at a time, and the provider can load-balance these to maximize utilization of their clusters that are plagued by wasted resources~\cite{fuerst2020cloud,fuerst2022memory,wang2021smartharvest,serverless-harvest-sosp21,harvest-osdi20}.
 The transition to more fine-grained resource management allows for more advanced optimizations and opportunities for improving resource utilization.
 
-Achieving this detailed level of control such features comes with an equal complexity cost for the control plane that is to orchestrate it.
-The value in serverless comes from its ability offer low-latency \emph{performance}, which requires a \emph{simple yet scalable} control plane providing \emph{locality}.
-The primary components of such a control plane are outlined in Figure~\ref{fig:control-plane}, citing where this thesis has impacted.
+% Achieving this detailed level of control such features comes with an equal complexity cost for the control plane that is to orchestrate it.
+
+The value in serverless comes from its ability offer low-latency \emph{performance}, which requires a \emph{simple yet scalable} control plane tailored with FaaS-specific distributed computing optimizations.
+The primary components of such a control plane are outlined in Figure~\ref{fig:control-plane}, highlighting the contributions of this thesis.
 A worker executing serverless functions can host dozens of concurrent executions and thousands of idle functions to fully utilize resources (Chs.~\ref{chap:faascache}~\&~\ref{chap:gpu-sched}).
 The entire control plane coordinates the execution of billions of invocations per day~\cite{sahraei2023xfaas} and must scale to clusters of thousands of machines, guaranteeing good performance under uncertain conditions (Chs.~\ref{chap:chrlu}~\&~\ref{chap:iluvatar}).
 Active work on serverless spans from low-level virtualization and OS abstractions to high-level scheduling and load-balancing (Ch.~\ref{chap:chrlu}) algorithms.
 This thesis discusses issues existing in current FaaS control planes and proposes methods, new designs, and future-thinking systems to tackle them.
 
+% main underlying thesis?
+% key RQs?
+% approaches? system design, empirical, real workloads, realistic simulations
+% main findings/outcomes?
+This thesis hinges on the fact that serverless systems draw on solutions and designs from many fields of computing, but they must be adapted and modified to truly suit this paradigm.
+Given the abstraction FaaS provides, one can ask several questions: 1) What techniques help individual invocations achieve minimum latency?, 2) How must these change to keep global latency low as we scale to millions of invocations?, and 3) How do orchestration decisions by the platform impact latency?
+It analyzes the functions and workloads seen by serverless systems to accurately understand the conditions we must support.
+The systems designs presented here are tested empirically on real hardware, and bolstered by simulations matching the runtime characteristics of live systems.
+The chapters herein show that all the layers and pieces comprising serverless platforms are in fact opportunities for dramatically increasing performance and resource utilization.
+
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{introduction/figs/faas-labeled.pdf}
-  \caption{The major components of the control plane, and the areas of each this thesis impacts.}
+  \caption{The major components of the control plane, and the areas of each this thesis impacts. A controller accepts invocations for functions and distributes them amongst a cluster of workers. These in turn run invocations in isolated sandboxes}
   \label{fig:control-plane}
 \end{figure}
 
@@ -88,7 +100,7 @@ Another unique entry, FuncX~\cite{funcx_hpdc_20}, creates a layer over supercomp
 % Cloud - GCP, Alibaba, AWS, Azure, several others
 The most well-known platforms are the public offerings of the major cloud providers, AWS Lambda~\cite{lambda}, Google Functions~\cite{gcp-functions}, Azure Functions~\cite{azure-functions}, and Alibaba Function Compute~\cite{alibaba-compute}.
 Several open-source equivalents have been made~\cite{openwhisk,openfaas,nuclio,knative} which are popular in both research and as products for end-users.
-Included in this thesis is a design for a fitter-free, low-latency control plane and is highly configurable and able to run on heterogeneous and edge hardware.
+Included in this thesis is a design for a jitter-free, low-latency control plane and is highly configurable and able to run on heterogeneous and edge hardware.
 
 % FaaS research isn't limited to a single domain
 More focused research into serverless has branched into nearly every field of systems research.
@@ -97,7 +109,7 @@ To serve a function invocation, the system must create an isolated \emph{sandbox
 Numerous isolation mechanisms have been put forward, containers~\cite{chhatrapati2021towards,docker-main,gvisor}, language runtimes~\cite{shillaker2020faasm,aytekin2019harnessing}, and lightweight virtualization~\cite{firecracker-nsdi20}.
 All of these take time to start, in what's referred to as a \textit{cold starts} and can significantly increase invocation latency.
 Additional research has targeted this problem specifically to accelerate existing isolation mechanisms creation time~\cite{mohan2019agile,du2020catalyzer,warm2}.
-Future invocations see lower latency by benefiting from \emph{locality}, re-using the isolation sandbox in a \textit{warm start} invocation.
+Future invocations see lower latency by benefiting from \emph{locality}, where the isolation sandbox is re-used in a \textit{warm start} invocation.
 
 Knowingly keeping idle sandboxes resident in memory improves latency, but may lead to resource underutilization.
 Sandboxes sizes are chosen by users, who often over-provision to negate performance problems~\cite{mvondo2021ofc,romero2021faa,eismann2021sizeless,yu2021harvesting,serverless-harvest-sosp21}.
@@ -149,8 +161,9 @@ Running accelerated and massively parallel computation in FaaS that puts not res
 
 \section{Thesis Outline}
 
-This thesis is consists of five additional chapters and is ordered as follows.
-The following chapter~\ref{chap:serverless} provides in detail what serverless computing is, what technologies it builds on top of, and how it is being used in both research and by users.
+% This thesis is consists of five additional chapters and is ordered as follows.
+This thesis is ordered as follows.
+The following chapter, Chapter~\ref{chap:serverless}, provides background on serverless computing, what technologies it builds on top of, and how it is being used in both research and by users.
 Serverless evolved from, and is still built on top of, abstractions in cloud computing like virtual machines (VMs) and containers.
 These mechanisms are used to isolate functions from one another and allow the control plane to control and protect resources.
 This control plane itself consists of several components, a \emph{controller}, \emph{workers}, and ancillary services.
