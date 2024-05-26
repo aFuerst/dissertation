@@ -121,8 +121,18 @@ Maintaining locality to provide acceptable performance while maximizing use of r
 % All possibly containers cannot be kept around because server resources are limited and valuable.
 % The \textit{keep-alive} decision selects if and/or when containers are removed.
 
+The serverless abstraction allows for workers with various capabilities, not limiting them to CPU-only computation.
+The major cloud providers currently do not expose alternative compute, but latency-critical applications like machine learning (ML) inference being moved onto FaaS platforms to take advantage its high scalability can also benefit from heterogeneous hardware.
+% Serverless functions currently cannot viably access CPU parallelism, and are configurable to use a limited number of CPU cores during execution. 
+Accelerators come in many flavors: SmartNICs~\cite{choi2020lambda}, GPUs~\cite{pemberton2022kernel,guleria2019emf}, FPGAs~\cite{bacis2020blastfunction}, and more~\cite{du2022serverless,romero2021llama} -- each with unique characteristics and types of applications they can support.
+A host of applications have moved to FaaS~\cite{yang2022infless,ali2022optimizing,zhang2019video,risco2021gpu,hung2019rapid,shankar2020serverless} that can leverage faster hardware.
+FaaS invocations are also unable to easily coordinate computation with each other~\cite{yuan2022smpi,copik2023fmi,copik2022faaskeeper,sreekanti2020fault,sreekanti2020cloudburst,giantsidi2023flexlog,xu2021lambdadnn}, requiring slow intermediaries for interaction.
+These accelerators also require locality to achieve usable performance, having significant and often longer cold start times.
+% They also have a secondary effect
+A unique \emph{data locality} for these devices exists too, as they must have data on hand that may have been cached on a system with more available memory.
+Running accelerated and massively parallel computation in FaaS that puts not restrictions on applications is important for adoption and continued growth.
 
-FaaS by design exists at a cluster level, so we cannot consider its challenges solely from a single-worker perspective.
+We cannot consider the challenges of serverless solely from a single-worker perspective, as by design it exists at a cluster level.
 Functions have a variety of characteristics: execution time, inter-arrival-time of invocations, memory usage, and more.
 These can all vary in orders of magnitude, from sub-second to several minute runtimes and sub-second to daily invocation arrivals~\cite{shahrad2020serverless}.
 % The control plane is expected to guarantee low latency in all cases and scale applications up or down with changing demand.
@@ -134,15 +144,6 @@ One could schedule function sandboxes~\cite{balaji2021fireplace,kaffes2021practi
 Load balancing invocations~\cite{aumala2019beyond,leegreedy,faaslb-hpdc22} is a more scalable way to address the complex load and large cluster uncertainty, trusting workers to make ideal decisions.
 The cluster control plane targets locality in both cases, knowing that running invocations in existing sandboxes is much more performant.
 
-Cloud providers currently do not expose compute capabilities outside of CPU computation, but users want to put latency-critical applications like machine learning (ML) inference onto FaaS platforms to take advantage its high scalability.
-% Serverless functions currently cannot viably access CPU parallelism, and are configurable to use a limited number of CPU cores during execution. 
-Accelerators come in many flavors: SmartNICs~\cite{choi2020lambda}, GPUs~\cite{pemberton2022kernel,guleria2019emf}, FPGAs~\cite{bacis2020blastfunction}, and more~\cite{du2022serverless,romero2021llama} -- each with unique characteristics and types of applications they can support.
-A host of applications are lining up~\cite{yang2022infless,ali2022optimizing,zhang2019video,risco2021gpu,hung2019rapid,shankar2020serverless} to run on faster FaaS hardware.
-FaaS invocations are also unable to easily coordinate computation with each other~\cite{yuan2022smpi,copik2023fmi,copik2022faaskeeper,sreekanti2020fault,sreekanti2020cloudburst,giantsidi2023flexlog,xu2021lambdadnn}, requiring slow intermediaries for interaction.
-These accelerators also require locality to achieve usable performance, having significant and often longer cold start times.
-% They also have a secondary effect
-A unique \emph{data locality} for these devices exists too, as they must have data on hand that may have been cached on a system with more available memory.
-Running accelerated and massively parallel computation in FaaS that puts not restrictions on applications is important for adoption and continued growth.
 
 % security~\cite{kim2023cryonics,zhao2023reusable,trach2019clemmys}
 % applications~\cite{zhang2021serverless,mete2021implementation,hussain2019serverless,fouladi2019laptop,copik2022faaskeeper,hung2019rapid}
