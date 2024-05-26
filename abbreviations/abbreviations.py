@@ -46,8 +46,8 @@ with open("abbreviations.done") as f:
     # print(line)
 
 abbrevs_write = sorted(abbrevs_write)
-abbrevs_write.insert(0, "\\raggedright{\n")
-abbrevs_write.append("\n}")
+abbrevs_write.insert(0, "\\noindent\n")
+# abbrevs_write.append("\n}")
 with open("../abbreviations.tex", 'w') as f:
   f.writelines(abbrevs_write)
 
