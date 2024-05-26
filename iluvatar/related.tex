@@ -5,18 +5,18 @@ Alongside the closed-source FaaS control planes from the major cloud providers, 
 Open-source production faas OpenWhisk~\cite{openwhisk}, OpenFaaS~\cite{openfaas}, nuclio~\cite{nuclio}, kNative~\cite{knative}, and funcX~\cite{funcx_hpdc_20}.
 Others were made for with targeted research goals in mind \cite{jia2021nightcore, hendrickson2016serverless, oakes_sock_2018, singhvi2021atoll,vhive-asplos21}.
 
-\sysname~ occupies a somewhat unique spot in the crowded FaaS landscape because of its focus on warm starts and some key constraints in our system design.
+\sysname~occupies a somewhat unique spot in the crowded FaaS landscape because of its focus on warm starts and some key constraints in our system design.
 %
 Techniques for reducing cold-start overheads, like snapshots, language isolation,  unikernels, all sit ``below'' the control plane, and can be complemented with fast control planes.
 At the other extreme end, the predictable nature of serverless workloads has been used to great effect for predictive load-balancing, prefetching, sizing, etc.
-\sysname~ is mostly reactive and is worker-centric, and tries to make minimal assumptions about workload predictability and focuses on more general optimizations that can work for arbitrary workload patterns.
+\sysname~is mostly reactive and is worker-centric, and tries to make minimal assumptions about workload predictability and focuses on more general optimizations that can work for arbitrary workload patterns.
 %
 
 \noindent \textbf{FaaS Control Planes.}
 %
 SOCK~\cite{oakes_sock_2018} is closely related to \sysname, and makes similar observations about network namespace overheads, and introduced storage and cgroup optimizations for serverless optimized containers. 
 SOCK is based on OpenLambda~\cite{hendrickson2016serverless} and achieves great cold-start performance with Zygotes that are cloned into new containers.
-These optimizations to the container runtime are also applicable to \sysname~ and are complementary. 
+These optimizations to the container runtime are also applicable to \sysname~and are complementary. 
 Using the standard containerd interface allows us to use multiple current and future container backends, and is a deliberate tradeoff. 
 %Importantly it lacks both the ability to operate as a cluster and an integrated load generation system, both of which we have implemented both in \sysname~.
 
@@ -41,7 +41,7 @@ Tighter latency requirements exist when deploying functions at the edge, and Ope
 Interestingly, public cloud latencies are also significant, of the order of 50 ms~\cite{ustiugov_analyzing_2021}, hinting that the problems also extend their control planes. 
 %All four of these control planes rely on Docker and Kubernetes for their deployment and scaling mechanisms.
 %These existing tech stacks are highly useful, but limit the research possibilities of a platform, e.g. cold-start optimizations and deploying to edge nodes become intractable.
-%While \sysname~ does have a Docker isolation implementation, it is to showcase the ability implement multiple containerization mechanisms and compare between them.
+%While \sysname~does have a Docker isolation implementation, it is to showcase the ability implement multiple containerization mechanisms and compare between them.
 
 
 \noindent \textbf{Function Scheduling.}

@@ -20,7 +20,7 @@ In experiments we witnessed OpenWhisk's 50 percentile latency overhead to be mor
 Worryingly, the 99 percentile overhead is much higher, and rises to as much as 600ms, more details are in Section~\ref{sec:ilu:eval}.
 To emphasize, for a median function in the Azure workload which runs for 500 ms, OpenWhisk can increase its latency by 100\%.  
 Thus, the control plane plays a crucial role in function performance.
-We note that these are the best-case warm-start latencies, when the function's containers is fully initialized and in memory. 
+We note that these are the best-case warm-start latencies, when the function's containers are fully initialized and in memory. 
 Since function cold-starts impose such a major performance penalty (increasing latency by more than $10\times$), mitigating them has been a major research focus. 
 However, because of temporal and spatial locality of access, caching and prefetching techniques can be extremely effective, and the cold-start rate is often less than $1\% $ of all invocations~\cite{faascache-asplos21}. 
 The majority of invocations are thus \quotes{warm}, where the performance is dominated by control plane overheads.
@@ -32,7 +32,7 @@ The majority of invocations are thus \quotes{warm}, where the performance is dom
 % Some of these latency overheads are an artifact of the architecture. 
 % The shared Kafka function queue can be a major bottleneck; and there are no explicit backpressure or load regulation mechanisms, which is compounded by the CPU overcommitment. 
 
-% For the sake of comparison, the figure also shows the latency overhead of \sysname~ in the same environment. 
+% For the sake of comparison, the figure also shows the latency overhead of \sysname~in the same environment. 
 % We are able to achieve a per-invocation mean overhead of less than 2ms for almost all the load conditions.
 % Importantly, the tail overhead is also small: less than 3ms for less than 32 concurrent invocations, rising to 10ms when the system is saturated.
 
@@ -51,7 +51,7 @@ As evidenced by the OpenWhisk architecture presented earlier, FaaS control plane
 %
 A simple system running web services or microservices does not have to deal with sandbox management overheads, nor with highly heterogeneous request sizes.
 % For reducing tail latency, these systems can often rely on the OS CPU scheduler for processor sharing, can do CPU allocation at very fine granularity~\cite{kaffes2019shinjuku}, use queuing theory techniques~\cite{prekas2017zygos}, etc. 
-At the other extreme, control planes managing long running containers and VMs, like OpenStack or Kubernetes, face a much lower rate of VM arrivals and departures. and can do careful and \quotes{hard} resource allocation using bin-packing~\cite{cortez2017resource}.
+At the other extreme, control planes managing long running containers and VMs, like OpenStack or Kubernetes, face a much lower rate of VM arrivals and departures, and can do careful and \quotes{hard} resource allocation using bin-packing~\cite{cortez2017resource}.
 
 
 Functions are highly heterogeneous, and can be seen as both latency-sensitive web requests \emph{and} large containers requiring significant system resources for several seconds. 
@@ -124,10 +124,11 @@ Even on a single server, a function's execution is orchestrated through many com
 We believe that the FaaS control plane is an important component of the modern cloud ecosystem, and presents many optimization opportunities and interesting research questions in system design. 
 
 \begin{figure}
-  \centering  \includegraphics[width=0.4\textwidth]{iluvatar/graphs/scaling/pyaes/overhead-scaling.pdf}
+  \centering
+  \includegraphics[width=0.9\textwidth]{iluvatar/graphs/scaling/pyaes/overhead-scaling.pdf}
   \caption{The latency overhead of the control plane, as the number of concurrent invocations increases. 
         OpenWhisk overhead is significant and has high variance, resulting in high tail latency. 
-        \sysname~ reduces this overhead by 100x. }
+        \sysname~reduces this overhead by 100x. }
   \label{fig:ow-scaling}
 \end{figure}
 
@@ -136,7 +137,7 @@ We believe that the FaaS control plane is an important component of the modern c
 %
 Because of its central role in coordinating all aspects of function execution, the control plane plays a major role in determining function performance. 
 Managing the function execution lifecycle for hundreds of concurrent invocations imposes a \emph{control plane overhead}, and increases the end-to-end latency.
-This control plane overhead can be significant, and affects \emph{all} function invocations, including and especially the ``warm starts''. 
+This control plane overhead can be significant, affecting \emph{all} function invocations, including and especially the ``warm starts''. 
 %Time spent in the control plane is simply measured by subtracting the execution time of the function code from the overall end-to-end latency.
 This overhead (end-to-end latency minus the function code execution time) for the PyAES function from FunctionBench~\cite{kim2019functionbench} is shown in Figure~\ref{fig:ow-scaling}. 
 
@@ -155,7 +156,7 @@ Due to these issues, low-latency functions see severe performance degradation, a
 Some of these latency overheads are an artifact of the architecture. 
 The shared Kafka function queue can be a major bottleneck; and there are no explicit backpressure or load regulation mechanisms, which is compounded by the CPU overcommitment. 
 %
-For the sake of comparison, the figure also shows the latency overhead of \sysname~ in the same environment. 
+For the sake of comparison, the figure also shows the latency overhead of \sysname~in the same environment. 
 We are able to achieve a per-invocation mean overhead of less than 2ms for almost all the load conditions.
 Importantly, the tail overhead is also small: less than 3ms for less than 32 concurrent invocations, rising to 10ms when the system is saturated.
 
@@ -174,7 +175,7 @@ As evidenced by the OpenWhisk architecture presented earlier, FaaS control plane
 Due to the continually evolving needs of FaaS applications and emergence of new sandboxing techniques (such as lightweight VMs like Firecracker~\cite{firecracker-nsdi20}), they are sandwiched between the scale and heterogeneity of FaaS workloads on one hand, and the deep stack of OS and virtualization components on the other. 
 
 For instance, systems for running web services or microservices do not have to deal with large and highly variable sandbox management overheads, nor with highly heterogeneous request sizes.
-For reducing tail latency, these systems can often rely on the OS CPU scheduler for processor sharing, can do CPU allocation at very fine granularity~\cite{kaffes2019shinjuku}, use queuing theory techniques~\cite{prekas2017zygos}, etc. 
+For reducing tail latency, these systems can often rely on the OS CPU scheduler for processor sharing, but can manually perform CPU allocation at a very fine granularity~\cite{kaffes2019shinjuku}, or use queuing theory techniques~\cite{prekas2017zygos}. 
 At the other extreme, for longer running containers and VMs, their control planes, like OpenStack or Kubernetes face a much lower rate of VM arrivals and departures. and can do careful and ``hard'' resource allocation using bin-packing~\cite{cortez2017resource}.
 
 
@@ -192,14 +193,14 @@ Our new implementation also helps to identify the current performance bottleneck
 %
 Performance-focused FaaS research is already challenging due to the extreme scale and heterogeneity of the workloads.
 These challenges are compounded by existing control planes like OpenWhisk that are unfortunately highly unpredictable.
-The control plane jitter and the extreme bimodal cold vs. warm latencies makes it difficult to do reliable and reproducible research~\cite{mytkowicz2009producing}, and subtle environmental and configuration effects can mask the true effects of new research optimizations.
+The control plane jitter and the extreme bimodal cold vs. warm latencies make it difficult to do reliable and reproducible research~\cite{mytkowicz2009producing}, and subtle environmental and configuration effects can mask the true effects of new research optimizations.
 However, it continues to be a key component in developing and evaluating FaaS research~\cite{akkus_sand_2018, shahrad_serverless_2020, faascache-asplos21, faaslb-hpdc22, zhou2022aquatope, ensure-faas-acsos20, alzayat_groundhog_2022}. 
 %OpenWhisk is a popular framework which has been used as a platform for investigating and optimizing many facets of FaaS execution.
 With OpenWhisk, function performance can be severely affected by a myriad of configuration options, such as insufficient memory for CouchDB, networking configuration, Docker configuration, etc. 
 
 Given the importance of the control plane, we want \emph{predictable} performance to a large degree. 
 In our experience, research in FaaS is often hindered by the large overheads and complexity of existing control planes. 
-Thus, \sysname~ is designed from the ground-up to be lightweight and provide predictable performance under different conditions. 
+Thus, \sysname~is designed from the ground-up to be lightweight and provide predictable performance under different conditions. 
 Our system implementation can potentially accelerate the development of new optimizations, clarify  our understanding of performance characteristics of this relatively new stack, and provide a platform for robust experiments. 
 % Establishing a shared open platform enables easy comparison between research work
 With a robust platform, the community can share knowledge and advances, while being able to compare against a well-known and trusted baseline.

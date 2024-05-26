@@ -8,15 +8,14 @@
 %   Rust language for efficient compiled language, without garbage collection interference
 %   Tokio async handling & userspace threads
 
-\sysname~ is implemented in Rust in about 13,000 lines of code.
-It will be open-sourced upon paper acceptance. 
+\sysname~is implemented in Rust in about 13,000 lines of code, and was made open-source and easy to use.
+% It will be open-sourced upon paper acceptance. 
 Its low latency and lack of jitter are attributable to the various low-level profile-guided performance optimizations we have implemented during the course of its development and testing.
 Function handling and container management in the worker make up a majority of the implementation footprint and focus. 
 Ours is a heavily asynchronous implementation using the \texttt{tokio} library in Rust, and various function lifecycle events spawn new userspace threads and trigger callbacks. 
 The major data structure shared by the various worker threads is the container pool, which is implemented using the \texttt{dashmap} crate, which is a concurrent associative hashmap--- this provides noticeable latency improvements compared to a mutex or read-write lock.
 Conversely, we still use a mutex for the queue, since we found minimal performance degradation compared to a no-queue architecture during profiling. 
-These, and many other small optimizations, keep the \sysname~
-resource consumption small: even under a heavy and sustained load that saturates a 48 CPU server, the worker process uses less than 20\% of a single CPU core. 
+These, and many other small optimizations, keep the \sysname~resource consumption small: even under a heavy and sustained load that saturates a 48 CPU server, the worker process uses less than 20\% of a single CPU core. 
 
 
 
@@ -48,7 +47,7 @@ resource consumption small: even under a heavy and sustained load that saturates
 \label{sec:impl:support}
 
 One of our major design goals is for a reliable and extensible control plane for performance-focused FaaS research.
-We now describe some of the \sysname~ features and our experiences in extending it.
+We now describe some of the \sysname~features and our experiences in extending it.
 
 
 \noindent \textbf{Performance Metrics.}
