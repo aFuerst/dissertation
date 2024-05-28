@@ -24,16 +24,16 @@ FaaS functions cannot assume that state will persist across invocations, and fun
 Each functions is run inside a containers such as Docker~\cite{docker-main}, or a lightweight VM such as Firecracker~\cite{firecracker-nsdi20}. 
 By encapsulating all of the function state and any side-effects, the virtual execution environment provides isolation among multiple functions, and also allows for concurrent invocations of the same function. 
 %
-Due to the overhead of starting a new virtual execution environment (i.e., container or VM), and initializing the function by importing libraries and other data dependencies, function execution thus incurs a significant ``cold-start'' penalty. 
+Due to the overhead of starting a new virtual execution environment (i.e., container or VM), and initializing the function by importing libraries and other data dependencies, function execution thus incurs a significant ``cold start'' penalty. 
 %
 Thus, FaaS can result in significant performance (i.e., total function execution latency) overheads compared to conventional models of execution where applications can reuse state and do not face the high initialization overheads. 
 
 
-Two main techniques are used to alleviate the cold-start penalty. 
+Two main techniques are used to alleviate the cold start penalty. 
 Once a container for a function is created and the function finishes execution, the container can be kept alive instead of immediately terminating it. 
 Subsequent invocations of the function can then \emph{reuse} the already running container.
-This \emph{keep-alive} mechanism can alleviate the cold-start overhead due to container launching (which can be $\sim 100$ ms). %Might be confusing, keep-alive also helps in other initialization. 
-The second technique for reducing the cold-start overhead is to explicitly initialize functions before running them, and resolving most of the function's code and data dependencies during the initialization phase. 
+This \emph{keep-alive} mechanism can alleviate the cold start overhead due to container launching (which can be $\sim 100$ ms). %Might be confusing, keep-alive also helps in other initialization. 
+The second technique for reducing the cold start overhead is to explicitly initialize functions before running them, and resolving most of the function's code and data dependencies during the initialization phase. 
 
 An example of function initialization is shown in Figure~\ref{fig:lambda-example}, which shows a pseudo-code snippet of a function that performs machine learning inference on its input. 
 For ML inference, the function downloads an ML model and initializes the TensorFlow ML framework (lines  5 and 6). 
@@ -58,7 +58,7 @@ def lambda_handler(event, context):
      return prediction_output 
    \end{lstlisting}
    \vspace*{\myfigspace}
-   \caption{Initializing functions by importing and downloading code and data dependencies can reduce function latency by hiding the cold-start overhead.}
+   \caption{Initializing functions by importing and downloading code and data dependencies can reduce function latency by hiding the cold start overhead.}
    \label{fig:lambda-example}
    \vspace*{\myfigspace}
 \end{figure}
@@ -68,7 +68,7 @@ However, keep-alive is not a panacea for all FaaS latency problems.
 Keeping a container alive consumes valuable computing resources on the servers, and reduces the number of functions that can be executed concurrently. 
 Specifically, a running container occupies memory, and ``warm'' containers being kept alive in anticipation of future function invocations can reduce the multiplexing and efficiency of the servers.
 
-Thus, we require keep-alive \emph{policies} that reduce the cold-start overhead while keeping the server utilization high. 
+Thus, we require keep-alive \emph{policies} that reduce the cold start overhead while keeping the server utilization high. 
 Designing keep-alive policies is not trivial due to the highly diverse and expanding range of applications that are using FaaS platforms. 
 Conventionally, FaaS has been used for hosting web services, which is attractive because of the pay-per-use properties. 
 Event handling functions for web responses typically have a small memory footprint but require low execution latency. 
@@ -116,7 +116,7 @@ Keep-alive policies must therefore balance the resource footprint of the contain
 
 
 
-% Sources of cold-start overhead
+% Sources of cold start overhead
 
 
 

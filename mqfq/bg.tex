@@ -123,7 +123,7 @@ Interposition and disaggregation techniques~\cite{duato2010rcuda,fingler2022dgsf
 
 \begin{comment}
 % All of these techniques give total control to one function, or allows it to allocate physical memory on a device and leave insufficient memory for other functions to run.
-% The only way to adjust resource imbalances is with removal and creation of new containers, a high-overhead scenario with many function cold-starts.
+% The only way to adjust resource imbalances is with removal and creation of new containers, a high-overhead scenario with many function cold starts.
 Applications cannot manipulate GPUs directly, they must use a manufacturer-provided driver for all operations.
 GPU compute is launched by host programs using \emph{kernels} which execute a code block with given memory inputs and a number of parallel threads to use.
 Multiple kernels can be launched concurrently, with the device handling scheduling of kernels and threads internally.

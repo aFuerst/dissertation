@@ -18,7 +18,7 @@ Our goal is to investigate the effectiveness of the these techniques under diffe
 \hfill 
   \subfloat[Random sampling.      \label{fig:random-trace-exec}] {\includegraphics[width=0.27\textwidth]{../graphs/random-funcs-200/exec_inc_mem-200.pdf}}
   \vspace*{\myfigspace}
-\caption{Increase in execution time due to cold-starts for different workloads derived from the Azure function trace.}
+\caption{Increase in execution time due to cold starts for different workloads derived from the Azure function trace.}
 \label{fig:exec-overheads-all}
   \vspace*{\myfigspace}
 \end{figure*}
@@ -35,9 +35,9 @@ Our goal is to investigate the effectiveness of the these techniques under diffe
   \subfloat[Random sampling. \label{fig:random-trace-cold}]
   {\includegraphics[width=0.3\textwidth]{../graphs/random-funcs-200/cold_drop_mem-200.pdf}}
     \vspace*{\myfigspace}
-    \caption[cold-starts]{Fraction of cold-starts is lower with caching-based keep-alive. } % for different samples of the Azure function trace.}
+    \caption[cold starts]{Fraction of cold starts is lower with caching-based keep-alive. } % for different samples of the Azure function trace.}
       \vspace*{\myfigspace}
-      \label{fig:cold-starts-all}
+      \label{fig:cold starts-all}
     \end{minipage}
     \hfill
     \begin{minipage}[c]{0.29\linewidth}
@@ -85,7 +85,7 @@ We generate three day-long traces using the Azure Functions dataset to showcase 
 
 \end{comment}
 
-We are interested in two metrics: the cold-start ratio; and the average increase in the execution time due to cold-starts. 
+We are interested in two metrics: the cold start ratio; and the average increase in the execution time due to cold starts. 
 The latter captures the heterogeneity in function initialization overheads and invocation frequencies. 
 For estimating the initialization overhead of each function using the workload trace, we subtract each functions' average runtime from its maximum runtime. 
 
@@ -104,16 +104,16 @@ The others are the caching-based variants described in Section~\ref{subsec:varia
 %
 The increase in execution time for different traces and for different cache sizes is shown in Figure~\ref{fig:exec-overheads-all}.
 % How is this measured?
-The increase in execution time is the cold-start overheads averaged across all invocations of each function, and captures the user-visible response-time. 
+The increase in execution time is the cold start overheads averaged across all invocations of each function, and captures the user-visible response-time. 
 %
 
-For the representative trace (Figure~\ref{fig:rep-trace-exec}), Greedy-Dual reduces the cold-start overhead by more than $3\times$ compared to TTL for a wide range of cache sizes (15--80 GB). 
+For the representative trace (Figure~\ref{fig:rep-trace-exec}), Greedy-Dual reduces the cold start overhead by more than $3\times$ compared to TTL for a wide range of cache sizes (15--80 GB). 
 Interestingly, it is able to achieve a low overhead of only 0.5\% at a much smaller cache size of 15GB, compared to other variants, which need 50 GB to achieve similar results---a reduction of cache size by more than $3\times$. 
 %
-For rare functions (Figure~\ref{fig:rare-trace-exec}), caching-based approaches such as LRU  reduce the cold-start overhead by $2\times$ compared to TTL for cache sizes of 40--50 GB. 
+For rare functions (Figure~\ref{fig:rare-trace-exec}), caching-based approaches such as LRU  reduce the cold start overhead by $2\times$ compared to TTL for cache sizes of 40--50 GB. 
 This shows that for rare functions, recency is a more pertinent characteristic, and the complex four-way tradeoff used in Greedy-Dual is not necessarily ideal in all workload scenarios. 
 For this workload, the HIST policy outperforms TTL, as reported in~\cite{shahrad_serverless_2020}. 
-However, it results in 50\% higher cold-start overhead compared to caching-based approaches.
+However, it results in 50\% higher cold start overhead compared to caching-based approaches.
 Furthermore, because HIST uses only inter-arrival times, it is unable to perform well with heterogeneous representative workloads  (Figure~\ref{fig:rep-trace-exec}). 
 
 
@@ -124,8 +124,8 @@ The equivalence of LRU and TTL-based caching for rare objects is well establishe
 
 \noindent \emph{\textbf{Result:} For representative, diverse workloads, our GD policy can improve the performance and shrink cache sizes by up to $3\times$. For more homogeneous workloads, LRU can outperform current TTL-based approaches by $2\times$.}
 
-We see a similar relation and behavior in the miss-ratio curves shown in Figure~\ref{fig:cold-starts-all}.
-Due to function heterogeneity, the cold-start overheads are not strictly correlated with cache miss ratios, and thus the differences between policies is different compared to the previously described actual cold-start overheads. 
+We see a similar relation and behavior in the miss-ratio curves shown in Figure~\ref{fig:cold starts-all}.
+Due to function heterogeneity, the cold start overheads are not strictly correlated with cache miss ratios, and thus the differences between policies is different compared to the previously described actual cold start overheads. 
 % \prat{Write after colors are fixed.}
 We note that the average inter-arrival time for all three workloads is less than 36ms. As the IAT grows, the effectiveness of work-conserving caching-based approaches increases compared to TTL, as we shall see next. 
 
@@ -134,16 +134,16 @@ We note that the average inter-arrival time for all three workloads is less than
 \vspace*{\subsecspace}
 
 We now evaluate the performance of our FaasCache keep-alive implementation, and compare it to the vanilla OpenWhisk system which uses a 10 minute TTL. 
-By leveraging Greedy-Dual caching, FaasCache is able to reduce cold-starts. 
+By leveraging Greedy-Dual caching, FaasCache is able to reduce cold starts. 
 This also reduces the number of \emph{dropped} requests. % Why?
 OpenWhisk buffers and eventually drops requests if it cannot fulfill them.
 Because FaasCache more effectively selects evictions, its higher hit rate results in functions finishing faster, allowing more functions to be executed in the same time frame.  
 %
-To examine the effect of Greedy-Dual keep-alive on cold-start and dropped requests, we use a small workload trace comprising of four different functions: Disk-bench, ML inference, Web-serving, and Floating-point from Table~\ref{tab:workloads}.
+To examine the effect of Greedy-Dual keep-alive on cold start and dropped requests, we use a small workload trace comprising of four different functions: Disk-bench, ML inference, Web-serving, and Floating-point from Table~\ref{tab:workloads}.
 
 In Figure~\ref{fig:litmus_2}, we use different kinds of \emph{skewed} workloads: with a single function having a different frequency, a cyclic access pattern, and a skewed workload with 2 sizes. 
 We see that FaasCache's keep-alive can increase the number of warm invocations by between 50 to 100\% compared to OpenWhisk's TTL.
-The difference in the total number of requests served (warm+cold) is because OpenWhisk drops a significant number of requests due to its high cold-start overhead and resultant system load. 
+The difference in the total number of requests served (warm+cold) is because OpenWhisk drops a significant number of requests due to its high cold start overhead and resultant system load. 
 %Interestingly, OpenWhisk drops a significant number of requests, which is the cause of the different total served requests. 
 %
 
@@ -191,7 +191,7 @@ Next, we use the skewed frequency workload and use functions from Table~\ref{tab
 To generate the workload, the CNN, DD, and Web-serving functions have an inter-arrival time of 1500 ms, and the Floating-point function has a lower IAT of 400 ms. 
 %
 Figure~\ref{fig:faasbench} shows the breakdown of different function invocations for this workload on a 48 GB server.
-Interestingly, OpenWhisk drops a significant number (50\%) of requests due to the its high cold-start overheads.
+Interestingly, OpenWhisk drops a significant number (50\%) of requests due to the its high cold start overheads.
 FaasCache increases the warm requests by more than $2\times$. 
 Interestingly, the \emph{distribution} of warm starts is also different. 
 FaasCache's Greedy-Dual policy prioritizes functions with higher initialization times, but penalizes those with large memory footprints.

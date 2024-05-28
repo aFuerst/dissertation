@@ -51,7 +51,7 @@ We use four function classes that are representative of commonly deployed FaaS f
 The function  memory sizes range from $[10,1000]$ MB, and running times ranging from $[10, 1000]$ ms. 
 Figure~\ref{fig:heterogen} shows this increase in execution time for the various keep-alive policies.
 We can see that the function execution time for the various caching-inspired policies is much lower (by up to $4\times$) than the constant-TTL policy being used by current FaaS platforms. 
-%The Greedy-Dual policy is able to reduce the increase in execution time due to cold-starts by $4\times$ compared to the constant-TTL policy 
+%The Greedy-Dual policy is able to reduce the increase in execution time due to cold starts by $4\times$ compared to the constant-TTL policy 
 
 
 Interestingly, for the above  configuration, we see that simpler policies such as SIZE are as effective as the full Greedy-Dual policy. 
@@ -134,7 +134,7 @@ We can see that the server size shows diminishing returns, similar to the classi
 
 The main insight in this paper is the isomorphism between function keep-alive and object caching.
 Using it, sophisticated caching policies can be applied to FaaS.
-Our Greedy-Dual based keep-alive policy can reduce cold-start overheads by up to $4\times$ compared to simple policies.
+Our Greedy-Dual based keep-alive policy can reduce cold start overheads by up to $4\times$ compared to simple policies.
 The caching analogy can also be used to enhance resource provisioning. 
 %As the diversity of FaaS applications and usecases grows, 
 

@@ -12,7 +12,7 @@ From a queuing theory perspective, policies such as least-work-left (LWL) and Jo
 
 Interestingly, load-balancing for \emph{data-oriented} systems, such as Content Delivery Networks (CDNs)~\cite{nygren2010akamai}, and distributed key-value stores (such as Amazon Dynamo~\cite{decandia2007dynamo}) must also balance the load on servers, but with data locality as a key requirement.
 In this context, locality refers to requests for the same object being handled by the server, or the same subset of servers if the object is replicated. 
-We find that FaaS load balancing requires and benefits from \emph{both} these objectives: minimizing computing load \emph{and} maximizing locality to reduce cold-starts. 
+We find that FaaS load balancing requires and benefits from \emph{both} these objectives: minimizing computing load \emph{and} maximizing locality to reduce cold starts. 
 
 \begin{comment}
 However, combining compute-oriented load-balancing solutions 

@@ -21,7 +21,7 @@ However, this function ``keep-alive'' presents an important tradeoff between mem
 %\textbf{Key insights and contributions.}
 In this paper, we present the design and implementation of an auto-scaling load balancer for FaaS platforms (such as OpenWhisk, OpenFaaS, and others).
 We address the challenges of routing and scheduling functions on a cluster of servers, and how such clusters can be horizontally scaled. 
-When deciding which server a function should be run on, our key design principle is to use \emph{locality} to reduce function cold-starts.
+When deciding which server a function should be run on, our key design principle is to use \emph{locality} to reduce function cold starts.
 Running a function on the same subset of servers increases the probability that a ``warm'' in-memory invocation of the same function can be reused, which reduces function latency. 
 However, we find that locality alone is insufficient: server load is also an important parameter which influences the slowdown of functions due to queuing delays and resource contention on overloaded servers. 
 
@@ -44,10 +44,10 @@ We make use of the recent equivalence between function keep-alive and caching~\c
 Our policies are designed to be simple and practical, have a small number of user-controlled parameters, which allows them to be a drop-in replacement for the default load-balancing implementation in OpenWhisk~\cite{openwhisk}. 
 
 %\textbf{Experimental methodology and artifact availability.}
-Prior work in serverless computing has largely focused on optimizing performance on a \emph{single} server using various cold-start mitigating mechanisms and policies. 
+Prior work in serverless computing has largely focused on optimizing performance on a \emph{single} server using various cold start mitigating mechanisms and policies. 
 We build on past insights on the importance of function locality, and extend them to a large cluster of servers instead of a single server. 
 While load-balancing has a long history of rigorous solutions, we find that the heterogeneity, skew, and stale-loads of the FaaS environment present unique challenges. 
-Classic load-aware techniques that use randomization such as power of 2 random choices do not capture locality and lead to high cold-starts, and hashing-based techniques cannot deal with the extreme skew in function popularity.
+Classic load-aware techniques that use randomization such as power of 2 random choices do not capture locality and lead to high cold starts, and hashing-based techniques cannot deal with the extreme skew in function popularity.
 %To evaluate the tradeoffs and performance of various policies that prioritize load and locality, we implement and evaluate them in a discrete-event simulator on a large number of traces sampled from the Azure function traces~\cite{shahrad_serverless_2020}.
 
 %\textbf{Limitations of the proposed approach.}

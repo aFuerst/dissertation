@@ -26,14 +26,14 @@ The functions are executed by the FaaS platform, greatly simplifying resource ma
 FaaS functions cannot assume that state will persist across invocations, and function definitions must first import and load all code and data dependencies on each execution. 
 Each function is run inside a container such as Docker~\cite{docker-main}, or a lightweight VM such as Firecracker~\cite{firecracker-nsdi20}. 
 By encapsulating all of the function state and any side-effects, the virtual execution environment provides isolation among multiple functions, and also allows for concurrent invocations of the same function. 
-Due to the overhead of starting a new virtual execution environment (i.e., container or VM), and initializing the function by importing libraries and other data dependencies, function execution thus incurs a significant ``cold-start'' penalty.
+Due to the overhead of starting a new virtual execution environment (i.e., container or VM), and initializing the function by importing libraries and other data dependencies, function execution thus incurs a significant ``cold start'' penalty.
 Table~\ref{tab:workloads} shows the breakdown of initialization time (last column) vs. the total running time of different FaaS applications, and we can that the initialization overhead can as much as 80\% of the total running time. 
-Thus, FaaS can result in significant performance (i.e., total function execution latency) overheads compared to conventional models of execution where applications can reuse state and do not face the high initialization and cold-start overheads. 
+Thus, FaaS can result in significant performance (i.e., total function execution latency) overheads compared to conventional models of execution where applications can reuse state and do not face the high initialization and cold start overheads. 
 
 
 
 \begin{table}
-  \caption{FaaS workloads are highly diverse in their resource requirements and running times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies.}
+  \caption{FaaS workloads are highly diverse in their resource requirements and running times. The initialization time can be significant and is the cause of the cold start overheads, and depends on the size of code and data dependencies.}
   \begin{tabular}{lrrr}
     \hline 
     Application & Mem size & Run time & Init. time \\
@@ -56,20 +56,20 @@ Thus, FaaS can result in significant performance (i.e., total function execution
 
 
 % Replace two main techniques -> Only one technique. 
-%Two main techniques are used to alleviate the cold-start penalty. 
+%Two main techniques are used to alleviate the cold start penalty. 
 Once a container for a function is created and the function finishes execution, the container can be kept alive instead of immediately terminating it. 
 Subsequent invocations of the function can then \emph{reuse} the already running container.
-This \emph{keep-alive} mechanism can alleviate the cold-start overhead due to container launching (which can be $\sim 100$ ms). %Might be confusing, keep-alive also helps in other initialization.
+This \emph{keep-alive} mechanism can alleviate the cold start overhead due to container launching (which can be $\sim 100$ ms). %Might be confusing, keep-alive also helps in other initialization.
 
 
 
 However, keep-alive is not a panacea for all FaaS latency problems. 
 Keeping a container alive consumes valuable computing resources on the servers. %, and reduces the number of functions that can be executed concurrently. 
 Specifically, a running container occupies memory, and ``warm'' containers being kept alive in anticipation of future function invocations can reduce the multiplexing and efficiency of the servers. 
-Thus, we develop keep-alive \emph{policies} that reduce the cold-start overhead while keeping the server utilization high.
+Thus, we develop keep-alive \emph{policies} that reduce the cold start overhead while keeping the server utilization high.
 %
 
-Designing general keep-alive policies is challenging due to the extreme heterogeneity in the different function popularities, resource requirements, and cold-start overheads.
+Designing general keep-alive policies is challenging due to the extreme heterogeneity in the different function popularities, resource requirements, and cold start overheads.
 For instance, a recent analysis of FaaS workloads from Azure~\cite{shahrad_serverless_2020} shows that function inter-arrival times and memory sizes can vary by more than three orders of magnitude. 
 %
 This workload heterogeneity magnifies the performance vs. utilization tradeoff faced by keep-alive policies, as we shall describe in the next section. 
@@ -126,7 +126,7 @@ Hit-ratio curves can be constructed both in an offline and online manner, using 
 
 
 
-% Sources of cold-start overhead
+% Sources of cold start overhead
 
 
 

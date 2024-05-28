@@ -74,7 +74,7 @@ The images consist of the user-provided function code and our agent, which is a 
 %How functions are registered and prepared to run by the platform isn't immediately interesting research-wise, so we choose to do these out-of-band.
 %
 Registered functions can then be directly \emph{invoked}, which triggers launching of the function's container.
-The first invocation is usually a cold-start, which entails launching the container image from disk, or from a previous snapshot~\cite{ustiugov2021benchmarking, ao2022faasnap} if available. 
+The first invocation is usually a cold start, which entails launching the container image from disk, or from a previous snapshot~\cite{ustiugov2021benchmarking, ao2022faasnap} if available. 
 Each function container starts the agent which listens for and controls the actual function code execution. 
 The agent has two simple commands, a \texttt{GET /} endpoint for simple status checking, and a \texttt{POST /invoke} to run an invocation with some arguments.
 When the container is ready, the worker sends an HTTP request to the agent to start the function code execution. 
@@ -91,7 +91,7 @@ This is in contrast to SAND's application sandboxing~\cite{akkus_sand_2018}, SOC
 Our isolation model is similar to the public cloud providers. 
 
 Additionally, \sysname~ introduces a standard \texttt{prewarm}  API call, which starts the function's container and the agent inside of it, and adds it to the container pool.
-This reduces most of the cold-start overhead associated with the container.
+This reduces most of the cold start overhead associated with the container.
 Prewarming can both avoid a ``thundering herd'' of cold starts on worker startup, and be an optimization in which the control plane anticipates invocations and prepares containers for them. 
 This allows for a systematic mechanism to implement various recently proposed predictive prewarm policies~\cite{roy2022icebreaker, shahrad_serverless_2020, silva_prebaking_2020}. 
 
@@ -217,7 +217,7 @@ This limited API allows \sysname~ to support \emph{multiple} container backends.
 
 By default, we use containerd~\cite{containerd}, which is popular container library, also used by Docker. 
 The very rich containerization ecosystem presents a large number of options, and examining their tradeoffs was a major part of \sysname's design process.
-Importantly, the choice of containerization library impacts the cold-start times, and some library operations can take considerable time (100s of ms). 
+Importantly, the choice of containerization library impacts the cold start times, and some library operations can take considerable time (100s of ms). 
 High-level container frameworks like Docker are feature-rich and easy to use, but are typically used for long-running containers and are not optimized for latency.
 Docker uses containerd under the hood, and it provides  more fine-grained control and slightly better latency.
 Functions require a minimal containerization, and a lot of feature-complexity in these large containerization libraries can add to latency.

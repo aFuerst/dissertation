@@ -17,7 +17,7 @@ Our goal is to investigate the effectiveness of the these techniques under diffe
 \hfill 
   \subfloat[Random sampling.      \label{fig:random-trace-exec}] {\includegraphics[width=0.3\textwidth]{../graphs/random-funcs-200/exec_inc_mem-200.pdf}}
   \vspace*{\myfigspace}
-\caption{Increase in execution time due to cold-starts for different workloads derived from the Azure function trace.}
+\caption{Increase in execution time due to cold starts for different workloads derived from the Azure function trace.}
 \label{fig:exec-overheads-all}
   \vspace*{\myfigspace}
 \end{figure*}
@@ -34,9 +34,9 @@ Our goal is to investigate the effectiveness of the these techniques under diffe
   \subfloat[Random sampling. \label{fig:random-trace-cold}]
   {\includegraphics[width=0.33\textwidth]{../graphs/random-funcs-200/cold_drop_mem-200.pdf}}
     \vspace*{\myfigspace}
-    \caption[cold-starts]{Fraction of cold-starts is lower with caching-based keep-alive. } % for different samples of the Azure function trace.}
+    \caption[cold starts]{Fraction of cold starts is lower with caching-based keep-alive. } % for different samples of the Azure function trace.}
       \vspace*{\myfigspace}
-      \label{fig:cold-starts-all}
+      \label{fig:cold starts-all}
 %    \end{minipage}
 %    \hfill
 %    \begin{minipage}[c]{0.29\linewidth}
@@ -89,17 +89,17 @@ When injecting/replaying the workload, if there is only one invocation in a minu
 For multiple invocations, they are equally spaced throughout the minute. 
 
 %
-The cold-start overhead of each function is estimated as {\texttt maximum - average} runtime, and the execution times provided in the dataset are used for this computation. 
-The dataset does not account for certain important sources of cold-start overheads such as execution environment creation (e.g., Docker).
-This unfortunately underestimates the cold-start overheads.
+The cold start overhead of each function is estimated as {\texttt maximum - average} runtime, and the execution times provided in the dataset are used for this computation. 
+The dataset does not account for certain important sources of cold start overheads such as execution environment creation (e.g., Docker).
+This unfortunately underestimates the cold start overheads.
 However, because it applies uniformly to all functions, it preserves the relative performance of the different keep-alive policies, and does not affect the cache hit ratios. 
 %
 
-%These cold-start overheads are generally constant, 
+%These cold start overheads are generally constant, 
 
-%This may not capture all the sources of cold-start overhead such as the execution environment creation (e.g., Docker) and 
+%This may not capture all the sources of cold start overhead such as the execution environment creation (e.g., Docker) and 
 
-We are interested in two metrics: the cold-start ratio; and the average increase in the execution time due to cold-starts.
+We are interested in two metrics: the cold start ratio; and the average increase in the execution time due to cold starts.
 The increase in execution time is computed by averaging across all function invocations. 
 
 %The latter captures the heterogeneity in function initialization overheads and invocation frequencies. 
@@ -107,26 +107,26 @@ The increase in execution time is computed by averaging across all function invo
 %The dataset timings do not include provider overhead, so this initialization time is entirely due to application code.
 
 %%
-%Provider cold-start overheads can be up to several seconds long, and take up the plurality of a function's execution time.
+%Provider cold start overheads can be up to several seconds long, and take up the plurality of a function's execution time.
 %Because the dataset does not include provider overhead, it is impossible to assign a realistic number to this cost.
 %With these large penalties are not in our simulations, we therefore assume it as 0, but in reality the overhead is roughly constant.
 %This causes the global increase in execution time to be smaller than it would be otherwise.
-%Including a non-zero cold-start cost would apply uniformly across all functions, and thus not change eviction priorities relative to one another.
-%The cache hit ratio in Figure~\ref{fig:cold-starts-all} would remain unchanged, and the Y-axis (the global increase in execution time) of Figure~\ref{fig:exec-overheads-all} would be scaled up relative to the chosen cold-start overhead.
+%Including a non-zero cold start cost would apply uniformly across all functions, and thus not change eviction priorities relative to one another.
+%The cache hit ratio in Figure~\ref{fig:cold starts-all} would remain unchanged, and the Y-axis (the global increase in execution time) of Figure~\ref{fig:exec-overheads-all} would be scaled up relative to the chosen cold start overhead.
 %%
 
 % Using variable, real-world, times would require knowing or randomly assigning the runtime of functions, and would still require stochasticity as provider latency is not constant. 
 
 % Not explaining this in the paper was our biggest “oops”: and there’s a few sources of confusion.
 % Here is what we assumed: the dataset doesnt include container startup time, but the included function execution time captures both the function-initialization time (importing packages etc.), and the actual execution.
-% So the assumption is that the Max execution time was due to this initialization overhead (which we include in the cold-start overhead in our paper).
+% So the assumption is that the Max execution time was due to this initialization overhead (which we include in the cold start overhead in our paper).
 % The “time functions take to execute after they are ready to run” added to our confusion: we assumed this meant that it is the time when the control is transferred to the FaaS runtime inside the container: which would still incorporate all actual function initialization overheads.
 % A contributing factor to making this assumptions was that most OpenWhisk applications do not have a strict explicit initialization, so it is in general not possible to know when a function is truly ready to execute non-idempotent code. 
 
 % And so we end up with pretty small startup overheads, which can be seen from our Figure 5.
 % Including container startup time and other overheads would make little difference to relative performance, since the extra overhead would apply to all functions.
 % For instance, adding a constant startup penalty for all functions doesnt change their eviction priorities.
-% The cache hit ratio (our Figure~\ref{fig:cold-starts-all}) would remain unchanged, and the Y-axis of Figure~\ref{fig:exec-overheads-all} would be scaled up depending on the chosen cold-start overheads. 
+% The cache hit ratio (our Figure~\ref{fig:cold starts-all}) would remain unchanged, and the Y-axis of Figure~\ref{fig:exec-overheads-all} would be scaled up depending on the chosen cold start overheads. 
 
 \begin{comment}
 Our simulator evaluation uses real-world FaaS usage data from the recently released Azure Function trace~\cite{shahrad_serverless_2020}. 
@@ -173,16 +173,16 @@ A function is evicted when the policy predicts it will not have an invocation in
 %
 The increase in execution time for different traces and for different cache sizes is shown in Figure~\ref{fig:exec-overheads-all}.
 % How is this measured?
-The increase in execution time is the cold-start overheads averaged across all invocations of every function, and captures the user-visible response-time. 
+The increase in execution time is the cold start overheads averaged across all invocations of every function, and captures the user-visible response-time. 
 %
 
-For the representative trace (Figure~\ref{fig:rep-trace-exec}), Greedy-Dual reduces the cold-start overhead by more than $3\times$ compared to TTL for a wide range of cache sizes (15--80 GB). 
+For the representative trace (Figure~\ref{fig:rep-trace-exec}), Greedy-Dual reduces the cold start overhead by more than $3\times$ compared to TTL for a wide range of cache sizes (15--80 GB). 
 Interestingly, it is able to achieve a low overhead of only 0.5\% at a much smaller cache size of 15GB, compared to other variants, which need 50 GB to achieve similar results---a reduction of cache size by more than $3\times$. 
 %
-For rare functions (Figure~\ref{fig:rare-trace-exec}), caching-based approaches such as LRU  reduce the cold-start overhead by $2\times$ compared to TTL for cache sizes of 40--50 GB. 
+For rare functions (Figure~\ref{fig:rare-trace-exec}), caching-based approaches such as LRU  reduce the cold start overhead by $2\times$ compared to TTL for cache sizes of 40--50 GB. 
 This shows that for rare functions, recency is a more pertinent characteristic, and the complex four-way tradeoff used in Greedy-Dual is not necessarily ideal in all workload scenarios. 
 For this workload, the HIST policy outperforms TTL, as reported in~\cite{shahrad_serverless_2020}. 
-However, it results in 50\% higher cold-start overhead compared to caching-based approaches.
+However, it results in 50\% higher cold start overhead compared to caching-based approaches.
 Furthermore, because HIST uses only inter-arrival times, it is unable to perform well with heterogeneous representative workloads  (Figure~\ref{fig:rep-trace-exec}). 
 
 
@@ -207,12 +207,12 @@ Thus the server is overloaded, and TTL does well even though it is not work-cons
 As the IAT grows, the effectiveness of work-conserving caching-based approaches increases compared to TTL, as we shall see in the next subsection. 
 
 %%%%
-%While Figure~\ref{fig:exec-overheads-all} focuses on the average increase in execution latency, keep-alive can also reduce the tail latency of functions. Cold-start 
+%While Figure~\ref{fig:exec-overheads-all} focuses on the average increase in execution latency, keep-alive can also reduce the tail latency of functions. Cold start 
 
 %%%%
 
-We see a similar relation and behavior in the miss-ratio curves shown in Figure~\ref{fig:cold-starts-all}. 
-Due to function heterogeneity, the cold-start overheads are not strictly correlated with cache miss ratios, and thus the differences between policies is different compared to the previously described actual cold-start overheads. 
+We see a similar relation and behavior in the miss-ratio curves shown in Figure~\ref{fig:cold starts-all}. 
+Due to function heterogeneity, the cold start overheads are not strictly correlated with cache miss ratios, and thus the differences between policies is different compared to the previously described actual cold start overheads. 
 % \prat{Write after colors are fixed.}
 Classic miss-ratio curves do not consider the miss \emph{cost} (i.e., initialization cost), which is an important metric that is optimized by the Greedy-Dual approach.
 Thus in general, even in object caching contexts, miss-ratio curves deviate from the actual performance---a behavior that we also observe. 
@@ -237,17 +237,17 @@ We focus on the performance of FaasCache's Greedy-Dual keep-alive implementation
 
 % rev1 1
 In contrast to the previous subsection in which we showed the average performance for different cache sizes, we will now also focus on the inverse problem: for a fixed server size, how much more load can be handled with FaasCache? 
-By leveraging Greedy-Dual caching, FaasCache is able to reduce cold-starts. 
+By leveraging Greedy-Dual caching, FaasCache is able to reduce cold starts. 
 This also reduces the number of \emph{dropped} requests. %
 
 OpenWhisk buffers and eventually drops requests if it cannot fulfill them.
 Because FaasCache more effectively selects evictions, its higher hit rate results in functions finishing faster, allowing more functions to be executed in the same time frame.  
 %
-To examine the effect of Greedy-Dual keep-alive on cold-start and dropped requests, we use a workload trace comprising of four different functions: Disk-bench, ML inference, Web-serving, and Floating-point from Table~\ref{tab:workloads}.
+To examine the effect of Greedy-Dual keep-alive on cold start and dropped requests, we use a workload trace comprising of four different functions: Disk-bench, ML inference, Web-serving, and Floating-point from Table~\ref{tab:workloads}.
 
 In Figure~\ref{fig:litmus_2}, we use different kinds of \emph{skewed} workloads: with a single function having a different frequency, a cyclic access pattern, and a skewed workload with 2 sizes. 
 We see that FaasCache's keep-alive can increase the number of warm invocations by between 50 to 100\% compared to OpenWhisk's TTL.
-The difference in the total number of requests served (warm+cold) is because OpenWhisk drops a significant number of requests due to its high cold-start overhead and resultant system load. 
+The difference in the total number of requests served (warm+cold) is because OpenWhisk drops a significant number of requests due to its high cold start overhead and resultant system load. 
 %
 Thus with FaasCache, the total number of requests that are served also increases by $2\times$. 
 
@@ -299,7 +299,7 @@ Next, we use the skewed frequency workload and use functions from Table~\ref{tab
 To generate the workload, the CNN, DD, and Web-serving functions have an inter-arrival time of 1500 ms, and the Floating-point function has a lower IAT of 400 ms. 
 %
 Figure~\ref{fig:faasbench} shows the breakdown of different function invocations for this workload on a 48 GB server.
-Interestingly, OpenWhisk drops a significant number (50\%) of requests due to the its high cold-start overheads.
+Interestingly, OpenWhisk drops a significant number (50\%) of requests due to the its high cold start overheads.
 FaasCache increases the warm requests by more than $2\times$. 
 Interestingly, the \emph{distribution} of warm starts is also different. 
 FaasCache's Greedy-Dual policy prioritizes functions with higher initialization times, but penalizes those with large memory footprints. 

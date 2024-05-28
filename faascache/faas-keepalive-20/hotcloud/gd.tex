@@ -26,7 +26,7 @@ Thus, server resources are consumed by running containers, and containers being 
 \subsection{Policy Goals and Considerations}
 \vspace*{\subsecspace}
 
-The primary goal of keep-alive is to reduce the initialization and cold-start latency, by keeping functions alive for different durations based on their characteristics. 
+The primary goal of keep-alive is to reduce the initialization and cold start latency, by keeping functions alive for different durations based on their characteristics. 
 % Servers that run these functions are heavily multiplexed, and run hundreds of short lived functions concurrently. %backend FaaS servers?
 % too sudden 
 Because servers run hundreds of short lived functions concurrently, keep-alive policies must be generalizable and yield high server utilization. 
@@ -106,11 +106,11 @@ A more principled approach is needed, which we provide next.
 
 % Constant keep-alive policies (for 30 minutes) do not consider the resource footprints, nor do they take into account the benefits of warming for different functions.
 % %
-% For instance, given two containers close to their time out, we should ideally prefer the one with high cold-start overhead so that the work is not lost.
+% For instance, given two containers close to their time out, we should ideally prefer the one with high cold start overhead so that the work is not lost.
 
 % Similarly, resource footprint is another major factor. Higher footprint containers should be evicted earlier.
 
-% Ofcourse we need to consider multiple factors: footprint, access frequency, cold-start overhead, and size.
+% Ofcourse we need to consider multiple factors: footprint, access frequency, cold start overhead, and size.
 % %
 % Optimizing for server-times 
 
@@ -178,7 +178,7 @@ Our policy decides which container to terminate if a new container is to be laun
 %
 The total number of containers (warm + running) is constrained by the total server physical resources (cpu and memory). 
 %
-Intuitively, our termination policy computes a ``priority'' for each container based on the cold-start overhead and resource footprint, and terminates the container with the lowest priority.
+Intuitively, our termination policy computes a ``priority'' for each container based on the cold start overhead and resource footprint, and terminates the container with the lowest priority.
 %
 %Below, we describe our termination policy in detail.
 
@@ -195,7 +195,7 @@ Intuitively, our termination policy computes a ``priority'' for each container b
 
 %What is the point of this? 
 %Assume that a  function $i$ has a initialization or startup time of $s_i$. 
-%Once initialized, the running time of the function is  $r_i$, and thus total running time for the cold-start case is $s_i + r_i = T_i$.  
+%Once initialized, the running time of the function is  $r_i$, and thus total running time for the cold start case is $s_i + r_i = T_i$.  
 %When executing on a warm container, the time is simply $w_i$.
 %
 
@@ -271,7 +271,7 @@ The priority is proportional to the frequency, and thus more frequently executed
 
 \noindent \textbf{Cost} represents the termination-cost, which is equal to the initialization time, i.e., $s_i$. 
 %
-This captures the benefit of keeping a container alive and the cost of a cold-start. 
+This captures the benefit of keeping a container alive and the cost of a cold start. 
 %
 % There are other cost formulations also, such as $c/T$ etc that capture the ratio, that yield different policies.
 The priority is thus proportional to the initialization overhead of the function. 

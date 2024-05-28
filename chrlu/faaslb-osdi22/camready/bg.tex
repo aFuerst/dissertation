@@ -1,7 +1,7 @@
 
 \section{Background}
 
-\subsection{FaaS Function Execution} % Cold-starts and Keep-alive}
+\subsection{FaaS Function Execution} % Cold starts and Keep-alive}
 
 \noindent \textbf{Function Initialization Overheads.}
 The Function-as-a-Service computing paradigm sees providers running user code on-demand when a request comes in, and importantly deciding \emph{where} it should run. 
@@ -46,7 +46,7 @@ The cold times, because of the large initialization overheads, are $1-10\times$ 
 % To encourage reuse for lower latency, the provider must have a load balancing policy that ensures \emph{locality}. 
 % Consistently routing a function to the same server reinforces the warm container and improves response time and system latency. 
 
-\noindent \textbf{Keep-alive For Reducing Cold-starts.}
+\noindent \textbf{Keep-alive For Reducing Cold starts.}
 % An individual server impacts latency by choosing when and which functions to keep warm in memory.
 Servers cannot keep all the functions routed to them in memory indefinitely, and when memory is needed it must choose which function to retain, aka a \emph{keep-alive} policy.
 Many FaaS offerings, including OpenWhisk which we build on here, use a time-to-live approach that \emph{evicts} a function from memory if it isn't used within a certain time window.
@@ -74,7 +74,7 @@ We shall elaborate on this further in the next section, and show that the tradeo
 
 % Violin-plot figure here... 
 
-% \paragraph{Keep-Alive for reducing cold-starts.}
+% \paragraph{Keep-Alive for reducing cold starts.}
 % Many techniques have been proposed to reduce the initialization overhead.
 % One common general technique is to keep the initialized container state in server memory, and serve the subsequent invocations of the same function from this pre-initialized container.
 % Thus keeping functions alive can amortize the function initialization overheads. 
@@ -98,7 +98,7 @@ From a queuing theory perspective, policies such as least-work-left (LWL) and Jo
 
 Interestingly, load-balancing for \emph{data-oriented} systems, such as Content Delivery Networks (CDNs)~\cite{nygren2010akamai}, and distributed key-value stores (such as Amazon Dynamo~\cite{decandia2007dynamo}) must also balance the load on servers, but with data locality as a key requirement.
 In this context, locality refers to requests for the same object being handled by the server, or the same subset of servers if the object is replicated. 
-We find that FaaS load balancing requires and benefits from \emph{both} these objectives: minimizing computing load \emph{and} maximizing locality to reduce cold-starts. 
+We find that FaaS load balancing requires and benefits from \emph{both} these objectives: minimizing computing load \emph{and} maximizing locality to reduce cold starts. 
 
 \begin{comment}
 However, combining compute-oriented load-balancing solutions 

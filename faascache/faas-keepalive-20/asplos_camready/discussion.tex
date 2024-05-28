@@ -22,10 +22,10 @@ We have deliberately focused our techniques and evaluation on a single-server se
 
 \paragraph{Explicit initialization.}
 There are many techniques for reducing the initialization cost, which can be combined with our policies. 
-The cold-start overhead can also be addressed by \emph{explicit initialization} of functions, in which the initialization code is provided as a separate, explicit call-back. 
+The cold start overhead can also be addressed by \emph{explicit initialization} of functions, in which the initialization code is provided as a separate, explicit call-back. 
 For instance, OpenWhisk supports an \texttt{init} call into the function runtime, which can be executed before the function is triggered with the \texttt{run} call. 
 %, which we described in Section~\ref{sec:tradeoffs}. 
-This explicit initialization allows functions to be pre-warmed, and can be used to reduce the cold-start overhead.  
+This explicit initialization allows functions to be pre-warmed, and can be used to reduce the cold start overhead.  
 However, explicit initialization is not common---our empirical investigation into FaaS benchmarks~\cite{kim_functionbench_2019} and official examples showed that applications do not use this functionality. 
 We speculate that the slow adoption is due to the subtle differences in the various cloud function APIs, serverless platforms, and runtimes. 
 Nevertheless, it can be a powerful technique to amortize expensive operations such as package imports and downloading data dependencies, and increase the effectiveness of keep-alive policies even further.

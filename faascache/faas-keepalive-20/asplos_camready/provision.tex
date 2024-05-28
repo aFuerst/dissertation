@@ -11,7 +11,7 @@ To handle the interplay and tradeoffs between these factors, we use similar prin
 In case FaaS workloads are co-located with other applications such as long-running containers and VMs, our provisioning policies can also be used to determine the resource allocation of the combined running and warm function pool. 
 
 The fundamental challenge underlying resource provisioning for FaaS workloads is the performance vs. resource allocation tradeoff. 
-Running a workload on large servers/VMs provides more resources for the keep-alive cache, which reduces the cold-starts and improves the application performance. 
+Running a workload on large servers/VMs provides more resources for the keep-alive cache, which reduces the cold starts and improves the application performance. 
 However, we must also be careful to not \emph{overprovision}, since it leads to wasted and underutilized resources.
 Additionally, since function workload can be dynamic, resource provisioning must be \emph{elastic}, and be able to dynamically scale up or down based on the load. 
 We therefore present a \emph{static} provisioning policy that determines the server memory size for a given function workload, and then develop an elastic-scaling approach for handling workload temporal dynamics. 
@@ -20,7 +20,7 @@ We therefore present a \emph{static} provisioning policy that determines the ser
 \label{subsec:static}
 \vspace*{\subsecspace}
 
-In Section~\ref{sec:bg}, we have seen how keeping function containers warm in a keep-alive cache can help mitigate the cold-start overheads. 
+In Section~\ref{sec:bg}, we have seen how keeping function containers warm in a keep-alive cache can help mitigate the cold start overheads. 
 The effectiveness of any keep-alive policy depends on the size of this keep-alive cache, and thus the server resources available, i.e., the server size. 
 Our \emph{static} provisioning policy thus selects a server size for handling a given workload. 
 % Not peak, since that would be infinite sized. 90 percentile, but we dont do that. 
@@ -83,7 +83,7 @@ The main difference is due to the limitations on the concurrent execution of fun
 caching deals with unique objects, whereas there can be  multiple containers for a function. 
 %
 At lower cache sizes, a high miss rate results in higher server load, and hence a higher number of dropped requests, that the classical reuse-distance approaches do not capture.
-If all warmed containers of a function are in use, then a new invocation results in a cold-start---which would be counted as a cache ``hit''.
+If all warmed containers of a function are in use, then a new invocation results in a cold start---which would be counted as a cache ``hit''.
 Thus at lower sizes, the real hit-ratio is lower than the ideal. 
 At larger sizes, \emph{multiple} containers corresponding to concurrent invocations of a function will be present, which results in a deviation from the hit-rate curve. 
 %: which is again different from the caching model where objects are unique. 
@@ -104,14 +104,14 @@ We assume that the FaaS server backend is running functions as containers either
 In either case, it is important to be able to reclaim unused keep-alive cache resources and reduce its footprint, in order to increase the efficiency of the cloud platform. 
 
 Our vertical elastic scaling policy is simple and is intended to demonstrate the efficacy of a general caching based approach. 
-We implement a  proportional controller~\cite{pid-wiki} which periodically adjusts the VM memory size based on the rate of cold-starts.  
+We implement a  proportional controller~\cite{pid-wiki} which periodically adjusts the VM memory size based on the rate of cold starts.  
 Thus during periods of low rate of function invocations (i.e., arrival rate), the cache size can be reduced. 
-This may \emph{increase} the miss-ratio---but we care about the cold-starts (i.e., misses) per second, which is product of miss-ratio and invocations per second.
-Our controller monitors the arrival and cold-start rate, and uses the hit-ratio curve to decrease or increase VM size dynamically. 
+This may \emph{increase} the miss-ratio---but we care about the cold starts (i.e., misses) per second, which is product of miss-ratio and invocations per second.
+Our controller monitors the arrival and cold start rate, and uses the hit-ratio curve to decrease or increase VM size dynamically. 
 We use VM resource deflation~\cite{deflation-eurosys19} to shrink or expand the VM by using a combination of hypervisor level page swapping, or guest-OS memory hot-plug and unplug. 
 
 
-Assume that we have a target miss speed (number of cold-starts/misses per second).
+Assume that we have a target miss speed (number of cold starts/misses per second).
 For instance, this target value can be a product of the desired hit-ratio, $h$, and the average function arrival rate for the entire workload trace, $\bar{\lambda}$. 
 Periodically, we monitor the exponentially smoothed arrival rate $\lambda$, and the observed miss speed.
 Our proportional controller adjusts the cache size in order to reduce the difference between the actual vs. target miss speed.

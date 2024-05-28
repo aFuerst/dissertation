@@ -125,16 +125,16 @@ This highlights and emphasizes the deeper architectural challenges of FaaS, whic
   % \vspace*{-6pt}  
 \end{figure}
 
-\noindent \textbf{Cold-starts.}
+\noindent \textbf{Cold starts.}
 So far we have focused on warm-start performance which dominates function workloads.
-\sysname~ also incorporates a few optimizations for cold-starts. 
+\sysname~ also incorporates a few optimizations for cold starts. 
 Specifically, we are interested in quantifying the impact of the different container backends (containerd and Docker), and the network namespace caching optimizations. 
 The end to end cold times for various functions are shown in Figure~\ref{fig:cold}: this includes both container startup time and function initialization overheads. 
 In general, smaller functions face a larger impact due to the cold starts, since it represents a higher percentage of their total flow time. 
 
 
-For small functions (left axis of the figure), using containerd (without network namespace caching) reduces the cold-start by more than 40\%, indicating a clear advantage of using a lighter container runtime.
-Introducing the namespace caching further reduces the cold-start times by 15\% compared to unoptimized containerd which creates a new network namespace for each new container. 
+For small functions (left axis of the figure), using containerd (without network namespace caching) reduces the cold start by more than 40\%, indicating a clear advantage of using a lighter container runtime.
+Introducing the namespace caching further reduces the cold start times by 15\% compared to unoptimized containerd which creates a new network namespace for each new container. 
 After using the namespace cache, each function invocation sees upwards of $100 ms$ improvement in their cold start time.
 %
 The effects also hold for larger functions (right axis of Figure~\ref{fig:cold}), where Docker increases both the average and variance of the latency. 
@@ -149,7 +149,7 @@ Specifically, we use a random selection of 21 functions from the Azure traces, a
 This ``stationary'' workload has an average 40 requests per second for 30 minutes. 
 This represents an extremely heterogeneous workload in terms of function durations and IATs.
 Additionally, we also show results from a ``bursty'' workload generated in the same way, but with one function generating a burst of 18 requests per second for one minute.
-In this open-loop testing, we prewarm the function containers to prevent excessive cold-starts immediately at the start of the workload.
+In this open-loop testing, we prewarm the function containers to prevent excessive cold starts immediately at the start of the workload.
 The number of containers to prewarm for each function is determined using Little's law by using their average rates and execution times. 
 
 %~\ref{tab:workload-dsc} lists selected functions and theirs IATs. To test effectiveness of the queue policies we modify the baseline trace to include a burst of function invocation at the rate of 18 request per second in the middle of baseline trace for a window of one minute. Application dd in the table~\ref{tab:workload-dsc} represents it's IAT in bold.
@@ -245,7 +245,7 @@ However we can see a tradeoff: the increased concurrency risks performance inter
 For comparison and as a baseline, we also show  the ``no queue'' configuration which is pure processor sharing and there is no limit on CPU overcommitment.
 %
 Queuing also reduces cold starts due to concurrent invocations. 
-Without queuing, the number of cold-starts increased by more than $3\times$. 
+Without queuing, the number of cold starts increased by more than $3\times$. 
 
 
 
@@ -273,7 +273,7 @@ The small-function prioritization by SJF and EEDF reduces this significantly.
 The impact of queuing for the bursty workload is even more interesting, as shown in Figure~\ref{fig:q-burst:box}.
 EEDF's average latency is $2\times$ higher than simple FCFS, while SJF is 60\% lower than FCFS. 
 Investigating the per-function breakdown again in Figure~\ref{fig:q-burst:breakdown} again points to the contribution of the small web function, which is \emph{also the bursty function}.
-The bursty invocations trigger the cold-start mitigation, which deprioritizes them, and increases the queuing time, which disproportionately impacts the small functions.
+The bursty invocations trigger the cold start mitigation, which deprioritizes them, and increases the queuing time, which disproportionately impacts the small functions.
 
 % Bursty here. 
 
