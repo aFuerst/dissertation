@@ -1,21 +1,8 @@
 \section{Serverless Control Plane Research}
-\label{sec:platform-enhance}
+\label{sec:related}
 
-\mhead{Cold Start Mitigation}
-The FaaS computing paradigm sees providers running user code on-demand when a request comes in, and importantly deciding \emph{where} it should run. 
-Each invocation must be run in isolation from co-located invocations and must ensure provider control over system resources.
-Both security goals are thus achieved by running each invocation in a sandboxed environment. 
-Sandboxes are generally implemented using containers (such as Docker~\cite{docker-main}) or lightweight VMs (such as Firecracker~\cite{firecracker-nsdi20}) created on the server that runs the invocation.
-Unfortunately, creation time for any type of sandbox is often significant, always adding latency to the in-flight request. 
 
-Many techniques have been proposed to reduce the initialization overhead from such \emph{cold starts}.
-Cold start invocations, because of the large initialization overheads, are typically $1-10\times$ larger than the function execution time.
-%  which occurs when the function is run in an already initialized container which is cached in memory. 
-% They can be mitigated by skipping initialization entirely, by saving in memory and reusing the execution environment for subsequent invocations of the same function. 
-We can mitigate this by the saving execution environment in memory and reusing it for subsequent invocations of the same function, skipping initialization entirely. 
-Keeping the function \quotes{warm} thus allows a provider to amortize the startup cost across future invocations.
-
-\mhead{Workload Characterization}
+\subsection{Workload Characterization}
 Published traces from major providers give a glimpse into the scale of serverless computing.
 Shahrad et al.~\cite{shahrad_serverless_2020} publicized the first dataset of the functions served by Azure Functions, with a detailed characterization breakdown.
 As seen in Figure~\ref{fig:wild-invokes}, invocation rates are \emph{extremely} heavy tailed.
@@ -24,30 +11,21 @@ The most frequently invoked functions are executed several times a second, while
 Because of this, a small portion, 19\% of functions, account for 99.6\% of invocations in Azure.
 A paper describing an internal FaaS platform at Meta~\cite{sahraei2023xfaas}, showcased handling trillions of invocations daily and a similar skewed workload.
 
-Several examples of functions are shown in Table~\ref*{tab:workloads}, these are taken from~\cite{functionbench}.
-Functions have high variation in warm and cold-start times, with cold-start times being significantly higher.
-Memory usage can range from a few dozen megabytes, to half a gigabyte, matching real-world data from~\cite{shahrad_serverless_2020}.
-Control planes must be able to handle these high variations in frequency and resource usage, and treat all functions fairly.
-
 \begin{figure}
   \begin{center}
     \includegraphics[width=.9\columnwidth]{./figures/wild-invocations.png}
     \caption{A CDF of daily invocations for functions. 
-              Invocation frequencies range from sub-second to less than one per day. 
+              Invocation frequencies taken from an Azure dataset range from sub-second to less than one per day. 
               Figure from~\cite{shahrad_serverless_2020}}
   \label{fig:wild-invokes}
 \end{center}
 \end{figure}
 
-Functions exist in a data-driven architecture, being required to download inputs to handle each invocation.
-The same group at Azure released another dataset in~\cite{romero2021faa}, focusing on data usage of functions and DAG applications.
-They found a split of functions with some having high cloud storage usage and others almost none.
-Surveys have shown that increasingly diverse applications are deployed on FaaS, which will rely on data movement by the platform~\cite{raza2021sok,hossein2022survey,eismann2020serverless}.
-Some examples of these applications are explored in Section~\ref{sec:serverless-apps}.
-% Control planes must cater to a host of diverse applications with equally varied runtime needs.
 
-% The warm and cold time for different functions from the FunctionBench~\cite{kim_functionbench_2019} workload suite are shown in Table~\ref{tab:func-times}.
-% The table shows the total execution latency when these functions are run on OpenWhisk.
+Several examples of functions are shown in Table~\ref{tab:workloads}, these are taken from~\cite{functionbench}.
+Functions have high variation in warm and cold-start times, with cold-start times being significantly higher.
+Memory usage can range from a few dozen megabytes, to half a gigabyte, matching real-world data from~\cite{shahrad_serverless_2020}.
+Control planes must be able to handle these high variations in frequency and resource usage, and treat all functions fairly.
 
 \begin{table}
   \centering
@@ -77,6 +55,31 @@ Some examples of these applications are explored in Section~\ref{sec:serverless-
   \label{tab:workloads}
 \end{table}
 
+\subsection{Cold Start Mitigation}
+The FaaS computing paradigm sees providers running user code on-demand when a request comes in, and importantly deciding \emph{where} it should run. 
+Each invocation must be run in isolation from co-located invocations and must ensure provider control over system resources.
+Both security goals are thus achieved by running each invocation in a sandboxed environment. 
+Sandboxes are generally implemented using containers (such as Docker~\cite{docker-main}) or lightweight VMs (such as Firecracker~\cite{firecracker-nsdi20}) created on the server that runs the invocation.
+Unfortunately, creation time for any type of sandbox is often significant, always adding latency to the in-flight request. 
+
+Many techniques have been proposed to reduce the initialization overhead from such \emph{cold starts}.
+Cold start invocations, because of the large initialization overheads, are typically $1-10\times$ larger than the function execution time.
+%  which occurs when the function is run in an already initialized container which is cached in memory. 
+% They can be mitigated by skipping initialization entirely, by saving in memory and reusing the execution environment for subsequent invocations of the same function. 
+We can mitigate this by the saving execution environment in memory and reusing it for subsequent invocations of the same function, skipping initialization entirely. 
+Keeping the function \quotes{warm} thus allows a provider to amortize the startup cost across future invocations.
+
+Functions exist in a data-driven architecture, being required to download inputs to handle each invocation.
+The same group at Azure released another dataset in~\cite{romero2021faa}, focusing on data usage of functions and DAG applications.
+They found a split of functions with some having high cloud storage usage and others almost none.
+Surveys have shown that increasingly diverse applications are deployed on FaaS, which will rely on data movement by the platform~\cite{raza2021sok,hossein2022survey,eismann2020serverless}.
+Some examples of these applications are explored in Section~\ref{sec:serverless-apps}.
+% Control planes must cater to a host of diverse applications with equally varied runtime needs.
+
+% The warm and cold time for different functions from the FunctionBench~\cite{kim_functionbench_2019} workload suite are shown in Table~\ref{tab:func-times}.
+% The table shows the total execution latency when these functions are run on OpenWhisk.
+
+
 
 \begin{comment}
 \begin{table}
@@ -103,19 +106,44 @@ Some examples of these applications are explored in Section~\ref{sec:serverless-
 \end{table}
 \end{comment}
 
-\mhead{Reusing Initialization}
+
+\subsubsection{Keep-Alive}
+
+Locality for FaaS resource management has been explored in the form of function keep-alive policies~\cite{shahrad_serverless_2020}. 
+Once a container for a function is created and the function finishes execution, the container can be kept alive instead of immediately terminating it. 
+Subsequent invocations of the function can then \emph{reuse} the already running container.
+This \emph{keep-alive} mechanism can alleviate the cold-start overhead due to container launching (which can be $\sim 100$ ms). %Might be confusing, keep-alive also helps in other initialization.
+
+However, keep-alive is not a panacea for all FaaS latency problems. 
+Keeping a container alive consumes valuable computing resources on the servers. %, and reduces the number of functions that can be executed concurrently. 
+Specifically, a running container occupies memory, and warm containers being kept alive in anticipation of future function invocations can reduce the multiplexing and efficiency of the servers. 
+% Thus, we develop keep-alive \emph{policies} that reduce the cold-start overhead while keeping the server utilization high.
+
+Designing general keep-alive policies is challenging due to the extreme heterogeneity in the different function popularities, resource requirements, and cold-start overheads.
+For instance, a recent analysis of FaaS workloads from Azure~\cite{shahrad_serverless_2020} shows that function inter-arrival times and memory sizes can vary by more than three orders of magnitude.
+Commonly, platforms use a default, fixed, time-to-live (TTL) before deleting idle containers~\cite{openwhisk}.
+% \cite{shahrad_serverless_2020}
+FaaS users have even taken it upon themselves to keep their containers alive in various ways~\cite{warm2,warm1} to avoid cold starts.
+% This workload heterogeneity magnifies the performance vs. utilization tradeoff faced by keep-alive policies, as we shall describe in the next section. 
+% Additionally, FaaS workloads also show a high temporal dynamism, which requires new approaches to resource provisioning and elastic scaling, which we also develop. 
+
+% Single-server environments have been the focus of these mechanisms and policies: we have made an initial attempt to understand their interactions in a distributed cluster context.
+% Inter-function dependencies can also be used for predictive resource management and reducing function communication and startup costs~\cite{gunasekaran2020fifer, daw2021speedo, shen2021defuse}: incorporating these policies into our load-balancer is part of future work. 
+
+
+\subsubsection{Reusing Initialization}
 Performing multiple container startups of a function will involve executing the same startup procedures repeatedly: language runtimes, the OS of a micro-VM, etc.
 Utilizing past startups by checkpointing the container at a known position and booting from there has proved promising in reducing cold start times~\cite{du2020catalyzer,vhive-asplos21}.
 Memoization approaches that leverage existing containers to duplicate their state have proven highly effective~\cite{du2020catalyzer,wei2022booting}.
 
-\mhead{Alternate Isolation Mechanisms}
+\subsubsection{Alternate Isolation Mechanisms}
 While a simple implementation would run functions inside Docker containers~\cite{docker-main}, so long as isolation guarantees are upheld, using alternate mechanisms with faster start times is effective.
-Directly optimizing the isolation mechanism~\cite{firecracker-nsdi20} or common libraries and language runtimes used by FaaS worklaods~\cite{carreira2021warm} both give immediate performance boosts. 
+Directly optimizing the isolation mechanism~\cite{firecracker-nsdi20} or common libraries and language runtimes used by FaaS workloads~\cite{carreira2021warm} both give immediate performance boosts. 
 Running functions inside the worker's language runtime can dramatically reduce initialization times~\cite{vhive-asplos21,shillaker2020faasm,jia2021nightcore,du2020catalyzer}.
 Security may be relaxed between functions in a larger application~\cite{akkus_sand_2018, dukic2020photons} allowing for the reuse of sandboxes.
 %
 
-\mhead{FaaS Resource Management}
+\subsubsection{Worker Resource Management}
 Worker resources are not infinite, especially memory for keeping function sandboxes available.
 Packing functions together can improve memory utilization~\cite{akhtar_cose_2020}.
 Developers often over-assign memory, causing under-utilization, the control plane is in the perfect place to minimize this waste~\cite{eismann2021sizeless, mvondo2021ofc}.
@@ -123,24 +151,6 @@ Concurrent invocations of the same function has been reused to share resources, 
 
 The initialization overheads of serverless functions and their repeated invocations have spawned a great deal of research into optimizing their resource management.
 Recent surveys~\cite{faas-survey-jan-2022, raza2021sok, eismann2020serverless, hassan2021survey, mampage2021holistic} provide an overview of the challenges and solutions in this very active research area. 
-
-% Locality for FaaS resource management has been explored in the form of function keep-alive policies~\cite{shahrad_serverless_2020}. 
-% Once a container for a function is created and the function finishes execution, the container can be kept alive instead of immediately terminating it. 
-% Subsequent invocations of the function can then \emph{reuse} the already running container.
-% This \emph{keep-alive} mechanism can alleviate the cold-start overhead due to container launching (which can be $\sim 100$ ms). %Might be confusing, keep-alive also helps in other initialization.
-
-% However, keep-alive is not a panacea for all FaaS latency problems. 
-% Keeping a container alive consumes valuable computing resources on the servers. %, and reduces the number of functions that can be executed concurrently. 
-% Specifically, a running container occupies memory, and ``warm'' containers being kept alive in anticipation of future function invocations can reduce the multiplexing and efficiency of the servers. 
-% Thus, we develop keep-alive \emph{policies} that reduce the cold-start overhead while keeping the server utilization high.
-
-% Designing general keep-alive policies is challenging due to the extreme heterogeneity in the different function popularities, resource requirements, and cold-start overheads.
-% For instance, a recent analysis of FaaS workloads from Azure~\cite{shahrad_serverless_2020} shows that function inter-arrival times and memory sizes can vary by more than three orders of magnitude. 
-% This workload heterogeneity magnifies the performance vs. utilization tradeoff faced by keep-alive policies, as we shall describe in the next section. 
-% Additionally, FaaS workloads also show a high temporal dynamism, which requires new approaches to resource provisioning and elastic scaling, which we also develop. 
-
-% Single-server environments have been the focus of these mechanisms and policies: we have made an initial attempt to understand their interactions in a distributed cluster context.
-% Inter-function dependencies can also be used for predictive resource management and reducing function communication and startup costs~\cite{gunasekaran2020fifer, daw2021speedo, shen2021defuse}: incorporating these policies into our load-balancer is part of future work. 
 
 \subsection{Load Balancing}
 
@@ -152,7 +162,7 @@ Predicting a window of function's invocation arrivals and preparing a container 
 Scheduling functions based on their larger application DAG can minimize startup and communication time~\cite{shen2021defuse, abdi2023palette, guo_decomposing_2022, kotni2021faastlane, shen_defuse_2021,mahgoub_wisefuse_2022,zhou_qos-aware_2022}.
 Functions may compete for certain resources like network, so scheduling them on different machines can speed up certain workloads~\cite{tian_owl_2022}.
 
-Package-aware load balancing~\cite{package-cristina-19}  identifies and uses function code dependencies (software packages) as an important source of data locality.
+Package-aware load balancing~\cite{package-cristina-19} identifies and uses function code dependencies (software packages) as an important source of data locality.
 While this is an important factor, we focus on the in-memory locality of kept-alive functions since memory capacity is much smaller than permanent storage and caching functions in memory has a very large performance impact.
 CPU contention and interference is a major source of performance bottlenecks for co-located functions, and adjusting CPU-shares using cgroups can provide significant benefits~\cite{suresh2019fnsched, suresh2021servermore, ensure-faas-acsos20}.
 The repetitive nature of functions and their workflows can also be used to improve resource utilization and latency~\cite{hunhoff2020proactive, yu2021faasrank, puru_xanadu_20, przybylski2021data} to select workers and sandboxes before they are needed. %: our load-balancer is stateless for the sake of simplicity and can be enhanced with these techniques if necessary.

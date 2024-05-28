@@ -41,7 +41,7 @@ Our load-balancing policy is cognizant of the different utility of locality for 
 To deal with stale server load information and bursty function invocations, we use stochastic random loads, such that very popular functions can be spread out among more servers and minimize the herd-effect of overloading servers running bursty popular functions. % instead of overloading their home servers. 
 
 We make use of the recent equivalence between function keep-alive and caching~\cite{faascache-asplos21}, and develop a new simplified version of SHARDS~\cite{shards} for our load-balancing policy for detecting and handling popular functions. 
-Our policies are designed to be simple and practical, have a small number of user-controlled parameters, which allows them to be a drop-in replacement for the default load-balancing implementation in OpenWhisk \cite{openwhisk}. 
+Our policies are designed to be simple and practical, have a small number of user-controlled parameters, which allows them to be a drop-in replacement for the default load-balancing implementation in OpenWhisk~\cite{openwhisk}. 
 
 %\textbf{Experimental methodology and artifact availability.}
 Prior work in serverless computing has largely focused on optimizing performance on a \emph{single} server using various cold-start mitigating mechanisms and policies. 

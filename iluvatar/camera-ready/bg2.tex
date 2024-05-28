@@ -37,7 +37,7 @@ Importantly, both Kafka and CouchDB are on the critical path, and add 100s of ms
 %
 OpenWhisk is highly modular and distributed, with many networked services.
 All of these, combined with the JVM GC (it is implemented in Scala), results in large and unpredictable latency spikes~\cite{faaslb-hpdc22, hotcarbon22-faas}, with slowdowns of more than $10,000\times$ reported~\cite{zuk_call_2022}. 
-%For instance, Stretch factors shown in \cite{zuk} of 10,000, indicating that the overhead is 10,000 more than the actual processing latency, and with response times of 100s of seconds. 
+%For instance, Stretch factors shown in~\cite{zuk} of 10,000, indicating that the overhead is 10,000 more than the actual processing latency, and with response times of 100s of seconds. 
 
 \begin{comment}
 Shared kafka queue for scheduling and assignment of invocations.
@@ -49,7 +49,7 @@ Increase queue size, overcommit resources and increase concurrency, forward, and
 
 OS level preemption is useful, since function invocation is not confined to a single process but many components such as containerization layer. The resource usage is also not uniform, but bursty and low average.
 
-Stretch factors shown in \cite{zuk} of 10,000, indicating that the overhead is 10,000 more than the actual processing latency, and with response times of 100s of seconds. 
+Stretch factors shown in~\cite{zuk} of 10,000, indicating that the overhead is 10,000 more than the actual processing latency, and with response times of 100s of seconds. 
 
 \noindent \textbf{Control planes}  (such as OpenWhisk~\cite{openwhisk})  handle all aspects of function execution. 
 This control plane manages a cluster of servers to run functions on, and implements function scheduling, load-balancing, resource monitoring, function status tracking, storing function results, logging, etc. 

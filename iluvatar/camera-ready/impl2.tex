@@ -36,11 +36,11 @@ Concurrent data structures, from \emph{DashMap}, using sharded read-write locks 
 As object creation happens on registration and cold starts, which are uncommon, we continue to use read-write locks elsewhere to avoid contention on global objects.
 The primary "bottleneck" comes from our enqueueing of every invocation into a global queue protected by a basic mutex.
 A mutex in Rust is extremely efficient, and the quick nature of adding and removing to the queue ensures time is not lost in contention.
-Our results below show that even handling many thousands of requests per second, it is no worse than a queue-less implementation \ref{}.
+Our results below show that even handling many thousands of requests per second, it is no worse than a queue-less implementation~\ref{}.
 
 The efficient nature of compiled Rust code and our implementation moderates the CPU usage of the worker process.
 Keeping this low is important to avoid interference on functions and minimize overhead.
-Even under a heavy and sustained load that fills our servers \ref{}, the \sysname{} worker process never uses more than 20\% of a CPU core.
+Even under a heavy and sustained load that fills our servers~\ref{}, the \sysname{} worker process never uses more than 20\% of a CPU core.
 
 \textbf{Platform Optimizations}.
 We made a number of optimizations that we discovered along the way, often specific to our design.
@@ -61,14 +61,14 @@ The agent imports the function Python code, loading it and any library dependenc
 
 
 \paragraph{Deployment}
-For ease of repeatable and scalable use, we have set up our system to be deployable with Ansible \cite{}.
+For ease of repeatable and scalable use, we have set up our system to be deployable with Ansible~\cite{}.
 In a command it can configure, set up, and tear down the applications that make up \sysname{}, and even capture artifacts like logs.
 It ties in nicely with the detailed configuration supported by our worker and controller services.
 Our services support configuration via a json file, convenient for development and local testing, but less so for large research experiments.
 Ansible, plus some clever config loading, allow us to inject arbitrary values as part of a larger command, making deployment for different experiments a breeze.
 
 % With this setup, \sysname{} can be configured and deployed to any number of nodes with a single command.
-% With this we easily scripted a variety of setups for our experiments in Section \ref{Evaluation}, giving us consistent and controlled environments and results.
+% With this we easily scripted a variety of setups for our experiments in Section~\ref{Evaluation}, giving us consistent and controlled environments and results.
 % Workers are configured with a json file on startup, with the various policy options (such as queuing), keep-alive, timeouts, networking, logging, etc.
 
 % CNI and container-spec are also provided as json files. For the container-spec, we change....
@@ -138,8 +138,8 @@ Our load generator is closely coupled with the platform, being able to target a 
 At it's simplest we can test the running characteristics of a variety of functions, which we used to inform both our design and debugging directions.
 We then leverage those function metrics to execute realistic loads against the system under test.
 For deciding what user code is actually executed on workers, we have provided several possibilities.
-The function characteristics from above are used to intelligently ''map'' ported FaasBench \cite{} functions to the trace being run, so the running times are similar.
-Supplementing this, users can either specify code to be run in each function or utilize \emph{lookbusy} \cite{} for wall-clock accurate, cpu-using, and memory-usage matching invocations.
+The function characteristics from above are used to intelligently ''map'' ported FaasBench~\cite{} functions to the trace being run, so the running times are similar.
+Supplementing this, users can either specify code to be run in each function or utilize \emph{lookbusy}~\cite{} for wall-clock accurate, cpu-using, and memory-usage matching invocations.
 
 % Trace generation
 % Use the azure stuff
@@ -147,10 +147,10 @@ Supplementing this, users can either specify code to be run in each function or 
 % function sizes based on # of functions taken from the Azure trace or expected # of outstanding requests per second (little's law)
 % Any hand-rolled trace with specific functions and IATs for testing and creating specific scenarios: e.g. big burst
 
-To generate loads, we pull real-world data from pub Azure \cite{} datasets.
+To generate loads, we pull real-world data from pub Azure~\cite{} datasets.
 \sysname{} can generate basic traces using the mean inter-arrival times of functions, such that functions will appear with consistent frequency, plus some Gausian noise distribution.
 % and even directly replicate invocation patterns.
-The most advanced are traces use ECDFs \cite{}, where the range of IATs of a function form a sample distribution to when it will be invoked next.
+The most advanced are traces use ECDFs~\cite{}, where the range of IATs of a function form a sample distribution to when it will be invoked next.
 This allows us to capture the bursty nature of many functions, having alternating periods of high and low invocation frequencies.
 
 

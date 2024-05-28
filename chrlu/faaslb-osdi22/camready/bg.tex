@@ -13,7 +13,7 @@ Many techniques have been proposed to reduce the initialization overhead from su
 Cold starts  can be mitigated by skipping initialization entirely, by saving in memory and reusing the execution environment for subsequent invocations of the same function. 
 Keeping the function ``warm'' thus allows a provider to amortize the startup cost across future invocations. 
 
-The warm and cold time for different functions from the FunctionBench \cite{kim_functionbench_2019} workload suite are shown in Table~\ref{tab:func-times}.
+The warm and cold time for different functions from the FunctionBench~\cite{kim_functionbench_2019} workload suite are shown in Table~\ref{tab:func-times}.
 The table shows the total execution latency when these functions are run on OpenWhisk.
 The cold times, because of the large initialization overheads, are $1-10\times$ larger than the warm running time, which occurs when the function is run in an already initialized container which is cached in memory. 
 
@@ -35,7 +35,7 @@ The cold times, because of the large initialization overheads, are $1-10\times$ 
   JSON Parsing & 0.414 & 1.962 \\
 \hline
 \end{tabular}
-\caption{FunctionBench \cite{kim_functionbench_2019} functions run times' are significantly longer on cold starts. Ideally we want all of our functions to run warm to lower user latency. Cold starts also increase system load by creating runtime overhead.}
+\caption{FunctionBench~\cite{kim_functionbench_2019} functions run times' are significantly longer on cold starts. Ideally we want all of our functions to run warm to lower user latency. Cold starts also increase system load by creating runtime overhead.}
 \label{tab:func-times}
 %\vspace*{-0.4cm}
 \end{table}

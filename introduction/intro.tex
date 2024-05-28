@@ -83,7 +83,7 @@ The chapters herein show that all the layers and pieces comprising serverless pl
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{introduction/figs/faas-labeled.pdf}
+  \includegraphics[width=\textwidth]{./introduction/figs/faas-labeled.pdf}
   \caption{The major components of the control plane, and the areas of each this thesis impacts. A controller accepts invocations for functions and distributes them amongst a cluster of workers. These in turn run invocations in isolated sandboxes}
   \label{fig:control-plane}
 \end{figure}
@@ -112,7 +112,7 @@ Additional research has targeted this problem specifically to accelerate existin
 Future invocations see lower latency by benefiting from \emph{locality}, where the isolation sandbox is re-used in a \textit{warm start} invocation.
 
 Knowingly keeping idle sandboxes resident in memory improves latency, but may lead to resource underutilization.
-Sandboxes sizes are chosen by users, who often over-provision to negate performance problems~\cite{mvondo2021ofc,romero2021faa,eismann2021sizeless,yu2021harvesting,serverless-harvest-sosp21}.
+Sandbox sizes are chosen by users, who often over-provision to negate performance problems~\cite{mvondo2021ofc,romero2021faa,eismann2021sizeless,yu2021harvesting,serverless-harvest-sosp21}.
 Worker nodes also cannot host a container per function, who often require several for ideal performance, therefore remove them periodically to conserve space~\cite{faascache-asplos21}.
 The highly heterogeneous workload of FaaS has proven challenging when trying to predict when containers will be needed, which would allow their removal from memory to conserve resources~\cite{shahrad2020serverless,zhao2021understanding}.
 Adjusting the number of containers a function has reduces footprint, but may impact latency as they cannot be shared~\cite{enes2020real,li2022kneescale}.
@@ -210,7 +210,7 @@ The effectiveness of this at both minimizing platform overhead and keeping load 
 
 Next, Chapter~\ref{chap:iluvatar} details a new serverless control plane design called \sysname.
 % created to fix problems with existing open-source offerings.
-% Current open-source FaaS control planes \cite{openwhisk} are deficient in key areas for promoting scalable research in the area.
+% Current open-source FaaS control planes~\cite{openwhisk} are deficient in key areas for promoting scalable research in the area.
 This new control plane is written in Rust and seeks to solve the deficiencies in current open-source control planes used for research~\cite{openwhisk}.
 Its worker is designed to be highly modular, allowing swap-able implementations to support heterogeneous platforms and ease comparisons for research.
 It supports a novel queue mechanism to support new designs that may not run all workloads immediately, or handle cases of severe resource demand.

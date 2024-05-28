@@ -29,14 +29,14 @@ resource consumption small: even under a heavy and sustained load that saturates
 
 
 % \paragraph{Deployment}
-% For ease of repeatable and scalable use, we have set up our system to be deployable with Ansible \cite{}.
+% For ease of repeatable and scalable use, we have set up our system to be deployable with Ansible~\cite{}.
 % In a command it can configure, set up, and tear down the applications that make up \sysname{}, and even capture artifacts like logs.
 % It ties in nicely with the detailed configuration supported by our worker and controller services.
 % Our services support configuration via a json file, convenient for development and local testing, but less so for large research experiments.
 % Ansible, plus some clever config loading, allow us to inject arbitrary values as part of a larger command, making deployment for different experiments a breeze.
 
 % With this setup, \sysname{} can be configured and deployed to any number of nodes with a single command.
-% With this we easily scripted a variety of setups for our experiments in Section \ref{Evaluation}, giving us consistent and controlled environments and results.
+% With this we easily scripted a variety of setups for our experiments in Section~\ref{Evaluation}, giving us consistent and controlled environments and results.
 % Workers are configured with a json file on startup, with the various policy options (such as queuing), keep-alive, timeouts, networking, logging, etc.
 
 % CNI and container-spec are also provided as json files. For the container-spec, we change....

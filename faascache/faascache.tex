@@ -38,7 +38,7 @@ Finally, functions have different \textbf{frequencies} and invocation rates. Som
 \cite{faascache-asplos21}
 
 Platforms today exhibit eager eviction, always trying to have memory available to facilitate possible cold starts.
-My work called FaasCache \cite{faascache-asplos21}, reinterprets this paradigm.
+My work called FaasCache~\cite{faascache-asplos21}, reinterprets this paradigm.
 We can choose instead to keep all sandboxes around indefinitely and only remove them when we must make room for an invocation we do not yet have a sandbox for.
 It casts the eviction choice as a caching decision, where better eviction decisions lead to more cache hits (warm starts for invocations).
 Taking into account a function's memory allocation, how often it is invoked, its recency, and the cost of having to re-initialize it, we can make more optimal decisions on what to keep.

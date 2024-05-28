@@ -44,7 +44,7 @@ Algorithm~\ref{algo:BoundedLoadsPolicy}
 \subsection{Caching Aware Forwarding}
 
 % Impact of the warm starts is different for different functions. And so we use this information to make the forwarding decision. 
-% FaasCache \cite{TODO} established not only that functions benifit from warm starts, but vary greatly between their cold and warm runtimes.
+% FaasCache~\cite{TODO} established not only that functions benifit from warm starts, but vary greatly between their cold and warm runtimes.
 % It has been well established that functions benefit from being run warm, and that better cache eviction choices can improve warm hits.
 Different functions can gain more from running warm than others, knowledge that is used in our FaasCache eviction strategy.
 Our load balancer can then assume a function previously ran on a certain worker will still be warm unless under high load.
@@ -84,7 +84,7 @@ We compute the predicted slowdown for the function's cold start and assign it to
 
 \subsection{Handling Bursts}
 
-Functions come in a variety of frequency classes and are also prone to unpredictable burstiness \cite{TODO}.
+Functions come in a variety of frequency classes and are also prone to unpredictable burstiness~\cite{TODO}.
 Identifying these bursts and both keeping latency for such "popular" functions low and preventing them from negatively impacting co-located functions is critical.
 % Very popular functions can present problems.
 We use two strategies:
@@ -94,7 +94,7 @@ We use two strategies:
 
 \subsubsection{Popular function detection with Spatial Sampling}
 
-Our solution to identifying popular functions and function bursts is inspired by SHARDS \cite{shards}.
+Our solution to identifying popular functions and function bursts is inspired by SHARDS~\cite{shards}.
 We can idenfy the top \textit{p} percentile of functions, or filter on some IAT threshold, depending on what is desired. 
 We use the former to avoid unnecessary hyperparamaters and, following SHARDS, randomly sampling invocations to track individual IATs.
 This tracking is simplified by only recording the most recent access time, and then computing the IAT as an estimated moving average of the current IAT and  $now - last_access$.

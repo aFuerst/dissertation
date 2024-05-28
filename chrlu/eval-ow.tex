@@ -74,7 +74,7 @@ It gives some balance between outcomes, for example, a rare function may get sev
 
 
 \noindent \textbf{Workload.}
-We convert 12 functions from FunctionBench \cite{kim_functionbench_2019} to run on OpenWhisk.
+We convert 12 functions from FunctionBench~\cite{kim_functionbench_2019} to run on OpenWhisk.
 To create a more realistic variety of functions, we create ten copies of each function with unique names, giving us 120 unique functions. 
 Each function clone is invoked at different frequencies mimicing the arrival frequencies of the Azure trace~\cite{shahrad_serverless_2020}. 
 % We picked these to mimic the invocation disparity shown in real-world traces.
@@ -110,7 +110,7 @@ Its only latency outliers are due to the inconsistent system overhead we saw abo
 A more CPU intense function performing AES key encryption and decryption in Figure~\ref{fig:AES} roughly has some correlation with load.
 Once the load gets above \textbf{8} does it not finish near its minimum latency anymore.
 The AES function also exhibits layency inconsistency from the system like 'float' did, with many of the invocations under the extreme load of 10 taking as long as invocations with no load.
-% Both \ref{fig:AES} and \ref{fig:FLOAT}, both CPU bound functions, see \textit{no} impact at extreme loads.
+% Both~\ref{fig:AES} and~\ref{fig:FLOAT}, both CPU bound functions, see \textit{no} impact at extreme loads.
 Finally, the long running and CPU bound Sklearn training function in Figure~\ref{fig:TRAIN} is marginally affected as load becomes extreme.
 There is a definite correlation between the two, but it is clearly not linear, with a normalized load of 10 only causing a 1.5x increase in function latency.
 These results challenge the traditional notion that functions are strictly limited by CPU resources. %, but we see that this isn't true.

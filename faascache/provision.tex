@@ -18,7 +18,7 @@ We therefore present a \emph{static} provisioning policy that determines the ser
 \subsection{Static Provisioning}
 \label{subsec:static}
 
-In Section \ref{sec:faascache:bg}, we have seen how keeping function containers warm in a keep-alive cache can help mitigate the cold-start overheads. 
+In Section~\ref{sec:faascache:bg}, we have seen how keeping function containers warm in a keep-alive cache can help mitigate the cold-start overheads. 
 The effectiveness of any keep-alive policy depends on the size of this keep-alive cache, and thus the server resources available, i.e., the server size. 
 Our \emph{static} provisioning policy thus selects a server size for handling a given workload. 
 % Not peak, since that would be infinite sized. 90 percentile, but we dont do that. 

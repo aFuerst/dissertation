@@ -1,0 +1,140 @@
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+% Python style for highlighting
+\lstdefinelanguage{python}{
+  keywords={self, import, as, def},
+  morecomment=[l]{#},
+  morecomment=[s]{"""}{"""},
+  morestring=[b]',
+  morestring=[b]",
+  ndkeywords={self, import, as, def},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{deepgreen}\ttfamily,
+  sensitive=true
+}
+% \newcommand\pythonstyle{\lstset{
+% language=python,
+% % basicstyle=\ttm,
+% morekeywords={self, import, as, def},              % Add keywords here
+% keywordstyle=\ttb\color{deepblue},
+% emph={MyClass,__init__},          % Custom highlighting
+% emphstyle=\ttb\color{deepred},    % Custom highlighting style
+% stringstyle=\color{deepgreen},
+% morecomment=[l]{#},
+% morecomment=[s]{"""}{"""},
+% morestring=[b]',
+% morestring=[b]",
+% frame=single,                         % Any extra options here
+% showstringspaces=false,
+% basicstyle=\footnotesize\sffamily,
+% columns=fullflexible,
+% numbers=left,
+% backgroundcolor=\color{lightgray},
+% }}
+% % Python environment
+% \lstnewenvironment{python}[1][]
+% {
+% \pythonstyle
+% \lstset{#1}
+% }
+% {}
+\begin{figure}
+  \begin{lstlisting}[language=python, numbers=left, frame=single, basicstyle=\footnotesize\sffamily, columns=fullflexible, label={lst:python-lambda-example}]
+# Initialization code 
+import numpy as np 
+import tensorflow as tf
+  
+m = download_model("http://model_serve/img_classify.pb")
+session = create_tensorflow_graph(m) 
+  
+def lambda_handler(event, context):
+    # This is called on every function invocation 
+    picture = event["data"]
+    prediction_output = run_inference_on_image(picture) 
+    return prediction_output 
+\end{lstlisting}
+     \caption{A classic serverless function: simple Python code performing ML inference on image data. 
+              In this example library and model initialization are done before execution starts.}
+     \label{fig:python-lambda-example}
+\end{figure}
+
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, new, return, switch, this, throw, try, typeof, var, void, while, with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  sensitive=true
+}
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{white},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+\begin{figure}
+  \begin{lstlisting}[language=JavaScript, numbers=left, frame=single, basicstyle=\footnotesize\sffamily, columns=fullflexible]
+const doc = require("dynamodb-doc");    
+const dynamo = new doc.DynamoDB();
+
+exports.handler = (event, context, callback) => {
+    const done = (err, res) => callback(null, {
+        statusCode: err ? "400" : "200",
+        body: err ? err.message : JSON.stringify(res),
+        headers: {
+          "Content-Type": "application/json",
+        },
+    });
+    switch (event.httpMethod) {
+        case "DELETE":
+            dynamo.deleteItem(JSON.parse(event.body), done);
+            break;
+        case "GET":
+            dynamo.scan({ TableName: event.queryStringParameters.TableName }, done);
+            break;
+        case "POST":
+            dynamo.putItem(JSON.parse(event.body), done);
+            break;
+        case "PUT":
+            dynamo.updateItem(JSON.parse(event.body), done);
+            break;
+        default:
+            done(new Error("Unsupported method `${event.httpMethod}'"));
+    }};
+     \end{lstlisting}
+     \caption{Functions have varied tasks and implementation languages.
+     This JavaScript function is designed to operate a microservice as part of a larger application.}
+     \label{fig:javascript-lambda-example}
+\end{figure}
+
+\begin{comment}
+  \begin{figure}
+  \begin{lstlisting}[frame=single, basicstyle=\footnotesize\sffamily, columns=fullflexible]
+GET http://faas.com/img_recogn?input_bucket=9bcc64b9.png
+  \end{lstlisting}
+  \caption{Invoking a serverless function to perform image recognition. Small inputs may be passed directly, with large ones passed indirectly via storage.}
+  \label{fig:lambda-invoke}
+\end{figure}
+\end{comment}
