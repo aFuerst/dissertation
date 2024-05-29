@@ -70,7 +70,7 @@ We believe that the FaaS control plane is an important component of the modern c
 \begin{figure}
   \centering  \includegraphics[width=0.4\textwidth]{iluvatar/graphs/scaling/pyaes/overhead-scaling.pdf}
   % \vspace*{-6pt}
-  \caption{The latency overhead of the control plane, as the number of concurrent invocations increases. OpenWhisk overhead is significant and has high variance, resulting in high tail latency. \sysname~ reduces this overhead by 100x. }
+  \caption{The latency overhead of the control plane, as the number of concurrent invocations increases. OpenWhisk overhead is significant and has high variance, resulting in high tail latency. \sysname~reduces this overhead by 100x. }
   \label{fig:ow-scaling}
     % \vspace*{-6pt}
 \end{figure}
@@ -99,7 +99,7 @@ Due to these issues, low-latency functions see severe performance degradation, a
 Some of these latency overheads are an artifact of the architecture. 
 The shared Kafka function queue can be a major bottleneck; and there are no explicit backpressure or load regulation mechanisms, which is compounded by the CPU overcommitment. 
 %
-For the sake of comparison, the figure also shows the latency overhead of \sysname~ in the same environment. 
+For the sake of comparison, the figure also shows the latency overhead of \sysname~in the same environment. 
 We are able to achieve a per-invocation mean overhead of less than 2ms for almost all the load conditions.
 Importantly, the tail overhead is also small: less than 3ms for less than 32 concurrent invocations, rising to 10ms when the system is saturated.
 
@@ -143,7 +143,7 @@ With OpenWhisk, function performance can be severely affected by a myriad of con
 
 Given the importance of the control plane, we want \emph{predictable} performance to a large degree. 
 In our experience, research in FaaS is often hindered by the large overheads and complexity of existing control planes. 
-Thus, \sysname~ is designed from the ground-up to be lightweight and provide predictable performance under different conditions. 
+Thus, \sysname~is designed from the ground-up to be lightweight and provide predictable performance under different conditions. 
 Our system implementation can potentially accelerate the development of new optimizations, clarify  our understanding of performance characteristics of this relatively new stack, and provide a platform for robust experiments. 
 % Establishing a shared open platform enables easy comparison between research work
 With a robust platform, the community can share knowledge and advances, while being able to compare against a well-known and trusted baseline.

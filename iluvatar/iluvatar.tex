@@ -21,3 +21,9 @@ In this chapter we present the design and implementation of \sysname, a fast, mo
 \input{iluvatar/eval.tex}
 
 \input{iluvatar/related.tex}
+
+\sysname~a fast, modular, and extensible FaaS control plane made open source capable of running on heterogeneous and edge hardware. 
+It is implemented in Rust in about 13,000 lines of code, and introduces only 3ms of latency overhead under a wide range of loads.
+Its worker-centric architecture, resource caching based design, queue-based overcommitment and scheduling, and careful asynchronous implementation, all contribute to low latency and jitter. 
+% \sysname~is open source, runs on heterogeneous and edge hardware, and is intended to serve as a platform for future high-performance FaaS research and deployments.
+% In the near future, we intend to incorporate support for Firecracker~\cite{firecracker-nsdi20} VMs and GPUs; investigate load balancing optimizations; and deploy \sysname~on HPC and cloud clusters. 

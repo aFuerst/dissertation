@@ -1,4 +1,4 @@
-\section{\sysname~ Design}
+\section{\sysname~Design}
 \label{sec:design}
 
 % Design goals:
@@ -16,8 +16,8 @@
 \subsection{Architecture and Overview}
 \label{sec:design:arch}
 
-The \sysname~ control plane is spread out across a load balancer and the individual workers, and sits above the containerization layers. 
-We intend for \sysname~ to be the narrow waist~\cite{popa_http_2010} in the FaaS ecosystem: with optimizations for DAG scheduling~\cite{zhou_qos-aware_2022}, state handling~\cite{sreekanti2020cloudburst}, and horizontal scaling~\cite{faaslb-hpdc22} implemented above it, and sandboxing and containerization below it.  
+The \sysname~control plane is spread out across a load balancer and the individual workers, and sits above the containerization layers. 
+We intend for \sysname~to be the narrow waist~\cite{popa_http_2010} in the FaaS ecosystem: with optimizations for DAG scheduling~\cite{zhou_qos-aware_2022}, state handling~\cite{sreekanti2020cloudburst}, and horizontal scaling~\cite{faaslb-hpdc22} implemented above it, and sandboxing and containerization below it.  
 This architecture was motivated by the key question: \emph{Can fast FaaS control planes be implemented with strict layering and separation of concerns?}
 
 
@@ -31,7 +31,7 @@ Predictive techniques for load-balancing, prefetching, scheduling, function-sizi
   \centering 
   \includegraphics[width=0.6\textwidth]{iluvatar/figs/il76-q.pdf}
     % \vspace*{-6pt}
-  \caption{\sysname~ has a worker-centric architecture. A per-worker queue helps schedule functions, and regulate load and overcommitment. }
+  \caption{\sysname~has a worker-centric architecture. A per-worker queue helps schedule functions, and regulate load and overcommitment. }
   \label{fig:arch}
   % \vspace*{-6pt}
 \end{figure}
@@ -49,11 +49,11 @@ All functions are launched inside containers, and dealing with the container lay
 Each worker maintains a container pool of initialized containers for facilitating warm starts, and has an invocation queue for handling dynamic loads.
 Function characteristics such as their cold and warm execution times are captured in various data-structures and are made available using APIs for developing data-driven resource management policies.
 
-An important contribution and component of \sysname~ is its principled support for function overcommitment based on its queuing architecture.
+An important contribution and component of \sysname~is its principled support for function overcommitment based on its queuing architecture.
 In many environments, like public FaaS providers, function resources cannot be overcommitted. 
 However, the actual function resource usage is often significantly less compared to their requested ``size''.
 This difference is the motivation behind recent ``right sizing'' work~\cite{akhtar_cose_2020, guo_decomposing_2022, tian_owl_2022, eismann2021sizeless, kotni2021faastlane}, and can significantly improve system utilization.
-Through its queue-based architecture (described in Section~\ref{sec:q}), \sysname~ supports a wide range of overcommitment scenarios, including no overcommitment, which is absent from OpenWhisk.
+Through its queue-based architecture (described in Section~\ref{sec:q}), \sysname~supports a wide range of overcommitment scenarios, including no overcommitment, which is absent from OpenWhisk.
 By default, OpenWhisk does not overcommit memory, but can  overcommit CPUs, which introduces performance interference and potential SLA violations for functions. 
 
 
@@ -66,7 +66,7 @@ By default, OpenWhisk does not overcommit memory, but can  overcommit CPUs, whic
 \subsection{Function Lifecycle}
 \label{sec:design:lifecycle}
 
-%Function lifecycle is controlled by three main \sysname~ worker API calls.
+%Function lifecycle is controlled by three main \sysname~worker API calls.
 New functions need to be first \emph{registered}, which entails downloading and preparing its container disk image.
 The container images are fetched from DockerHub or some other image repository.
 Container images are composed of multiple copy-on-write layers, and we prepare the images by selecting the relevant layers for the operating system and CPU architecture.
@@ -82,7 +82,7 @@ We detect the container's readiness using an inotify callback, which is a faster
 %
 Finally, when the function finishes execution, the HTTP call to the container's agent returns, and the container is marked as  `available' in the container pool, to be potentially used for future invocations of the same function.
 
-In the spirit of a fast ``baseline'' control plane and for isolation, \sysname~ does not share containers across functions.
+In the spirit of a fast ``baseline'' control plane and for isolation, \sysname~does not share containers across functions.
 This is in contrast to SAND's application sandboxing~\cite{akkus_sand_2018}, SOCK's Zygote containers~\cite{oakes_sock_2018}, Nightcore~\cite{jia2021nightcore}, and even OpenFaaS~\cite{openfaas}.
 %For example, recently proposed optimizations such as SAND's application sandboxing~\cite{akkus_sand_2018}, or SOCK's Zygote containers~\cite{oakes_sock_2018} share containers for concurrently running functions. 
 % allow for functions to share a language runtime inside a container, or the same function to reuse 
@@ -90,7 +90,7 @@ This is in contrast to SAND's application sandboxing~\cite{akkus_sand_2018}, SOC
 %We don't allow concurrent invocations of the same function to run in the same container like OpenFaaS~\cite{openfaas} or nightcore~\cite{jia2021nightcore}.
 Our isolation model is similar to the public cloud providers. 
 
-Additionally, \sysname~ introduces a standard \texttt{prewarm}  API call, which starts the function's container and the agent inside of it, and adds it to the container pool.
+Additionally, \sysname~introduces a standard \texttt{prewarm}  API call, which starts the function's container and the agent inside of it, and adds it to the container pool.
 This reduces most of the cold start overhead associated with the container.
 Prewarming can both avoid a ``thundering herd'' of cold starts on worker startup, and be an optimization in which the control plane anticipates invocations and prepares containers for them. 
 This allows for a systematic mechanism to implement various recently proposed predictive prewarm policies~\cite{roy2022icebreaker, shahrad_serverless_2020, silva_prebaking_2020}. 
@@ -104,7 +104,7 @@ This allows for a systematic mechanism to implement various recently proposed pr
 \centering 
 \includegraphics[width=0.6\textwidth]{iluvatar/figs/OverheadTimeline.pdf}
 % \vspace*{-12pt}
-\caption{The main components of the \sysname~ overheads.}
+\caption{The main components of the \sysname~overheads.}
 \label{fig:timeline-flow}
   % \vspace*{\myfigspace}
   % \vspace*{-12pt}
@@ -112,9 +112,9 @@ This allows for a systematic mechanism to implement various recently proposed pr
 
 
 \noindent \textbf{Function Latency Breakdown.}
-Throughout \sysname~ and this paper, we are interested in three main performance metrics. 
+Throughout \sysname~and this paper, we are interested in three main performance metrics. 
 The first is the end-to-end latency of function execution, also called the \emph{flow time}, shown in Figure~\ref{fig:timeline-flow}.
-This in turn has two main components: the control plane overhead is the latency of \sysname~ operations, which are mainly before the start of function execution.
+This in turn has two main components: the control plane overhead is the latency of \sysname~operations, which are mainly before the start of function execution.
 The second component is the function execution time, which is determined by the function code, and the load on the system.
 The function execution time is our baseline, and we compute the \emph{normalized} end-to-end latency by dividing the full latency by the execution time (also called the \emph{stretch}). 
 
@@ -143,7 +143,7 @@ This further motivates our worker-centric design and evaluation focus.
     Returning & \begin{tabular}{@{}c@{}}return\_container \\ return\_results \\ \end{tabular} & \begin{tabular}{@{}c@{}}0.017 \\ 0.266 \\ \end{tabular} \\
     \hline
   \end{tabular}
-  \caption{Latency of different \sysname~ worker components for a single warm invocation.}
+  \caption{Latency of different \sysname~worker components for a single warm invocation.}
     \label{tab:overheads}
 \end{table}
 
@@ -152,17 +152,17 @@ This further motivates our worker-centric design and evaluation focus.
 \subsection{Worker Performance Optimizations}
 \label{sec:design:worker}
 
-To achieve this low latency function execution for heterogeneous and bursty workloads, \sysname~ uses two key underlying design  principles: resource caching, and asynchronous handling of function life-cycle events.
+To achieve this low latency function execution for heterogeneous and bursty workloads, \sysname~uses two key underlying design  principles: resource caching, and asynchronous handling of function life-cycle events.
 
 \subsubsection{Resource Caching}
 
 %\noindent \textbf{Resource Caching.}
-The cornerstone design goal of \sysname~ is to reduce jitter, which we accomplish by removing expensive operations from the function's critical path. 
+The cornerstone design goal of \sysname~is to reduce jitter, which we accomplish by removing expensive operations from the function's critical path. 
 Instead, we cache and reuse as many function resources as possible, which minimizes the ``hot path'' function invocation latency significantly.
 This principle is applied in various worker components, which we describe below.
 
 \noindent \textbf{Container Keep-alive.}
-The primary and exemplary application of resource caching is in the container keep-alive cache that \sysname~ workers maintain.
+The primary and exemplary application of resource caching is in the container keep-alive cache that \sysname~workers maintain.
 The containers become ``warm'' when their function has finished execution, and become ``available'' for the next invocation of the same function. 
 We maintain a pool of all in-use and available containers for each registered function.
 This container cache implements classic eviction policies such as Least Recently Used (LRU), and size-aware policies like Greedy-Dual-Size-Frequency, as proposed in FaasCache~\cite{faascache-asplos21}. 
@@ -183,12 +183,12 @@ This affects all invocations (even warm starts), and reduces the control-plane o
 \subsubsection{Async function life-cycle handling}
 
 The second key design principle is to handle various aspects of the function's lifecycle asynchronously off the critical path.
-\sysname~ achieves this through background worker threads for certain tasks, and through its Rust implementation which heavily uses asynchronous functions, futures, and callbacks wherever possible. 
+\sysname~achieves this through background worker threads for certain tasks, and through its Rust implementation which heavily uses asynchronous functions, futures, and callbacks wherever possible. 
 
 \noindent \textbf{Keep-alive eviction.}
 One such aspect is maintaining the function keep-alive cache, and ensuring that new functions have enough free memory to launch without waiting on existing containers to be evicted first.
 Traditionally, eviction decisions would be made in an online fashion, but picking victims and waiting for their removal creates high variance in function execution times. 
-\sysname~ performs container eviction from the keep-alive pool  periodically in the background, off the critical path. 
+\sysname~performs container eviction from the keep-alive pool  periodically in the background, off the critical path. 
 This is similar to the Linux kernel page-cache implementation. 
 We maintain a minimum free-memory buffer for dealing with invocation bursts, and periodically sort the containers list for eviction based on caching policies from~\cite{faascache-asplos21}. 
 
@@ -204,7 +204,7 @@ Details of our queuing policies are presented in Section~\ref{sec:q}.
 \subsection{Container Handling}
 \label{sec:design:ctr}
 
-\sysname~ uses standard Linux containers for isolating and sandboxing function execution---a ``vanilla'' and conventional approach.  
+\sysname~uses standard Linux containers for isolating and sandboxing function execution---a ``vanilla'' and conventional approach.  
 Several exciting new isolation mechanisms for cloud functions
 have been proposed: such as lightweight VMs~\cite{firecracker-nsdi20}, unikernels, WASM~\cite{shillaker2020faasm} and other language runtimes~\cite{graalvm}, etc. 
 Importantly, the sandboxing affects the \emph{cold start} overheads, which account for a tiny fraction of all invocations (usually less than 1\%).
@@ -212,7 +212,7 @@ Our control plane design and performance optimizations are independent of the sa
 
 The basic container operations we use are: i) Create a container/sandbox with specified resource limits and disk image/snapshot, ii) launch a task inside it for the agent, and iii) destroy the container.
 Each container is launched with the CPU and memory resource limits. CPU limits are enforced with cgroup quotas. 
-This limited API allows \sysname~ to support \emph{multiple} container backends.
+This limited API allows \sysname~to support \emph{multiple} container backends.
 
 
 By default, we use containerd~\cite{containerd}, which is popular container library, also used by Docker. 
@@ -243,13 +243,13 @@ However, a major methodological and practical issue is that the policy implement
 This can lead to subtle and large divergences between the simulation and real environment. 
 Moreover, the simulator cannot capture all the real-world dynamics and jitter, and can suffer from poor fidelity.
 
-In order to aid researchers, \sysname~ takes a different approach to simulations, and provides \emph{in-situ} simulations. 
+In order to aid researchers, \sysname~takes a different approach to simulations, and provides \emph{in-situ} simulations. 
 Our ``null'' container backend does not run any actual function code, but instead sleeps for the function's anticipated execution time.
 The rest of the control plane operates exactly as with real containers, and we still handle all other aspects of the function's lifecycle.
 %
 This allows us to simulate large systems and workloads. 
 For evaluating any particular policy, researchers can use the simulator null-backend to evaluate control-plane overheads, warm-starts, etc., without requiring a large cluster.
-Each \sysname~ worker can ``simulate'' 100s of cores, since the CPU resources are only being consumed by the control plane, and not for running actual functions.
+Each \sysname~worker can ``simulate'' 100s of cores, since the CPU resources are only being consumed by the control plane, and not for running actual functions.
 Alternatively, a large cluster can be simulated with multiple simulated workers. 
 
 With this approach, \emph{there is minimal difference} between the simulation and the real system. 

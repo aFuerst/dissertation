@@ -1,7 +1,7 @@
 \section{Function Invocation Queuing}
 \label{sec:q}
 
-As a way to regulate and control function execution and worker load, \sysname~ incorporates a per-worker invocation queue architecture. 
+As a way to regulate and control function execution and worker load, \sysname~incorporates a per-worker invocation queue architecture. 
 Function invocations go through this queuing system before reaching the container manager, which either locates the warm container and runs the function or creates a new container.
 Each worker manages its own queue, differentiating our design from OpenWhisk's shared Kafka queue. 
 
@@ -49,7 +49,7 @@ The regulator can be used to run functions of only when sufficient resources (su
 %The concurrent cold start mitigation is one important component of the regulator policy.
 %Its inputs are the number of currently running functions, the state of the container map to see which functions are executing, and the system resource utilization (load average, cpu\%, etc).
 %This allows custom policies: we may want to limit the load average to under some limit, or the number of functions ``in flight'', etc.
-\sysname~ can be deployed with a fixed concurrency limit based on the usage requirements, or use its dynamic concurrency limit mode. 
+\sysname~can be deployed with a fixed concurrency limit based on the usage requirements, or use its dynamic concurrency limit mode. 
 In the dynamic mode, we use a simple TCP-like AIMD~\cite{yang2000general} policy which increases the concurrency limit until we hit congestion, which in our case is hit if the system load average increases above some specified threshold. 
 Other metrics are possible: looking at the increase in execution time (i.e., stretch) of the functions could also be used as a congestion metric.
 The concurrency limit affects the tail-latency, and more advanced policies can be implemented. 
@@ -97,7 +97,7 @@ Optimizing queuing policies for heterogeneous functions is challenging, and is a
 
 
 For improving throughput, we use shortest job first (SJF), which helps reduce the waiting time for short functions, but can lead to starvation for longer functions if the queue never drains. 
-As a tradeoff between function duration and arrival, \sysname~ by default tries to minimize the ``effective deadline'' of a function, which is equal to the sum of its arrival time and (expected) execution time.
+As a tradeoff between function duration and arrival, \sysname~by default tries to minimize the ``effective deadline'' of a function, which is equal to the sum of its arrival time and (expected) execution time.
 This earliest effective deadline first (EEDF) approach balances both short functions and starvation.
 In both SJF and EEDF, an invocations' execution time is determined by its (moving window) warm time.
 New/unseen functions have their times set to 0, to prioritize their execution.  

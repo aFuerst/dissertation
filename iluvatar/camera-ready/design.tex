@@ -1,4 +1,4 @@
-\section{\sysname~ Design}
+\section{\sysname~Design}
 \label{sec:design}
 
 % Design goals:
@@ -14,7 +14,7 @@
 
 \subsection{Architecture and Overview}
 
-The \sysname~ control plane is spread out across a load balancer and the individual workers.
+The \sysname~control plane is spread out across a load balancer and the individual workers.
 We have found that most of the control plane overhead is in the workers, and hence optimizing the worker performance is our major focus.
 We use stateless load-balancing, by using variants of consistent hashing with bounded loads (CH-BL), which have been proposed for FaaS recently~\cite{fuerst-hpdc23}.
 This is a locality-aware scheme, which runs functions on the same servers to maximize warm starts, and forwards them to other servers only when the server's load exceeds some pre-specified load-bound.
@@ -39,7 +39,7 @@ Invocation characteristics are captured in various datastructures and provided u
 
 \subsection{Function lifecycle}
 
-Function lifecycle is controlled by three main \sysname~ worker API calls.
+Function lifecycle is controlled by three main \sysname~worker API calls.
 New functions need to be first \emph{registered}, which entails downloading and preparing its container disk image.
 The container images are downloaded from DockerHub or some other image repository.
 Container images are composed of multiple copy-on-write layers, and we prepare the images by selecting the relevant layers for the operating system and CPU architecture.
@@ -55,10 +55,10 @@ We detect the container's readiness using an inotify callback, which is a faster
 Finally, when the function finishes execution, the HTTP call to the container's HTTP server returns, and the container is marked as  'available' in the container pool, to be potentially used for future invocations of the same function.
 
 
-In the spirit of a fast ``baseline'' control plane and for isolation, \sysname~ does not share containers across functions.
+In the spirit of a fast ``baseline'' control plane and for isolation, \sysname~does not share containers across functions.
 For example, recently proposed optimizations allow for functions to share a language runtime inside a container~\cite{}. 
 
-Additionally, \sysname~ introduces a standard \texttt{prewarm}  API call, which starts the function's container and the HTTP server inside of it, and adds it to the container pool.
+Additionally, \sysname~introduces a standard \texttt{prewarm}  API call, which starts the function's container and the HTTP server inside of it, and adds it to the container pool.
 This reduces most of the cold start overhead associated with the container.
 Prewarming can both avoid a "thundering herd" of cold starts on load startup, and be an optimization in which the control plane anticipates invocations and prepares containers for them. 
 This allows for a systematic mechanism to implement various recently proposed predictive prewarm policies~\cite{zhou2022aquatope, icebreaker, shahrad,..}. 
@@ -72,12 +72,12 @@ The function code's execution time is the function;s wall-clock time after the a
 
 \subsection{Worker Performance Optimizations}
 
-\sysname~ workers use various resource management and implementation techniques to provide low latency function execution for heterogenenous and bursty workloads.
+\sysname~workers use various resource management and implementation techniques to provide low latency function execution for heterogenenous and bursty workloads.
 
 \noindent \textbf{Resource Caching.}
-The cornerstone design goal of \sysname~ is to reduce jitter, which we accomplish by removing expensive operations from the function's critical path.
+The cornerstone design goal of \sysname~is to reduce jitter, which we accomplish by removing expensive operations from the function's critical path.
 Instead, we pre-allocate as many function resources as possible, such as the container image, the container itself, network namespaces and virtual interfaces, etc.
-\sysname~ maintains a cache all these resources, and the ``hot path'' function invocation latency is thus significantly lower than OpenWhisk, as we have shown earlier in Figure~\ref{fig:ow-ilu-overhead}.
+\sysname~maintains a cache all these resources, and the ``hot path'' function invocation latency is thus significantly lower than OpenWhisk, as we have shown earlier in Figure~\ref{fig:ow-ilu-overhead}.
 
 
 \textbf{Network namespace caching.}
@@ -107,7 +107,7 @@ One such aspect is maintaining the function keep-alive cache, and ensuring that 
 The container eviction from the keep-alive pool is done periodically in the background, similar to the Linux kernel page-cache implementation.
 We maintain a memory buffer for dealing with invocation bursts, periodically sort the containers list for eviction based on caching policies from~\cite{faascache-asplos21}, and evict containers from the keep-alive pool.
 
-\sysname~ workers maintain a queue of invocations instead of executing all functions synchronously; unlike existing popular FaaS control planes.
+\sysname~workers maintain a queue of invocations instead of executing all functions synchronously; unlike existing popular FaaS control planes.
 This allows us to spread the load of function bursts over time and reduce the maximum load and lock contention overheads.
 In our experience, function bursts are the primary contributor of high control plane overheads, and mitigating them is a major challenge. 
 
@@ -134,7 +134,7 @@ This allows for more advanced policies than the strict FIFO queue that other sys
   
 \noindent \textbf{Networking.}
 Similarly, other container startup operations such as creating network namespaces and virtual interfaces are also time-consuming.
-\sysname~ both pre-allocates and caches them, saving more than 100s milliseconds in latency overhead.
+\sysname~both pre-allocates and caches them, saving more than 100s milliseconds in latency overhead.
 
 We use CNI for using network bridges for 
 

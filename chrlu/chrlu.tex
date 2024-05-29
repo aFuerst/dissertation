@@ -3,12 +3,13 @@
 
 % While serverless computing provides more convenient abstractions for developing and deploying applications, the Function-as-a-Service (FaaS) programming model presents new resource management challenges for the FaaS provider. 
 In this chapter, we investigate load-balancing policies for serverless clusters and find that the locality vs. load tradeoff is crucial and presents a large design space.
-Locality, i.e., running repeated invocations of a function on the same server, is a key determinant of performance because it increases warm-starts and reduces cold start overheads. 
-% We find that the locality vs. load tradeoff is crucial and presents a large design space. 
+Locality, i.e., running repeated invocations of a function on the same server, is a key determinant of performance because it increases warm-starts and reduces cold start overheads.
+Many functions are too popular and running all their invocations on one worker will overload it, requiring us to sacrifice locality and spread their invocations across the cluster.
+We find that the locality vs. load tradeoff is crucial and presents a large design space. 
 
-We enhance consistent hashing for FaaS, and develop CH-RLU: Consistent Hashing with Random Load Updates, a simple practical load-balancing policy which provides more than $2\times$ reduction in function latency. 
+We enhance consistent hashing and bring it to FaaS, developing CH-RLU: Consistent Hashing with Random Load Updates, a simple, practical load-balancing policy which provides more than $2\times$ reduction in function latency. 
 Our policy deals with highly heterogeneous, skewed, and bursty function workloads, and is a drop-in replacement for OpenWhisk's existing load-balancer.
-We leverage techniques from caching such as SHARDS for popularity detection, and develop a new approach that places functions based on a tradeoff between locality, load, and randomness. 
+We leverage techniques from caching such as SHARDS for popularity detection, and develop a new approach that places functions based on a tradeoff between function locality, cluster load, and randomness. 
 
 
 \input{chrlu/bg.tex}
@@ -22,6 +23,12 @@ We leverage techniques from caching such as SHARDS for popularity detection, and
 \input{chrlu/related.tex}
 
 %~\cite{lbfaas-hpdc2022}
+
+In this chapter we have explored the tradeoff between locality and load for serverless functions. 
+Our CH-RLU policy can tackle the challenges of function heterogeneity, workload skew, bursty workloads, and stale loads.
+We enhance consistent hashing to yield a simple and practical load-balancing policy. 
+Empirical evaluation shows substantial improvements in function latency (by more than $2\times$) compared to OpenWhisk's load balancing strategy.
+
 
 \begin{comment}
 \begin{figure}

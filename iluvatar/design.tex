@@ -114,7 +114,7 @@ This allows for a systematic mechanism to implement various recently proposed pr
 
 
 \noindent \textbf{Function Latency Breakdown.}
-Throughout \sysname~and this paper, we are interested in three main performance metrics. 
+Throughout \sysname~and this chapter, we are interested in three main performance metrics. 
 The first is the end-to-end latency of function execution, also called the \emph{flow time}, shown in Figure~\ref{fig:timeline-flow}.
 This in turn has two main components: the control plane overhead is the latency of \sysname~operations, which are mainly before the start of function execution.
 The second component is the function execution time, which is determined by the function code, and the load on the system.
@@ -133,6 +133,8 @@ This further motivates our worker-centric design and evaluation focus.
 
 \begin{table}
   \centering 
+  \caption{Latency of different \sysname~worker components for a single warm invocation.}
+  \label{tab:overheads}
   \begin{tabular}{|c|c|r|}
     \hline
     Group & Function Name & Time (ms) \\
@@ -146,8 +148,6 @@ This further motivates our worker-centric design and evaluation focus.
     Returning & \begin{tabular}{@{}c@{}}return\_container \\ return\_results \\ \end{tabular} & \begin{tabular}{@{}c@{}}0.017 \\ 0.266 \\ \end{tabular} \\
     \hline
   \end{tabular}
-  \caption{Latency of different \sysname~worker components for a single warm invocation.}
-    \label{tab:overheads}
 \end{table}
 
 %As we can see, the overheads are minimal. Some queuing, some agent communication, which totals to about 3ms. 

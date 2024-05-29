@@ -2,7 +2,18 @@
 
 \input{./mqfq-final/macros.tex}
 
-\input{./mqfq-final/intro.tex} 
+% \todo{better intro}
+
+% \input{./mqfq-final/intro.tex} 
+Hardware accelerators like GPUs are now ubiquitous in data centers and edge computing, but are not fully supported by major FaaS platforms.
+Many popular and emerging FaaS applications such as machine learning and scientific computing can benefit from GPU acceleration.
+However, FaaS frameworks are not capable of providing this acceleration because of the design mismatch between the GPU usage and FaaS programming model, which requires virtualization and sandboxing of each function, and must support highly dynamic and heterogeneous functions. 
+
+This chapter presents the design and implementation of a FaaS system for heterogeneous hardware, which provides hybrid computing capabilities for general, black-box functions.
+We show how data and code locality determines GPU function performance, and translate principles from I/O scheduling such as fair queuing and anticipatory scheduling, to GPUs. 
+On real-world FaaS workloads, our fair-queuing scheduling can reduce latency by more than $5\times$ compared to FCFS and batch-oriented scheduling. 
+Our scheduler-integrated memory movement optimizations significantly reduce GPU cold-starts, reducing function latency by more than two orders of magnitude, allowing FaaS operators to provide opportunistic acceleration and leverage antiquated GPUs. 
+
 
 \input{./mqfq-final/2.prateek.tex}
 
@@ -15,5 +26,9 @@
 %\input{discussion}
 
 \input{./mqfq-final/related.tex}
+
+This chapter showed that harnessing GPU resources for functions is practical and can achieve good performance through the use of locality-aware scheduling and memory management.
+Black-box containerized functions and heterogeneous and dynamic function workloads present many challenges to efficient GPU utilization. 
+\QName, our scheduling algorithm, is inspired by I/O fair scheduling. Empirical analysis of its performance indicates it reduces function latency by more than $50\times$ compared to current GPU containers. 
 
 % \input{conclusion}

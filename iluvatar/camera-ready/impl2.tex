@@ -91,8 +91,8 @@ These visible throught the program allowing different pieces to update or access
 % Data structures: StateMap and container history access. Fast concurrent.
 
 Other internal data points that are tracked include the existing queue length, number of executing functions, and container memory usage.
-External metrics are just as important to track as those inside \sysname~ as they impact performance and can again be inform system decisions.
-We get updated one-minute load averages, node CPU utilization breakdowns and \sysname~ process CPU usage.
+External metrics are just as important to track as those inside \sysname~as they impact performance and can again be inform system decisions.
+We get updated one-minute load averages, node CPU utilization breakdowns and \sysname~process CPU usage.
 Alongside these, we capture some more esoteric information such as cpu frequencies, some energy-releated \texttt{perf} counters, and a number of hardware values tracking energy usage of the worker's node.
 
 \textbf{Extensible nature.}
@@ -124,7 +124,7 @@ We only needed to use small the portions of the Docker API that are required to 
 \textbf{Tracing and logging.}
 Understanding what occurs inside the system offline is equally important to research.
 One must be able to examine the effects of changes and improvements internally and externally to prove effectiveness.
-Therefore we export a variety of information in all the services of \sysname~ during it's execution.
+Therefore we export a variety of information in all the services of \sysname~during it's execution.
 We liberally use Rust's \texttt{tracing} crate for all our logging needs.
 All the metrics described in Section~\ref{sec:data-support} are regularly added to the log file.
 To monitor the passage of invocations through the system, we tag each with a unique ID and emit log statements container that ID at major points to enable deeper post-analysis.

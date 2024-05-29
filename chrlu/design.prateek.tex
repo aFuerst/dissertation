@@ -39,7 +39,7 @@ In the rest of this section, we describe our approach.
 %\vspace*{-0.2cm}
 \subsection{Key Principle: Load-based Forwarding}
 
-To balance the locality vs. server load tradeoff, we build on a new variant of consistent hashing called Consistent Hashing with Bounded Loads~\cite{mirrokni2018consistent} (abbreviated as CH-BL in the rest of the paper).  
+To balance the locality vs. server load tradeoff, we build on a new variant of consistent hashing called Consistent Hashing with Bounded Loads~\cite{mirrokni2018consistent} (abbreviated as CH-BL in the rest of the chapter).  
 The key idea behind CH-BL is to use consistent hashing to locate servers for objects, and if the servers are ``full'', then ``forward'' the objects to the next server in the consistent hashing ring.
 
 For example, in Figure~\ref{fig:ch}, function A is originally assigned to server 0, but this ``home'' server is overloaded (already running many functions), and thus the function is forwarded along the ring until a suitable non-overloaded server (2) is found. 
@@ -285,9 +285,9 @@ In the case where we skip over 3 servers, we assume that the invocation will run
     \State return least-loaded-server
     \EndIf 
 
-    \State $\lambda \gets 1.0 / avg\_iat$ \Comment Computed from Algo 1
+    \State $\lambda \gets 1.0 / avg\_iat$ \Comment Computed from Algorithm~\ref{algo:shards-popular}
      \State $L=Load(server)$
-    \If{popular(func)} \Comment Computed from Algo 1 
+    \If{popular(func)} \Comment Computed from Algorithm~\ref{algo:shards-popular}
          \State $L = Load(server) + \mathcal{N}(\mu=\lambda\,\sigma=0.1)$
     \EndIf 
     \If{$L < min(cb/w, b\_max)$}
