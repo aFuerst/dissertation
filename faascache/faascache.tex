@@ -6,18 +6,24 @@ Keeping every created function container indefinitely is not feasible for server
 They can be invoked sparsely -- perhaps a handful of times per day.
 When a container isn't handling an invocation, it sits idle, occupying memory the control plane may want to use for other, more active, purposes.
 How long to keep a function sandbox in memory is called a \textbf{keep-alive} decision, and has a dramatic effect on latency.
+Keep-alive policies must keep functions alive based on their resource and usage characteristics, which is challenging due to the diversity found in FaaS workloads.
 
-The primary goal of keep-alive is to amortize the initialization and cold start latencies by keeping functions alive for different durations based on their characteristics.
-Keep-alive policies must be generalizable and yield high server utilization, because servers must handle hundreds of short-lived functions concurrently.
-Functions can have vastly different characteristics, and keep-alive policies must work efficiently in highly dynamic and diverse settings.
-We use the following characteristics of functions for keep-alive policies.
+The insight of this chapter is that keep-alive is analogous to caching.
+Our caching-inspired Greedy-Dual keep-alive policy can be effective in reducing the cold start overhead by more than $3\times$ compared to previous approaches.
+Caching concepts such as reuse distances and hit-ratio curves can also be used for auto-scaled server resource provisioning, which can reduce the resource requirement of FaaS providers by $30\%$ for real-world dynamic workloads.
+We implement caching-based keep-alive and resource provisioning policies in our \emph{FaasCache} system, which is based on OpenWhisk.
+% We hope that our caching analogy opens the door to more principled and optimized keep-alive and resource provisioning techniques for future FaaS workloads and platforms. 
+% The primary goal of keep-alive is to amortize the initialization and cold start latencies by keeping functions alive for different durations based on their characteristics.
+% Keep-alive policies must be generalizable and yield high server utilization, because servers must handle hundreds of short-lived functions concurrently.
+% Functions can have vastly different characteristics, and keep-alive policies must work efficiently in highly dynamic and diverse settings.
+% We use the following characteristics of functions for keep-alive policies.
 
-The \textbf{initialization time} of functions can vary based on the code and data dependencies of the function.  
-For example, a function for machine learning inference may be initialized by importing large ML libraries (such as TensorFlow, etc.), and fetching the ML model, which can be hundreds of megabytes in size and take several seconds to download. 
-Functions also differ in terms of their \textbf{total running time}, which includes the initialization time and the actual execution time. 
-Again, functions for deep-learning inference can take several seconds, whereas functions for HTTP servers and microservices are extremely short-lived (few milliseconds). 
-The \textbf{resource footprint} comprises the CPU, memory, and I/O use, and also differs widely based on the application's requirements. 
-Finally, functions have different \textbf{frequencies} and invocation rates. Some functions may be invoked several times a second, whereas other functions may only be invoked rarely (if they are used to serve a very low-traffic website, for instance). 
+% The \textbf{initialization time} of functions can vary based on the code and data dependencies of the function.  
+% For example, a function for machine learning inference may be initialized by importing large ML libraries (such as TensorFlow, etc.), and fetching the ML model, which can be hundreds of megabytes in size and take several seconds to download. 
+% Functions also differ in terms of their \textbf{total running time}, which includes the initialization time and the actual execution time. 
+% Again, functions for deep-learning inference can take several seconds, whereas functions for HTTP servers and microservices are extremely short-lived (few milliseconds). 
+% The \textbf{resource footprint} comprises the CPU, memory, and I/O use, and also differs widely based on the application's requirements. 
+% Finally, functions have different \textbf{frequencies} and invocation rates. Some functions may be invoked several times a second, whereas other functions may only be invoked rarely (if they are used to serve a very low-traffic website, for instance). 
 
 
 \input{faascache/bg.tex}
@@ -33,6 +39,21 @@ Finally, functions have different \textbf{frequencies} and invocation rates. Som
 \input{faascache/eval.tex}
 
 \input{faascache/related.tex}
+
+% \todo{Also update with more recent related work and how FaasCache has been compared,
+% how new policies/approaches differ from it and how your work is still relevant/different.}
+
+% \todo{better conclusion}
+
+\section{Conclusion}
+
+The main insight in this chapter is the equivalence between function keep-alive and object caching.
+This can have far-reaching consequences for cloud resource management policies.
+We showed that classic size and frequency-aware caching algorithms such as Greedy-Dual can be adapted to yield effective and principled keep-alive policies.
+The tradeoff between server memory-utilization and cold start overheads can also be analyzed through hit-ratio curves, which can also be used for dynamic resource allocation.
+FaasCache implements these caching-based techniques for significant benefits over TLL- and LRU-based policies.
+% something about the evaluation and some results? 
+% We hope that our caching analogy opens the door to more caching-based serverless systems and analysis. 
 
 \begin{comment}
 \cite{faascache-asplos21}

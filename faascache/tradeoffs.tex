@@ -57,13 +57,14 @@ Function initialization refers to function-specific code for downloading and res
 For example, this can be used for downloading data dependencies ahead of time such as large neural network models for inference, or for runtime initialization such as downloading and importing package dependencies (e.g., Python packages). 
 %The second technique for reducing the cold start overhead is to explicitly initialize functions before running  them, and resolving most of the function's code and data dependencies during the initialization phase. 
 %
-An example of function initialization is shown in Figure~\ref{fig:lambda-example}, which shows a pseudo-code snippet of a function that performs machine learning inference on its input. 
+An example of function initialization is shown in Figure~\ref{fig:python-lambda-example}, which shows a pseudo-code snippet of a function that performs machine learning inference on its input. 
 For ML inference, the function downloads an ML model and initializes the TensorFlow ML framework (lines  5 and 6). 
 If the function's container is kept alive, then invocations of the function do not need to run the expensive initialization code (lines 2--6). 
 %Thus, the execution latency of functions can be minimized with a combination of careful function initialization and keeping the containers alive. 
 % too broad a conclusion here...
 
 
+\begin{comment}
 % \footnotesize
 \begin{figure}
 \begin{lstlisting}[language=Python, numbers=left, frame=single, basicstyle=\footnotesize\sffamily, columns=fullflexible, xleftmargin=10.0ex, xrightmargin=10.0ex]
@@ -85,7 +86,7 @@ def lambda_handler(event, context):
    \label{fig:lambda-example}
    %\vspace*{\myfigspace}
 \end{figure}
-
+\end{comment}
 
 % The function cold start overhead includes both the execution environment initialization and the
 \begin{comment}
@@ -116,20 +117,20 @@ Function workloads are also heavy-tailed: a few ``heavy hitting'' functions are 
 \subsection{Policy Goals and Considerations}
 
 
-% The primary goal of keep-alive is to reduce the initialization and cold start latency, by keeping functions alive for different durations based on their characteristics. 
-% % Servers that run these functions are heavily multiplexed, and run hundreds of short lived functions concurrently. %backend FaaS servers?
-% % too sudden 
-% Because servers run hundreds of short lived functions concurrently, keep-alive policies must be generalizable and yield high server utilization. 
-% Functions can have vastly different characteristics, and keep-alive polices must work efficiently in highly dynamic and diverse settings. % (Table~\ref{tab:workloads}). 
-% We use the following characteristics of functions for keep-alive policies.
+The primary goal of keep-alive is to reduce the initialization and cold start latency, by keeping functions alive for different durations based on their characteristics. 
+% Servers that run these functions are heavily multiplexed, and run hundreds of short lived functions concurrently. %backend FaaS servers?
+% too sudden 
+Because servers run hundreds of short lived functions concurrently, keep-alive policies must be generalizable and yield high server utilization. 
+Functions can have vastly different characteristics, and keep-alive polices must work efficiently in highly dynamic and diverse settings. % (Table~\ref{tab:workloads}). 
+We use the following characteristics of functions for keep-alive policies.
 
 
-% The \textbf{initialization time} of functions can vary based on the code and data dependencies of the function.  
-% For example, a function for machine learning inference may be initialized by importing large ML libraries (such as TensorFlow, etc.), and fetching the ML model, which can be hundreds of megabytes in size and take several seconds to download. 
-% Functions also differ in terms of their \textbf{total running time}, which includes the initialization time and the actual execution time. 
-% Again, functions for deep-learning inference can take several seconds, whereas functions for HTTP servers and microservices are extremely short lived (few milliseconds). 
-% The \textbf{resource footprint} comprises of the CPU, memory, and I/O use, and also differs widely based on the application's requirements. 
-% Finally, functions have different \textbf{frequencies} and invocation rates. Some functions may be invoked several times a second, whereas other functions may only be invoked rarely (if they are used to serve a very low-traffic web-site, for instance). 
+The \textbf{initialization time} of functions can vary based on the code and data dependencies of the function.  
+For example, a function for machine learning inference may be initialized by importing large ML libraries (such as TensorFlow, etc.), and fetching the ML model, which can be hundreds of megabytes in size and take several seconds to download. 
+Functions also differ in terms of their \textbf{total running time}, which includes the initialization time and the actual execution time. 
+Again, functions for deep-learning inference can take several seconds, whereas functions for HTTP servers and microservices are extremely short lived (few milliseconds). 
+The \textbf{resource footprint} comprises of the CPU, memory, and I/O use, and also differs widely based on the application's requirements. 
+Finally, functions have different \textbf{frequencies} and invocation rates. Some functions may be invoked several times a second, whereas other functions may only be invoked rarely (if they are used to serve a very low-traffic web-site, for instance). 
 
 % \begin{figure}[t]
 %   \centering

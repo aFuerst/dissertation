@@ -1,0 +1,105 @@
+\documentclass[sigplan,review,twocolumn,anonymous]{acmart}
+\usepackage{graphicx}
+\usepackage{subfig}
+%Removing the geometry package used for Tighter Format
+%\usepackage{geometry}
+%\usepackage{times}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{comment}
+\usepackage{microtype}
+\usepackage[noend]{algpseudocode}
+\usepackage[nothing]{algorithm}
+% \usepackage[hyphens]{url}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+%\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage[normalem]{ulem}
+%Used only for breaking hypenated URLs
+\usepackage{etoolbox}
+\gappto{\UrlBreaks}{\UrlOrds}
+%
+
+\hypersetup{breaklinks=true}
+
+\urlstyle{same}
+
+%\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=20,shrink=20]{microtype}
+
+
+\input{macros}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+% Optional: Remove the ACM reference between the abstract and the main text.
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\acmConference{}{}{}
+\acmPrice{}
+\acmISBN{}
+\acmDOI{}
+\acmYear{}
+\acmMonth{}
+
+\settopmatter{printfolios=true,printacmref=false}
+\acmSubmissionID{\submissionnumber}
+
+\begin{document}
+%-------------------------------------------------------------------------------
+
+%\title{Any Function, Any GPU: Acceleration and Multiplexing for Serverless Systems}
+%\title{Black-Box GPU Acceleration and Multiplexing for Serverless Systems}
+\title{Opportunistic GPU Acceleration for Serverless Functions}
+
+%don't want date printed
+\date{}
+
+% make title bold and 14 pt font (Latex default is non-bold, 16 pt)
+\author{}
+
+\begin{abstract}
+\input{a2}
+\end{abstract}
+
+\maketitle 
+
+%\thispagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\vspace{-0.3cm}
+
+\input{intro} 
+
+\input{2.prateek}
+
+\input{q2.prateek}
+
+\input{impl}
+
+\input{eval2}
+
+%\input{discussion}
+
+\input{related}
+
+\input{conclusion}
+
+\bibliographystyle{plain}
+\bibliography{gpu-q-faas.bib}
+
+\end{document}
+
+
+
+%Hotcloud template... 
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

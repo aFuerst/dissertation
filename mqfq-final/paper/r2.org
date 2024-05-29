@@ -1,0 +1,37 @@
+* Cold start
+- Characterization for DL \cite{juan_reducing_2023}. Uses remote memory pooling and autoscaling. Thus also disaggregated in some sense.
+- Ours is server level which can be composed with other serverless tasks.
+- DGSF also CUDA interposition. 
+- Offloading of operational concerns.
+- Special-purpose FaaS like ML inference: AWS Elastic Inference exposes its own API
+- General purpose, so preserve the programming model and abstraction, without disaggregation. Orthogonal.
+- KaaS middleware 23 also breaks the isolation: kernels from diffrent functions share the kernel runtime. 
+- \cite{kim_gpu_2018} early work: microservices and remote GPU
+- Surprisingly, local execution has lots of challenges and opportunities. 
+  
+* Commercial
+SageMaker?
+
+* Providing a FaaS-inspired abstraction with different deployment model (not isolated sandboxes)
+- Molecule and XPU-shim and special vectorized sandbox [Chen Asplos 22] and IPC . Heterogenenous . Mechanism focused 
+- 
+
+* Scheduling
+- MW 24 fair: \cite{}, offline and small number of applications.
+- FaastGshare: explicit time and space bin-packing with known inputs. Scaling of function resources based on QoS etc. Offline profling. 
+- 
+
+* Also inference
+- KNIX/SAND: \cite{satzke2020efficient}
+- smirni \cite{ali2022optimizing} BATCH 
+
+* Intro: need to specialize. Too general now. GPUs saturated. 
+
+* SAGE: April 24 24. Very related. \cite{sage_zhao_towards_2024}
+- 13,15: Azure and Alibaba function compute have GPU
+- Fixed GPU
+- Cold start: context and data prep
+- data prefetch pipelining
+- memory and shim
+- C++ runtime, not blackbox serverless , whew
+- 

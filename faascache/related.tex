@@ -37,6 +37,14 @@ Hiding function latency using data caching (such as redis) for database applicat
 The ENSURE~\cite{ensure_acsos20} system handles keep-alive and resource provisioning for CPU resources using queuing theory techniques.
 Our focus is on memory-constrained keep-alive and provisioning, and CPU-focused approaches are complementary to our work. 
 
+\subsection{Comparative Works}
+
+FaasCache has inspired a number of new caching policies, and of everything in this thesis has become the most popular system to reference and compare against.
+Listed here are those that directly compare against FaasCache.
+Heterogeneous FaaS workers~\cite{roy2022icebreaker} and predictive prewarming of containers~\cite{saha2024fase} can improve performance.
+Edge computing has strict resource requirements, and uses a mix of scheduling and cache management to minimize cold starts~\cite{zhang2023online,chen2024cross}.
+Invocations can also be intelligently scheduled, batched, and re-ordered to avoid cold starts~\cite{wu2024faasbatch,cai2024incendio}.
+
 \begin{comment}
 \noindent \textbf{Caching.}
 Our choice of Greedy-Dual-Size-Frequency was motivated by the ease with which its parameters mapped to function keep-alive, in particular the frequency vs. size tradeoff.
