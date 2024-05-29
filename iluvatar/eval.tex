@@ -182,11 +182,11 @@ The number of containers to prewarm for each function is determined using Little
 
 \begin{figure*}
   \centering
-  \subfloat[Overcommit \label{fig:q-base:wted}] {\includegraphics[width=0.3\textwidth]{iluvatar/graphs/old-baseline/breakdown/all_funcs_minheap_ed.pdf}}
+  \subfloat[Overcommit \label{fig:q-base:wted}] {\includegraphics[width=0.5\textwidth]{iluvatar/graphs/old-baseline/breakdown/all_funcs_minheap_ed.pdf}}
   \hfill
-  \subfloat[Distribution of function latencies \label{fig:q-base:box}] {\includegraphics[width=0.3\textwidth]{iluvatar/graphs/scaled_trace2/trace_0_1/violin_e2e_for_each_queue/16_16.pdf}}
+  \subfloat[Distribution of function latencies \label{fig:q-base:box}] {\includegraphics[width=0.5\textwidth]{iluvatar/graphs/scaled_trace2/trace_0_1/violin_e2e_for_each_queue/16_16.pdf}}
   \hfill
-  \subfloat[Latency breakdown \label{fig:q-base:breakdown}] {\includegraphics[width=0.3\textwidth]{iluvatar/graphs/scaled_trace2/trace_0_1/violin_func_breakdown/16_16.pdf}}
+  \subfloat[Latency breakdown \label{fig:q-base:breakdown}] {\includegraphics[width=0.5\textwidth]{iluvatar/graphs/scaled_trace2/trace_0_1/violin_func_breakdown/16_16.pdf}}
 % \vspace*{-6pt}
   \caption{Queuing performance on the stationary Azure workload. Size-based policies can provide significant latency benefits.}
   \label{fig:q-baseline}
@@ -231,11 +231,11 @@ This variance often masks the control plane jitter, which is of more interest to
 % This behavior mimics how Openwhisk handles overload scenarios.
 \begin{figure*}
   \centering
-  \subfloat[Overcommit \label{fig:q-burst:wted}] {\includegraphics[width=0.3\textwidth]{iluvatar/graphs/scaled_burst_trace2/trace_0_1/barplot_breakdown_perqueue/all_funcs_minheap_ed.pdf}}
+  \subfloat[Overcommit \label{fig:q-burst:wted}] {\includegraphics[width=0.5\textwidth]{iluvatar/graphs/scaled_burst_trace2/trace_0_1/barplot_breakdown_perqueue/all_funcs_minheap_ed.pdf}}
   \hfill
-  \subfloat[Distribution of function latencies \label{fig:q-burst:box}] {\includegraphics[width=0.3\textwidth]{iluvatar/graphs/scaled_burst_trace2/trace_0_1/violin_e2e_for_each_queue/16_16.pdf}}
+  \subfloat[Distribution of function latencies \label{fig:q-burst:box}] {\includegraphics[width=0.5\textwidth]{iluvatar/graphs/scaled_burst_trace2/trace_0_1/violin_e2e_for_each_queue/16_16.pdf}}
   \hfill
-  \subfloat[Latency Breakdown \label{fig:q-burst:breakdown}] {\includegraphics[width=0.3\textwidth]{iluvatar/graphs/scaled_burst_trace2/trace_0_1/violin_func_breakdown/16_16.pdf}}
+  \subfloat[Latency Breakdown \label{fig:q-burst:breakdown}] {\includegraphics[width=0.5\textwidth]{iluvatar/graphs/scaled_burst_trace2/trace_0_1/violin_func_breakdown/16_16.pdf}}
     %  \vspace*{-6pt}
   \caption{Small and bursty functions can get disproportionately impacted due to queuing. A little overcommitment can go a long way to reduce latency.}
     %  \vspace*{-6pt}

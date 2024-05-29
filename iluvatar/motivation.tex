@@ -44,41 +44,13 @@ The majority of invocations are thus \quotes{warm}, where the performance is dom
 % The majority of invocations are thus ``warm'', where the performance is dominated by control plane overheads.
 %\emph{We thus need a low-latency, low-jitter control plane.}
 
-\textbf{System Design.}
-%
-As evidenced by the OpenWhisk architecture presented earlier, FaaS control planes are large, complex distributed systems.
-% Due to the continually evolving needs of FaaS applications and emergence of new sandboxing techniques (such as lightweight VMs like Firecracker~\cite{firecracker-nsdi20}), they are sandwiched between the scale and heterogeneity of FaaS workloads on one hand, and the deep stack of OS and virtualization components on the other. 
-%
-A simple system running web services or microservices does not have to deal with sandbox management overheads, nor with highly heterogeneous request sizes.
-% For reducing tail latency, these systems can often rely on the OS CPU scheduler for processor sharing, can do CPU allocation at very fine granularity~\cite{kaffes2019shinjuku}, use queuing theory techniques~\cite{prekas2017zygos}, etc. 
-At the other extreme, control planes managing long running containers and VMs, like OpenStack or Kubernetes, face a much lower rate of VM arrivals and departures, and can do careful and \quotes{hard} resource allocation using bin-packing~\cite{cortez2017resource}.
-
-
-Functions are highly heterogeneous, and can be seen as both latency-sensitive web requests \emph{and} large containers requiring significant system resources for several seconds. 
-FaaS control planes thus have to do \emph{both} low-latency allocation \emph{and} pack CPU and memory resources on their servers carefully to maintain high system utilization.
-Thus FaaS control planes are one of the more perfect microcosms of challenges in resource management and control in large scale distributed computing. 
-%
-% A clean-slate control plane design helps us investigate the fundamental performance tradeoffs and challenges in this fast-evolving ecosystem.
-Our new implementation also helps to identify the current performance bottlenecks and new avenues of OS optimizations. 
-
-
-\textbf{Control Plane for Experimental Systems Research.}
-%
-Performance-focused FaaS research is already challenging due to the extreme scale and heterogeneity of the workloads.
-These challenges are compounded by existing control planes like OpenWhisk that are unfortunately highly unpredictable.
-The control plane jitter and the extreme bimodal cold vs. warm latencies makes it difficult to do reliable and reproducible research~\cite{mytkowicz2009producing}, and subtle environmental and configuration effects can mask the true effects of new research optimizations.
-However, it continues to be a key component in developing and evaluating FaaS research~\cite{akkus_sand_2018, shahrad_serverless_2020, faascache-asplos21, faaslb-hpdc22, zhou2022aquatope, ensure-faas-acsos20, alzayat_groundhog_2022}. 
-% With OpenWhisk, function performance can be severely affected by a myriad of configuration options, such as insufficient memory for CouchDB, networking configuration, Docker configuration, etc. 
-
-Given the importance of the control plane, we want \emph{predictable} performance to a large degree. 
-In our experience, research in FaaS is often hindered by the large overheads and complexity of existing control planes. 
-Thus, \sysname~is designed from the ground-up to be lightweight and provide predictable performance under different conditions. 
-Our system implementation can potentially accelerate the development of new optimizations, clarify our understanding of performance characteristics of this relatively new stack, and provide a control plane for robust experiments. 
-With a robust control plane, the community can share knowledge and advances, while being able to compare against a well-known and trusted baseline.
+\subsection{FaaS Control Planes}
+\label{sec:bg:cplane}
 
 All aspects of function execution are orchestrated by a FaaS \emph{control plane}, which are implemented by frameworks like OpenWhisk~\cite{openwhisk}.
 For using a FaaS service, the user interacts with the control plane for registering and invoking functions, tracking their status, etc.
 The control plane manages the resources of a cluster of servers, and schedules functions on to them based on its load-balancing policies.
+
 
 %FaaS is a relatively new workload paradigm, and control planes are still evolving and maturing.
 %OpenWhisk is a popular framework which has been used as a platform for investigating and optimizing many facets of FaaS execution.
