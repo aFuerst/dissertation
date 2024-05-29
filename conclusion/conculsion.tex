@@ -6,7 +6,7 @@ It also went into the challenges faced by this new service, proposing several al
 
 Single-worker resource optimization was explored in Chapters~\ref{chap:faascache} and ~\ref{chap:gpu-sched}, and validated the criticality of warm-starts to low latency in FaaS.
 Chapter~\ref{chap:faascache} described a cache management design called \emph{FaasCache} that uses function characteristics to better manage in-memory containers for better performance.
-Knowing that some containers will provide better value if kept available longer, it prunes the cotnainer pool of those less useful to provide better locality and maximize memory utilization.
+Knowing that some containers will provide better value if kept available longer, it prunes the container pool of those less useful to provide better locality and maximize memory utilization.
 A novel resource, GPU acceleration, was proposed in Chapter~\ref{chap:gpu-sched}.
 % These functions allow more opportunity in scheduling functions and allow further improvements to serverless efficiency and latency improvement.
 Several combined mechanisms allowed the efficient and fair scheduling of black-box functions to receive acceleration from GPUs.

@@ -34,14 +34,14 @@ We found default OpenWhisk to be almost unusably slow and unstable even under re
 We present their details and our actions to overcome them, hoping that the fast-growing serverless computing research field can benefit from our lessons. 
 
 
-In our experience, the primary source of scalability bottlenecks is running Docker containers concurrently.
+In our experience, the primary source of scalability bottlenecks when concurrently managing Docker containers.
 We found significant contention in \texttt{dockerd}, Docker's control daemon which handles all the container lifecycle events.
 Even at moderate loads (normalized server load average close to 1), high dockerd contention can increase tail latencies by \emph{several minutes!}
 
 
 Currently, OpenWhisk \textbf{pauses} each container after function execution, which prevents it from being scheduled by the CPU.
 It then resumes the container before running the next invocation of the same function (assuming a warm start).
-Thus each invocation requires these two additional (pause/resume) events to be handled by dockerd, which results in significant lock contention.
+Each invocation therefore requires these two additional (pause/resume) events to be handled by dockerd, which results in significant lock contention.
 Because of the FaaS programming model, the pausing is not necessary, since nothing in the container can run after a function has returned.
 Therefore, we remove these redundant pause/resume operations to reduce dockerd contention.
 This reduces the OpenWhisk overhead by 0.2 seconds \emph{per-invocation} on average.

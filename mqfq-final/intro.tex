@@ -1,0 +1,65 @@
+% \vspace*{-0.4cm}
+\section{Introduction}
+% \vspace*{\subsecspace}
+
+Function as a Service (also called FaaS) is an important and growing abstraction in cloud computing, with new and existing applications increasingly adopting serverless computing~\cite{wen2023rise}. 
+% Users create self-contained \textit{functions} whose lifecycle is orchestrated by the FaaS provider.  
+Users are enticed by its dynamic scaling, low cost, and ease of management, since the lifecycle of self-contained \textit{functions} is orchestrated by the FaaS provider.
+FaaS has emerged as a common, narrow interface for a wide range of cloud applications such as web serving, machine learning (ML), internet of things (IoT), scientific computing, event-driven workflows and  orchestration, etc.
+
+Providing sandboxed and efficient execution for highly heterogeneous and dynamic FaaS workloads is one of the central challenges in serverless cloud computing~\cite{wang2021faasnet}. 
+FaaS workloads can be highly bursty, and have significant sandboxing overheads from function cold-starts when creating and starting virtualized environments (lightweight VMs or containers). 
+The resource contention due to the above issues causes large performance degradation and poor function latency---and this cold-start problem will worsen as FaaS is used by a wider gamut of applications and their feature requirements increase. 
+
+In this paper, we seek to improve FaaS performance by developing \emph{opportunistic acceleration} for serverless computing. 
+Thanks to the boom in machine learning, accelerators like GPUs are now a common feature in data center servers and edge computing devices. 
+Our goal is to provide GPU support to functions by leveraging these accelerators, and improve both function latency and server utilization.
+Functions are increasingly amenable to GPU acceleration, due to the adoption of the FaaS abstraction by applications across ML~\cite{carreira2018case,romero2021llama,gimeno2022mlless,xu2021lambdadnn}, HPC~\cite{kumanov2018serverless,hung2019rapid, aytekin2019harnessing,werner2018serverless,shankar2020serverless}, multimedia~\cite{ao2018sprocket, zhang2019video}, and other computationally intensive workloads. 
+
+
+Providing GPU acceleration to functions in black-box serverless environments poses three major  challenges.
+\textbf{1.} The hardware and software stacks of GPUs are designed for highly parallel, throughput-intensive applications, and have limited support for multiplexing and virtualization.
+Typical functions run for milliseconds or seconds, which makes temporal multiplexing challenging due to the high context switch costs on GPUs.
+GPU virtualization technologies (such as MIG, MPS) are designed for a limited and static set of applications---however, function workloads are highly dynamic, which makes spatial multiplexing of compute-resources and memory challenging.
+%and are thus not ideally suited to highly dynamic function workloads where the set of GPU functions can be vary significantly over time.
+% more concrete details needed
+\textbf{2.} From a serverless provider's perspective (which we take in this paper), functions are highly diverse and must run inside isolated and containerized environments which prevents the use of application-specific GPU multiplexing techniques (often used in ML training and inference~\cite{pemberton2022kernel, ng2023paella, fingler2022dgsf, gu2023fast}).
+We thus seek general-purpose black-box solutions. 
+\textbf{3.} Finally, we target heterogeneous GPU data center and edge machines that may lack state-of-the-art GPUs with enhanced virtualization support.
+Instead, we seek to run on out of data center GPUs which no longer provide adequate speedup for modern ML workloads and are stranded resources, and on edge GPUs with limited computing resources and multiplexing support. 
+
+
+We observe that cold-starts and (temporal) locality play a vital role in function performance on GPUs.
+Cold-starts associated with initializing GPU containers (such as nvidia-docker) can take \emph{several seconds} and increase latency by up to $100\times$. 
+While batching is a common technique with GPUs~\cite{ali2022optimizing}, doing so in a black-box and \emph{fair} manner is challenging. 
+We address these challenges through function scheduling, and use fair queuing principles to resolve the locality, fairness, and efficiency tradeoff.
+Specifically, we adopt scheduling techniques from I/O scheduling such as MQFQ (Multi-Queue Fair Queuing~\cite{hedayati2019multi}) and anticipatory scheduling~\cite{iyer2001anticipatory} to develop a new class of GPU scheduling algorithms for FaaS workloads.
+We treat each function as a separate application, and dispatch invocations in order of their service requirements and priority weights, retaining the fairness properties of MQFQ while significantly reducing cold starts.
+
+Developing an equivalence between I/O and GPU scheduling allows us to leverage classic and well studied ideas from disk scheduling, and provides a new and more principled approach to GPU resource management. 
+Our work is unique in that it seeks to improve GPU utilization through scheduling, and does not depend on specialized application level approaches or hardware virtualization support. 
+A major focus of prior work on GPU support for FaaS has been on application-specific optimizations (such as for ML inference) or disaggregation mechanisms.
+Our work is orthogonal, and investigates heterogeneous CPU and GPU function performance of realistic workloads at scale.
+
+Since GPU memory is a precious resource, our scheduler is tightly integrated with memory management.
+We develop a minimalistic CUDA interposition technique for enabling virtual memory for GPU functions, and prefetch and swap out function memory based on their scheduler states.
+We implement and integrate our GPU scheduling policies and mechanisms in a state of the art high performance FaaS control plane, \sysname~\cite{fuerst2023iluvatar}, and support hybrid computing by dispatching invocations to both CPUs and GPUs based on their speedup. 
+We make the following contributions:
+\begin{enumerate}[leftmargin=*]
+%\item We investigate cold-starts for a broad range of GPU functions, and empirically study the  locality-fairness-efficiency tradeoff. 
+\item We develop fair queuing based scheduling (called \quotes{\QName}) for black-box containerized functions, which preserves both locality and fairness by adapting ideas from I/O scheduling.
+This allows us fine-grained and intuitive control of both temporal and spatial multiplexing of GPU compute and memory resources.
+Our GPU memory management is integrated with the scheduler, and by virtually eliminating cold-starts, provides more than $300\times$ reduction in latency compared to current GPU containers.
+
+\item We extensively evaluate our scheduling policies and their tradeoffs using the Azure FaaS workload~\cite{shahrad2020serverless}.
+  \QName~reduces the average latency by $1.2-10\times$, the variance by $3-8\times$, and improves fairness by more than $3\times$.
+  
+\item We have integrated our scheduling policies and mechanisms into the \sysname~\cite{fuerst2023iluvatar} FaaS control plane, and provide the first open-source, practical, and high-performance GPU acceleration for black-box functions across data center and edge environments. 
+\end{enumerate}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

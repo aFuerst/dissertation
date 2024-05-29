@@ -54,7 +54,8 @@ Concurrent computing interactions are limited -- two concurrent invocations cann
 Several platform-managed FaaS dataplanes have been designed to improve data sharing between concurrently running~\cite{giantsidi2023flexlog,sreekanti2020fault} or the input and outputs of DAG functions~\cite{mvondo2021ofc,romero2021faa,abdi2023palette}.
 Functions should not need to use intermediaries to communicate, especially when computing on a shared problem or dataset.
 
-I want to explore enhancements to the serverless stack to let them interact like true parallel applications ubiquitous to cloud and high-performance computing.
+% I want to explore enhancements to the serverless stack to let them interact like true parallel applications ubiquitous to cloud and high-performance computing.
+The serverless stack must be enhanced to let invocations interact like true parallel applications that are ubiquitous in cloud and high-performance computing.
 This can be taken in several theoretical directions, the first of which is a Hadoop-style~\cite{hadoop} cluster scheduler that creates many workers operating on a shared dataset.
 Applications for these cluster distributed systems are programmed with API hooks to abstract away how they interact, as the platform coordinates placement and data.
 The other direction is to support MPI~\cite{mpi} functions, where many processes communicate via discrete messages to share data or synchronize themselves.

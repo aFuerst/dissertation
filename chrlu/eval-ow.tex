@@ -33,7 +33,7 @@ We make no policy changes to the invoker eviction policy, but use the changes fr
 
 \noindent \textbf{Contenders.}
 In addition to our proposed load balancing policy, we compare against the default OpenWhisk load balancing policy (described in Section~\ref{subsec:ch}) with GreedyDual (OW+GD) and 10 minute Time-To-Live (OW+TTL) eviction policies, and implement two other load balancing polices for comparison: least loaded (LL), and consistent hashing with bounded loads using stale load-averages (CH-BL). 
-For CH-RLU and CH-BL, we set the max\_chain\_len=3, a high max load bound, b\_max= 6, and a popularity threshold, p=20\%. 
+For CH-RLU and CH-BL, we set the $max\_chain\_len=3$, a high max load bound, $b\_max= 6$, and a popularity threshold, $p=20\%$. 
 We did not find performance to be particularly sensitive to the load-bound: the function latencies showed little changes across load upper-bounds of $[2-8]$. 
 % This is also shown earlier in our latency vs. load analysis in Section~\ref{subsec:function-perf}. 
 

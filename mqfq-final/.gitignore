@@ -1,0 +1,11 @@
+*.fls
+*.out
+*.fdb_latexmk
+*.aux
+*.blg
+*.bbl
+*.log
+*.gz
+.vscode/
+figs/.~lock*
+**.swp

@@ -1,0 +1,22 @@
+1. Queueing time breakdown
+2. Container pool. Is swap out async. What is contained in this? GPU kernel and data copied to GPU for the functions?
+3. Container pool size > D ?
+4. How do we determine the pool size?
+5. How do we set D?
+6. How do we set TTL?
+7. 
+
+| Function   | &          | GPU | (warm) | & |     CPU | (warm) |      & | GPU | Speedup | \\ |
+| Imagenet   | [ML]       | &   |  2.253 | & |   5.477 | &      |  2.44x | \\  |         |    |
+| %          | Squeezenet | &   |  1.168 | & |   1.099 | &      |  0.95x | \\  |         |    |
+| %          | RNN        | &   |  0.366 | & |   0.048 | &      |  0.14x | \\  |         |    |
+| Roberta    | [ML]       | &   |  0.268 | & |   5.162 | &      | 19.26x | \\  |         |    |
+| Ffmpeg     | [Video]    | &   |  4.483 | & |  32.997 | &      |  7.37x | \\  |         |    |
+| FFT        | [HPC]      | &   |  0.897 | & |  11.584 | &      | 12.92x | \\  |         |    |
+| %          | Eos        | &   |  0.017 | & |   0.045 | &      |  2.66x | \\  |         |    |
+| Isoneural  | [HPC]      | &   |  0.026 | & |   0.501 | &      | 19.57x | \\  |         |    |
+| %          | Lavamd     | &   |  1.989 | & |  15.199 | &      |  7.64x | \\  |         |    |
+| Lud        | [Rodinia]  | &   |  2.050 | & |  70.915 | &      |  34.6x | \\  |         |    |
+| Myocyte    | [Rodinia]  | &   |  2.784 | & |  39.277 | &      | 14.11x | \\  |         |    |
+| Needle     | [Rodinia]  | &   |  1.979 | & | 144.639 | &      | 73.09x | \\  |         |    |
+| Pathfinder | [Rodinia]  | &   |  1.472 | & | 134.358 | &      |  91.3x | \\  |         |    |

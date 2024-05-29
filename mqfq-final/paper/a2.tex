@@ -1,0 +1,10 @@
+Hardware accelerators like GPUs are now ubiquitous in data centers and edge computing, but are not fully supported by common cloud abstractions such as serverless Functions as a Service (FaaS).
+Many popular and emerging FaaS applications such as machine learning and scientific computing  can benefit from GPU acceleration.
+However, FaaS frameworks (such as OpenWhisk) are not capable of providing this acceleration because of the design mismatch between the GPU usage and FaaS programming model, which requires virtualization and sandboxing of each function, and must support highly dynamic and heterogeneous functions. 
+
+This paper presents the design and implementation of a FaaS system for heterogeneous hardware, which provides hybrid computing capabilities for general, black-box functions.
+We show how data and code locality determines GPU function performance, and translate principles from I/O scheduling such as fair queuing and anticipatory scheduling, to GPUs. 
+On real-world FaaS workloads, our fair-queuing scheduling can reduce latency by more than 5x compared to FCFS and batch-oriented scheduling. 
+Our scheduler-integrated memory movement optimizations significantly reduce GPU cold-starts, reducing function latency by more than two orders of magnitude, allowing FaaS operators to provide opportunistic acceleration and leverage antiquated GPUs. 
+
+%we show that even obselete GPUs can reduce function latency by more than 2x compared to pure CPU execution. 

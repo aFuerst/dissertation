@@ -1,0 +1,30 @@
+\section{Discussion}
+
+\begin{comment}
+\noindent \textbf{Why not Nvidia MIG or MPS?}
+Previous work has used MPS to enable time slicing of GPUs~\cite{gu2023fast}, but using MPS has a number of drawbacks that make it poorly suited to serverless.
+MPS is explicitly designed to let cooperative processes share GPU resources, and documentation specifies that it is intended to work with OpenMP/MPI applications.
+If any process encounters a critical error, \emph{all} processes connected to the MPS server will crash, meaning one faulty serverless function will break all containers using the GPU, regardless of the function it is for.
+The amount of GPU memory and compute usable by a process can be specified at process launch time, and is fixed thereafter.
+If one wishes to adjust allocations, a new container must be spun up with the large overhead that entails.
+Importantly, support for MPS features varies one hardware, and only the newest devices fully support these resource management features.
+MPS does not enable oversubscribing limited device memory, and the inability to truly isolate processes from one another makes it a poor candidate for FaaS.
+
+Nvidia MIG has similar drawbacks to MPS with poor resource management capabilities.
+Once slice(s) of the GPU are assigned to a container/VM, the only way to adjust them is to launch a new container.
+Multiple containers could share and timeslice GPU partitions, but this is just a more complicated version of timeslicing the entire GPU via userspace management.
+The partitions sizes are fixed as manufacturing time, and lead to resource fragmentation and underutilization.
+Memory oversubscription and temporal sharing of compute as we have described in this work are a more ideal way of utilizing GPU compute in a serverless platform.
+
+\end{comment}
+
+\mhead{Security}
+Nvidia UVM maintains a per-process page table entries for allocated memory similar to OS PTEs.
+If a process tries to access memory outside these allocations, it will incur a segmentation fault.
+Another process will have different mappings and will likewise error trying to access memory from other processes.
+UVM therefore provides the same security guarantees as given by traditional RAM virtual memory managed by the OS/hypervisor.
+
+\mhead{Scalability}
+We cannot continue to create containers attached to GPUs so long as host memory is available. % and via UVM move their memory to the host when idle.
+An open CUDA context holds some device physical memory~\cite{cuda-ctx-overhead} that cannot be moved by our design, and would eventually consume all usable device memory.
+On top of that, the device will eventually run out of PTEs to map device-to-host pages.

@@ -1,0 +1,21 @@
+\begin{comment}
+
+\section{Future Work}
+
+\begin{enumerate}
+  \item Integrate more fine-grained GPU compute control~\cite{strati2024orion}.
+  Individual kernel launches can be intercepted, and the used number of GPU threads/blocks check and/or modified.
+  \item cluster load balancing of GPU invokes
+  % \item tailor flow TTL to its IAT
+\end{enumerate}
+
+\end{comment}
+
+\vspace*{-.5cm}
+\section{Conclusion}
+%\vspace*{\subsecspace}
+
+We showed that harnessing GPU resources for functions is practical and can achieve good performance through the use of locality-aware scheduling and memory management.
+Black-box containerized functions and heterogeneous and dynamic function workloads present many challenges to efficient GPU utilization. 
+MQFQ-Sticky, our scheduling algorithm, is inspired by I/O fair scheduling. Empirical analysis of its performance indicates it reduces function latency by more than $50\times$ compared to current GPU containers. 
+
