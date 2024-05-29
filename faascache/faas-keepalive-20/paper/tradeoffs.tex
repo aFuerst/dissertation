@@ -3,7 +3,7 @@
 
 \vspace*{\subsecspace}
 
-In this section, we first present an empirical analysis of cold-start overheads of common serverless applications, followed by the tradeoffs in keep-alive policies. 
+In this section, we first present an empirical analysis of cold start overheads of common serverless applications, followed by the tradeoffs in keep-alive policies. 
 
 \noindent \textbf{System model.} 
 We assume that each function invocation runs in its own container. 
@@ -19,11 +19,11 @@ At any instant of time, each container is either running a function, or is being
 %
 Thus, server resources are consumed by running containers, and containers being kept alive in anticipation for future invocations. 
 
-\noindent \textbf{Cold-start overheads in OpenWhisk.} 
+\noindent \textbf{Cold start overheads in OpenWhisk.} 
 %
-In order to understand the performance and latency implications of function cold-starts, we investigate the chain of events necessary to run function code in a popular FaaS platform, OpenWhisk~\cite{openwhisk}.  
+In order to understand the performance and latency implications of function cold starts, we investigate the chain of events necessary to run function code in a popular FaaS platform, OpenWhisk~\cite{openwhisk}.  
 A timeline of a function invocation request for a TensorFlow machine learning inference task is shown in Figure~\ref{fig:timeline}. 
-The figure shows the major sources of cold-start overhead: from request arrival to the actual function execution. 
+The figure shows the major sources of cold start overhead: from request arrival to the actual function execution. 
 OpenWhisk first checks whether the function can be served from the  pool of warmed containers it maintains, and if no container is found, a Docker container is launched, and the runtime for the function is initialized: which comprises of OpenWhisk and Python runtime initialization, as well as any specific \emph{explicit} function initialization provided by the application. 
 The total compulsory overhead, from the request arrival to the actual function execution, is significant: up to 2.5 seconds are spent loading all runtime dependencies, before the user-provided initialization and actual event handling code can begin execution. 
 
@@ -32,7 +32,7 @@ The total compulsory overhead, from the request arrival to the actual function e
   \centering
   \includegraphics[width=0.4\textwidth]{../figures/ow-timeline.pdf}
   \vspace*{\myfigspace}
-  \caption{Timeline of function execution and sources of cold-start delay in OpenWhisk for an ML inference application.}
+  \caption{Timeline of function execution and sources of cold start delay in OpenWhisk for an ML inference application.}
   \label{fig:timeline}
 \end{figure}
 
@@ -41,7 +41,7 @@ The total compulsory overhead, from the request arrival to the actual function e
 %
 Optionally, applications may also use custom code to initialize and pre-warm the container (explicit-init component in Figure~\ref{fig:timeline}). 
 For example, this can be used for downloading data dependencies ahead of time such as large neural network models for inference, or for runtime initialization such as downloading and importing package dependencies (such as Python packages). 
-%The second technique for reducing the cold-start overhead is to explicitly initialize functions before running  them, and resolving most of the function's code and data dependencies during the initialization phase. 
+%The second technique for reducing the cold start overhead is to explicitly initialize functions before running  them, and resolving most of the function's code and data dependencies during the initialization phase. 
 %
 An example of function initialization is shown in Figure~\ref{fig:lambda-example}, which shows a pseudo-code snippet of a function that performs machine learning inference on its input. 
 For ML inference, the function downloads an ML model and initializes the TensorFlow ML framework (lines  5 and 6). 
@@ -67,7 +67,7 @@ def lambda_handler(event, context):
      return prediction_output 
    \end{lstlisting}
    %\vspace*{\myfigspace}
-   \caption{Initializing functions by importing and downloading code and data dependencies can reduce function latency by hiding the cold-start overhead.}
+   \caption{Initializing functions by importing and downloading code and data dependencies can reduce function latency by hiding the cold start overhead.}
    \label{fig:lambda-example}
    %\vspace*{\myfigspace}
 \end{figure}
@@ -100,7 +100,7 @@ Function workloads are also heavy-tailed: a few ``heavy hitting'' functions are 
 \vspace*{\subsecspace}
 
 
-The primary goal of keep-alive is to reduce the initialization and cold-start latency, by keeping functions alive for different durations based on their characteristics. 
+The primary goal of keep-alive is to reduce the initialization and cold start latency, by keeping functions alive for different durations based on their characteristics. 
 % Servers that run these functions are heavily multiplexed, and run hundreds of short lived functions concurrently. %backend FaaS servers?
 % too sudden 
 Because servers run hundreds of short lived functions concurrently, keep-alive policies must be generalizable and yield high server utilization. 

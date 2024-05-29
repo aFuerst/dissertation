@@ -59,7 +59,7 @@ In the spirit of a fast ``baseline'' control plane and for isolation, \sysname~ 
 For example, recently proposed optimizations allow for functions to share a language runtime inside a container~\cite{}. 
 
 Additionally, \sysname~ introduces a standard \texttt{prewarm}  API call, which starts the function's container and the HTTP server inside of it, and adds it to the container pool.
-This reduces most of the cold-start overhead associated with the container.
+This reduces most of the cold start overhead associated with the container.
 Prewarming can both avoid a "thundering herd" of cold starts on load startup, and be an optimization in which the control plane anticipates invocations and prepares containers for them. 
 This allows for a systematic mechanism to implement various recently proposed predictive prewarm policies~\cite{zhou2022aquatope, icebreaker, shahrad,..}. 
 
@@ -87,7 +87,7 @@ Moving this creation off the container creation critical path saves upwards of 1
 
 %Function registration triggers fetching the container disk image. 
 %We also introduce a \texttt{prewarm} function action, which starts up the function's container (before it is actually invoked). 
-%An invocation on the prewarmed container prevents a cold-start, and this allows us to implement many prewarming and pre-fetching policies like in~\cite{shahrad_serverless_2020}.
+%An invocation on the prewarmed container prevents a cold start, and this allows us to implement many prewarming and pre-fetching policies like in~\cite{shahrad_serverless_2020}.
 
 % \noindent \textbf{Disk image caching and pre-warming.}
 % A \textit{cold start} occurs if a function is run on a worker that does not have a container available for it.
@@ -113,7 +113,7 @@ In our experience, function bursts are the primary contributor of high control p
 
 
 \textbf{Evicting containers.}
-In the event there is not enough memory on the server to cold-start and run a function, cached containers must be evicted to make room.
+In the event there is not enough memory on the server to cold start and run a function, cached containers must be evicted to make room.
 Traditionally eviction decisions would be made in an online fashion, but picking victims and waiting for their removal creates high variance in function execution times.
 We alleviate this by proactively computing eviction priorities and maintaining a memory buffer for bursts of invocations. 
 A thread routinely monitors all cached containers, ordering them based on an eviction algorithm, and, if necessary, removes some to maintain the bubble.
@@ -180,7 +180,7 @@ Finally, a ``null'' simulation backend for ...
 
 We use containerd. Will be useful to say what the layers are: Docker, containerd, runc.
 We get the container, image, namespace, and snapshot abstractions.
-There is a tradeoff here: the container creation overheads can also vary significantly. The C implementation crun is 150ms, and runc is 200ms, containerd is 300ms, and docker is 350ms. This primarily affects the cold-start times. This is thus an important optimization opportunity for work on reducing cold-start times.
+There is a tradeoff here: the container creation overheads can also vary significantly. The C implementation crun is 150ms, and runc is 200ms, containerd is 300ms, and docker is 350ms. This primarily affects the cold start times. This is thus an important optimization opportunity for work on reducing cold start times.
 
 Container creation also requiring lots of process forks, which itself is few ms. One way to optimize this is to use \textbf{large pages.}
 
@@ -214,10 +214,10 @@ There has been an explosive growth in the number of sandboxing abstractions for 
 Lightweight VMs use stripped-down specialized hypervisors for reducing the ``boot time'' of functions, and are popular because they can provide additional isolation.
 \sysname can work with these lightweight VMs such as Firecracker, since it is a containerd backend, and as a control-plane, it really does not focus on the isolation backend.
 
-Resuming from some kind of a snapshot, like in Catalyzer, vhive, etc., is also a common technique for reducing the cold-start latency.
+Resuming from some kind of a snapshot, like in Catalyzer, vhive, etc., is also a common technique for reducing the cold start latency.
 And finally isolation can be provided by language runtimes, such as WASM or graalVM.
 
-These different isolation methods again mainly influence the cold-start times, and the other control plane operations remain unaffected. Exploring their performance is part of our future work.
+These different isolation methods again mainly influence the cold start times, and the other control plane operations remain unaffected. Exploring their performance is part of our future work.
 We chose containers because they allow the shortest path to deploying FaaS, especially in private clusters, such as Funcx. 
 
 
@@ -261,7 +261,7 @@ Worker API is simple and minimalistic: invoke, invoke-async, prewarm, register, 
 
 Two-step process for reducing work on critical path.
 \textbf{Prewarm} and
-\textbf{Register} operation creates the container disk image and makes the function ``ready'' for execution. This removes a lot of cold-start overheads associated with fetching and building the image, and often takes around .... seconds.
+\textbf{Register} operation creates the container disk image and makes the function ``ready'' for execution. This removes a lot of cold start overheads associated with fetching and building the image, and often takes around .... seconds.
 
 
 

@@ -7,7 +7,7 @@ They can be invoked sparsely -- perhaps a handful of times per day.
 When a container isn't handling an invocation, it sits idle, occupying memory the control plane may want to use for other, more active, purposes.
 How long to keep a function sandbox in memory is called a \textbf{keep-alive} decision, and has a dramatic effect on latency.
 
-The primary goal of keep-alive is to amortize the initialization and cold-start latencies by keeping functions alive for different durations based on their characteristics.
+The primary goal of keep-alive is to amortize the initialization and cold start latencies by keeping functions alive for different durations based on their characteristics.
 Keep-alive policies must be generalizable and yield high server utilization, because servers must handle hundreds of short-lived functions concurrently.
 Functions can have vastly different characteristics, and keep-alive policies must work efficiently in highly dynamic and diverse settings.
 We use the following characteristics of functions for keep-alive policies.

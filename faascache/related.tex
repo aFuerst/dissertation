@@ -4,11 +4,11 @@
 % \section{Related Work}
 
 % \noindent \textbf{Function Keep-alive.}
-Mitigating cold-starts is one of the central performance problems in FaaS, and has received commensurate attention in both academia and industry.
+Mitigating cold starts is one of the central performance problems in FaaS, and has received commensurate attention in both academia and industry.
 %
 The initialization or startup time of functions can be reduced  by reducing container startup overheads~\cite{oakes_sock_2018,mohan_agile_2019, akkus_sand_2018}, or deploying functions inside ultra-light containers, VMs, or unikernels~\cite{unikernels,firecracker-nsdi20}.
 %
-While these mechanisms can reduce the cold-start overhead associated with the virtual environment creation, other sources of overheads remain, such as losing all application initialized variables, cached files, etc.
+While these mechanisms can reduce the cold start overhead associated with the virtual environment creation, other sources of overheads remain, such as losing all application initialized variables, cached files, etc.
 As we have shown, keep-alive essentially serves the role of caching, and fast startup only reduces the ``miss'' penalty, and does not eliminate it.
 
 % Rev 1 
@@ -77,7 +77,7 @@ HPC~\cite{mocskos_faaster_2018}
 
 SPEC group report~\cite{van_eyk_spec_2017}
 
-\noindent \textbf{cold-start problem}
+\noindent \textbf{cold start problem}
 
 ~\cite{lin_mitigating_2019} is a project report that uses ML inference, webserver workloads as we are. Knative platform. Maintain a pool of warm containers. No real policy though.
 

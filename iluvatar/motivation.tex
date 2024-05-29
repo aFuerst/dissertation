@@ -21,8 +21,8 @@ Worryingly, the 99 percentile overhead is much higher, and rises to as much as 6
 To emphasize, for a median function in the Azure workload which runs for 500 ms, OpenWhisk can increase its latency by 100\%.  
 Thus, the control plane plays a crucial role in function performance.
 We note that these are the best-case warm-start latencies, when the function's containers are fully initialized and in memory. 
-Since function cold-starts impose such a major performance penalty (increasing latency by more than $10\times$), mitigating them has been a major research focus. 
-However, because of temporal and spatial locality of access, caching and prefetching techniques can be extremely effective, and the cold-start rate is often less than $1\% $ of all invocations~\cite{faascache-asplos21}. 
+Since function cold starts impose such a major performance penalty (increasing latency by more than $10\times$), mitigating them has been a major research focus. 
+However, because of temporal and spatial locality of access, caching and prefetching techniques can be extremely effective, and the cold start rate is often less than $1\% $ of all invocations~\cite{faascache-asplos21}. 
 The majority of invocations are thus \quotes{warm}, where the performance is dominated by control plane overheads.
 
 % We also see strange inversions in the scaling behavior: the overhead reduces for certain load-levels, and then increases again.
@@ -39,8 +39,8 @@ The majority of invocations are thus \quotes{warm}, where the performance is dom
 % To emphasize, for a median function in the Azure workload which runs for 500 ms, OpenWhisk can increase its latency by 100\%.  
 % Thus, the control plane plays a crucial role in function performance.
 % We note that these are the best-case warm-start latencies, when the function's containers is fully initialized and in memory. 
-% Since function cold-starts impose such a major performance penalty (increasing latency by more than $10\times$), mitigating them has been a major research focus. 
-% However, because of temporal and spatial locality of access, caching and prefetching techniques can be extremely effective, and the cold-start rate is often less than $1\% $ of all invocations~\cite{faascache-asplos21}. 
+% Since function cold starts impose such a major performance penalty (increasing latency by more than $10\times$), mitigating them has been a major research focus. 
+% However, because of temporal and spatial locality of access, caching and prefetching techniques can be extremely effective, and the cold start rate is often less than $1\% $ of all invocations~\cite{faascache-asplos21}. 
 % The majority of invocations are thus ``warm'', where the performance is dominated by control plane overheads.
 %\emph{We thus need a low-latency, low-jitter control plane.}
 
@@ -82,7 +82,7 @@ Stretch factors shown in~\cite{zuk} of 10,000, indicating that the overhead is 1
 
 \noindent \textbf{Control planes}  (such as OpenWhisk~\cite{openwhisk})  handle all aspects of function execution. 
 This control plane manages a cluster of servers to run functions on, and implements function scheduling, load-balancing, resource monitoring, function status tracking, storing function results, logging, etc. 
-It is also responsible for performance optimizations for functions such as keep-alive~\cite{faascache-asplos21} to mitigate function cold-start overheads due to the sandboxing and function initialization overheads. 
+It is also responsible for performance optimizations for functions such as keep-alive~\cite{faascache-asplos21} to mitigate function cold start overheads due to the sandboxing and function initialization overheads. 
 %\emph{Paint a picture of what all it does.}
 The control plane itself is highly distributed with many components such as API gateways, distributed message queues (such as Kafka), and databases. % (like CouchDB).
 Even on a single server, a function's execution is orchestrated through many components, as shown in Figure~\ref{fig:faasmeter-iluvatar}. 
@@ -136,8 +136,8 @@ Importantly, the tail overhead is also small: less than 3ms for less than 32 con
 To emphasize, for a median function in the Azure workload which runs for 500 ms, OpenWhisk can increase its latency by 100\%.  
 Thus, the control plane plays a crucial role in function performance.
 We note that these are the best-case warm-start latencies, when the function's containers is fully initialized and in memory. 
-Since function cold-starts impose such a major performance penalty (increasing latency by more than $10\times$), mitigating them has been a major research focus. 
-However, because of temporal and spatial locality of access, caching and prefetching techniques can be extremely effective, and the cold-start rate is often less than $1\% $ of all invocations~\cite{faascache-asplos21}. 
+Since function cold starts impose such a major performance penalty (increasing latency by more than $10\times$), mitigating them has been a major research focus. 
+However, because of temporal and spatial locality of access, caching and prefetching techniques can be extremely effective, and the cold start rate is often less than $1\% $ of all invocations~\cite{faascache-asplos21}. 
 The majority of invocations are thus ``warm'', where the performance is dominated by control plane overheads.
 %\emph{We thus need a low-latency, low-jitter control plane.}
 

@@ -22,17 +22,17 @@ A paper describing an internal FaaS platform at Meta~\cite{sahraei2023xfaas}, sh
 \end{figure}
 
 
-Several examples of functions are shown in Table~\ref{tab:workloads}, these are taken from~\cite{functionbench}.
-Functions have high variation in warm and cold-start times, with cold-start times being significantly higher.
+Several examples of functions are shown in Table~\ref{tab:bg:workloads}, these are taken from FunctionBench~\cite{functionbench}.
+Functions have high variation in warm and cold start times, with cold start times being significantly higher.
 Memory usage can range from a few dozen megabytes, to half a gigabyte, matching real-world data from~\cite{shahrad_serverless_2020}.
 Control planes must be able to handle these high variations in frequency and resource usage, and treat all functions fairly.
 
 \begin{table}
   \centering
-  \caption{FaaS workloads are highly diverse in their resource requirements and execution times. The initialization time can be significant and is the cause of the cold-start overheads, and depends on the size of code and data dependencies.}
+  \caption{FaaS workloads are highly diverse in their resource requirements and execution times. The initialization time can be significant and is the cause of the cold start overheads, and depends on the size of code and data dependencies.}
   \begin{tabular}{lrrr}
     \hline 
-    Application & Mem size & Warm time (sec) & Cold-start time (sec) \\
+    Application & Memory size & Warm time (sec.) & Cold start time (sec.) \\
     \hline
     % Web-serving & 64 MB & 2.4 s & 2 s \\
     % ML Inference (CNN) & 512 MB & 6.5 s & 4.5 s \\
@@ -52,10 +52,15 @@ Control planes must be able to handle these high variations in frequency and res
     JSON Parsing & 256 MB & 0.414 & 1.962 \\
     \hline
   \end{tabular}
-  \label{tab:workloads}
+  \label{tab:bg:workloads}
 \end{table}
 
 \subsection{Cold Start Mitigation}
+
+Many techniques have been proposed to reduce the initialization overhead from cold starts.
+They fall into two general categories, the first try to prevent cold starts by smart container management, and the latter reduce the time of a cold start.
+
+\begin{comment}
 The FaaS computing paradigm sees providers running user code on-demand when a request comes in, and importantly deciding \emph{where} it should run. 
 Each invocation must be run in isolation from co-located invocations and must ensure provider control over system resources.
 Both security goals are thus achieved by running each invocation in a sandboxed environment. 
@@ -78,7 +83,7 @@ Some examples of these applications are explored in Section~\ref{sec:serverless-
 
 % The warm and cold time for different functions from the FunctionBench~\cite{kim_functionbench_2019} workload suite are shown in Table~\ref{tab:func-times}.
 % The table shows the total execution latency when these functions are run on OpenWhisk.
-
+\end{comment}
 
 
 \begin{comment}
@@ -109,20 +114,22 @@ Some examples of these applications are explored in Section~\ref{sec:serverless-
 
 \subsubsection{Keep-Alive}
 
-Locality for FaaS resource management has been explored in the form of function keep-alive policies~\cite{shahrad_serverless_2020}. 
-Once a container for a function is created and the function finishes execution, the container can be kept alive instead of immediately terminating it. 
+Locality for FaaS resource management has been explored in the form of function \emph{keep-alive} policies. 
+Once a container for a function is created and the function finishes execution, the container can be kept resident in-memory instead of immediately terminating it. 
 Subsequent invocations of the function can then \emph{reuse} the already running container.
-This \emph{keep-alive} mechanism can alleviate the cold-start overhead due to container launching (which can be $\sim 100$ ms). %Might be confusing, keep-alive also helps in other initialization.
+% This \emph{keep-alive} mechanism can alleviate the cold start overhead due to container launching (which can be $\sim 100$ ms). %Might be confusing, keep-alive also helps in other initialization.
+However, keep-alive is not a panacea for all FaaS latency problems.
+% as keeping a container alive consumes valuable computing resources on the servers.
+%, and reduces the number of functions that can be executed concurrently. 
+Specifically, idle containers being kept alive in anticipation of future function invocations can reduce the efficiency of the servers by intentionally not using resources.
+% Thus, we develop keep-alive \emph{policies} that reduce the cold start overhead while keeping the server utilization high.
 
-However, keep-alive is not a panacea for all FaaS latency problems. 
-Keeping a container alive consumes valuable computing resources on the servers. %, and reduces the number of functions that can be executed concurrently. 
-Specifically, a running container occupies memory, and warm containers being kept alive in anticipation of future function invocations can reduce the multiplexing and efficiency of the servers. 
-% Thus, we develop keep-alive \emph{policies} that reduce the cold-start overhead while keeping the server utilization high.
-
-Designing general keep-alive policies is challenging due to the extreme heterogeneity in the different function popularities, resource requirements, and cold-start overheads.
-For instance, a recent analysis of FaaS workloads from Azure~\cite{shahrad_serverless_2020} shows that function inter-arrival times and memory sizes can vary by more than three orders of magnitude.
-Commonly, platforms use a default, fixed, time-to-live (TTL) before deleting idle containers~\cite{openwhisk}.
+Designing general keep-alive policies is challenging due to the extreme heterogeneity in the different function popularities, resource requirements, and cold start overheads.
+% For instance, a recent analysis of FaaS workloads from Azure~\cite{shahrad_serverless_2020} shows that function inter-arrival times and memory sizes can vary by more than three orders of magnitude.
+Commonly, platforms use a default, fixed, time-to-live (TTL) to wait before deleting idle containers~\cite{openwhisk}.
 % \cite{shahrad_serverless_2020}
+Predicting when future invocations will occur has been tried~\cite{shahrad_serverless_2020}.
+The platform can use this prediction to keep idle containers or remove them expecting it won't be needed for some time and re-create ahead of time when anticipated.
 FaaS users have even taken it upon themselves to keep their containers alive in various ways~\cite{warm2,warm1} to avoid cold starts.
 % This workload heterogeneity magnifies the performance vs. utilization tradeoff faced by keep-alive policies, as we shall describe in the next section. 
 % Additionally, FaaS workloads also show a high temporal dynamism, which requires new approaches to resource provisioning and elastic scaling, which we also develop. 

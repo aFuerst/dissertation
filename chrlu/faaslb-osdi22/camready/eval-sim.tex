@@ -40,13 +40,13 @@ Nevertheless, it provides an optimistic baseline: our consistent-hashing based p
 Figure~\ref{fig:1k-lat} compares this greedy policy with a locality-agnostic ``least-loaded'' policy that is popular in web-clusters, and the two consistent-hashing based policies. 
 The figure shows the function slowdown factor for each function, as well as the global average slowdown.
 Slowdown is defined as the ratio of function's execution time to its base warm time without any system overhead, resource contention, or queuing delays.
-Most functions do poorly with the least-loaded policy: the median function slowdown is almost $4\times$, primarily because of high cold-starts.
+Most functions do poorly with the least-loaded policy: the median function slowdown is almost $4\times$, primarily because of high cold starts.
 Figure~\ref{fig:1k-cd} compares the cold and dropped statistics for the various policies.
 
 Returning to Figure~\ref{fig:1k-lat}, both CH-BL and CH-RLU have comparable performance, with a median slowdown of $2.4$. 
 Finally, and surprisingly, the omniscient greedy policy performs poorly: with the global slowdown approaching $7$.
 The primary reason for this is because of the bursty nature of the workload: the greedy policy tends to pick the server with the least-loaded server that can run the warm function.
-However because of stale load information, we see a \emph{herd effect} on the server, and this causes extremely high resource contention and latency, even though the number of cold-starts is small (compared in Figure~\ref{fig:1k-cd}). 
+However because of stale load information, we see a \emph{herd effect} on the server, and this causes extremely high resource contention and latency, even though the number of cold starts is small (compared in Figure~\ref{fig:1k-cd}). 
 
 
 
@@ -54,7 +54,7 @@ However because of stale load information, we see a \emph{herd effect} on the se
   \centering
   \includegraphics[width=0.3\textwidth]{chrlu/faaslb-osdi22/figs/1k/latencies-250scaling.pdf}
   %  \vspace*{-0.3cm}
-  \caption{[Simulated] Function latencies as cluster size is increased. Least-loaded performs \emph{worse} because its locality and cold-starts become worse as more servers are added.}
+  \caption{[Simulated] Function latencies as cluster size is increased. Least-loaded performs \emph{worse} because its locality and cold starts become worse as more servers are added.}
   \label{fig:1k-scaling}
  %   \vspace*{-0.3cm}
 \end{figure}

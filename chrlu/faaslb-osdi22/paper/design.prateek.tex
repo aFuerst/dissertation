@@ -30,7 +30,7 @@ our research question is: \emph{Can consistent hashing be used to reduce latency
 Or put another way, can we balance the tradeoff between function locality and server-loads with consistent hashing? 
 
 
-Our key idea is to extend consistent hashing to take also into account server loads, the cold-start overheads of different functions, and the bursty traffic that is a key characteristic of FaaS workloads.
+Our key idea is to extend consistent hashing to take also into account server loads, the cold start overheads of different functions, and the bursty traffic that is a key characteristic of FaaS workloads.
 In the rest of this section, we describe our approach. 
 
 % \subsection{Broad design Criteria}
@@ -70,7 +70,7 @@ Both these metrics fail to capture CPU loads and lead to scalability issues when
 
 
 Instead, we primarily rely on \emph{system-level} load metrics, such as the standard Linux 1-minute load-average.
-In addition to CPU utilization, this also captures the I/O wait due to cold-starts, and provides a more realistic measure of load.
+In addition to CPU utilization, this also captures the I/O wait due to cold starts, and provides a more realistic measure of load.
 Traditional Linux load-average estimates the total number of processes running and ready-to-run, and we normalize the load-average by the number of CPUs. 
 Thus, a load-average of $8$ on an 8 core server (discounting hyperthreading) is normalized to 1. 
 
@@ -80,7 +80,7 @@ Furthermore, load monitoring and reporting has delays due to how frequently the 
 We use a simple publish-subscribe-like system, where individual servers periodically (every 5 seconds) push their load information, and the load-balancer uses these published loads to make all scheduling decisions.
 
 
-%\subsection{Cold-Start Aware Bounded-Loads
+%\subsection{Cold start Aware Bounded-Loads
 
 \vspace*{-0.2cm} % Challenges of CH-BL adoption. 
 \subsection{Why CH-BL Is Insufficient}
@@ -141,14 +141,14 @@ Bursty function invocations result in two main problems.
 First, they cause an increase in server load beyond the actual load-bound, because load is only lazily tracked.
 The delayed load information can result in a popular function completely overwhelming a server, causing load ``hotspots'' in the cluster.
 The second problem is that in extreme cases, the inter-arrival-time is less than the function latency, causing concurrent invocations.
-Even if these concurrent invocations are run on a ``local'' server with the function present in the keep-alive cache, there will still be cold-starts, since each invocation must run in its own container. 
+Even if these concurrent invocations are run on a ``local'' server with the function present in the keep-alive cache, there will still be cold starts, since each invocation must run in its own container. 
 
 Our solution to these two problems caused by bursty invocations is to detect popular function bursts, ``spread'' these invocations around multiple servers to prevent cluster hot-spots, and use stochastic/random load updates to introduce randomness into the load-balancing. 
 
 \begin{comment}
 Multiple problems. 1. Increase the load beyond the bound because lazily tracked. 2. Concurrent: no warm starts. Spreading them around will be useful. 
 
-The problem of concurrent invocations is vexing even with locality, since containers may be in use and thus results in cold-starts for these invocations. In the worst case we must accept $n-1$ cold starts for an $n$ core server. 
+The problem of concurrent invocations is vexing even with locality, since containers may be in use and thus results in cold starts for these invocations. In the worst case we must accept $n-1$ cold starts for an $n$ core server. 
 
 % Very popular functions can present problems.
 We use two strategies:

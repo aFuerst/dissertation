@@ -20,7 +20,7 @@ Reducing this function ``startup overhead'' is a key challenge in serverless com
 
 
 
-To mitigate the startup overhead, a common technique is to keep the execution environment alive or ``warm'' for a small duration, so that future invocations of the same function do not incur the cold-start overhead. 
+To mitigate the startup overhead, a common technique is to keep the execution environment alive or ``warm'' for a small duration, so that future invocations of the same function do not incur the cold start overhead. 
 %
 Keeping functions warm can reduce the function latency by up to $10\times$. 
 %
@@ -36,7 +36,7 @@ In this paper, we explore this tradeoff, and argue for and develop principled ke
 %
 Current cloud platforms and FaaS systems employ simple keep-alive policies. 
 %
-For example, AWS Lambda will keep functions ``warm'' for $\sim 15-60$ minutes, and users have to resort to ad-hoc ``polling'' techniques to keep functions warm to avoid the cold-start penalty~\cite{lambda-warm, lambda-limits, lambda-warm-hour}. 
+For example, AWS Lambda will keep functions ``warm'' for $\sim 15-60$ minutes, and users have to resort to ad-hoc ``polling'' techniques to keep functions warm to avoid the cold start penalty~\cite{lambda-warm, lambda-limits, lambda-warm-hour}. 
 %for the maximum duration of the function, which is currently 15 minutes~\cite{lambda-warm, lambda-limits, lambda-warm-hour}. 
 % 
 An optimized keep-alive policy must balance the overhead of keeping a function warm with the likelihood that the function will be called again in the near future, and the duration of keep-alive should depend on the function's characteristics. 
@@ -51,7 +51,7 @@ Designing keep-alive policies is challenging because of the diverse range of fun
 % 
 Keeping a function warm is equivalent to caching an object, and a warm function execution is equivalent to a cache hit. 
 %
-Terminating a function's execution environment means that the next invocation will incur the cold-start penalty, and is thus equivalent to evicting an object from a cache. 
+Terminating a function's execution environment means that the next invocation will incur the cold start penalty, and is thus equivalent to evicting an object from a cache. 
 % 
 The objective is to keep functions warm such that the effective function latency is reduced, which is equivalent to caching's goal of reducing object access time. 
 %

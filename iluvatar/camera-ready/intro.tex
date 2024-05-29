@@ -23,8 +23,8 @@ At the other end, they have to work with many intricately connected software com
 %Thus, understanding and optimizing them is challenging. 
 
 We posit that current FaaS control planes such as OpenWhisk have become unsuitable due to the rapid growth of FaaS workloads and advances in FaaS research.
-Historically, functions suffered very high cold-start overheads associated with initializing their execution runtimes and dependencies in a sandboxed environment (such as a container or a VM).
-However, techniques such as keep-alive, prefetching, VM snapshots, and specialized lightweight sandboxing have reduced the \emph{effective} cold-start overheads, and the spatial and temporal locality of FaaS workloads means that over 99\% invocations are \emph{warm}~\cite{faascache-asplos21}.
+Historically, functions suffered very high cold start overheads associated with initializing their execution runtimes and dependencies in a sandboxed environment (such as a container or a VM).
+However, techniques such as keep-alive, prefetching, VM snapshots, and specialized lightweight sandboxing have reduced the \emph{effective} cold start overheads, and the spatial and temporal locality of FaaS workloads means that over 99\% invocations are \emph{warm}~\cite{faascache-asplos21}.
 We find that fundamental design and implementation issues hinder good performance, adding 100s of milliseconds of tail latency even to warm-start invocations served from fully-initialized containers in memory. 
 Due to this \emph{control plane overhead}, function performance is now increasingly bottlenecked by the control plane itself.
 

@@ -20,11 +20,11 @@ The queue length is  used for accurately determining the true load on the worker
 This reduces the staleness and noise of using system load average as the load indicator, and makes load balancing more robust.
 
 
-Queuing invocations also allows us to reduce cold-starts.
+Queuing invocations also allows us to reduce cold starts.
 While repeated function invocations are good and increase warm starts, 
-\emph{concurrent} invocations of the same function results in cold-starts for all the concurrent invocations, since each invocation needs to be run in its own container.
+\emph{concurrent} invocations of the same function results in cold starts for all the concurrent invocations, since each invocation needs to be run in its own container.
 This is also the ``spawn start''~\cite{ristov_colder_warmer}, which causes severe latency increase of 10s of  seconds in public FaaS. 
-If there are $n$ concurrent invocations that arrive at the same time, then the $n$ concurrent cold-starts can significantly increase the system load and affect latency of other functions.
+If there are $n$ concurrent invocations that arrive at the same time, then the $n$ concurrent cold starts can significantly increase the system load and affect latency of other functions.
 Instead, by queuing and throttling the functions, we can wait for the invocation to finish, and then use the warm container for the next function in this ``herd'', and so on and so forth. % Lol zizek 
 %Having a queue allows us to regulate the invocations by this and other means. (?) 
 
@@ -56,7 +56,7 @@ The concurrency limit affects the tail-latency, and more advanced policies can b
 
 
 \begin{comment}
-Having the container map also allows us to implement \textbf{concurrent cold-start mitigation}.
+Having the container map also allows us to implement \textbf{concurrent cold start mitigation}.
 If the function at the head of the queue has no warm containers available, and one of its instantiations is running, then we put the function back in the queue.
 As a function's warm start is typically orders of magnitude shorter than cold starts, it is better for it to wait for warm container than to cold start one.
 We implement this by asking the container pool for a warm container, and if it fails to give us one we can re-queue the invocation for the future.

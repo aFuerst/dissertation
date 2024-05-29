@@ -1,6 +1,6 @@
 While serverless computing provides more convenient abstractions for developing and deploying applications, the Function-as-a-Service (FaaS) programming model presents new resource management challenges for the FaaS provider. 
 In this paper, we investigate load-balancing policies for serverless clusters.
-Locality, i.e., running repeated invocations of a function on the same server, is a key determinant of performance because it increases warm-starts and reduces cold-start overheads. 
+Locality, i.e., running repeated invocations of a function on the same server, is a key determinant of performance because it increases warm-starts and reduces cold start overheads. 
 We find that the locality vs. load tradeoff is crucial and presents a large design space. 
 
 We enhance consistent hashing for FaaS, and develop CH-RLU: Consistent Hashing with Random Load Updates, a simple practical load-balancing policy which provides more than $2\times$ reduction in function latency. 
@@ -10,7 +10,7 @@ We leverage techniques from caching such as SHARDS for popularity detection, and
 
 % and uses the newly-found equivalence between FaaS and caching~\cite{faascache-asplos21} 
 % Prior work has looked at optimizing FaaS performance on a \emph{single} server. 
-% We find that the principles of locality and avoiding cold-starts continue to remain key determinants of application and system performance even in distributed setups. 
+% We find that the principles of locality and avoiding cold starts continue to remain key determinants of application and system performance even in distributed setups. 
 % However, translating these lessons to a cluster of servers presents us with new challenges.
 % We develop a new consistent hashing based technique that takes into account function cold starts, and staleness of server loads.
 % Our technique can mitigate severe workload spikes and extreme workload heterogeneity.

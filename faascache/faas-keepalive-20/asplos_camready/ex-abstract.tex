@@ -52,10 +52,10 @@ The execution time of each function is typically short---in the range of a few m
 
 While Functions as a Service (also called serverless computing) promises to revolutionize how applications use cloud resources, the tight latency requirement and the wide diversity in function characteristics raises new challenges in resource management for FaaS. 
 %
-Specifically, current FaaS systems suffer from cold-start problems due to the overhead of initializing code and data dependencies before a function can start executing.
+Specifically, current FaaS systems suffer from cold start problems due to the overhead of initializing code and data dependencies before a function can start executing.
 Our empirical analysis of popular FaaS applications shows that the initialization overhead can as much as 80\% of the total running time. 
 
-Keeping the functions alive and warm after they have finished execution can alleviate the cold-start overhead.  
+Keeping the functions alive and warm after they have finished execution can alleviate the cold start overhead.  
 However, keeping the execution environment alive and running, instead of immediately terminating it, has some drawbacks. 
 Keeping a container or a VM alive consumes computing resources on the physical servers (such as memory). 
 Keep-alive algorithms and policies thus need to balance the latency requirements of applications and the resource utilization of FaaS backend servers.
@@ -86,14 +86,14 @@ Recent keep-alive policies~\cite{shahrad_serverless_2020} also do not take into 
 
 \emph{Our primary insight is that the resource management of functions is equivalent to object caching.}
 Keeping a function warm is equivalent to caching an object, and a warm function execution is equivalent to a cache hit. 
-Terminating a function's execution environment means that the subsequent invocation will incur a cold-start penalty, and is thus equivalent to evicting an object from a cache. 
+Terminating a function's execution environment means that the subsequent invocation will incur a cold start penalty, and is thus equivalent to evicting an object from a cache. 
 The objective is to keep functions warm such that the effective function latency is reduced---which is equivalent to caching's goal of reducing object access time. 
 \emph{By mapping keep-alive to the exhaustively studied caching problem, we can leverage principles and techniques from caching, and apply them to serverless computing.} 
 
 
 The caching analogy allows us to use the vast set of caching algorithms and  analytical models, and provides a new way to approach resource provisioning for FaaS platforms.
 We use hit-ratio curves to determine the ideal size of servers required for handling FaaS workloads, and develop a new vertical auto-scaling approach that dynamically adapts server size based on the workload characteristics.
-The dynamic scaling uses proportional control and hit-ratio curves to minimize both the required server resources, and the cold-start overheads. 
+The dynamic scaling uses proportional control and hit-ratio curves to minimize both the required server resources, and the cold start overheads. 
 
 
 \section{Artifacts}
@@ -134,16 +134,16 @@ For each container, we assign a \emph{keep-alive priority}, which is computed ba
     \label{eq:prio-prop}
 \end{equation}
 
-This allows us to capture the function invocation recency (Clock), the inter-arrival-time (frequency), its memory footprint size, and its cold-start cost. 
+This allows us to capture the function invocation recency (Clock), the inter-arrival-time (frequency), its memory footprint size, and its cold start cost. 
 Because this approach considers these different function attributes, it can improve the keep-alive ``cache hit rate''.
 We also develop and evaluate specialized versions of Greedy-Dual such as LRU, LFU, etc. 
-We evaluate all keep-alive policies on the Azure function trace~\cite{shahrad_serverless_2020}, as  illustrated in Figure~\ref{fig:392-b-trace}, which shows a $3\times$ reduction in cold-start overheads with our Greedy-Dual (GD) policy. 
+We evaluate all keep-alive policies on the Azure function trace~\cite{shahrad_serverless_2020}, as  illustrated in Figure~\ref{fig:392-b-trace}, which shows a $3\times$ reduction in cold start overheads with our Greedy-Dual (GD) policy. 
 
 \begin{figure}[t]
   \centering
       \vspace*{\myfigspace}
 \includegraphics[width=0.4\textwidth]{../graphs/rep-funcs-392/exec_inc_mem-392-legend.pdf}
-  \caption{Our caching-based keep-alive policies (such as Greedy-Dual) can reduce the cold-start overhead by more than $3\times$ compared to current (TTL) and state of the art approaches (HIST~\cite{shahrad_serverless_2020}). The results are shown for a representative sample of the Azure function trace comprising of over 100 million function invocations.}
+  \caption{Our caching-based keep-alive policies (such as Greedy-Dual) can reduce the cold start overhead by more than $3\times$ compared to current (TTL) and state of the art approaches (HIST~\cite{shahrad_serverless_2020}). The results are shown for a representative sample of the Azure function trace comprising of over 100 million function invocations.}
   \label{fig:392-b-trace}
 \end{figure}
 
@@ -152,11 +152,11 @@ We evaluate all keep-alive policies on the Azure function trace~\cite{shahrad_se
 \vspace*{\subsecspace}
 
 The fundamental challenge underlying resource provisioning for FaaS workloads is the performance vs. resource allocation tradeoff. 
-Running a workload on large servers/VMs provides more resources for the keep-alive cache, which reduces the cold-starts and improves the application performance.
+Running a workload on large servers/VMs provides more resources for the keep-alive cache, which reduces the cold starts and improves the application performance.
 We develop a \emph{static} provisioning policy that determines the server memory size for a given function workload, that uses hit-ratio curves that are constructed using the notion of reuse-distances. 
 
 To handle highly dynamic function workloads, our system also dynamically scales VMs up or down (vertical auto-scaling). 
-Our \emph{dynamic} VM-sizing approach uses hit-ratio curves and a proportional controller, to minimize both the cold-start overhead and the VM size.
+Our \emph{dynamic} VM-sizing approach uses hit-ratio curves and a proportional controller, to minimize both the cold start overhead and the VM size.
 Our provisioning policies are also evaluated using the Azure function trace, as illustrated in Figure~\ref{fig:dynamic}, which shows the dynamic server memory adjustment in response to the function workload using our hit-ratio curve and proportional control based method. 
 
 \begin{figure}[t]
@@ -175,12 +175,12 @@ Our provisioning policies are also evaluated using the Azure function trace, as 
  We implement our caching-based techniques in a popular FaaS platform, OpenWhisk, and empirically evaluate our techniques on real-world FaaS workloads.
 
 \begin{enumerate}
-%\item We show the equivalence between caching and function keep-alive, and develop a family of caching-based keep-alive policies for reducing  function cold-start overhead. We use a Greedy-Dual based approach that is designed to work even with the diverse FaaS workloads. 
+%\item We show the equivalence between caching and function keep-alive, and develop a family of caching-based keep-alive policies for reducing  function cold start overhead. We use a Greedy-Dual based approach that is designed to work even with the diverse FaaS workloads. 
 \item  We conduct extensive trace-driven analysis of the tradeoffs of keep-alive techniques under different workload characteristics based on the Azure FaaS traces~\cite{shahrad_serverless_2020} and popular FaaS applications~\cite{kim_functionbench_2019}. 
-    Our experimental results indicate that caching-based keep-alive can reduce cold-start overheads by $3\times$,
+    Our experimental results indicate that caching-based keep-alive can reduce cold start overheads by $3\times$,
   improve application-latency by $6\times$,
   and reduce system load to run $2\times$ more functions.
-  \item Our resource provisioning policies use hit-ratio curves to determine the ideal server configuration (such as memory size) required to handle different function workloads. The proportional-control based dynamic vertical-scaling approach can adjust server resources to reduce the cold-start probability, and reduce the average server size by more than $30\%$. 
+  \item Our resource provisioning policies use hit-ratio curves to determine the ideal server configuration (such as memory size) required to handle different function workloads. The proportional-control based dynamic vertical-scaling approach can adjust server resources to reduce the cold start probability, and reduce the average server size by more than $30\%$. 
 
 \end{enumerate}
 

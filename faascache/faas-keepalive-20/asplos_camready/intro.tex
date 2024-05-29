@@ -15,8 +15,8 @@ Reducing this function ``startup overhead'' is a key challenge in serverless com
 
 
 To mitigate the startup overhead, a common technique is to keep the execution environment alive or ``warm'' for a small duration, so that future invocations of the same function can run in the already initialized environment. 
-%do not incur the cold-start overhead.
-Keeping functions warm can reduce the cold-start overheads and overall function latency by more than  $5\times$~\cite{manner_cold_2018}.  
+%do not incur the cold start overhead.
+Keeping functions warm can reduce the cold start overheads and overall function latency by more than  $5\times$~\cite{manner_cold_2018}.  
 %However, keeping the execution environment alive and running, instead of immediately terminating it, has some drawbacks. 
 However, keeping a container or a VM alive consumes computing resources on the physical servers, and increases the resource requirements for hosting FaaS platforms. 
 %, and reduces the  number of functions that can be concurrently executed. 
@@ -29,7 +29,7 @@ In this paper, we explore this tradeoff, and argue for and develop principled ke
 %
 Current cloud platforms and FaaS systems employ simple keep-alive policies. 
 %
-For example, AWS Lambda will keep functions ``warm'' for $\sim 15-60$ minutes, and users have to resort to wasteful ``polling'' techniques to keep functions warm to avoid the cold-start penalty~\cite{lambda-warm, lambda-limits, lambda-warm-hour}. 
+For example, AWS Lambda will keep functions ``warm'' for $\sim 15-60$ minutes, and users have to resort to wasteful ``polling'' techniques to keep functions warm to avoid the cold start penalty~\cite{lambda-warm, lambda-limits, lambda-warm-hour}. 
 %for the maximum duration of the function, which is currently 15 minutes~\cite{lambda-warm, lambda-limits, lambda-warm-hour}. 
 % 
 An optimized keep-alive policy must balance the overhead of keeping a function warm with the likelihood that the function will be called again in the near future, and the duration of keep-alive should depend on the function's characteristics. 
@@ -44,7 +44,7 @@ Designing keep-alive policies is challenging because of the diverse range of fun
 In this paper, we focus on how diverse FaaS workloads can be efficiently executed, by developing a new class of resource management techniques that balance the fundamental latency vs. utilization tradeoff.
 We argue that keep-alive \emph{policies} can have a crucial impact on application performance, and thus must be integrated into resource allocation and provisioning. % of computing resources for serving FaaS workloads.
 Current cloud platforms and FaaS systems employ simple keep-alive policies. 
-For example, AWS Lambda will keep functions ``warm'' for $\sim 15-60$ minutes, and users have to resort to ad-hoc ``polling'' techniques to keep functions warm to avoid the cold-start penalty~\cite{lambda-warm, lambda-limits, lambda-warm-hour}.
+For example, AWS Lambda will keep functions ``warm'' for $\sim 15-60$ minutes, and users have to resort to ad-hoc ``polling'' techniques to keep functions warm to avoid the cold start penalty~\cite{lambda-warm, lambda-limits, lambda-warm-hour}.
 Similarly, OpenWhisk sets a constant time to live (10 minutes) for function containers.
 
 
@@ -56,7 +56,7 @@ This is challenging because of the diverse range of functions with different ini
 \emph{Our primary insight is that the resource management of functions is equivalent to object caching.}
 %\emph{Our primary insight is that the problem of which function to keep alive/warm, is analogous to object caching.} 
 Keeping a function warm is equivalent to caching an object, and a warm function execution is equivalent to a cache hit. 
-Terminating a function's execution environment means that the next invocation will incur the cold-start penalty, and is thus equivalent to evicting an object from a cache. 
+Terminating a function's execution environment means that the next invocation will incur the cold start penalty, and is thus equivalent to evicting an object from a cache. 
 The objective is to keep functions warm such that the effective function latency is reduced, which is equivalent to caching's goal of reducing object access time.  
 \emph{By mapping keep-alive to the exhaustively studied field of caching, we can leverage its  principles and techniques, and apply them to serverless computing.} 
 
@@ -68,8 +68,8 @@ This caching-based approach can improve both the function latency and server uti
 
 The caching analogy allows us to use the vast set of caching algorithms and  analytical models, and provides a new approach to resource provisioning for FaaS platforms.
 We use hit-ratio curves to determine the ideal size of servers required for handling FaaS workloads, and develop a vertical auto-scaling approach that dynamically adapts server size based on the workload characteristics.
-The dynamic scaling uses proportional control and hit-ratio curves to minimize both the required server resources, and cold-start overheads. 
-%These static and dynamic provisioning policies, when combined with our keep-alive policies, help reduce cold-start overhead by more than 100\% compared to current approaches, and reduce the server resource requirements by more than 30\%.
+The dynamic scaling uses proportional control and hit-ratio curves to minimize both the required server resources, and cold start overheads. 
+%These static and dynamic provisioning policies, when combined with our keep-alive policies, help reduce cold start overhead by more than 100\% compared to current approaches, and reduce the server resource requirements by more than 30\%.
 %Not sure if result is required here.. 
 
 The rise of serverless computing and the challenges posed by its heterogeneity, workload diversity, and latency requirements, will require a new class of approaches to FaaS resource management. 
@@ -78,7 +78,7 @@ While bespoke solutions to serverless resource management will continue to be de
 This paper makes an initial exploration into the world of caching-based approaches for resource management in serverless computing, and makes the following contributions:
 
 \begin{enumerate}
-\item We show the equivalence between caching and function keep-alive, and develop a family of caching-based keep-alive policies for reducing  function cold-start overhead. We use a Greedy-Dual based approach that is designed to work even with the diverse FaaS workloads. 
+\item We show the equivalence between caching and function keep-alive, and develop a family of caching-based keep-alive policies for reducing  function cold start overhead. We use a Greedy-Dual based approach that is designed to work even with the diverse FaaS workloads. 
 
 \item We implement our caching-based techniques in a our system, FaasCache, which is based on OpenWhisk. 
 %We empirically evaluate our techniques on real-world FaaS workloads. 
@@ -86,9 +86,9 @@ This paper makes an initial exploration into the world of caching-based approach
   
  
 \item Our resource provisioning policies use hit-ratio curves to determine the ideal server configuration (such as memory size) required to handle different function workloads.
-  Our proportional-control based dynamic vertical-scaling  can adjust server resources to reduce the cold-start probability, and reduce the average server size by more than $30\%$. 
+  Our proportional-control based dynamic vertical-scaling  can adjust server resources to reduce the cold start probability, and reduce the average server size by more than $30\%$. 
 
-\item   Our experimental results indicate that caching-based keep-alive can reduce cold-start overheads by $3\times$, 
+\item   Our experimental results indicate that caching-based keep-alive can reduce cold start overheads by $3\times$, 
   improve \\ application-latency by $6\times$,
   and reduce system load to serve $2\times$ more requests.
 \end{enumerate}
