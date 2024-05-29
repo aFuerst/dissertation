@@ -26,7 +26,7 @@ They are naturally more aware of local load and container pool conditions, and c
 
 Chapter~\ref{chap:gpu-sched} of this thesis introduced scheduling of GPU functions, but also the idea that a function can run on different compute types.
 It used Python functions capable of running on traditional CPU or be accelerated by a GPU.
-The last experiment, shown in Figure~\ref{fig:poly}, only selected functions to accelerate that saw significant speedup, choosing to run the rest on CPU.
+One of the later experiments, shown in Table~\ref{tab:cpu-gpu} of Sec.~\ref{subsec:gpu:scaling}, only selected functions to accelerate that saw significant speedup, choosing to run the rest on CPU.
 I wish to extend these two ideas, that functions
 \begin{enumerate}
   \item Are \emph{polymorphic}, in that without changing code they are capable of running on several distinct compute platforms

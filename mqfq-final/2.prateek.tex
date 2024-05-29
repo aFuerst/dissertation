@@ -1,6 +1,7 @@
 \section{Background and Motivation}
 \label{sec:bg}
 
+\begin{comment}
 \subsection{Providing Functions as a Service}
 
 Serverless computing entails executing snippets of user code, usually in an event-driven manner, inside protected and isolated sandboxes~\cite{serverless-cacm-21}.
@@ -13,7 +14,7 @@ Because of the richness of their usecases, function workloads are highly diverse
 For example, both Azure~\cite{shahrad2020serverless} and Alibaba~\cite{luo2021characterizing} workloads indicate that the inter-arrival-times can range from 0.1s to hours, the execution times can range from milliseconds to minutes, and the memory footprint from 100 MB to 5 GB. 
 From the FaaS control plane point of view, an invocation is a \quotes{black-box} containerized task with known resource limits (such as the number of allocated CPUs and memory size).
 Function resource usage is typically similar across invocations, and control planes also use these estimates for implementing advanced policies for keep-alive~\cite{roy2022icebreaker,faascache-asplos21}, placement, etc. 
-
+\end{comment}
 
 \subsection{Why GPU Acceleration for Functions}
 

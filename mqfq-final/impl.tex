@@ -40,6 +40,7 @@ When a container needs to run, or a flow is made active, we can evict containers
 
 
 \begin{figure}
+  \centering
   \includegraphics[width=0.7\textwidth]{./mqfq-final/graphs/driver-compare/8-exec_time.pdf}
   \caption{Functions see little to no impact from our interception and substitution of allocation calls.
           This matches performance promised by Nvidia for UVM applications.}
@@ -71,7 +72,8 @@ This low overhead shim is thus ideal for virtualizing GPU memory.
 %With our driver having such little impact, it is ideal for enabling a warm container pool of GPU containers and moving function memory off device when idle.
 
 \begin{figure}
-  \includegraphics[width=0.6\textwidth]{./mqfq-final/mem-move/f16-i20-driver-mps-move.pdf}
+  \centering
+  \includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/mem-move/f16-i20-driver-mps-move.pdf}
   \caption{Active memory management (\texttt{Prefetch+Swap}) improves execution latency.}
   \label{fig:mem-prefetch}
 % Fetch Strat, Exec Time, Fetch Time, Total Time
