@@ -8,34 +8,55 @@ def find_bibs(path):
         found += find_bibs(search_pth)
       elif os.path.isfile(search_pth) and search_pth.endswith(".bib"):
         found.append(search_pth)
-
   return found
 
 def fix_title(title):
-  return title
+  # print(title)
+  open_bracket = title.find('{')
+  close_bracket = title.rfind('}')
+  # print(open_bracket, close_bracket)
+  just_title = title[open_bracket+1:close_bracket+1]
+  just_title = just_title.replace("{", "")
+  just_title = just_title.replace("}", "")
+  just_title = '{' + '{' + just_title + '}' + '}'
+  # print(just_title)
+  before_title = title[:open_bracket]
+  after_title = title[close_bracket+1:]
+  # print(before_title, after_title)
+  ret_title = before_title + just_title + after_title
+  # print(ret_title)
+  # exit()
+  return ret_title
+
+def end_of_part(line):
+  return line.endswith("}\n") or line.endswith("},\n") or line.endswith(",\n")
 
 def fix_reference(ref):
-  parts = ref.split('\n')
-  i = 0
-  while i < len(parts):
-    part = parts[i]
+  ref_parts = []
+  part = ""
+  for line in ref:
+    part += line
+    if end_of_part(line):
+      ref_parts.append(part)
+      part = ""
+  # print(ref_parts)
+  # exit()
+  ret_ref = []
+  for part in ref_parts:
     if part.strip().startswith("title"):
-      label, title = part.split('=')
-      title = title.strip()
-      if not (title.startswith('{') and (title.endswith('},') or title.endswith('}'))):
-        print(title)
-        if '=' in parts[i+1]:
-          title += parts[i+1]
-          print("ADDED")
-          print(title)
-        else:
-          print(part)
-          print(f"'{title}'")
-          print(ref)
-          exit()
+      try:
+        label, title = part.split('=')
+      except Exception as e:
+        print(f"'{part}'")
+        raise e
+      title = fix_title(title)
+      part=f"{label}={title}"
+    ret_ref.append(part)
 
-    i += 1
-  return ref
+  return ret_ref
+
+def end_of_ref(line):
+  return line == "}\n" or line == "}"
 
 def fix_file(bib_file):
   with open(bib_file) as f:
@@ -44,50 +65,43 @@ def fix_file(bib_file):
   refs = []
   i = 0
   while i < len(lines):
-    line = lines[i].strip("\n")
-    if len(line) == 0 or line.isspace():
-      # print(line)
+    line = lines[i]
+    if line == "\n" or line.isspace():
       i += 1
       continue
     if line.startswith("#"):
-      # print(line)
       i += 1
       continue
     ref = []
-    # print(line)
     if line.startswith('@'):
-      while line != "}":
-        # print(line)
-        ref.append(line) 
+      while not end_of_ref(line):
+        ref.append(line)
         i += 1
-        line = lines[i].strip("\n")
-      # print(line)
+        if i >= len(lines):
+          break
+        line = lines[i]
       ref.append(line)
     else:
       i += 1
       continue
     i += 1
     if len(ref) == 0:
-      # print(bib_file)
       print("EMPTY REF")
       exit()
-    ref = "\n".join(ref)
-    ref = fix_reference(ref)
+    try:
+      ref = fix_reference(ref)
+    except:
+      pass
+    ref = "".join(ref)
     refs.append(ref)
 
   print(len(refs))
-  # print(refs[0:4])
-  # exit()
   with open(bib_file, 'w') as f:
     for r in refs:
       f.write(r)
       f.write('\n')
-      f.write('\n')
 
 all_bibs = find_bibs(".")
-# print(len(all_bibs))
-# print(all_bibs)
-
 # fix_file(all_bibs[-1])
 # exit()
 
