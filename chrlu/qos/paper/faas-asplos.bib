@@ -1,0 +1,1980 @@
+@inproceedings{hendrickson2016serverless,
+  title={Serverless computation with openlambda},
+  author={Hendrickson, Scott and Sturdevant, Stephen and Harter, Tyler and Venkataramani, Venkateshwaran and Arpaci-Dusseau, Andrea C and Arpaci-Dusseau, Remzi H},
+  booktitle={8th USENIX Workshop on Hot Topics in Cloud Computing (HotCloud 16)},
+  year={2016}
+}
+
+@inproceedings{jonas2017occupy,
+  title={Occupy the cloud: Distributed computing for the 99\%},
+  author={Jonas, Eric and Pu, Qifan and Venkataraman, Shivaram and Stoica, Ion and Recht, Benjamin},
+  booktitle={Proceedings of the 2017 Symposium on Cloud Computing},
+  pages={445--451},
+  year={2017},
+  organization={ACM}
+}
+
+
+
+@inproceedings{cartas_reality_2019,
+	address = {Dresden, Germany},
+	title = {A {Reality} {Check} on {Inference} at {Mobile} {Networks} {Edge}},
+	isbn = {978-1-4503-6275-7},
+	url = {http://dl.acm.org/citation.cfm?doid=3301418.3313946},
+	doi = {10.1145/3301418.3313946},
+	abstract = {Edge computing is considered a key enabler to deploy Artificial Intelligence platforms to provide real-time applications such as AR/VR or cognitive assistance. Previous works show computing capabilities deployed very close to the user can actually reduce the end-to-end latency of such interactive applications. Nonetheless, the main performance bottleneck remains in the machine learning inference operation. In this paper, we question some assumptions of these works, as the network location where edge computing is deployed, and considered software architectures within the framework of a couple of popular machine learning tasks. Our experimental evaluation shows that after performance tuning that leverages recent advances in deep learning algorithms and hardware, network latency is now the main bottleneck on end-to-end application performance. We also report that deploying computing capabilities at the first network node still provides latency reduction but, overall, it is not required by all applications. Based on our findings, we overview the requirements and sketch the design of an adaptive architecture for general machine learning inference across edge locations.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the 2nd {International} {Workshop} on {Edge} {Systems}, {Analytics} and {Networking} - {EdgeSys} '19},
+	publisher = {ACM Press},
+	author = {Cartas, Alejandro and Kocour, Martin and Raman, Aravindh and Leontiadis, Ilias and Luque, Jordi and Sastry, Nishanth and Nuñez-Martinez, Jose and Perino, Diego and Segura, Carlos},
+	year = {2019},
+	pages = {54--59},
+	file = {Cartas et al. - 2019 - A Reality Check on Inference at Mobile Networks Ed.pdf:/home/prateeks/Zotero/storage/E4H3S9AE/Cartas et al. - 2019 - A Reality Check on Inference at Mobile Networks Ed.pdf:application/pdf}
+}
+
+
+@article{lin_mitigating_2019,
+	title = {Mitigating {Cold} {Starts} in {Serverless} {Platforms}: {A} {Pool}-{Based} {Approach}},
+	shorttitle = {Mitigating {Cold} {Starts} in {Serverless} {Platforms}},
+	url = {http://arxiv.org/abs/1903.12221},
+	abstract = {Rapid adoption of the ’serverless’ (or Function-as-a-Service, FaaS) paradigm [8], pioneered by Amazon with AWS Lambda and followed by numerous commercial offerings and open source projects, introduces new challenges in designing the cloud infrastructure, balancing between performance and cost. While instant per-request elasticity that FaaS platforms typically offer application developers makes it possible to achieve high performance of bursty workloads without over-provisioning, such elasticity often involves extra latency associated with on-demand provisioning of individual runtime containers that serve the functions. This phenomenon is often called ’cold starts’ [12], as opposed to the situation when a function is served by a pre-provisioned ’warm’ container, ready to serve requests with close to zero overhead. Providers are constantly working on techniques aimed at reducing cold starts. A common approach to reduce cold starts is to maintain a pool of ’warm’ containers, in anticipation of future requests. In this project, we address the cold start problem in serverless architectures, specifically under the Knative Serving FaaS platform. We implemented a pool of function instances and evaluated the latency compared with the original implementation, which resulted in an 85\% reduction of P99 response time for a single instance pool.},
+	language = {en},
+	urldate = {2020-01-10},
+	journal = {arXiv:1903.12221 [cs]},
+	author = {Lin, Ping-Min and Glikson, Alex},
+	month = mar,
+	year = {2019},
+	note = {arXiv: 1903.12221},
+	keywords = {Computer Science - Distributed, Parallel, and Cluster Computing},
+	file = {Lin and Glikson - 2019 - Mitigating Cold Starts in Serverless Platforms A .pdf:/home/prateeks/Zotero/storage/2T2GVP5J/Lin and Glikson - 2019 - Mitigating Cold Starts in Serverless Platforms A .pdf:application/pdf}
+}
+
+
+@inproceedings{carreira_cirrus_2019,
+	address = {Santa Cruz, CA, USA},
+	title = {Cirrus: a {Serverless} {Framework} for {End}-to-end {ML} {Workflows}},
+	isbn = {978-1-4503-6973-2},
+	shorttitle = {Cirrus},
+	url = {http://dl.acm.org/citation.cfm?doid=3357223.3362711},
+	doi = {10.1145/3357223.3362711},
+	abstract = {Machine learning (ML) workflows are extremely complex. The typical workflow consists of distinct stages of user interaction, such as preprocessing, training, and tuning, that are repeatedly executed by users but have heterogeneous computational requirements. This complexity makes it challenging for ML users to correctly provision and manage resources and, in practice, constitutes a significant burden that frequently causes over-provisioning and impairs user productivity. Serverless computing is a compelling model to address the resource management problem, in general, but there are numerous challenges to adopt it for existing ML frameworks due to significant restrictions on local resources.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the {ACM} {Symposium} on {Cloud} {Computing}  - {SoCC} '19},
+	publisher = {ACM Press},
+	author = {Carreira, Joao and Fonseca, Pedro and Tumanov, Alexey and Zhang, Andrew and Katz, Randy},
+	year = {2019},
+	pages = {13--24},
+	file = {Carreira et al. - 2019 - Cirrus a Serverless Framework for End-to-end ML W.pdf:/home/prateeks/Zotero/storage/BMERI3NP/Carreira et al. - 2019 - Cirrus a Serverless Framework for End-to-end ML W.pdf:application/pdf}
+}
+
+
+@inproceedings{hall_execution_2019,
+	address = {Montreal, Quebec, Canada},
+	title = {An execution model for serverless functions at the edge},
+	isbn = {978-1-4503-6283-2},
+	url = {http://dl.acm.org/citation.cfm?doid=3302505.3310084},
+	doi = {10.1145/3302505.3310084},
+	abstract = {Serverless computing platforms allow developers to host singlepurpose applications that automatically scale with demand. In contrast to traditional long-running applications on dedicated, virtualized, or container-based platforms, serverless applications are intended to be instantiated when called, execute a single function, and shut down when finished. State-of-the-art serverless platforms achieve these goals by creating a new container instance to host a function when it is called and destroying the container when it completes. This design allows for cost and resource savings when hosting simple applications, such as those supporting IoT devices at the edge of the network. However, the use of containers introduces some overhead which may be unsuitable for applications requiring low-latency response or hardware platforms with limited resources, such as those served by edge computing environments. In this paper, we present a nomenclature for characterizing serverless function access patterns which allows us to derive the basic requirements of a serverless computing runtime. We then propose the use of WebAssembly as an alternative method for running serverless applications while meeting these requirements. Finally, we demonstrate how a WebAssembly-based serverless platform provides many of the same isolation and performance guarantees of container-based platforms while reducing average application start times and the resources needed to host them.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the {International} {Conference} on {Internet} of {Things} {Design} and {Implementation}  - {IoTDI} '19},
+	publisher = {ACM Press},
+	author = {Hall, Adam and Ramachandran, Umakishore},
+	year = {2019},
+	pages = {225--236},
+	file = {Hall and Ramachandran - 2019 - An execution model for serverless functions at the.pdf:/home/prateeks/Zotero/storage/Y62LI2RX/Hall and Ramachandran - 2019 - An execution model for serverless functions at the.pdf:application/pdf}
+}
+
+
+
+@article{bermbach_towards_2019,
+	title = {Towards {Auction}-{Based} {Function} {Placement} in {Serverless} {Fog} {Platforms}},
+	url = {http://arxiv.org/abs/1912.06096},
+	abstract = {The Function-as-a-Service (FaaS) paradigm has a lot of potential as a computing model for fog environments comprising both cloud and edge nodes. When the request rate exceeds capacity limits at the edge, some functions need to be ofﬂoaded from the edge towards the cloud. In this position paper, we propose an auction-based approach in which application developers bid on resources. This allows fog nodes to make a local decision about which functions to ofﬂoad while maximizing revenue. For a ﬁrst evaluation of our approach, we use simulation.},
+	language = {en},
+	urldate = {2020-01-10},
+	journal = {arXiv:1912.06096 [cs]},
+	author = {Bermbach, David and Maghsudi, Setareh and Hasenburg, Jonathan and Pfandzelter, Tobias},
+	month = dec,
+	year = {2019},
+	note = {arXiv: 1912.06096},
+	keywords = {Computer Science - Distributed, Parallel, and Cluster Computing, Computer Science - Networking and Internet Architecture},
+	annote = {Comment: preprint},
+	file = {Bermbach et al. - 2019 - Towards Auction-Based Function Placement in Server.pdf:/home/prateeks/Zotero/storage/ZHS5KATE/Bermbach et al. - 2019 - Towards Auction-Based Function Placement in Server.pdf:application/pdf}
+}
+
+
+@inproceedings{karhula_checkpointing_2019,
+	address = {Dresden, Germany},
+	title = {Checkpointing and {Migration} of {IoT} {Edge} {Functions}},
+	isbn = {978-1-4503-6275-7},
+	url = {http://dl.acm.org/citation.cfm?doid=3301418.3313947},
+	doi = {10.1145/3301418.3313947},
+	abstract = {The serverless and functions as a service (FaaS) paradigms are currently trending among cloud providers and are now increasingly being applied to the network edge, and to the Internet of Things (IoT) devices. The benefits include reduced latency for communication, less network traffic and increased privacy for data processing. However, there are challenges as IoT devices have limited resources for running multiple simultaneous containerized functions, and also FaaS does not typically support long-running functions. Our implementation utilizes Docker and CRIU for checkpointing and suspending long-running blocking functions. The results show that checkpointing is slightly slower than regular Docker pause, but it saves memory and allows for more long-running functions to be run on an IoT device. Furthermore, the resulting checkpoint files are small, hence they are suitable for live migration and backing up stateful functions, therefore improving availability and reliability of the system.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the 2nd {International} {Workshop} on {Edge} {Systems}, {Analytics} and {Networking}  - {EdgeSys} '19},
+	publisher = {ACM Press},
+	author = {Karhula, Pekka and Janak, Jan and Schulzrinne, Henning},
+	year = {2019},
+	pages = {60--65},
+	file = {Karhula et al. - 2019 - Checkpointing and Migration of IoT Edge Functions.pdf:/home/prateeks/Zotero/storage/XVMPRXRL/Karhula et al. - 2019 - Checkpointing and Migration of IoT Edge Functions.pdf:application/pdf}
+}
+
+
+@incollection{riis_nielson_no_2019,
+	address = {Cham},
+	title = {No {More}, {No} {Less}: {A} {Formal} {Model} for {Serverless} {Computing}},
+	volume = {11533},
+	isbn = {978-3-030-22396-0 978-3-030-22397-7},
+	shorttitle = {No {More}, {No} {Less}},
+	url = {http://link.springer.com/10.1007/978-3-030-22397-7_9},
+	abstract = {Serverless computing, also known as Functions-as-a-Service, is a recent paradigm aimed at simplifying the programming of cloud applications. The idea is that developers design applications in terms of functions, which are then deployed on a cloud infrastructure. The infrastructure takes care of executing the functions whenever requested by remote clients, dealing automatically with distribution and scaling with respect to inbound traﬃc.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Coordination {Models} and {Languages}},
+	publisher = {Springer International Publishing},
+	author = {Gabbrielli, Maurizio and Giallorenzo, Saverio and Lanese, Ivan and Montesi, Fabrizio and Peressotti, Marco and Zingaro, Stefano Pio},
+	editor = {Riis Nielson, Hanne and Tuosto, Emilio},
+	year = {2019},
+	doi = {10.1007/978-3-030-22397-7_9},
+	pages = {148--157},
+	file = {Gabbrielli et al. - 2019 - No More, No Less A Formal Model for Serverless Co.pdf:/home/prateeks/Zotero/storage/2WD849R9/Gabbrielli et al. - 2019 - No More, No Less A Formal Model for Serverless Co.pdf:application/pdf}
+}
+
+
+@article{carver_search_2019,
+	title = {In {Search} of a {Fast} and {Efficient} {Serverless} {DAG} {Engine}},
+	url = {http://arxiv.org/abs/1910.05896},
+	abstract = {Python-written data analytics applications can be modeled as and compiled into a directed acyclic graph (DAG) based workﬂow, where the nodes are ﬁne-grained tasks and the edges are task dependencies. Such analytics workﬂow jobs are increasingly characterized by short, ﬁne-grained tasks with large fan-outs. These characteristics make them well-suited for a new cloud computing model called serverless computing or Function-as-a-Service (FaaS), which has become prevalent in recent years. The auto-scaling property of serverless computing platforms accommodates short tasks and bursty workloads, while the pay-per-use billing model of serverless computing providers keeps the cost of short tasks low.},
+	language = {en},
+	urldate = {2020-01-10},
+	journal = {arXiv:1910.05896 [cs]},
+	author = {Carver, Benjamin and Zhang, Jingyuan and Wang, Ao and Cheng, Yue},
+	month = oct,
+	year = {2019},
+	note = {arXiv: 1910.05896},
+	keywords = {Computer Science - Distributed, Parallel, and Cluster Computing},
+	annote = {Comment: Appears at PDSW 2019},
+	file = {Carver et al. - 2019 - In Search of a Fast and Efficient Serverless DAG E.pdf:/home/prateeks/Zotero/storage/YPH9BW94/Carver et al. - 2019 - In Search of a Fast and Efficient Serverless DAG E.pdf:application/pdf}
+}
+
+
+@inproceedings{kulkarni_living_2019,
+	title = {Living on the {Edge}: {Serverless} {Computing} and the {Cost} of {Failure} {Resiliency}},
+	shorttitle = {Living on the {Edge}},
+	doi = {10.1109/LANMAN.2019.8846970},
+	abstract = {Serverless computing platforms have gained popularity because they allow easy deployment of services in a highly scalable and cost-effective manner. By enabling just-in-time startup of container-based services, these platforms can achieve good multiplexing and automatically respond to traffic growth, making them particularly desirable for edge cloud data centers where resources are scarce. Edge cloud data centers are also gaining attention because of their promise to provide responsive, low-latency shared computing and storage resources. Bringing serverless capabilities to edge cloud data centers must continue to achieve the goals of low latency and reliability. The reliability guarantees provided by serverless computing however are weak, with node failures causing requests to be dropped or executed multiple times. Thus serverless computing only provides a best effort infrastructure, leaving application developers responsible for implementing stronger reliability guarantees at a higher level. Current approaches for providing stronger semantics such as “exactly once” guarantees could be integrated into serverless platforms, but they come at high cost in terms of both latency and resource consumption. As edge cloud services move towards applications such as autonomous vehicle control that require strong guarantees for both reliability and performance, these approaches may no longer be sufficient. In this paper we evaluate the latency, throughput, and resource costs of providing different reliability guarantees, with a focus on these emerging edge cloud platforms and applications.},
+	booktitle = {2019 {IEEE} {International} {Symposium} on {Local} and {Metropolitan} {Area} {Networks} ({LANMAN})},
+	author = {Kulkarni, Sameer G and Liu, Guyue and Ramakrishnan, K. K. and Wood, Timothy},
+	month = jul,
+	year = {2019},
+	note = {ISSN: 1944-0367},
+	keywords = {cloud computing, Cloud computing, computer centres, container-based services, Containers, Data centers, edge cloud data centers, edge cloud platforms, edge cloud services, Fasteners, fault tolerant computing, Reliability, reliability guarantees, resource costs, Semantics, serverless computing platforms, serverless platforms, storage resources, Storms},
+	pages = {1--6},
+	file = {IEEE Xplore Abstract Record:/home/prateeks/Zotero/storage/UNELACFE/8846970.html:text/html;IEEE Xplore Full Text PDF:/home/prateeks/Zotero/storage/23BA479D/Kulkarni et al. - 2019 - Living on the Edge Serverless Computing and the C.pdf:application/pdf}
+}
+
+
+@inproceedings{kannan_grandslam_2019,
+	address = {Dresden, Germany},
+	title = {{GrandSLAm}: {Guaranteeing} {SLAs} for {Jobs} in {Microservices} {Execution} {Frameworks}},
+	isbn = {978-1-4503-6281-8},
+	shorttitle = {{GrandSLAm}},
+	url = {http://dl.acm.org/citation.cfm?doid=3302424.3303958},
+	doi = {10.1145/3302424.3303958},
+	abstract = {The microservice architecture has dramatically reduced user effort in adopting and maintaining servers by providing a catalog of functions as services that can be used as building blocks to construct applications. This has enabled datacenter operators to look at managing datacenter hosting microservices quite differently from traditional infrastructures. Such a paradigm shift calls for a need to rethink resource management strategies employed in such execution environments. We observe that the visibility enabled by a microservices execution framework can be exploited to achieve high throughput and resource utilization while still meeting Service Level Agreements, especially in multi-tenant execution scenarios. In this study, we present GrandSLAm, a microservice execution framework that improves utilization of datacenters hosting microservices. GrandSLAm estimates time of completion of requests propagating through individual microservice stages within an application. It then leverages this estimate to drive a runtime system that dynamically batches and reorders requests at each microservice in a manner where individual jobs meet their respective target latency while achieving high throughput. GrandSLAm significantly increases throughput by up to 3× compared to the our baseline, without violating SLAs for a wide range of real-world AI and ML applications.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the {Fourteenth} {EuroSys} {Conference} 2019 {CD}-{ROM} on {ZZZ} - {EuroSys} '19},
+	publisher = {ACM Press},
+	author = {Kannan, Ram Srivatsa and Subramanian, Lavanya and Raju, Ashwin and Ahn, Jeongseob and Mars, Jason and Tang, Lingjia},
+	year = {2019},
+	pages = {1--16},
+	file = {Kannan et al. - 2019 - GrandSLAm Guaranteeing SLAs for Jobs in Microserv.pdf:/home/prateeks/Zotero/storage/F2IZXGBL/Kannan et al. - 2019 - GrandSLAm Guaranteeing SLAs for Jobs in Microserv.pdf:application/pdf}
+}
+
+
+@inproceedings{gunasekaran_spock_2019,
+	title = {Spock: {Exploiting} {Serverless} {Functions} for {SLO} and {Cost} {Aware} {Resource} {Procurement} in {Public} {Cloud}},
+	shorttitle = {Spock},
+	doi = {10.1109/CLOUD.2019.00043},
+	abstract = {We are witnessing the emergence of elastic web services which are hosted in public cloud infrastructures. For reasons of cost-effectiveness, it is crucial for the elasticity of these web services to match the dynamically-evolving user demand. Traditional approaches employ clusters of virtual machines (VMs) to dynamically scale resources based on application demand. However, they still face challenges such as higher cost due to over-provisioning or incur service level objective (SLO) violations due to under-provisioning. Motivated by this observation, we propose Spock, a new scalable and elastic control system that exploits both VMs and serverless functions to reduce cost and ensure SLO for elastic web services. We show that under two different scaling policies, Spock reduces SLO violations of queries by up to 74\% when compared to VM-based resource procurement schemes. Further, Spock yields significant cost savings, by up to 33\% compared to traditional approaches which use only VMs.},
+	booktitle = {2019 {IEEE} 12th {International} {Conference} on {Cloud} {Computing} ({CLOUD})},
+	author = {Gunasekaran, Jashwant Raj and Thinakaran, Prashanth and Kandemir, Mahmut Taylan and Urgaonkar, Bhuvan and Kesidis, George and Das, Chita},
+	month = jul,
+	year = {2019},
+	note = {ISSN: 2159-6182},
+	keywords = {application demand, autoscaling, cloud computing, cost aware resource procurement, cost savings, cost-aware, cost-effectiveness, dynamically scale resources, dynamically-evolving user demand, elastic control system, elastic Web services, elasticity, FaaS, lambda, public cloud infrastructures, public domain software, resource allocation, resource procurement schemes, scalable control system, serverless, serverless functions, service level objective violations, SLO, Spock, virtual machines, Web services},
+	pages = {199--208},
+	file = {IEEE Xplore Abstract Record:/home/prateeks/Zotero/storage/GUTUWQ6M/8814535.html:text/html;IEEE Xplore Full Text PDF:/home/prateeks/Zotero/storage/GIJDWZLU/Gunasekaran et al. - 2019 - Spock Exploiting Serverless Functions for SLO and.pdf:application/pdf}
+}
+
+
+
+@article{jonas_cloud_2019,
+	title = {Cloud {Programming} {Simplified}: {A} {Berkeley} {View} on {Serverless} {Computing}},
+	shorttitle = {Cloud {Programming} {Simplified}},
+	url = {http://arxiv.org/abs/1902.03383},
+	abstract = {Serverless cloud computing handles virtually all the system administration operations needed to make it easier for programmers to use the cloud. It provides an interface that greatly simpliﬁes cloud programming, and represents an evolution that parallels the transition from assembly language to high-level programming languages. This paper gives a quick history of cloud computing, including an accounting of the predictions of the 2009 Berkeley View of Cloud Computing paper, explains the motivation for serverless computing, describes applications that stretch the current limits of serverless, and then lists obstacles and research opportunities required for serverless computing to fulﬁll its full potential. Just as the 2009 paper identiﬁed challenges for the cloud and predicted they would be addressed and that cloud use would accelerate, we predict these issues are solvable and that serverless computing will grow to dominate the future of cloud computing.},
+	language = {en},
+	urldate = {2020-01-10},
+	journal = {arXiv:1902.03383 [cs]},
+	author = {Jonas, Eric and Schleier-Smith, Johann and Sreekanti, Vikram and Tsai, Chia-Che and Khandelwal, Anurag and Pu, Qifan and Shankar, Vaishaal and Carreira, Joao and Krauth, Karl and Yadwadkar, Neeraja and Gonzalez, Joseph E. and Popa, Raluca Ada and Stoica, Ion and Patterson, David A.},
+	month = feb,
+	year = {2019},
+	note = {arXiv: 1902.03383},
+	keywords = {Computer Science - Operating Systems},
+	file = {Jonas et al. - 2019 - Cloud Programming Simplified A Berkeley View on S.pdf:/home/prateeks/Zotero/storage/33K5MS3Z/Jonas et al. - 2019 - Cloud Programming Simplified A Berkeley View on S.pdf:application/pdf}
+}
+
+
+
+@article{pu_shufing_2019,
+	title = {Shufﬂing, {Fast} and {Slow}: {Scalable} {Analytics} on {Serverless} {Infrastructure}},
+	abstract = {Serverless computing is poised to fulﬁll the long-held promise of transparent elasticity and millisecond-level pricing. To achieve this goal, service providers impose a ﬁnegrained computational model where every function has a maximum duration, a ﬁxed amount of memory and no persistent local storage. We observe that the ﬁne-grained elasticity of serverless is key to achieve high utilization for general computations such as analytics workloads, but that resource limits make it challenging to implement such applications as they need to move large amounts of data between functions that don’t overlap in time. In this paper, we present Locus, a serverless analytics system that judiciously combines (1) cheap but slow storage with (2) fast but expensive storage, to achieve good performance while remaining cost-efﬁcient. Locus applies a performance model to guide users in selecting the type and the amount of storage to achieve the desired cost-performance trade-off. We evaluate Locus on a number of analytics applications including TPC-DS, CloudSort, Big Data Benchmark and show that Locus can navigate the costperformance trade-off, leading to 4⇥-500⇥ performance improvements over slow storage-only baseline and reducing resource usage by up to 59\% while achieving comparable performance with running Apache Spark on a cluster of virtual machines, and within 2⇥ slower compared to Redshift.},
+	language = {en},
+	journal = {USENIC NSDI},
+	author = {Pu, Qifan},
+	year = {2019},
+	pages = {15},
+	file = {Pu - Shufﬂing, Fast and Slow Scalable Analytics on Ser.pdf:/home/prateeks/Zotero/storage/CCL9FASY/Pu - Shufﬂing, Fast and Slow Scalable Analytics on Ser.pdf:application/pdf}
+}
+
+
+@inproceedings{glikson_runbox_2019,
+	address = {Haifa, Israel},
+	title = {Runbox: serverless interactive computing platform},
+	isbn = {978-1-4503-6749-3},
+	shorttitle = {Runbox},
+	url = {http://dl.acm.org/citation.cfm?doid=3319647.3325852},
+	doi = {10.1145/3319647.3325852},
+	abstract = {Serverless computing revolutionizes cloud software by eliminating the need to manage the underlying infrastructure, while providing efficient scaling, performance and security isolation as well as usage metering.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the 12th {ACM} {International} {Conference} on {Systems} and {Storage}  - {SYSTOR} '19},
+	publisher = {ACM Press},
+	author = {Glikson, Alex and Nie, Shichao and Breitgand, David},
+	year = {2019},
+	pages = {191--191},
+	file = {Glikson et al. - 2019 - Runbox serverless interactive computing platform.pdf:/home/prateeks/Zotero/storage/858ZRWXW/Glikson et al. - 2019 - Runbox serverless interactive computing platform.pdf:application/pdf}
+}
+
+
+@article{garcia-lopez_servermix_2019,
+	title = {{ServerMix}: {Tradeoffs} and {Challenges} of {Serverless} {Data} {Analytics}},
+	shorttitle = {{ServerMix}},
+	url = {http://arxiv.org/abs/1907.11465},
+	abstract = {Serverless computing has become very popular today since it largely simpliﬁes cloud programming. Developers do not need to longer worry about provisioning or operating servers, and they pay only for the compute resources used when their code is run. This new cloud paradigm suits well for many applications, and researchers have already begun investigating the feasibility of serverless computing for data analytics. Unfortunately, today’s serverless computing presents important limitations that make it really difﬁcult to support all sorts of analytics workloads. This paper ﬁrst starts by analyzing three fundamental trade-offs of today’s serverless computing model and their relationship with data analytics. It studies how by relaxing disaggregation, isolation, and simple scheduling, it is possible to increase the overall computing performance, but at the expense of essential aspects of the model such as elasticity, security, or sub-second activations, respectively. The consequence of these trade-offs is that analytics applications may well end up embracing hybrid systems composed of serverless and serverful components, which we call ServerMix in this paper. We will review the existing related work to show that most applications can be actually categorized as ServerMix. Finally, this paper will introduce the major challenges of the CloudButton research project to manage these trade-offs.},
+	language = {en},
+	urldate = {2020-01-10},
+	journal = {arXiv:1907.11465 [cs]},
+	author = {García-López, Pedro and Sánchez-Artigas, Marc and Shillaker, Simon and Pietzuch, Peter and Breitgand, David and Vernik, Gil and Sutra, Pierre and Tarrant, Tristan and Ferrer, Ana Juan},
+	month = jul,
+	year = {2019},
+	note = {arXiv: 1907.11465},
+	keywords = {Computer Science - Distributed, Parallel, and Cluster Computing},
+	annote = {Comment: 15 pages, 1 figure, 1 table}
+}
+
+
+
+@article{zhang_hyperfaas_2019,
+	title = {{HyperFaaS}: {A} truly elastic serverless computing framework},
+	language = {en},
+	journal = {USENIX NSDI},
+	author = {Zhang, Jingyuan and Wang, Ao and Li, Min and Chen, Yuan and Cheng, Yue},
+	year = {2019},
+	pages = {2}
+}
+
+
+@article{joyner_ripple_2020,
+	title = {Ripple: {A} {Practical} {Declarative} {Programming} {Framework} for {Serverless} {Compute}},
+	shorttitle = {Ripple},
+	url = {http://arxiv.org/abs/2001.00222},
+	abstract = {Serverless computing has emerged as a promising alternative to infrastructure- (IaaS) and platform-as-a-service (PaaS) cloud platforms for applications with ample parallelism and intermittent activity. Serverless promises greater resource elasticity, signiﬁcant cost savings, and simpliﬁed application deployment. All major cloud providers, including Amazon, Google, and Microsoft, have introduced serverless to their public cloud offerings. For serverless to reach its potential, there is a pressing need for programming frameworks that abstract the deployment complexity away from the user. This includes simplifying the process of writing applications for serverless environments, automating task and data partitioning, and handling scheduling and fault tolerance. We present Ripple, a programming framework designed to speciﬁcally take applications written for single-machine execution and allow them to take advantage of the task parallelism of serverless. Ripple exposes a simple interface that users can leverage to express the high-level dataﬂow of a wide spectrum of applications, including machine learning (ML) analytics, genomics, and proteomics. Ripple also automates resource provisioning, meeting user-deﬁned QoS targets, and handles fault tolerance by eagerly detecting straggler tasks. We port Ripple over AWS Lambda and show that, across a set of diverse applications, it provides an expressive and generalizable programming framework that simpliﬁes running data-parallel applications on serverless, and can improve performance by up to 80x compared to IaaS/PaaS clouds for similar costs.},
+	language = {en},
+	urldate = {2020-01-10},
+	journal = {arXiv:2001.00222 [cs]},
+	author = {Joyner, Shannon and MacCoss, Michael and Delimitrou, Christina and Weatherspoon, Hakim},
+	month = jan,
+	year = {2020},
+	note = {arXiv: 2001.00222},
+	keywords = {Computer Science - Distributed, Parallel, and Cluster Computing},
+	file = {Joyner et al. - 2020 - Ripple A Practical Declarative Programming Framew.pdf:/home/prateeks/Zotero/storage/4MI8G7BU/Joyner et al. - 2020 - Ripple A Practical Declarative Programming Framew.pdf:application/pdf}
+}
+
+
+@article{ghosh_caching_2019,
+	title = {Caching {Techniques} to {Improve} {Latency} in {Serverless} {Architectures}},
+	url = {http://arxiv.org/abs/1911.07351},
+	abstract = {Serverless computing has gained a signiﬁcant traction in recent times because of its simplicity of development, deployment and ﬁne-grained billing. However, while implementing complex services comprising databases, ﬁle stores, or more than one serverless function, the performance in terms of latency of serving requests often degrades severely. In this work, we analyze different serverless architectures with AWS Lambda services and compare their performance in terms of latency with a traditional virtual machine (VM) based approach. We observe that database access latency in serverless architecture is almost 14 times than that in VM based setup. Further, we introduce some caching strategies which can improve the response time signiﬁcantly, and compare their performance.},
+	language = {en},
+	urldate = {2020-01-10},
+	journal = {arXiv:1911.07351 [cs]},
+	author = {Ghosh, Bishakh Chandra and Addya, Sourav Kanti and Somy, Nishant Baranwal and Nath, Shubha Brata and Chakraborty, Sandip and Ghosh, Soumya K.},
+	month = nov,
+	year = {2019},
+	note = {arXiv: 1911.07351},
+	keywords = {Computer Science - Distributed, Parallel, and Cluster Computing, Computer Science - Networking and Internet Architecture},
+	file = {Ghosh et al. - 2019 - Caching Techniques to Improve Latency in Serverles.pdf:/home/prateeks/Zotero/storage/GTL43XNY/Ghosh et al. - 2019 - Caching Techniques to Improve Latency in Serverles.pdf:application/pdf}
+}
+
+
+@inproceedings{krol_nfaas_2017,
+	address = {Berlin, Germany},
+	title = {{NFaaS}: named function as a service},
+	isbn = {978-1-4503-5122-5},
+	shorttitle = {{NFaaS}},
+	url = {http://dl.acm.org/citation.cfm?doid=3125719.3125727},
+	doi = {10.1145/3125719.3125727},
+	abstract = {In the past, the Information-centric networking (ICN) community has focused on issues mainly pertaining to traditional content delivery (e.g., routing and forwarding scalability, congestion control and in-network caching). However, to keep up with future Internet architectural trends the wider area of future Internet paradigms, there is a pressing need to support edge/fog computing environments, where cloud functionality is available more proximate to where the data is generated and needs processing. With this goal in mind, we propose Named Function as a Service (NFaaS), a framework that extends the Named Data Networking architecture to support in-network function execution. In contrast to existing works, NFaaSbuilds on very lightweight VMs and allows for dynamic execution of custom code. Functions can be downloaded and run by any node in the network. Functions can move between nodes according to user demand, making resolution of moving functions a first-class challenge. NFaaSincludes a Kernel Store component, which is responsible not only for storing functions, but also for making decisions on which functions to run locally. NFaaSincludes a routing protocol and a number of forwarding strategies to deploy and dynamically migrate functions within the network. We validate our design through extensive simulations, which show that delay-sensitive functions are deployed closer to the edge, while less delay-sensitive ones closer to the core.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the 4th {ACM} {Conference} on {Information}-{Centric} {Networking} - {ICN} '17},
+	publisher = {ACM Press},
+	author = {Król, Michał and Psaras, Ioannis},
+	year = {2017},
+	pages = {134--144},
+	file = {Król and Psaras - 2017 - NFaaS named function as a service.pdf:/home/prateeks/Zotero/storage/WUEYLHHF/Król and Psaras - 2017 - NFaaS named function as a service.pdf:application/pdf}
+}
+
+
+@inproceedings{krol_nfaas_2017,
+	address = {Berlin, Germany},
+	title = {{NFaaS}: named function as a service},
+	isbn = {978-1-4503-5122-5},
+	shorttitle = {{NFaaS}},
+	url = {http://dl.acm.org/citation.cfm?doid=3125719.3125727},
+	doi = {10.1145/3125719.3125727},
+	abstract = {In the past, the Information-centric networking (ICN) community has focused on issues mainly pertaining to traditional content delivery (e.g., routing and forwarding scalability, congestion control and in-network caching). However, to keep up with future Internet architectural trends the wider area of future Internet paradigms, there is a pressing need to support edge/fog computing environments, where cloud functionality is available more proximate to where the data is generated and needs processing. With this goal in mind, we propose Named Function as a Service (NFaaS), a framework that extends the Named Data Networking architecture to support in-network function execution. In contrast to existing works, NFaaSbuilds on very lightweight VMs and allows for dynamic execution of custom code. Functions can be downloaded and run by any node in the network. Functions can move between nodes according to user demand, making resolution of moving functions a first-class challenge. NFaaSincludes a Kernel Store component, which is responsible not only for storing functions, but also for making decisions on which functions to run locally. NFaaSincludes a routing protocol and a number of forwarding strategies to deploy and dynamically migrate functions within the network. We validate our design through extensive simulations, which show that delay-sensitive functions are deployed closer to the edge, while less delay-sensitive ones closer to the core.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the 4th {ACM} {Conference} on {Information}-{Centric} {Networking} - {ICN} '17},
+	publisher = {ACM Press},
+	author = {Król, Michał and Psaras, Ioannis},
+	year = {2017},
+	pages = {134--144},
+	file = {Król and Psaras - 2017 - NFaaS named function as a service.pdf:/home/prateeks/Zotero/storage/WUEYLHHF/Król and Psaras - 2017 - NFaaS named function as a service.pdf:application/pdf}
+}
+
+
+@article{lin_computation_2019,
+	title = {Computation {Offloading} {Toward} {Edge} {Computing}},
+	volume = {107},
+	issn = {1558-2256},
+	doi = {10.1109/JPROC.2019.2922285},
+	abstract = {We are living in a world where massive end devices perform computing everywhere and everyday. However, these devices are constrained by the battery and computational resources. With the increasing number of intelligent applications (e.g., augmented reality and face recognition) that require much more computational power, they shift to perform computation offloading to the cloud, known as mobile cloud computing (MCC). Unfortunately, the cloud is usually far away from end devices, leading to a high latency as well as the bad quality of experience (QoE) for latency-sensitive applications. In this context, the emergence of edge computing is no coincidence. Edge computing extends the cloud to the edge of the network, close to end users, bringing ultra-low latency and high bandwidth. Consequently, there is a trend of computation offloading toward edge computing. In this paper, we provide a comprehensive perspective on this trend. First, we give an insight into the architecture refactoring in edge computing. Based on that insight, this paper reviews the state-of-the-art research on computation offloading in terms of application partitioning, task allocation, resource management, and distributed execution, with highlighting features for edge computing. Then, we illustrate some disruptive application scenarios that we envision as critical drivers for the flourish of edge computing, such as real-time video analytics, smart “things” (e.g., smart city and smart home), vehicle applications, and cloud gaming. Finally, we discuss the opportunities and future research directions.},
+	number = {8},
+	journal = {Proceedings of the IEEE},
+	author = {Lin, Li and Liao, Xiaofei and Jin, Hai and Li, Peng},
+	month = aug,
+	year = {2019},
+	keywords = {architecture refactoring, Backscatter, Cloud computing, computation offloading, Computation offloading, distributed execution, distributed processing, edge computing, Edge computing, Energy harvesting, Internet of Things, Internet of Things (IoT), mobile cloud computing (MCC), mobile edge computing (MEC), quality of experience, Radio frequency, resource allocation, resource management, Resource management, software architecture, software maintenance, task allocation, Throughput, Wireless communication},
+	pages = {1584--1607},
+	file = {IEEE Xplore Abstract Record:/home/prateeks/Zotero/storage/JCBZQBQ9/8758310.html:text/html;IEEE Xplore Full Text PDF:/home/prateeks/Zotero/storage/WESJZBRL/Lin et al. - 2019 - Computation Offloading Toward Edge Computing.pdf:application/pdf}
+}
+
+
+@inproceedings{mtibaa_towards_2018,
+	title = {Towards {Edge} {Computing} over {Named} {Data} {Networking}},
+	doi = {10.1109/EDGE.2018.00023},
+	abstract = {This paper discusses leveraging the Named Data Networking (NDN) architecture and Named Function Networking (NFN) to facilitate in-network edge computing. In the NDN context, we consider a the Augmented Reality (AR) use-case-a challenging application-to discuss how NDN functionalities can be leveraged for addressing inherent edge computing challenges, such as efficient resource discovery, compute re-use, mobility management, and security. We present several options to tackle the highlighted challenges and where possible provide solutions.},
+	booktitle = {2018 {IEEE} {International} {Conference} on {Edge} {Computing} ({EDGE})},
+	author = {Mtibaa, Abderrahmen and Tourani, Reza and Misra, Satyajayant and Burke, Jeff and Zhang, Lixia},
+	month = jul,
+	year = {2018},
+	note = {ISSN: null},
+	keywords = {augmented reality, Augmented reality, Computer architecture, distributed processing, edge, Edge computing, in-network edge computing, inherent edge computing challenges, IP networks, Mobile handsets, named data networking architecture, named function networking, NDN, NDN context, NDN functionalities, NFN, Quality of experience, security, Task analysis},
+	pages = {117--120},
+	file = {IEEE Xplore Abstract Record:/home/prateeks/Zotero/storage/SYXAKTNC/8473385.html:text/html;IEEE Xplore Full Text PDF:/home/prateeks/Zotero/storage/4EA226ZY/Mtibaa et al. - 2018 - Towards Edge Computing over Named Data Networking.pdf:application/pdf}
+}
+
+
+@article{xylomenos_named_2019,
+	title = {Named {Functions} at the {Edge}},
+	abstract = {As end-user and edge-network devices are becoming ever more powerful, they are producing ever increasing amounts of data. Pulling all this data into the cloud for processing is impossible, not only due to its enormous volume, but also due to the stringent latency requirements of many applications. Instead, we argue that end-user and edge-network devices should collectively form edge computing swarms and complement the cloud with their storage and processing resources. This shift from centralized to edge clouds has the potential to open new horizons for application development, supporting new low-latency services and, ultimately, creating new markets for storage and processing resources. To realize this vision, we propose Named Functions at the Edge (NFE), a platform where functions can i) be identiﬁed through a routable name, ii) be requested and moved (as data objects) to process data on demand at edge nodes, iii) pull raw or anonymized data from sensors and devices, iv) securely and privately return their results to the invoker and v) compensate each party for use of their data, storage, communication or computing resources via tracking and accountability mechanisms. We use an emergency evacuation application to motivate the need for NFE and demonstrate its potential.},
+	language = {en},
+	author = {Xylomenos, George and Pavlou, George and Psaras, Ioannis and Karakonstantis, Ioannis},
+	year = {2019},
+	pages = {6},
+	file = {Xylomenos et al. - 2019 - Named Functions at the Edge.pdf:/home/prateeks/Zotero/storage/2W7DJBP3/Xylomenos et al. - 2019 - Named Functions at the Edge.pdf:application/pdf},
+}
+
+
+@inproceedings{krol_computation_2018,
+	address = {Boston, Massachusetts},
+	title = {Computation offloading with {ICN}},
+	isbn = {978-1-4503-5959-7},
+	url = {http://dl.acm.org/citation.cfm?doid=3267955.3269009},
+	doi = {10.1145/3267955.3269009},
+	abstract = {This demo shows an implementation of a computation-centric architecture over NDN. The system is able to perform in-network load balancing of incoming computation requests, reliably authenticate consumers and allow them to submit large payloads without routable prefixes. The system is able to migrate requested function in a form of unikernels where they are needed, follows ICN pull-based model and introduces only minimal changes to the NDN stack.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the 5th {ACM} {Conference} on {Information}-{Centric} {Networking}  - {ICN} '18},
+	publisher = {ACM Press},
+	author = {Król, Michał and Nicolaescu, Adrian-Cristian and Reñé, Sergi and Ascigil, Onur and Psaras, Ioannis and Oran, David and Kutscher, Dirk},
+	year = {2018},
+	pages = {220--221},
+	file = {Król et al. - 2018 - Computation offloading with ICN.pdf:/home/prateeks/Zotero/storage/V4CMVLSR/Król et al. - 2018 - Computation offloading with ICN.pdf:application/pdf}
+}
+
+
+@incollection{mocskos_faaster_2018,
+	address = {Cham},
+	title = {{FaaSter}, {Better}, {Cheaper}: {The} {Prospect} of {Serverless} {Scientific} {Computing} and {HPC}},
+	volume = {796},
+	isbn = {978-3-319-73352-4 978-3-319-73353-1},
+	shorttitle = {{FaaSter}, {Better}, {Cheaper}},
+	url = {http://link.springer.com/10.1007/978-3-319-73353-1_11},
+	abstract = {The adoption of cloud computing facilities and programming models diﬀers vastly between diﬀerent application domains. Scalable web applications, low-latency mobile backends and on-demand provisioned databases are typical cases for which cloud services on the platform or infrastructure level exist and are convincing when considering technical and economical arguments. Applications with speciﬁc processing demands, including high-performance computing, high-throughput computing and certain ﬂavours of scientiﬁc computing, have historically required special conﬁgurations such as compute- or memory-optimised virtual machine instances. With the rise of function-level compute instances through Function-as-a-Service (FaaS) models, the ﬁtness of generic conﬁgurations needs to be re-evaluated for these applications. We analyse several demanding computing tasks with regards to how FaaS models compare against conventional monolithic algorithm execution. Beside the comparison, we contribute a reﬁned FaaSiﬁcation process for legacy software and provide a roadmap for future work.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {High {Performance} {Computing}},
+	publisher = {Springer International Publishing},
+	author = {Spillner, Josef and Mateos, Cristian and Monge, David A.},
+	editor = {Mocskos, Esteban and Nesmachnow, Sergio},
+	year = {2018},
+	doi = {10.1007/978-3-319-73353-1_11},
+	pages = {154--168},
+	file = {Spillner et al. - 2018 - FaaSter, Better, Cheaper The Prospect of Serverle.pdf:/home/prateeks/Zotero/storage/4X87DHXU/Spillner et al. - 2018 - FaaSter, Better, Cheaper The Prospect of Serverle.pdf:application/pdf}
+}
+
+
+@inproceedings{van_eyk_spec_2017,
+	address = {Las Vegas, Nevada},
+	title = {The {SPEC} cloud group's research vision on {FaaS} and serverless architectures},
+	isbn = {978-1-4503-5434-9},
+	url = {http://dl.acm.org/citation.cfm?doid=3154847.3154848},
+	doi = {10.1145/3154847.3154848},
+	abstract = {Cloud computing enables an entire ecosystem of developing, composing, and providing IT services. An emerging class of cloud-based software architectures, serverless, focuses on providing software architects the ability to execute arbitrary functions with small overhead in server management, as Function-as-a-service (FaaS). However useful, serverless and FaaS suffer from a community problem that faces every emerging technology, which has indeed also hampered cloud computing a decade ago: lack of clear terminology, and scattered vision about the field. In this work, we address this community problem. We clarify the term serverless, by reducing it to cloud functions as programming units, and a model of executing simple and complex (e.g., workflows of) functions with operations managed primarily by the cloud provider. We propose a research vision, where 4 key directions (perspectives) present 17 technical opportunities and challenges.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the 2nd {International} {Workshop} on {Serverless} {Computing} - {WoSC} '17},
+	publisher = {ACM Press},
+	author = {van Eyk, Erwin and Iosup, Alexandru and Seif, Simon and Thömmes, Markus},
+	year = {2017},
+	pages = {1--4},
+	file = {van Eyk et al. - 2017 - The SPEC cloud group's research vision on FaaS and.pdf:/home/prateeks/Zotero/storage/QTXZKT4I/van Eyk et al. - 2017 - The SPEC cloud group's research vision on FaaS and.pdf:application/pdf}
+}
+
+
+@inproceedings{lee_evaluation_2018,
+	title = {Evaluation of {Production} {Serverless} {Computing} {Environments}},
+	doi = {10.1109/CLOUD.2018.00062},
+	abstract = {Serverless computing provides a small runtime container to execute lines of codes without infrastructure management which is similar to Platform as a Service (PaaS) but a functional level. Amazon started the event-driven compute named Lambda functions in 2014 with a 25 concurrent limitation, but it now supports at least a thousand of concurrent invocation to process event messages generated by resources like databases, storage and system logs. Other providers, i.e., Google, Microsoft, and IBM offer a dynamic scaling manager to handle parallel requests of stateless functions in which additional containers are provisioning on new compute nodes for distribution. However, while functions are often developed for microservices and lightweight workload, they are associated with distributed data processing using the concurrent invocations. We claim that the current serverless computing environments can support dynamic applications in parallel when a partitioned task is executable on a small function instance. We present results of throughput, network bandwidth, a file I/O and compute performance regarding the concurrent invocations. We deployed a series of functions for distributed data processing to address the elasticity and then demonstrated the differences between serverless computing and virtual machines for cost efficiency and resource utilization.},
+	booktitle = {2018 {IEEE} 11th {International} {Conference} on {Cloud} {Computing} ({CLOUD})},
+	author = {Lee, Hyungro and Satyam, Kumar and Fox, Geoffrey},
+	month = jul,
+	year = {2018},
+	note = {ISSN: 2159-6190},
+	keywords = {cloud computing, Cloud computing, concurrent invocation, Containers, Data processing, Databases, distributed data processing, dynamic scaling manager, event-driven compute, FaaS, Serverless, Event-driven Computing, Amazon Lambda, Google Functions, Microsoft Azure Functions, IBM OpenWhisk, Google, infrastructure management, Lambda functions, parallel requests, production serverless computing environments, Runtime, stateless functions, Throughput, virtual machines},
+	pages = {442--450},
+	file = {IEEE Xplore Abstract Record:/home/prateeks/Zotero/storage/Q9VUFSQY/8457830.html:text/html;IEEE Xplore Full Text PDF:/home/prateeks/Zotero/storage/QABN6LRG/Lee et al. - 2018 - Evaluation of Production Serverless Computing Envi.pdf:application/pdf}
+}
+
+
+
+@article{oakes_sock_2018,
+	title = {{SOCK}: {Rapid} {Task} {Provisioning} with {Serverless}-{Optimized} {Containers}},
+	volume = {USENIX ATC},
+	abstract = {Serverless computing promises to provide applications with cost savings and extreme elasticity. Unfortunately, slow application and container initialization can hurt common-case latency on serverless platforms. In this work, we analyze Linux container primitives, identifying scalability bottlenecks related to storage and network isolation. We also analyze Python applications from GitHub and show that importing many popular libraries adds about 100 ms to startup. Based on these ﬁndings, we implement SOCK, a container system optimized for serverless workloads. Careful avoidance of kernel scalability bottlenecks gives SOCK an 18× speedup over Docker. A generalized-Zygote provisioning strategy yields an additional 3× speedup. A more sophisticated three-tier caching strategy based on Zygotes provides a 45× speedup over SOCK without Zygotes. Relative to AWS Lambda and OpenWhisk, OpenLambda with SOCK reduces platform overheads by 2.8× and 5.3× respectively in an image processing case study.},
+	language = {en},
+	author = {Oakes, Edward and Yang, Leon and Zhou, Dennis and Houck, Kevin and Harter, Tyler and Arpaci-Dusseau, Andrea C and Arpaci-Dusseau, Remzi H},
+	year = {2018},
+	pages = {14},
+	file = {Oakes et al. - SOCK Rapid Task Provisioning with Serverless-Opti.pdf:/home/prateeks/Zotero/storage/GT5DXNVP/Oakes et al. - SOCK Rapid Task Provisioning with Serverless-Opti.pdf:application/pdf}
+}
+
+
+@article{fouladi_laptop_2019,
+	title = {From {Laptop} to {Lambda}: {Outsourcing} {Everyday} {Jobs} to {Thousands} of {Transient} {Functional} {Containers}},
+	abstract = {We present gg, a framework and a set of command-line tools that helps people execute everyday applications—e.g., software compilation, unit tests, video encoding, or object recognition—using thousands of parallel threads on a cloudfunctions service to achieve near-interactive completion times. In the future, instead of running these tasks on a laptop, or keeping a warm cluster running in the cloud, users might push a button that spawns 10,000 parallel cloud functions to execute a large job in a few seconds from start. gg is designed to make this practical and easy.},
+	language = {en},
+	journal = {USENIX ATC},
+	author = {Fouladi, Sadjad and Romero, Francisco and Iter, Dan and Li, Qian and Chatterjee, Shuvo},
+	year = {2019},
+	pages = {15},
+	file = {Fouladi et al. - From Laptop to Lambda Outsourcing Everyday Jobs t.pdf:/home/prateeks/Zotero/storage/F5ZQT529/Fouladi et al. - From Laptop to Lambda Outsourcing Everyday Jobs t.pdf:application/pdf}
+}
+
+
+@inproceedings{zhang_narrowing_2019,
+	address = {Santa Cruz, CA, USA},
+	title = {Narrowing the {Gap} {Between} {Serverless} and its {State} with {Storage} {Functions}},
+	isbn = {978-1-4503-6973-2},
+	url = {http://dl.acm.org/citation.cfm?doid=3357223.3362723},
+	doi = {10.1145/3357223.3362723},
+	abstract = {Serverless computing has gained attention due to its fine-grained provisioning, large-scale multi-tenancy, and on-demand scaling. However, it also forces applications to externalize state in remote storage, adding substantial overheads. To fix this “data shipping problem” we built Shredder, a low-latency multi-tenant cloud store that allows small units of computation to be performed directly within storage nodes. Storage tenants provide Shredder with JavaScript functions (or WebAssembly programs), which can interact directly with data without moving them over the network. The key challenge in Shredder is safely isolating thousands of tenant storage functions while minimizing data interaction costs. Shredder uses a unique approach where its data store and networking paths are implemented in native code to ensure performance, while isolated tenant functions interact with data using a V8-specific intermediate representation that avoids expensive cross-protectiondomain calls and data copying. As a result, Shredder can execute 4 million remotely-invoked tenant functions per second spread over thousands of tenants with median and 99th-percentile response latencies of less than 50 µs and 500 µs, respectively. Our evaluation shows that Shredder achieves a 14\% to 78\% speedup against conventional remote storage when fetching items with just one to three data dependencies between them. We also demonstrate Shredder’s effectiveness in accelerating data-intensive applications, including a k-hop query on social graphs that shows orders of magnitude gain.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the {ACM} {Symposium} on {Cloud} {Computing}  - {SoCC} '19},
+	publisher = {ACM Press},
+	author = {Zhang, Tian and Xie, Dong and Li, Feifei and Stutsman, Ryan},
+	year = {2019},
+	pages = {1--12},
+	file = {Zhang et al. - 2019 - Narrowing the Gap Between Serverless and its State.pdf:/home/prateeks/Zotero/storage/JUAWARDJ/Zhang et al. - 2019 - Narrowing the Gap Between Serverless and its State.pdf:application/pdf}
+}
+
+@inproceedings{pitchumani2015realistic,
+	title={Realistic request arrival generation in storage benchmarks},
+	author={Pitchumani, Rekha and Frank, Shayna and Miller, Ethan L},
+	booktitle={2015 31st Symposium on Mass Storage Systems and Technologies (MSST)},
+	pages={1--10},
+	year={2015},
+	organization={IEEE}
+}
+
+@inproceedings{10.1145/1807128.1807152,
+	author = {Cooper, Brian F. and Silberstein, Adam and Tam, Erwin and Ramakrishnan, Raghu and Sears, Russell},
+	title = {Benchmarking Cloud Serving Systems with YCSB},
+	year = {2010},
+	isbn = {9781450300360},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/1807128.1807152},
+	doi = {10.1145/1807128.1807152},
+	booktitle = {Proceedings of the 1st ACM Symposium on Cloud Computing},
+	pages = {143–154},
+	numpages = {12},
+	keywords = {cloud serving database, benchmarking},
+	location = {Indianapolis, Indiana, USA},
+	series = {SoCC ’10}
+}
+
+@misc{aws-lambda,
+  title={{AWS Lambda}},
+  year ={2020},
+  howpublished={\url{https://aws.amazon.com/lambda/}},
+  }
+
+
+@misc{warm2 ,
+  title={{Lambda Warmer: Optimize AWS Lambda Function Cold Starts}},
+  year ={2018},
+    howpublished={\url{https://www.jeremydaly.com/lambda-warmer-optimize-aws-lambda-function-cold-starts/}},
+  }
+
+
+@misc{warm1 ,
+  title={{Keeping Functions Warm - How To Fix AWS Lambda Cold Start Issues}},
+  year ={},
+    howpublished={\url{https://serverless.com/blog/keep-your-lambdas-warm/}},
+  }
+
+
+@misc{lambda-warm,
+  title={ Cold start / Warm start with AWS Lambda },
+  year ={2018},
+  author={Erwan Alliaume and Benjamin Le Roux},
+  howpublished={\url{https://blog.octo.com/en/cold-start-warm-start-with-aws-lambda/}},
+  }
+
+@misc{lambda-limits ,
+  title={{AWS Lambda Limits}},
+  howpublished={\url{https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html}},
+  }
+
+@misc{lambda-warm-hour ,
+  title={{How long does AWS Lambda keep your idle functions around before a cold start?}},
+  year ={2017},
+  howpublished={\url{https://read.acloud.guru/how-long-does-aws-lambda-keep-your-idle-functions-around-before-a-cold-start-bf715d3b810}},
+  }
+
+
+@misc{azure-functions,
+  title={{Azure Functions}},
+  year ={2020},
+  howpublished={\url{https://azure.microsoft.com/en-us/services/functions/ }},
+  }
+
+@misc{google-functions,
+  title={{Google Cloud Functions}},
+  year ={2020 },
+  howpublished={\url{https://cloud.google.com/functions  }},
+  }
+
+
+@misc{openfaas,
+title={{OpenFaaS : Server Functions, Made Simple.}},
+howpublished={\url{https://www.openfaas.com}},
+year={2020},
+}
+
+@online{lambda_cold_start_idle,
+  author = {Kevin S Lin},
+  title = {Benchmarking Lambda’s Idle Timeout Before A Cold Start},
+  year = {2019},
+  url = {https://kevinslin.com/aws/lambda_cold_start_idle/#},
+  urldate = {2020-03-17}
+}
+
+
+
+@inproceedings{unikernels,
+	author = {Madhavapeddy, Anil and Mortier, Richard and Rotsos, Charalampos and Scott, David and Singh, Balraj and Gazagnaire, Thomas and Smith, Steven and Hand, Steven and Crowcroft, Jon},
+	title = {Unikernels: Library Operating Systems for the Cloud},
+	booktitle = {Proceedings of the Eighteenth International Conference on Architectural Support for Programming Languages and Operating Systems},
+	series = {ASPLOS '13},
+	year = {2013},
+	isbn = {978-1-4503-1870-9},
+	location = {Houston, Texas, USA},
+	pages = {461--472},
+	numpages = {12},
+	url = {http://doi.acm.org/10.1145/2451116.2451167},
+	doi = {10.1145/2451116.2451167},
+	acmid = {2451167},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+	keywords = {functional programming, hypervisor, microkernel},
+} 
+
+
+
+@article{shankar2018numpywren,
+  title={Numpywren: Serverless linear algebra},
+  author={Shankar, Vaishaal and Krauth, Karl and Pu, Qifan and Jonas, Eric and Venkataraman, Shivaram and Stoica, Ion and Recht, Benjamin and Ragan-Kelley, Jonathan},
+  journal={arXiv preprint arXiv:1810.09679},
+  year={2018}
+}
+
+
+@inproceedings{ycsb-socc2010,
+  title={Benchmarking cloud serving systems with YCSB},
+  author={Cooper, Brian F and Silberstein, Adam and Tam, Erwin and Ramakrishnan, Raghu and Sears, Russell},
+  booktitle={Proceedings of the 1st ACM symposium on Cloud computing},
+  pages={143--154},
+  year={2010}
+}
+
+
+@article{lagar2011snowflock,
+  title={Snowflock: Virtual machine cloning as a first-class cloud primitive},
+  author={Lagar-Cavilla, H Andr{\'e}s and Whitney, Joseph A and Bryant, Roy and Patchin, Philip and Brudno, Michael and de Lara, Eyal and Rumble, Stephen M and Satyanarayanan, M and Scannell, Adin},
+  journal={ACM Transactions on Computer Systems (TOCS)},
+  volume={29},
+  number={1},
+  pages={1--45},
+  year={2011},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{sharma2012singleton,
+  title={Singleton: system-wide page deduplication in virtual environments},
+  author={Sharma, Prateek and Kulkarni, Purushottam},
+  booktitle={Proceedings of the 21st international symposium on High-Performance Parallel and Distributed Computing},
+  pages={15--26},
+  year={2012}
+}
+
+@TechReport{clusterdata:Reiss2011,
+  author = {Charles Reiss and John Wilkes and Joseph L. Hellerstein},
+  title = {{Google} cluster-usage traces: format + schema},
+  institution = {Google Inc.},
+  year = 2011,
+  month = Nov,
+  type = {Technical Report},
+  address = {Mountain View, CA, USA},
+  note = {Revised 2014-11-17 for version 2.1.  Posted at
+	\url{https://github.com/google/cluster-data}},
+}
+
+@article{lin_mitigating_2019,
+	title = {Mitigating {Cold} {Starts} in {Serverless} {Platforms}: {A} {Pool}-{Based} {Approach}},
+	shorttitle = {Mitigating {Cold} {Starts} in {Serverless} {Platforms}},
+	url = {http://arxiv.org/abs/1903.12221},
+	abstract = {Rapid adoption of the ’serverless’ (or Function-as-a-Service, FaaS) paradigm [8], pioneered by Amazon with AWS Lambda and followed by numerous commercial offerings and open source projects, introduces new challenges in designing the cloud infrastructure, balancing between performance and cost. While instant per-request elasticity that FaaS platforms typically offer application developers makes it possible to achieve high performance of bursty workloads without over-provisioning, such elasticity often involves extra latency associated with on-demand provisioning of individual runtime containers that serve the functions. This phenomenon is often called ’cold starts’ [12], as opposed to the situation when a function is served by a pre-provisioned ’warm’ container, ready to serve requests with close to zero overhead. Providers are constantly working on techniques aimed at reducing cold starts. A common approach to reduce cold starts is to maintain a pool of ’warm’ containers, in anticipation of future requests. In this project, we address the cold start problem in serverless architectures, specifically under the Knative Serving FaaS platform. We implemented a pool of function instances and evaluated the latency compared with the original implementation, which resulted in an 85\% reduction of P99 response time for a single instance pool.},
+	language = {en},
+	urldate = {2020-01-10},
+	journal = {arXiv:1903.12221 [cs]},
+	author = {Lin, Ping-Min and Glikson, Alex},
+	month = mar,
+	year = {2019},
+	note = {arXiv: 1903.12221},
+	keywords = {Computer Science - Distributed, Parallel, and Cluster Computing},
+	file = {Lin and Glikson - 2019 - Mitigating Cold Starts in Serverless Platforms A .pdf:/home/prateeks/Zotero/storage/2T2GVP5J/Lin and Glikson - 2019 - Mitigating Cold Starts in Serverless Platforms A .pdf:application/pdf}
+}
+
+
+@article{mohan_agile_2019,
+	title = {Agile {Cold} {Starts} for {Scalable} {Serverless}},
+	abstract = {The Serverless or Function-as-a-Service (FaaS) model capitalizes on lightweight execution by packaging code and dependencies together for just-in-time dispatch. Often a container environment has to be set up afresh– a condition called “cold start", and in such cases, performance suffers and overheads mount, both deteriorating rapidly under high concurrency. Caching and reusing previously employed containers ties up memory and risks information leakage. Latency for cold starts is frequently due to work and wait-times in setting up various dependencies – such as in initializing networking elements. This paper proposes a solution that pre-crafts such resources and then dynamically reassociates them with baseline containers. Applied to networking, this approach demonstrates an order of magnitude gain in cold starts, negligible memory consumption, and ﬂat startup time under rising concurrency.},
+	language = {en},
+	journal = {USENIX Workshop on Hot Topics in Cloud Computing (HotCloud)},
+	author = {Mohan, Anup and Sane, Harshad and Doshi, Kshitij and Edupuganti, Saikrishna and Sukhomlinov, Vadim and Nayak, Naren},
+	year = {2019},
+	pages = {6},
+	file = {Mohan et al. - Agile Cold Starts for Scalable Serverless.pdf:/home/prateeks/Zotero/storage/KKUKA8EB/Mohan et al. - Agile Cold Starts for Scalable Serverless.pdf:application/pdf}
+}
+
+
+@inproceedings{funcx_hpdc_20,
+author = {Chard, Ryan and Babuji, Yadu and Li, Zhuozhao and Skluzacek, Tyler and Woodard, Anna and Blaiszik, Ben and Foster, Ian and Chard, Kyle},
+title = {FuncX: A Federated Function Serving Fabric for Science},
+year = {2020},
+isbn = {9781450370523},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3369583.3392683},
+doi = {10.1145/3369583.3392683},
+booktitle = {Proceedings of the 29th International Symposium on High-Performance Parallel and Distributed Computing},
+pages = {65–76},
+numpages = {12},
+keywords = {federated function serving, function as a service, funcX},
+location = {Stockholm, Sweden},
+series = {HPDC ’20}
+}
+  
+  
+
+@inproceedings{john_sweep_2019,
+	address = {Auckland, New Zealand},
+	title = {{SWEEP}: {Accelerating} {Scientific} {Research} {Through} {Scalable} {Serverless} {Workflows}},
+	isbn = {978-1-4503-7044-8},
+	shorttitle = {{SWEEP}},
+	url = {http://dl.acm.org/citation.cfm?doid=3368235.3368839},
+	doi = {10.1145/3368235.3368839},
+	abstract = {Scientific and commercial applications are increasingly being executed in the cloud, but the difficulties associated with cluster management render on-demand resources inaccessible or inefficient to many users. Recently, the serverless execution model, in which the provisioning of resources is abstracted from the user, has gained prominence as an alternative to traditional cyberinfrastructure solutions. With its inherent elasticity, the serverless paradigm constitutes a promising computational model for scientific workflows, allowing domain specialists to develop and deploy workflows that are subject to varying workloads and intermittent usage without the overhead of infrastructure maintenance. We present the Serverless Workflow Enablement and Execution Platform (SWEEP), a cloud-agnostic workflow management system with a purely serverless execution model that allows users to define, run and monitor generic cloud-native workflows. We demonstrate the use of SWEEP on workflows from two disparate scientific domains and present an evaluation of performance and scaling.},
+	language = {en},
+	urldate = {2020-07-29},
+	booktitle = {Proceedings of the 12th {IEEE}/{ACM} {International} {Conference} on {Utility} and {Cloud} {Computing} {Companion}  - {UCC} '19 {Companion}},
+	publisher = {ACM Press},
+	author = {John, Aji and Ausmees, Kristiina and Muenzen, Kathleen and Kuhn, Catherine and Tan, Amanda},
+	year = {2019},
+	pages = {43--50},
+	file = {John et al. - 2019 - SWEEP Accelerating Scientific Research Through Sc.pdf:/home/prateeks/Zotero/storage/5MWV8GFP/John et al. - 2019 - SWEEP Accelerating Scientific Research Through Sc.pdf:application/pdf}
+}
+
+
+
+@inproceedings{kim_functionbench_2019,
+	title = {{FunctionBench}: {A} {Suite} of {Workloads} for {Serverless} {Cloud} {Function} {Service}},
+	shorttitle = {{FunctionBench}},
+	doi = {10.1109/CLOUD.2019.00091},
+	abstract = {Serverless computing is attracting considerable attention recently, but many published papers use micro-benchmarks for evaluation that might result in impracticality. To address this, we present FunctionBench, a suite of practical function workloads for public services. It contains realistic data-oriented applications that utilize various resources during execution. The source codes customized for various cloud service providers are publicly available. We are positive that it suggests opportunities for new function applications with lessen experiment setup overheads.},
+	booktitle = {2019 {IEEE} 12th {International} {Conference} on {Cloud} {Computing} ({CLOUD})},
+	author = {Kim, Jeongchul and Lee, Kyungyong},
+	month = jul,
+	year = {2019},
+	note = {ISSN: 2159-6182},
+	keywords = {cloud, cloud computing, FaaS, serverless, benchmark, cloud service providers, data-oriented applications, function applications, function workloads, FunctionBench, microbenchmarks, public services, serverless cloud function service, serverless computing, source codes, workload},
+	pages = {502--504},
+	file = {IEEE Xplore Abstract Record:/home/prateeks/Zotero/storage/436476Y3/8814583.html:text/html;IEEE Xplore Full Text PDF:/home/prateeks/Zotero/storage/6RIZVX2H/Kim and Lee - 2019 - FunctionBench A Suite of Workloads for Serverless.pdf:application/pdf}
+}
+
+
+
+@inproceedings{lee_evaluation_2018,
+	title = {Evaluation of {Production} {Serverless} {Computing} {Environments}},
+	doi = {10.1109/CLOUD.2018.00062},
+	abstract = {Serverless computing provides a small runtime container to execute lines of codes without infrastructure management which is similar to Platform as a Service (PaaS) but a functional level. Amazon started the event-driven compute named Lambda functions in 2014 with a 25 concurrent limitation, but it now supports at least a thousand of concurrent invocation to process event messages generated by resources like databases, storage and system logs. Other providers, i.e., Google, Microsoft, and IBM offer a dynamic scaling manager to handle parallel requests of stateless functions in which additional containers are provisioning on new compute nodes for distribution. However, while functions are often developed for microservices and lightweight workload, they are associated with distributed data processing using the concurrent invocations. We claim that the current serverless computing environments can support dynamic applications in parallel when a partitioned task is executable on a small function instance. We present results of throughput, network bandwidth, a file I/O and compute performance regarding the concurrent invocations. We deployed a series of functions for distributed data processing to address the elasticity and then demonstrated the differences between serverless computing and virtual machines for cost efficiency and resource utilization.},
+	booktitle = {2018 {IEEE} 11th {International} {Conference} on {Cloud} {Computing} ({CLOUD})},
+	author = {Lee, Hyungro and Satyam, Kumar and Fox, Geoffrey},
+	month = jul,
+	year = {2018},
+	note = {ISSN: 2159-6190},
+	keywords = {Cloud computing, cloud computing, virtual machines, Google, Runtime, Throughput, Containers, concurrent invocation, Data processing, Databases, distributed data processing, dynamic scaling manager, event-driven compute, FaaS, Serverless, Event-driven Computing, Amazon Lambda, Google Functions, Microsoft Azure Functions, IBM OpenWhisk, infrastructure management, Lambda functions, parallel requests, production serverless computing environments, stateless functions},
+	pages = {442--450},
+	file = {IEEE Xplore Abstract Record:/home/prateeks/Zotero/storage/Q9VUFSQY/8457830.html:text/html;IEEE Xplore Full Text PDF:/home/prateeks/Zotero/storage/QABN6LRG/Lee et al. - 2018 - Evaluation of Production Serverless Computing Envi.pdf:application/pdf}
+}
+
+
+
+@inproceedings{manner_cold_2018,
+	address = {Zurich},
+	title = {Cold {Start} {Influencing} {Factors} in {Function} as a {Service}},
+	isbn = {978-1-72810-359-4},
+	url = {https://ieeexplore.ieee.org/document/8605777/},
+	doi = {10.1109/UCC-Companion.2018.00054},
+	language = {en},
+	urldate = {2020-08-15},
+	booktitle = {2018 {IEEE}/{ACM} {International} {Conference} on {Utility} and {Cloud} {Computing} {Companion} ({UCC} {Companion})},
+	publisher = {IEEE},
+	author = {Manner, Johannes and EndreB, Martin and Heckel, Tobias and Wirtz, Guido},
+	month = dec,
+	year = {2018},
+	pages = {181--188},
+	file = {Manner et al. - 2018 - Cold Start Influencing Factors in Function as a Se.pdf:/home/prateeks/Zotero/storage/MEHUS7HU/Manner et al. - 2018 - Cold Start Influencing Factors in Function as a Se.pdf:application/pdf}
+}
+
+
+
+@article{young_gd_orig_94,
+	title = {The {K}-server dual and loose competitiveness for paging},
+	volume = {11},
+	issn = {0178-4617, 1432-0541},
+	url = {http://link.springer.com/10.1007/BF01189992},
+	doi = {10.1007/BF01189992},
+	abstract = {Weighted caching is a generalization of paging in which the cost to evict an item depends on the item. We give two results concerning strategies for these problems that incur a cost within a factor of the minimum possible on each input.},
+	language = {en},
+	number = {6},
+	urldate = {2020-08-17},
+	journal = {Algorithmica},
+	author = {Young, N.},
+	month = jun,
+	year = {1994},
+	pages = {525--541},
+	file = {Young - 1994 - Thek-server dual and loose competitiveness for pag.pdf:/home/prateeks/Zotero/storage/SEV3HAD8/Young - 1994 - Thek-server dual and loose competitiveness for pag.pdf:application/pdf}
+}
+
+
+@incollection{gdfs_2001,
+	address = {Berlin, Heidelberg},
+	title = {Role of {Aging}, {Frequency}, and {Size} in {Web} {Cache} {Replacement} {Policies}},
+	volume = {2110},
+	isbn = {978-3-540-42293-8 978-3-540-48228-4},
+	url = {http://link.springer.com/10.1007/3-540-48228-8_12},
+	abstract = {Document caching on is used to improve Web performance. An eﬃcient caching policy keeps popular documents in the cache and replaces rarely used ones. The latest web cache replacement policies incorporate the document size, frequency, and age in the decision process. The recently-proposed and very popular Greedy-Dual-Size (GDS) policy is based on document size and has an elegant aging mechanism. Similarly, the Greedy-Dual-Frequency (GDF) policy takes into account ﬁle frequency and exploits the aging mechanism to deal with cache pollution. The eﬃciency of a cache replacement policy can be evaluated along two popular metrics: ﬁle hit ratio and byte hit ratio. Using four diﬀerent web server logs, we show that GDS-like replacement policies emphasizing size yield the best ﬁle hit ratio but typically show poor byte hit ratio, while GDF-like replacement policies emphasizing frequency have better byte hit ratio but result in worse ﬁle hit ratio. In this paper, we propose a generalization of Greedy-Dual-Frequency-Size policy which allows to balance the emphasis on size vs. frequency. We perform a sensitivity study to derive the impact of size and frequency on ﬁle and byte hit ratio, identifying parameters that aim at optimizing both metrics.},
+	language = {en},
+	urldate = {2020-08-17},
+	booktitle = {High-{Performance} {Computing} and {Networking}},
+	publisher = {Springer Berlin Heidelberg},
+	author = {Cherkasova, Ludmila and Ciardo, Gianfranco},
+	editor = {Goos, G. and Hartmanis, J. and van Leeuwen, J. and Hertzberger, Bob and Hoekstra, Alfons and Williams, Roy},
+	year = {2001},
+	doi = {10.1007/3-540-48228-8_12},
+	note = {Series Title: Lecture Notes in Computer Science},
+	pages = {114--123},
+	file = {Cherkasova and Ciardo - 2001 - Role of Aging, Frequency, and Size in Web Cache Re.pdf:/home/prateeks/Zotero/storage/Y4ZD5TA5/Cherkasova and Ciardo - 2001 - Role of Aging, Frequency, and Size in Web Cache Re.pdf:application/pdf}
+}
+
+
+@inproceedings{cao_irani_1997,
+	title = {Cost-{Aware} {WWW} {Proxy} {Caching} {Algorithms}},
+	abstract = {Web caches can not only reduce network tra c and downloading latency, but can also a ect the distribution of web tra c over the network through costaware caching. This paper introduces GreedyDualSize, which incorporates locality with cost and size concerns in a simple and non-parameterized fashion for high performance. Trace-driven simulations show that with the appropriate cost de nition, GreedyDualSize outperforms existing web cache replacement algorithms in many aspects, including hit ratios, latency reduction and network cost reduction. In addition, GreedyDual-Size can potentially improve the performance of main-memory caching of Web documents.},
+	language = {en},
+	author = {Cao, Pei and Irani, Sandy},
+	pages = {15},
+	year={1997},
+	booktitle={Proceedings of the USENIX Symposium on Internet Technologies and Systems},
+	file = {Cao and Irani - Cost-Aware WWW Proxy Caching Algorithms.pdf:/home/prateeks/Zotero/storage/Z9AZKPHJ/Cao and Irani - Cost-Aware WWW Proxy Caching Algorithms.pdf:application/pdf}
+}
+
+@inproceedings{cherkasova2001role,
+  title={Role of aging, frequency, and size in web cache replacement policies},
+  author={Cherkasova, Ludmila and Ciardo, Gianfranco},
+  booktitle={International Conference on High-Performance Computing and Networking},
+  pages={114--123},
+  year={2001},
+  organization={Springer}
+}
+
+@article{young2002line,
+  title={On-line file caching},
+  author={Young, Neal E},
+  journal={Algorithmica},
+  volume={33},
+  number={3},
+  pages={371--383},
+  year={2002},
+  publisher={Springer}
+}
+
+@inproceedings{shards,
+  title={Efficient {MRC} Construction with {SHARDS}},
+  author={Waldspurger, Carl A and Park, Nohhyun and Garthwaite, Alexander and Ahmad, Irfan},
+  booktitle={13th {USENIX} Conference on File and Storage Technologies ({FAST} 15)},
+  pages={95--110},
+  year={2015}
+}
+
+@inproceedings{counterstacks,
+  title={Characterizing storage workloads with counter stacks},
+  author={Wires, Jake and Ingram, Stephen and Drudi, Zachary and Harvey, Nicholas JA and Warfield, Andrew},
+  booktitle={11th {USENIX} Symposium on Operating Systems Design and Implementation ({OSDI} 14)},
+  pages={335--349},
+  year=2014
+}
+
+@inproceedings{sundarrajan2017footprint,
+  title={Footprint descriptors: Theory and practice of cache provisioning in a global cdn},
+  author={Sundarrajan, Aditya and Feng, Mingdong and Kasbekar, Mangesh and Sitaraman, Ramesh K},
+  booktitle={Proceedings of the 13th International Conference on emerging Networking EXperiments and Technologies},
+  pages={55--67},
+  year={2017}
+}
+
+@inproceedings{hu2016kinetic,
+  title={Kinetic modeling of data eviction in cache},
+  author={Hu, Xiameng and Wang, Xiaolin and Zhou, Lan and Luo, Yingwei and Ding, Chen and Wang, Zhenlin},
+  booktitle={2016 USENIX Annual Technical Conference (USENIX ATC 16)},
+  pages={351--364},
+  year={2016}
+}
+
+@article{che2002hierarchical,
+  title={Hierarchical web caching systems: Modeling, design and experimental results},
+  author={Che, Hao and Tung, Ye and Wang, Zhijun},
+  journal={IEEE journal on Selected Areas in Communications},
+  volume={20},
+  number={7},
+  pages={1305--1314},
+  year={2002},
+  publisher={IEEE}
+}
+
+@article{o1993lru,
+  title={The LRU-K page replacement algorithm for database disk buffering},
+  author={O'neil, Elizabeth J and O'neil, Patrick E and Weikum, Gerhard},
+  journal={Acm Sigmod Record},
+  volume={22},
+  number={2},
+  pages={297--306},
+  year={1993},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{megiddo2003arc,
+  title={ARC: A Self-Tuning, Low Overhead Replacement Cache.},
+  author={Megiddo, Nimrod and Modha, Dharmendra S},
+  booktitle={{USENIX FAST}},
+  volume={3},
+  pages={115--130},
+  year={2003}
+}
+
+@article{einziger2017tinylfu,
+  title={Tinylfu: A highly efficient cache admission policy},
+  author={Einziger, Gil and Friedman, Roy and Manes, Ben},
+  journal={ACM Transactions on Storage (ToS)},
+  volume={13},
+  number={4},
+  pages={1--31},
+  year={2017},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{cheng2000lru,
+  title={LRU-SP: a size-adjusted and popularity-aware LRU replacement algorithm for web caching},
+  author={Cheng, Kai and Kambayashi, Yahiko},
+  booktitle={Proceedings 24th Annual International Computer Software and Applications Conference. COMPSAC2000},
+  pages={48--53},
+  year={2000},
+  organization={IEEE}
+}
+
+
+@inproceedings{carreira2018case,
+  title={A case for serverless machine learning},
+  author={Carreira, Joao and Fonseca, Pedro and Tumanov, Alexey and Zhang, Andrew and Katz, Randy},
+  booktitle={Workshop on Systems for ML and Open Source Software at NeurIPS},
+  volume={2018},
+  year={2018}
+}
+
+
+@inproceedings{carreira_cirrus_2019,
+	address = {Santa Cruz, CA, USA},
+	title = {Cirrus: a {Serverless} {Framework} for {End}-to-end {ML} {Workflows}},
+	isbn = {978-1-4503-6973-2},
+	shorttitle = {Cirrus},
+	url = {http://dl.acm.org/citation.cfm?doid=3357223.3362711},
+	doi = {10.1145/3357223.3362711},
+	abstract = {Machine learning (ML) workflows are extremely complex. The typical workflow consists of distinct stages of user interaction, such as preprocessing, training, and tuning, that are repeatedly executed by users but have heterogeneous computational requirements. This complexity makes it challenging for ML users to correctly provision and manage resources and, in practice, constitutes a significant burden that frequently causes over-provisioning and impairs user productivity. Serverless computing is a compelling model to address the resource management problem, in general, but there are numerous challenges to adopt it for existing ML frameworks due to significant restrictions on local resources.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {Proceedings of the {ACM} {Symposium} on {Cloud} {Computing}  - {SoCC} '19},
+	publisher = {ACM Press},
+	author = {Carreira, Joao and Fonseca, Pedro and Tumanov, Alexey and Zhang, Andrew and Katz, Randy},
+	year = {2019},
+	pages = {13--24},
+	file = {Carreira et al. - 2019 - Cirrus a Serverless Framework for End-to-end ML W.pdf:/home/prateeks/Zotero/storage/BMERI3NP/Carreira et al. - 2019 - Cirrus a Serverless Framework for End-to-end ML W.pdf:application/pdf}
+}
+
+@inproceedings{carreira2019cirrus,
+  title={Cirrus: A serverless framework for end-to-end ml workflows},
+  author={Carreira, Joao and Fonseca, Pedro and Tumanov, Alexey and Zhang, Andrew and Katz, Randy},
+  booktitle={Proceedings of the ACM Symposium on Cloud Computing},
+  pages={13--24},
+  year={2019}
+}
+
+
+
+@inproceedings {osca_atc20,
+author = {Yu Zhang and Ping Huang and Ke Zhou and Hua Wang and Jianying Hu and Yongguang Ji and Bin Cheng},
+title = {{OSCA}: An Online-Model Based Cache Allocation Scheme in Cloud Block Storage Systems},
+booktitle = {2020 {USENIX} Annual Technical Conference ({USENIX} {ATC} 20)},
+year = {2020},
+isbn = {978-1-939133-14-4},
+pages = {785--798},
+url = {https://www.usenix.org/conference/atc20/presentation/zhang-yu},
+publisher = {{USENIX} Association},
+month = jul,
+}
+
+@article{gandhi2012autoscale,
+  title={Autoscale: Dynamic, robust capacity management for multi-tier data centers},
+  author={Gandhi, Anshul and Harchol-Balter, Mor and Raghunathan, Ram and Kozuch, Michael A},
+  journal={ACM Transactions on Computer Systems (TOCS)},
+  volume={30},
+  number={4},
+  pages={1--26},
+  year={2012},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{deflation-eurosys19,
+ author = {Sharma, Prateek and Ali-Eldin, Ahmed and Shenoy, Prashant},
+ title = {Resource Deflation: A New Approach For Transient Resource Reclamation},
+ booktitle = {Proceedings of the Fourteenth EuroSys Conference 2019},
+ series = {EuroSys '19},
+ year = {2019},
+ isbn = {978-1-4503-6281-8},
+ location = {Dresden, Germany},
+ pages = {33:1--33:17},
+ articleno = {33},
+ numpages = {17},
+ url = {http://doi.acm.org/10.1145/3302424.3303945},
+ doi = {10.1145/3302424.3303945},
+ acmid = {3303945},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+} 
+
+@misc{pid-wiki,
+title={{PID} Controllers},
+howpublished={\url{https://en.wikipedia.org/wiki/PID\_controller}},
+}
+
+
+@article{ensure_acsos20,
+	title = {{ENSURE}: {Efficient} {Scheduling} and {Autonomous} {Resource} {Management} in {Serverless} {Environments}},
+	abstract = {An imminent challenge in the serverless computing landscape is the escalating cost of infrastructure needed to handle the growing trafﬁc at scale. This work presents ENSURE, a function-level scheduler and autonomous resource manager designed to minimize provider resource costs while meeting customer performance requirements. ENSURE works by classifying incoming function requests at runtime and carefully regulating the resource usage of colocated functions on each invoker. Beyond a single invoker, ENSURE elastically scales capacity, using concepts from operations research, in response to varying workload trafﬁc to prevent cold starts. Finally, ENSURE schedules requests by concentrating load on an adequate number of invokers to encourage reuse of active hosts (thus further avoiding cold starts) and allow unneeded capacity to provably and gracefully time out. We implement ENSURE on Apache OpenWhisk and show that, across several serverless applications and compared to existing baselines, ENSURE signiﬁcantly improves resource efﬁciency, by as much as 52\%, while providing acceptable application latency.},
+	language = {en},
+	author = {Suresh, Amoghavarsha and Somashekar, Gagan and Varadarajan, Anandh and Kakarla, Veerendra Ramesh and  Upadhyay, Hima and Gandhi, Anshu},
+	pages = {10},
+	year={2020},
+	booktitle={2020 IEEE International Conference on Autonomic Computing and Self-Organizing Systems (ACSOS)},
+	file = {Suresh et al. - ENSURE Efficient Scheduling and Autonomous Resour.pdf:/home/prateeks/Zotero/storage/WTNPXF79/Suresh et al. - ENSURE Efficient Scheduling and Autonomous Resour.pdf:application/pdf}
+}
+
+
+@inproceedings{basu2017adaptive,
+  title={Adaptive TTL-based caching for content delivery},
+  author={Basu, Soumya and Sundarrajan, Aditya and Ghaderi, Javad and Shakkottai, Sanjay and Sitaraman, Ramesh},
+  booktitle={Proceedings of the 2017 ACM SIGMETRICS/International Conference on Measurement and Modeling of Computer Systems},
+  pages={45--46},
+  year={2017}
+}
+
+@article{jiang2018convergence,
+  title={On the convergence of the ttl approximation for an lru cache under independent stationary request processes},
+  author={Jiang, Bo and Nain, Philippe and Towsley, Don},
+  journal={ACM Transactions on Modeling and Performance Evaluation of Computing Systems (TOMPECS)},
+  volume={3},
+  number={4},
+  pages={1--31},
+  year={2018},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{wang2018peeking,
+  title={Peeking behind the curtains of serverless platforms},
+  author={Wang, Liang and Li, Mengyuan and Zhang, Yinqian and Ristenpart, Thomas and Swift, Michael},
+  booktitle={2018 {USENIX} Annual Technical Conference},
+  pages={133--146},
+  year={2018}
+}
+
+
+@article{einziger2017tinylfu,
+  title={Tinylfu: A highly efficient cache admission policy},
+  author={Einziger, Gil and Friedman, Roy and Manes, Ben},
+  journal={ACM Transactions on Storage (ToS)},
+  volume={13},
+  number={4},
+  pages={1--31},
+  year={2017},
+  publisher={ACM New York, NY, USA}
+}
+
+
+@inproceedings{atre2020caching,
+  title={Caching with delayed hits},
+  author={Atre, Nirav and Sherry, Justine and Wang, Weina and Berger, Daniel S},
+  booktitle={Proceedings of the Annual conference of the ACM Special Interest Group on Data Communication on the applications, technologies, architectures, and protocols for computer communication},
+  pages={495--513},
+  year={2020}
+}
+
+@inproceedings{liu2020imitation,
+  title={An imitation learning approach for cache replacement},
+  author={Liu, Evan and Hashemi, Milad and Swersky, Kevin and Ranganathan, Parthasarathy and Ahn, Junwhan},
+  booktitle={International Conference on Machine Learning},
+  pages={6237--6247},
+  year={2020},
+  organization={PMLR}
+}
+
+
+@article{aditya-rlcache,
+  title={RL-Cache: Learning-based cache admission for content delivery},
+  author={Kirilin, Vadim and Sundarrajan, Aditya and Gorinsky, Sergey and Sitaraman, Ramesh K},
+  journal={IEEE Journal on Selected Areas in Communications},
+  volume={38},
+  number={10},
+  pages={2372--2385},
+  year={2020},
+  publisher={IEEE}
+}
+
+
+@inproceedings{narayanan2018deepcache,
+  title={Deepcache: A deep learning based framework for content caching},
+  author={Narayanan, Arvind and Verma, Saurabh and Ramadan, Eman and Babaie, Pariya and Zhang, Zhi-Li},
+  booktitle={Proceedings of the 2018 Workshop on Network Meets AI \& ML},
+  pages={48--53},
+  year={2018}
+}
+
+@inproceedings{choi2020lambda,
+  title={$\lambda$-NIC: Interactive serverless compute on programmable SmartNICs},
+  author={Choi, Sean and Shahbaz, Muhammad and Prabhakar, Balaji and Rosenblum, Mendel},
+  booktitle={2020 IEEE 40th International Conference on Distributed Computing Systems (ICDCS)},
+  pages={67--77},
+  year={2020},
+  organization={IEEE}
+}
+
+@inproceedings{khandelwal2020taureau,
+  title={Le Taureau: Deconstructing the serverless landscape \& A look forward},
+  author={Khandelwal, Anurag and Kejariwal, Arun and Ramasamy, Karthikeyan},
+  booktitle={Proceedings of the 2020 ACM SIGMOD International Conference on Management of Data},
+  pages={2641--2650},
+  year={2020}
+}
+
+@inproceedings{qiu2020clara,
+  title={Clara: Performance clarity for smartnic offloading},
+  author={Qiu, Yiming and Kang, Qiao and Liu, Ming and Chen, Ang},
+  booktitle={Proceedings of the 19th ACM Workshop on Hot Topics in Networks},
+  pages={16--22},
+  year={2020}
+}
+
+@inproceedings{dukic2020photons,
+  title={Photons: Lambdas on a diet},
+  author={Dukic, Vojislav and Bruno, Rodrigo and Singla, Ankit and Alonso, Gustavo},
+  booktitle={Proceedings of the 11th ACM Symposium on Cloud Computing},
+  pages={45--59},
+  year={2020}
+}
+
+@inproceedings{vhive-asplos21,
+  title={Benchmarking, analysis, and optimization of serverless function snapshots},
+  author={Ustiugov, Dmitrii and Petrov, Plamen and Kogias, Marios and Bugnion, Edouard and Grot, Boris},
+  booktitle={Proceedings of the 26th ACM International Conference on Architectural Support for Programming Languages and Operating Systems},
+  pages={559--572},
+  year={2021}
+}
+
+@inproceedings{carreira2021warm,
+  title={From warm to hot starts: leveraging runtimes for the serverless era},
+  author={Carreira, Joao and Kohli, Sumer and Bruno, Rodrigo and Fonseca, Pedro},
+  booktitle={Proceedings of the Workshop on Hot Topics in Operating Systems},
+  pages={58--64},
+  year={2021}
+}
+
+
+
+
+@inproceedings{tariq_sequoia_2020,
+	address = {Virtual Event USA},
+	title = {Sequoia: enabling quality-of-service in serverless computing},
+	isbn = {978-1-4503-8137-6},
+	shorttitle = {Sequoia},
+	url = {https://dl.acm.org/doi/10.1145/3419111.3421306},
+	doi = {10.1145/3419111.3421306},
+	abstract = {Serverless computing is a rapidly growing paradigm that easily harnesses the power of the cloud. With serverless computing, developers simply provide an event-driven function to cloud providers, and the provider seamlessly scales function invocations to meet demands as event-triggers occur. As current and future serverless o�erings support a wide variety of serverless applications, e�ective techniques to manage serverless workloads becomes an important issue. This work examines current management and scheduling practices in cloud providers, uncovering many issues including in�ated application run times, function drops, ine�cient allocations, and other undocumented and unexpected behavior. To �x these issues, a new quality-of-service function scheduling and allocation framework, called Sequoia, is designed. Sequoia allows developers or administrators to easily de�ne how serverless functions and applications should be deployed, capped, prioritized, or altered based on easily con�gured, �exible policies. Results with controlled and realistic workloads show Sequoia seamlessly adapts to policies, eliminates mid-chain drops, reduces queuing times by up to 6.4⇥, enforces tight chain-level fairness, and improves run-time performance up to 25⇥.},
+	language = {en},
+	urldate = {2021-07-16},
+	booktitle = {Proceedings of the 11th {ACM} {Symposium} on {Cloud} {Computing}},
+	publisher = {ACM},
+	author = {Tariq, Ali and Pahl, Austin and Nimmagadda, Sharat and Rozner, Eric and Lanka, Siddharth},
+	month = oct,
+	year = {2020},
+	pages = {311--327},
+	file = {Tariq et al. - 2020 - Sequoia enabling quality-of-service in serverless.pdf:/home/prateeks/Zotero/storage/J5GF66VY/Tariq et al. - 2020 - Sequoia enabling quality-of-service in serverless.pdf:application/pdf},
+}
+
+@inproceedings{puru_xanadu_20,
+author = {Daw, Nilanjan and Bellur, Umesh and Kulkarni, Purushottam},
+title = {Xanadu: Mitigating Cascading Cold Starts in Serverless Function Chain Deployments},
+year = {2020},
+isbn = {9781450381536},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3423211.3425690},
+doi = {10.1145/3423211.3425690},
+abstract = {Organization of tasks as workflows are an essential feature to expand the applicability
+of the serverless computing framework. Existing serverless platforms are either agnostic
+to function chains (workflows as a composition of functions) or rely on naive provisioning
+and management mechanisms of the serverless framework---an example is that they provision
+resources after the trigger to each function in a workflow arrives thereby forcing
+a setup latency for each function in the workflow. In this work, we focus on mitigating
+the cascading cold start problem--- the latency overheads in triggering a sequence
+of serverless functions according to a workflow specification. We first establish
+the nature and extent of the cascading effects in cold start situations across multiple
+commercial server platforms and cloud providers. Towards mitigating these cascading
+overheads, we design and develop several optimizations, that are built into our tool
+Xanadu. Xanadu offers multiple instantiation options based on the desired runtime
+isolation requirements and supports function chaining with or without explicit workflow
+specifications. Xanadu's optimizations to address the cascading cold start problem
+are built on speculative and just-in-time provisioning of resources. Our evaluation
+of the Xanadu system reveals almost complete elimination of cascading cold starts
+at minimal cost overheads, outperforming the available state of the art platforms.
+For even relatively short workflows, Xanadu reduces platform overheads by almost 18x
+compared to Knative and 10x compared to Apache Openwhisk.},
+booktitle = {Proceedings of the 21st International Middleware Conference},
+pages = {356-–370},
+numpages = {15},
+keywords = {Just-in-time scheduling, Serverless workflows, Speculative deployment},
+location = {Delft, Netherlands},
+series = {Middleware '20}
+}
+
+
+
+@article{mampage2021holistic,
+  title={A Holistic View on Resource Management in Serverless Computing Environments: Taxonomy, and Future Directions},
+  author={Mampage, Anupama and Karunasekera, Shanika and Buyya, Rajkumar},
+  journal={arXiv preprint arXiv:2105.11592},
+  year={2021}
+}
+
+
+@article{przybylski2021data,
+  title={Data-driven scheduling in serverless computing to reduce response time},
+  author={Przybylski, Bart{\l}omiej and {\.Z}uk, Pawe{\l} and Rzadca, Krzysztof},
+  journal={arXiv preprint arXiv:2105.03217},
+  year={2021}
+}
+
+
+
+@phdthesis{yu2021faasrank,
+  title={FaaSRank: A Reinforcement Learning Scheduler for Serverless Function-as-a-Service Platforms},
+  author={Yu, Hanfei},
+  year={2021},
+  school={University of Washington}
+}
+
+@inproceedings{lynx_asplos20, 
+author = {Tork, Maroun and Maudlej, Lina and Silberstein, Mark},
+title = {Lynx: A SmartNIC-Driven Accelerator-Centric Architecture for Network Servers},
+year = {2020},
+isbn = {9781450371025},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3373376.3378528},
+doi = {10.1145/3373376.3378528},
+abstract = {This paper explores new opportunities afforded by the growing deployment of compute
+and I/O accelerators to improve the performance and efficiency of hardware-accelerated
+computing services in data centers.We propose Lynx, an accelerator-centric network
+server architecture that offloads the server data and control planes to the SmartNIC,
+and enables direct networking from accelerators via a lightweight hardware-friendly
+I/O mechanism. Lynx enables the design of hardware-accelerated network servers that
+run without CPU involvement, freeing CPU cores and improving performance isolation
+for accelerated services. It is portable across accelerator architectures and allows
+the management of both local and remote accelerators, seamlessly scaling beyond a
+single physical machine.We implement and evaluate Lynx on GPUs and the Intel Visual
+Compute Accelerator, as well as two SmartNIC architectures - one with an FPGA, and
+another with an 8-core ARM processor. Compared to a traditional host-centric approach,
+Lynx achieves over 4X higher throughput for a GPU-centric face verification server,
+where it is used for GPU communications with an external database, and 25% higher
+throughput for a GPU-accelerated neural network inference service. For this workload,
+we show that a single SmartNIC may drive 4 local and 8 remote GPUs while achieving
+linear performance scaling without using the host CPU.},
+booktitle = {Proceedings of the Twenty-Fifth International Conference on Architectural Support for Programming Languages and Operating Systems},
+pages = {117–-131},
+numpages = {15},
+keywords = {server architecture, hardware accelerators, smartnics, i/o services for accelerators, operating systems},
+location = {Lausanne, Switzerland},
+series = {ASPLOS '20}
+}
+
+
+@incollection{ipipe_smartnic_19,
+  title={Offloading distributed applications onto smartNICs using iPipe},
+  author={Liu, Ming and Cui, Tianyi and Schuh, Henry and Krishnamurthy, Arvind and Peter, Simon and Gupta, Karan},
+  booktitle={Proceedings of the ACM Special Interest Group on Data Communication},
+  pages={318--333},
+  year={2019}
+}
+
+
+@inproceedings{gill2008multi,
+  title={On Multi-level Exclusive Caching: Offline Optimality and Why promotions are better than demotions.},
+  author={Gill, Binny S},
+  booktitle={FAST},
+  volume={8},
+  pages={1--17},
+  year={2008}
+}
+
+@article{che2002hierarchical,
+  title={Hierarchical web caching systems: Modeling, design and experimental results},
+  author={Che, Hao and Tung, Ye and Wang, Zhijun},
+  journal={IEEE journal on Selected Areas in Communications},
+  volume={20},
+  number={7},
+  pages={1305--1314},
+  year={2002},
+  publisher={IEEE}
+}
+
+@inproceedings{faascache-asplos21,
+author = {Fuerst, Alexander and Sharma, Prateek},
+title = {FaasCache: Keeping Serverless Computing Alive with Greedy-Dual Caching},
+year = {2021},
+isbn = {9781450383172},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3445814.3446757},
+doi = {10.1145/3445814.3446757},
+abstract = {Functions as a Service (also called serverless computing) promises to revolutionize
+how applications use cloud resources. However, functions suffer from cold-start problems
+due to the overhead of initializing their code and data dependencies before they can
+start executing. Keeping functions alive and warm after they have finished execution
+can alleviate the cold-start overhead. Keep-alive policies must keep functions alive
+based on their resource and usage characteristics, which is challenging due to the
+diversity in FaaS workloads. Our insight is that keep-alive is analogous to caching.
+Our caching-inspired Greedy-Dual keep-alive policy can be effective in reducing the
+cold-start overhead by more than 3\texttimes{} compared to current approaches. Caching concepts
+such as reuse distances and hit-ratio curves can also be used for auto-scaled server
+resource provisioning, which can reduce the resource requirement of FaaS providers
+by 30% for real-world dynamic workloads. We implement caching-based keep-alive and
+resource provisioning policies in our FaasCache system, which is based on OpenWhisk.
+We hope that our caching analogy opens the door to more principled and optimized keep-alive
+and resource provisioning techniques for future FaaS workloads and platforms.},
+booktitle = {Proceedings of the 26th ACM International Conference on Architectural Support for Programming Languages and Operating Systems},
+pages = {386–-400},
+numpages = {15},
+keywords = {Functions as a Service, Caching, Serverless Computing, Cloud Computing},
+location = {Virtual, USA},
+series = {ASPLOS 2021}
+}
+
+
+@inproceedings{dean2017machine,
+  title={Machine learning for systems and systems for machine learning},
+  author={Dean, Jeff},
+  booktitle={Presentation at 2017 Conference on Neural Information Processing Systems},
+  year={2017}
+}
+
+@inproceedings{fox2019learning,
+  title={Learning everywhere: Pervasive machine learning for effective high-performance computation},
+  author={Fox, Geoffrey and Glazier, James A and Kadupitiya, JCS and Jadhao, Vikram and Kim, Minje and Qiu, Judy and Sluka, James P and Somogyi, Endre and Marathe, Madhav and Adiga, Abhijin and others},
+  booktitle={2019 IEEE International Parallel and Distributed Processing Symposium Workshops (IPDPSW)},
+  pages={422--429},
+  year={2019},
+  organization={IEEE}
+}
+
+
+@inproceedings{mirrokni2018consistent,
+  title={Consistent hashing with bounded loads},
+  author={Mirrokni, Vahab and Thorup, Mikkel and Zadimoghaddam, Morteza},
+  booktitle={Proceedings of the Twenty-Ninth Annual ACM-SIAM Symposium on Discrete Algorithms},
+  pages={587--604},
+  year={2018},
+  organization={SIAM}
+}
+
+
+@INPROCEEDINGS{package-cristina-19,
+
+  author={Aumala, Gabriel and Boza, Edwin and Ortiz-Avilés, Luis and Totoy, Gustavo and Abad, Cristina},
+
+  booktitle={2019 19th IEEE/ACM International Symposium on Cluster, Cloud and Grid Computing (CCGRID)}, 
+
+  title={Beyond Load Balancing: Package-Aware Scheduling for Serverless Platforms}, 
+
+  year={2019},
+
+  volume={},
+
+  number={},
+
+  pages={282-291},
+
+  doi={10.1109/CCGRID.2019.00042}}
+
+
+@article{mampage2021holistic,
+  title={A Holistic View on Resource Management in Serverless Computing Environments: Taxonomy, and Future Directions},
+  author={Mampage, Anupama and Karunasekera, Shanika and Buyya, Rajkumar},
+  journal={arXiv preprint arXiv:2105.11592},
+  year={2021}
+}
+
+@article{romero2021faa,
+  title={Faa\$T: A Transparent Auto-Scaling Cache for Serverless Applications},
+  author={Romero, Francisco and Chaudhry, Gohar Irfan and Goiri, {\'I}{\~n}igo and Gopa, Pragna and Batum, Paul and Yadwadkar, Neeraja J and Fonseca, Rodrigo and Kozyrakis, Christos and Bianchini, Ricardo},
+  journal={arXiv preprint arXiv:2104.13869},
+  year={2021}
+}
+
+
+@ARTICLE{serverless-survey-21,
+
+  author={Eismann, Simon and Scheuner, Joel and van Eyk, Erwin and Schwinger, Maximilian and Grohmann, Johannes and Herbst, Nikolas and Abad, Cristina L. and Iosup, Alexandru},
+
+  journal={IEEE Software}, 
+
+  title={Serverless Applications: Why, When, and How?}, 
+
+  year={2021},
+
+  volume={38},
+
+  number={1},
+
+  pages={32--39},
+
+  doi={10.1109/MS.2020.3023302}}
+
+
+@inproceedings{doppleganger-imc20,
+  title={Using GANs for sharing networked time series data: Challenges, initial promise, and open questions},
+  author={Lin, Zinan and Jain, Alankar and Wang, Chen and Fanti, Giulia and Sekar, Vyas},
+  booktitle={Proceedings of the ACM Internet Measurement Conference},
+  pages={464--483},
+  year={2020}
+}
+
+
+@inproceedings{cadden_seuss_2020,
+	address = {Heraklion Greece},
+	title = {{SEUSS}: skip redundant paths to make serverless fast},
+	isbn = {978-1-4503-6882-7},
+	shorttitle = {{SEUSS}},
+	url = {https://dl.acm.org/doi/10.1145/3342195.3392698},
+	doi = {10.1145/3342195.3392698},
+	abstract = {This paper presents a system-level method for achieving the rapid deployment and high-density caching of serverless functions in a FaaS environment. For reduced start times, functions are deployed from unikernel snapshots, bypassing expensive initialization steps. To reduce the memory footprint of snapshots we apply page-level sharing across the entire software stack that is required to run a function. We demonstrate the effects of our techniques by replacing Linux on the compute node of a FaaS platform architecture. With our prototype OS, the deployment time of a function drops from 100s of milliseconds to under 10 ms. Platform throughput improves by 51x on workload composed entirely of new functions. We are able to cache over 50, 000 function instances in memory as opposed to 3, 000 using standard OS techniques. In combination, these improvements give the FaaS platform a new ability to handle large-scale bursts of requests.},
+	language = {en},
+	urldate = {2020-08-23},
+	booktitle = {Proceedings of the {Fifteenth} {European} {Conference} on {Computer} {Systems}},
+	publisher = {ACM},
+	author = {Cadden, James and Unger, Thomas and Awad, Yara and Dong, Han and Krieger, Orran and Appavoo, Jonathan},
+	month = apr,
+	year = {2020},
+	pages = {1--15},
+	file = {Cadden et al. - 2020 - SEUSS skip redundant paths to make serverless fas.pdf:/home/prateeks/Zotero/storage/KTYTBCNU/Cadden et al. - 2020 - SEUSS skip redundant paths to make serverless fas.pdf:application/pdf},
+}
+
+
+@inproceedings{novak_cloud_2019,
+	title = {Cloud {Functions} for {Fast} and {Robust} {Resource} {Auto}-{Scaling}},
+	doi = {10.1109/COMSNETS.2019.8711058},
+	abstract = {We design and build FEAT, a new scaling approach that uses (1) cloud functions as interim processing resources to compensate for VM launch delays and (2) a reactive, knobless, auto-scaling algorithm that requires no pre-specified thresholds or parameters, making it robust against changing load. We implement FEAT on Amazon Web Services (AWS) and Microsoft Azure. Our evaluations clearly demonstrate the higher performance and robustness of FEAT in comparison to existing approaches.},
+	booktitle = {2019 11th {International} {Conference} on {Communication} {Systems} {Networks} ({COMSNETS})},
+	author = {Novak, Joe H. and Kasera, Sneha Kumar and Stutsman, Ryan},
+	month = jan,
+	year = {2019},
+	note = {ISSN: 2155-2487},
+	keywords = {Cloud computing, Servers, cloud computing, resource allocation, virtual machines, Web services, robustness, Runtime, Delays, Load modeling, Amazon Web Services, cloud functions, Current measurement, fast robust resource autoscaling, FEAT, interim processing resources, Microsoft Azure, reactive knobless autoscaling algorithm, scaling approach, VM launch delays},
+	pages = {133--140},
+	file = {IEEE Xplore Abstract Record:/home/prateeks/Zotero/storage/3XCH46NG/8711058.html:text/html;IEEE Xplore Full Text PDF:/home/prateeks/Zotero/storage/S4WN76WY/Novak et al. - 2019 - Cloud Functions for Fast and Robust Resource Auto-.pdf:application/pdf},
+}
+
+
+@incollection{mocskos_faaster_2018,
+	address = {Cham},
+	title = {{FaaSter}, {Better}, {Cheaper}: {The} {Prospect} of {Serverless} {Scientific} {Computing} and {HPC}},
+	volume = {796},
+	isbn = {978-3-319-73352-4 978-3-319-73353-1},
+	shorttitle = {{FaaSter}, {Better}, {Cheaper}},
+	url = {http://link.springer.com/10.1007/978-3-319-73353-1_11},
+	abstract = {The adoption of cloud computing facilities and programming models diﬀers vastly between diﬀerent application domains. Scalable web applications, low-latency mobile backends and on-demand provisioned databases are typical cases for which cloud services on the platform or infrastructure level exist and are convincing when considering technical and economical arguments. Applications with speciﬁc processing demands, including high-performance computing, high-throughput computing and certain ﬂavours of scientiﬁc computing, have historically required special conﬁgurations such as compute- or memory-optimised virtual machine instances. With the rise of function-level compute instances through Function-as-a-Service (FaaS) models, the ﬁtness of generic conﬁgurations needs to be re-evaluated for these applications. We analyse several demanding computing tasks with regards to how FaaS models compare against conventional monolithic algorithm execution. Beside the comparison, we contribute a reﬁned FaaSiﬁcation process for legacy software and provide a roadmap for future work.},
+	language = {en},
+	urldate = {2020-01-10},
+	booktitle = {High {Performance} {Computing}},
+	publisher = {Springer International Publishing},
+	author = {Spillner, Josef and Mateos, Cristian and Monge, David A.},
+	editor = {Mocskos, Esteban and Nesmachnow, Sergio},
+	year = {2018},
+	doi = {10.1007/978-3-319-73353-1_11},
+	pages = {154--168},
+	file = {Spillner et al. - 2018 - FaaSter, Better, Cheaper The Prospect of Serverle.pdf:/home/prateeks/Zotero/storage/4X87DHXU/Spillner et al. - 2018 - FaaSter, Better, Cheaper The Prospect of Serverle.pdf:application/pdf},
+}
+
+
+@article{garcia-lopez_servermix_2019,
+	title = {{ServerMix}: {Tradeoffs} and {Challenges} of {Serverless} {Data} {Analytics}},
+	shorttitle = {{ServerMix}},
+	url = {http://arxiv.org/abs/1907.11465},
+	abstract = {Serverless computing has become very popular today since it largely simpliﬁes cloud programming. Developers do not need to longer worry about provisioning or operating servers, and they pay only for the compute resources used when their code is run. This new cloud paradigm suits well for many applications, and researchers have already begun investigating the feasibility of serverless computing for data analytics. Unfortunately, today’s serverless computing presents important limitations that make it really difﬁcult to support all sorts of analytics workloads. This paper ﬁrst starts by analyzing three fundamental trade-offs of today’s serverless computing model and their relationship with data analytics. It studies how by relaxing disaggregation, isolation, and simple scheduling, it is possible to increase the overall computing performance, but at the expense of essential aspects of the model such as elasticity, security, or sub-second activations, respectively. The consequence of these trade-offs is that analytics applications may well end up embracing hybrid systems composed of serverless and serverful components, which we call ServerMix in this paper. We will review the existing related work to show that most applications can be actually categorized as ServerMix. Finally, this paper will introduce the major challenges of the CloudButton research project to manage these trade-offs.},
+	language = {en},
+	urldate = {2020-01-10},
+	journal = {arXiv:1907.11465 [cs]},
+	author = {García-López, Pedro and Sánchez-Artigas, Marc and Shillaker, Simon and Pietzuch, Peter and Breitgand, David and Vernik, Gil and Sutra, Pierre and Tarrant, Tristan and Ferrer, Ana Juan},
+	month = jul,
+	year = {2019},
+	note = {arXiv: 1907.11465},
+	keywords = {Computer Science - Distributed, Parallel, and Cluster Computing},
+	annote = {Comment: 15 pages, 1 figure, 1 table},
+	file = {García-López et al. - 2019 - ServerMix Tradeoffs and Challenges of Serverless .pdf:/home/prateeks/Zotero/storage/CR66N8UR/García-López et al. - 2019 - ServerMix Tradeoffs and Challenges of Serverless .pdf:application/pdf},
+}
+
+
+
+@article{pu_shufing_2019,
+	title = {Shuffling, {Fast} and {Slow}: {Scalable} {Analytics} on {Serverless} {Infrastructure}},
+	abstract = {Serverless computing is poised to fulﬁll the long-held promise of transparent elasticity and millisecond-level pricing. To achieve this goal, service providers impose a ﬁnegrained computational model where every function has a maximum duration, a ﬁxed amount of memory and no persistent local storage. We observe that the ﬁne-grained elasticity of serverless is key to achieve high utilization for general computations such as analytics workloads, but that resource limits make it challenging to implement such applications as they need to move large amounts of data between functions that don’t overlap in time. In this paper, we present Locus, a serverless analytics system that judiciously combines (1) cheap but slow storage with (2) fast but expensive storage, to achieve good performance while remaining cost-efﬁcient. Locus applies a performance model to guide users in selecting the type and the amount of storage to achieve the desired cost-performance trade-off. We evaluate Locus on a number of analytics applications including TPC-DS, CloudSort, Big Data Benchmark and show that Locus can navigate the costperformance trade-off, leading to 4⇥-500⇥ performance improvements over slow storage-only baseline and reducing resource usage by up to 59\% while achieving comparable performance with running Apache Spark on a cluster of virtual machines, and within 2⇥ slower compared to Redshift.},
+	language = {en},
+	journal = {USENIC NSDI},
+	author = {Pu, Qifan,  Venkataraman, Shivaram, Stoica, Ian},
+	year = {2019},
+	pages = {15},
+	file = {Pu - Shufﬂing, Fast and Slow Scalable Analytics on Ser.pdf:/home/prateeks/Zotero/storage/CCL9FASY/Pu - Shufﬂing, Fast and Slow Scalable Analytics on Ser.pdf:application/pdf},
+}
+
+
+@article{castro2019rise,
+  title={The rise of serverless computing},
+  author={Castro, Paul and Ishakian, Vatche and Muthusamy, Vinod and Slominski, Aleksander},
+  journal={Communications of the ACM},
+  volume={62},
+  number={12},
+  pages={44--54},
+  year={2019},
+  publisher={ACM New York, NY, USA}
+}
+
+@article{eismann2020serverless,
+  title={Serverless applications: Why, when, and how?},
+  author={Eismann, Simon and Scheuner, Joel and Van Eyk, Erwin and Schwinger, Maximilian and Grohmann, Johannes and Herbst, Nikolas and Abad, Cristina L and Iosup, Alexandru},
+  journal={IEEE Software},
+  volume={38},
+  number={1},
+  pages={32--39},
+  year={2020},
+  publisher={IEEE}
+}
+
+@inproceedings{maissen2020faasdom,
+  title={FaaSdom: A benchmark suite for serverless computing},
+  author={Maissen, Pascal and Felber, Pascal and Kropf, Peter and Schiavoni, Valerio},
+  booktitle={Proceedings of the 14th ACM International Conference on Distributed and Event-based Systems},
+  pages={73--84},
+  year={2020}
+}
+
+@inproceedings{ali2020batch,
+  title={Batch: machine learning inference serving on serverless platforms with adaptive batching},
+  author={Ali, Ahsan and Pinciroli, Riccardo and Yan, Feng and Smirni, Evgenia},
+  booktitle={SC20: International Conference for High Performance Computing, Networking, Storage and Analysis},
+  pages={1--15},
+  year={2020},
+  organization={IEEE}
+}
+
+
+
+@article{hellerstein_serverless_2019,
+	title = {Serverless {Computing}: {One} {Step} {Forward}, {Two} {Steps} {Back}},
+	abstract = {Serverless computing offers the potential to program the cloud in an autoscaling, pay-as-you go manner. In this paper we address critical gaps in first-generation serverless computing, which place its autoscaling potential at odds with dominant trends in modern computing: notably data-centric and distributed computing, but also open source and custom hardware. Put together, these gaps make current serverless offerings a bad fit for cloud innovation and particularly bad for data systems innovation. In addition to pinpointing some of the main shortfalls of current serverless architectures, we raise a set of challenges we believe must be met to unlock the radical potential that the cloud—with its exabytes of storage and millions of cores—should offer to innovative developers.},
+	language = {en},
+	author = {Hellerstein, Joseph M and Faleiro, Jose and Gonzalez, Joseph E and Schleier-Smith, Johann and Sreekanti, Vikram and Tumanov, Alexey and Wu, Chenggang},
+	year = {2019},
+        journal={CIDR  2019,  9th  Biennial  Conference  on  Innovative  DataSystems Research, Asilomar, CA, USA, January 13-16, 2019},
+	pages = {9},
+	file = {Hellerstein et al. - 2019 - Serverless Computing One Step Forward, Two Steps .pdf:/home/prateeks/Zotero/storage/FGFM5GNE/Hellerstein et al. - 2019 - Serverless Computing One Step Forward, Two Steps .pdf:application/pdf},
+}
+
+
+@inproceedings{fouladi2017encoding,
+  title={Encoding, fast and slow: Low-latency video processing using thousands of tiny threads},
+  author={Fouladi, Sadjad and Wahby, Riad S and Shacklett, Brennan and Balasubramaniam, Karthikeyan Vasuki and Zeng, William and Bhalerao, Rahul and Sivaraman, Anirudh and Porter, George and Winstein, Keith},
+  booktitle={14th USENIX Symposium on Networked Systems Design and Implementation (NSDI 17)},
+  pages={363--376},
+  year={2017}
+}
+
+@article{serverless-cacm-21,
+author = {Schleier-Smith, Johann and Sreekanti, Vikram and Khandelwal, Anurag and Carreira, Joao and Yadwadkar, Neeraja J. and Popa, Raluca Ada and Gonzalez, Joseph E. and Stoica, Ion and Patterson, David A.},
+title = {What Serverless Computing is and Should Become: The next Phase of Cloud Computing},
+year = {2021},
+issue_date = {May 2021},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {64},
+number = {5},
+issn = {0001-0782},
+url = {https://doi.org/10.1145/3406011},
+doi = {10.1145/3406011},
+abstract = {The evolution that serverless computing represents, the economic forces that shape
+it, why it could fail, and how it might fulfill its potential.},
+journal = {Commun. ACM},
+month = apr,
+pages = {76–84},
+numpages = {9}
+}
+
+@inproceedings{du2020catalyzer,
+  title={Catalyzer: Sub-millisecond startup for serverless computing with initialization-less booting},
+  author={Du, Dong and Yu, Tianyi and Xia, Yubin and Zang, Binyu and Yan, Guanglu and Qin, Chenggang and Wu, Qixuan and Chen, Haibo},
+  booktitle={Proceedings of the Twenty-Fifth International Conference on Architectural Support for Programming Languages and Operating Systems},
+  pages={467--481},
+  year={2020}
+}
+
+@inproceedings{shillaker2020faasm,
+  title={Faasm: Lightweight isolation for efficient stateful serverless computing},
+  author={Shillaker, Simon and Pietzuch, Peter},
+  booktitle={2020 USENIX Annual Technical Conference (USENIX$\{$ATC$\}$ 20)},
+  pages={419--433},
+  year={2020}
+}
+
+
+@inproceedings{hunhoff2020proactive,
+  title={Proactive Serverless Function Resource Management},
+  author={Hunhoff, Erika and Irshad, Shazal and Thurimella, Vijay and Tariq, Ali and Rozner, Eric},
+  booktitle={Proceedings of the 2020 Sixth International Workshop on Serverless Computing},
+  pages={61--66},
+  year={2020}
+}
+
+@inproceedings{mvondo2021ofc,
+  title={OFC: an opportunistic caching system for FaaS platforms},
+  author={Mvondo, Djob and Bacou, Mathieu and Nguetchouang, Kevin and Ngale, Lucien and Pouget, St{\'e}phane and Kouam, Josiane and Lachaize, Renaud and Hwang, Jinho and Wood, Tim and Hagimont, Daniel and others},
+  booktitle={Proceedings of the Sixteenth European Conference on Computer Systems},
+  pages={228--244},
+  year={2021}
+}
+
+@article{xu2021lambda,
+  title={$\lambda$-DNN : Achieving Predictable Distributed DNN Training with Serverless Architectures},
+  author={Xu, Fei and Qin, Yiling and Chen, Li and Zhou, Zhi and Liu, Fangming},
+  journal={IEEE Transactions on Computers},
+  year={2021},
+  publisher={IEEE}
+}
+
+@inproceedings{kotni2021faastlane,
+  title={Faastlane: Accelerating Function-as-a-Service Workflows},
+  author={Kotni, Swaroop and Nayak, Ajay and Ganapathy, Vinod and Basu, Arkaprava},
+  booktitle={2021 USENIX Annual Technical Conference (USENIXATC 21)},
+  pages={805--820},
+  year={2021}
+}
+
+@inproceedings{adzic2017serverless,
+  title={Serverless computing: economic and architectural impact},
+  author={Adzic, Gojko and Chatley, Robert},
+  booktitle={Proceedings of the 2017 11th Joint Meeting on Foundations of Software Engineering},
+  pages={884--889},
+  year={2017}
+}
+
+
+@inproceedings{silva2020prebaking,
+  title={Prebaking Functions to Warm the Serverless Cold Start},
+  author={Silva, Paulo and Fireman, Daniel and Pereira, Thiago Emmanuel},
+  booktitle={Proceedings of the 21st International Middleware Conference},
+  pages={1--13},
+  year={2020}
+}
+
+@inproceedings{solaiman2020wlec,
+  title={WLEC: A Not So Cold Architecture to Mitigate Cold Start Problem in Serverless Computing},
+  author={Solaiman, Khondokar and Adnan, Muhammad Abdullah},
+  booktitle={2020 IEEE International Conference on Cloud Engineering (IC2E)},
+  pages={144--153},
+  year={2020},
+  organization={IEEE}
+}
+
+@inproceedings{donkervliet2020towards,
+  title={Towards supporting millions of users in modifiable virtual environments by redesigning minecraft-like games as serverless systems},
+  author={Donkervliet, Jesse and Trivedi, Animesh and Iosup, Alexandru},
+  booktitle={12th USENIX Workshop on Hot Topics in Cloud Computing (HotCloud 20)},
+  year={2020}
+}
+
+
+@article{sreekanti2020cloudburst,
+  title={Cloudburst: Stateful functions-as-a-service},
+  author={Sreekanti, Vikram and Wu, Chenggang and Lin, Xiayue Charles and Schleier-Smith, Johann and Faleiro, Jose M and Gonzalez, Joseph E and Hellerstein, Joseph M and Tumanov, Alexey},
+  journal={arXiv preprint arXiv:2001.04592},
+  year={2020}
+}
+
+@inproceedings{wu2020transactional,
+  title={Transactional causal consistency for serverless computing},
+  author={Wu, Chenggang and Sreekanti, Vikram and Hellerstein, Joseph M},
+  booktitle={Proceedings of the 2020 ACM SIGMOD International Conference on Management of Data},
+  pages={83--97},
+  year={2020}
+}
+
+
+@inproceedings{wang2020infinicache,
+  title={Infinicache: Exploiting ephemeral serverless functions to build a cost-effective memory cache},
+  author={Wang, Ao and Zhang, Jingyuan and Ma, Xiaolong and Anwar, Ali and Rupprecht, Lukas and Skourtis, Dimitrios and Tarasov, Vasily and Yan, Feng and Cheng, Yue},
+  booktitle={18th USENIX Conference on File and Storage Technologies ($\{$FAST$\}$ 20)},
+  pages={267--281},
+  year={2020}
+}
+
+@inproceedings{harvest-osdi20,
+  title={Providing slos for resource-harvesting vms in cloud platforms},
+  author={Ambati, Pradeep and Goiri, {\'I}{\~n}igo and Frujeri, Felipe and Gun, Alper and Wang, Ke and Dolan, Brian and Corell, Brian and Pasupuleti, Sekhar and Moscibroda, Thomas and Elnikety, Sameh and others},
+  booktitle={14th USENIX Symposium on Operating Systems Design and Implementation ($\{$OSDI$\}$ 20)},
+  pages={735--751},
+  year={2020}
+}
+
+@inproceedings{wang2021smartharvest,
+  title={SmartHarvest: harvesting idle CPUs safely and efficiently in the cloud},
+  author={Wang, Yawen and Arya, Kapil and Kogias, Marios and Vanga, Manohar and Bhandari, Aditya and Yadwadkar, Neeraja J and Sen, Siddhartha and Elnikety, Sameh and Kozyrakis, Christos and Bianchini, Ricardo},
+  booktitle={Proceedings of the Sixteenth European Conference on Computer Systems},
+  pages={1--16},
+  year={2021}
+}
+
+
+@article{bilal2021great,
+  title={With Great Freedom Comes Great Opportunity: Rethinking Resource Allocation for Serverless Functions},
+  author={Bilal, Muhammad and Canini, Marco and Fonseca, Rodrigo and Rodrigues, Rodrigo},
+  journal={arXiv preprint arXiv:2105.14845},
+  year={2021}
+}
+
+
+@inproceedings{crankshaw2017clipper,
+  title={Clipper: A low-latency online prediction serving system},
+  author={Crankshaw, Daniel and Wang, Xin and Zhou, Guilio and Franklin, Michael J and Gonzalez, Joseph E and Stoica, Ion},
+  booktitle={14th USENIX Symposium on Networked Systems Design and Implementation (NSDI 17)},
+  pages={613--627},
+  year={2017}
+}
+
+@article{zaharia2018accelerating,
+  title={Accelerating the machine learning lifecycle with MLflow.},
+  author={Zaharia, Matei and Chen, Andrew and Davidson, Aaron and Ghodsi, Ali and Hong, Sue Ann and Konwinski, Andy and Murching, Siddharth and Nykodym, Tomas and Ogilvie, Paul and Parkhe, Mani and others},
+  journal={IEEE Data Eng. Bull.},
+  volume={41},
+  number={4},
+  pages={39--45},
+  year={2018}
+}
+
+@inproceedings{satzke2020efficient,
+  title={Efficient GPU Sharing for Serverless Workflows},
+  author={Satzke, Klaus and Akkus, Istemi Ekin and Chen, Ruichuan and Rimac, Ivica and Stein, Manuel and Beck, Andre and Aditya, Paarijaat and Vanga, Manohar and Hilt, Volker},
+  booktitle={Proceedings of the 1st Workshop on High Performance Serverless Computing},
+  pages={17--24},
+  year={2020}
+}
+
+@inproceedings{tpu-datacenter,
+  title={In-datacenter performance analysis of a tensor processing unit},
+  author={Jouppi, Norman P and Young, Cliff and Patil, Nishant and Patterson, David and Agrawal, Gaurav and Bajwa, Raminder and Bates, Sarah and Bhatia, Suresh and Boden, Nan and Borchers, Al and others},
+  booktitle={Proceedings of the 44th annual international symposium on computer architecture},
+  pages={1--12},
+  year={2017}
+}
+
+@inproceedings{kochura2019batch,
+  title={Batch size influence on performance of graphic and tensor processing units during training and inference phases},
+  author={Kochura, Yuriy and Gordienko, Yuri and Taran, Vlad and Gordienko, Nikita and Rokovyi, Alexandr and Alienin, Oleg and Stirenko, Sergii},
+  booktitle={International Conference on Computer Science, Engineering and Education Applications},
+  pages={658--668},
+  year={2019},
+  organization={Springer}
+}
+
+
+
+@inproceedings{ali_batch_2020,
+	address = {Atlanta, GA, USA},
+	title = {{BATCH}: {Machine} {Learning} {Inference} {Serving} on {Serverless} {Platforms} with {Adaptive} {Batching}},
+	isbn = {978-1-72819-998-6},
+	shorttitle = {{BATCH}},
+	url = {https://ieeexplore.ieee.org/document/9355312/},
+	doi = {10.1109/SC41405.2020.00073},
+	abstract = {Serverless computing is a new pay-per-use cloud service paradigm that automates resource scaling for stateless functions and can potentially facilitate bursty machine learning serving. Batching is critical for latency performance and costeffectiveness of machine learning inference, but unfortunately it is not supported by existing serverless platforms due to their stateless design. Our experiments show that without batching, machine learning serving cannot reap the beneﬁts of serverless computing. In this paper, we present BATCH, a framework for supporting efﬁcient machine learning serving on serverless platforms. BATCH uses an optimizer to provide inference tail latency guarantees and cost optimization and to enable adaptive batching support. We prototype BATCH atop of AWS Lambda and popular machine learning inference systems. The evaluation veriﬁes the accuracy of the analytic optimizer and demonstrates performance and cost advantages over the state-of-the-art method MArk and the state-of-the-practice tool SageMaker.},
+	language = {en},
+	urldate = {2021-07-19},
+	booktitle = {{SC20}: {International} {Conference} for {High} {Performance} {Computing}, {Networking}, {Storage} and {Analysis}},
+	publisher = {IEEE},
+	author = {Ali, Ahsan and Pinciroli, Riccardo and Yan, Feng and Smirni, Evgenia},
+	month = nov,
+	year = {2020},
+	pages = {1--15},
+	file = {Ali et al. - 2020 - BATCH Machine Learning Inference Serving on Serve.pdf:/home/prateeks/Zotero/storage/4XIH9IF7/Ali et al. - 2020 - BATCH Machine Learning Inference Serving on Serve.pdf:application/pdf},
+}
+
+
+@inproceedings{awamoto2020designing,
+  title={Designing a Storage Software Stack for Accelerators},
+  author={Awamoto, Shinichi and Focht, Erich and Honda, Michio},
+  booktitle={12th USENIX Workshop on Hot Topics in Storage and File Systems (HotStorage 20)},
+  year={2020}
+}
+
+
+@inproceedings{eran2019nica,
+  title={$\{$NICA$\}$: An infrastructure for inline acceleration of network applications},
+  author={Eran, Haggai and Zeno, Lior and Tork, Maroun and Malka, Gabi and Silberstein, Mark},
+  booktitle={2019 USENIX Annual Technical Conference (USENIX ATC 19)},
+  pages={345--362},
+  year={2019}
+}
+
+
+@article{liu_performance_2021,
+	title = {Performance {Characteristics} of the {BlueField}-2 {SmartNIC}},
+	url = {http://arxiv.org/abs/2105.06619},
+	abstract = {High-performance computing (HPC) researchers have long envisioned scenarios where application workﬂows could be improved through the use of programmable processing elements embedded in the network fabric. Recently, vendors have introduced programmable Smart Network Interface Cards (SmartNICs) that enable computations to be ofﬂoaded to the edge of the network. There is great interest in both the HPC and high-performance data analytics (HPDA) communities in understanding the roles these devices may play in the data paths of upcoming systems.},
+	language = {en},
+	urldate = {2021-07-21},
+	journal = {arXiv:2105.06619 [cs]},
+	author = {Liu, Jianshen and Maltzahn, Carlos and Ulmer, Craig and Curry, Matthew Leon},
+	month = may,
+	year = {2021},
+	note = {arXiv: 2105.06619},
+	keywords = {Computer Science - Performance, Computer Science - Networking and Internet Architecture, B.8.2, C.2.0},
+	annote = {Comment: 13 pages, 8 figures, 4 tables},
+	file = {Liu et al. - 2021 - Performance Characteristics of the BlueField-2 Sma.pdf:/home/prateeks/Zotero/storage/N2ZRB6B5/Liu et al. - 2021 - Performance Characteristics of the BlueField-2 Sma.pdf:application/pdf},
+}
+
+
+
+@incollection{barolli_actual_2021,
+	address = {Cham},
+	title = {The {Actual} {Cost} of {Programmable} {SmartNICs}: {Diving} into the {Existing} {Limits}},
+	volume = {225},
+	isbn = {978-3-030-75099-2 978-3-030-75100-5},
+	shorttitle = {The {Actual} {Cost} of {Programmable} {SmartNICs}},
+	url = {https://link.springer.com/10.1007/978-3-030-75100-5_17},
+	abstract = {Programmable Data Planes is a novel paradigm that enables eﬃcient ofﬂoading of network applications. An important enabler for this paradigm is the current available SmartNICs, which should satisfy rigid network requirements such as high throughput and low latency. Despite recent research in this ﬁeld, not much attention was given to understand the costs and limitations of oﬄoading network applications into SmartNIC devices. Existing oﬄoading approaches either neglect the existing limitations of SmartNICs or assume that as an ongoing cost – leading, therefore, to sub-optimal ofﬂoading approaches. In this work, we conduct a comprehensive evaluation of SmartNICs in order to quantify existing performance limitations. We provide insights on network performance metrics such as throughput and packet latency while considering diﬀerent key building blocks of complex P4 programs (e.g., registers, cryptography functions, or packet recirculation). Results show that line-rate throughput can degrade up to 8x, while latency can increase as much as 80x when performing memory-intensive operations in the data plane.},
+	language = {en},
+	urldate = {2021-07-21},
+	booktitle = {Advanced {Information} {Networking} and {Applications}},
+	publisher = {Springer International Publishing},
+	author = {Viegas, Pablo B. and de Castro, Ariel G. and Lorenzon, Arthur F. and Rossi, Fábio D. and Luizelli, Marcelo C.},
+	editor = {Barolli, Leonard and Woungang, Isaac and Enokido, Tomoya},
+	year = {2021},
+	doi = {10.1007/978-3-030-75100-5_17},
+	note = {Series Title: Lecture Notes in Networks and Systems},
+	pages = {181--194},
+	file = {Viegas et al. - 2021 - The Actual Cost of Programmable SmartNICs Diving .pdf:/home/prateeks/Zotero/storage/HDGWLTKY/Viegas et al. - 2021 - The Actual Cost of Programmable SmartNICs Diving .pdf:application/pdf},
+}
+
+
+@inproceedings{firestone2018azure,
+  title={Azure accelerated networking: Smartnics in the public cloud},
+  author={Firestone, Daniel and Putnam, Andrew and Mundkur, Sambhrama and Chiou, Derek and Dabagh, Alireza and Andrewartha, Mike and Angepat, Hari and Bhanu, Vivek and Caulfield, Adrian and Chung, Eric and others},
+  booktitle={15th USENIX Symposium on Networked Systems Design and Implementation (NSDI 18)},
+  pages={51--66},
+  year={2018}
+}
+
+@inproceedings{yang2020large,
+  title={A large scale analysis of hundreds of in-memory cache clusters at Twitter},
+  author={Yang, Juncheng and Yue, Yao and Rashmi, KV},
+  booktitle={14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20)},
+  pages={191--208},
+  year={2020}
+}
+
+
+@article{nitu2018working,
+  title={Working set size estimation techniques in virtualized environments: One size does not fit all},
+  author={Nitu, Vlad and Kocharyan, Aram and Yaya, Hannas and Tchana, Alain and Hagimont, Daniel and Astsatryan, Hrachya},
+  journal={Proceedings of the ACM on Measurement and Analysis of Computing Systems},
+  volume={2},
+  number={1},
+  pages={1--22},
+  year={2018},
+  publisher={ACM New York, NY, USA}
+}
+
+@misc{locust,
+  title        = {Locust: A modern load testing framework},
+  author={Locust},
+  howpublished = {\url{https://locust.io/}}
+}
+
+@misc{cloudflare-workers,
+title={Cloudflare Workers},
+howpublished={\url{https://blog.cloudflare.com/introducing-cloudflare-workers/}}
+}
+
+
+@misc{lambda-edge,
+title={AWS Lambda@Edge, 
+howpublished={\url{https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-examples.html}}
+}
+}
+
+@misc{azure-iot-edge,
+title={Azure IoT Edge},
+howpublished={\url{https://azure.microsoft.com/en-us/services/iot-edge/}}
+}
+
+@misc{wasi,
+title={WebAssembly System Interface},
+howpublished={\url{https://wasi.dev/}}}
+
+@misc{singularity-net,
+title={SingularityNET},
+howpublished={\url{https://public.singularitynet.io/whitepaper.pdf}}}
+
+
+
+@inproceedings{vid-edge-serverless-mmsys21,
+author = {Zhang, Miao and Wang, Fangxin and Zhu, Yifei and Liu, Jiangchuan and Wang, Zhi},
+title = {Towards Cloud-Edge Collaborative Online Video Analytics with Fine-Grained Serverless Pipelines},
+year = {2021},
+isbn = {9781450384346},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3458305.3463377},
+doi = {10.1145/3458305.3463377},
+abstract = {The ever-growing deployment scale of surveillance cameras and the users' increasing
+appetite for real-time queries have urged online video analytics. Synergizing the
+virtually unlimited cloud resources with agile edge processing would deliver an ideal
+online video analytics system; yet, given the complex interaction and dependency within
+and across video query pipelines, it is easier said than done. This paper starts with
+a measurement study to acquire a deep understanding of video query pipelines on real-world
+camera streams. We identify the potentials and practical challenges towards cloud-edge
+collaborative video analytics. We then argue that the newly emerged serverless computing
+paradigm is the key to achieve fine-grained resource partitioning with minimum dependency.
+We accordingly propose CEVAS, a Cloud-Edge collaborative Video Analytics system empowered
+by fine-grained Serverless pipelines. It builds flexible serverless-based infrastructures
+to facilitate fine-grained and adaptive partitioning of cloud-edge workloads for multiple
+concurrent query pipelines. With the optimized design of individual modules and their
+integration, CEVAS achieves real-time responses to highly dynamic input workloads.
+We have developed a prototype of CEVAS over Amazon Web Services (AWS) and conducted
+extensive experiments with real-world video streams and queries. The results show
+that by judiciously coordinating the fine-grained serverless resources in the cloud
+and at the edge, CEVAS reduces 86.9% cloud expenditure and 74.4% data transfer overhead
+of a pure cloud scheme and improves the analysis throughput of a pure edge scheme
+by up to 20.6%. Thanks to the fine-grained video content-aware forecasting, CEVAS
+is also more adaptive than the state-of-the-art cloud-edge collaborative scheme.},
+booktitle = {Proceedings of the 12th ACM Multimedia Systems Conference},
+pages = {80–93},
+numpages = {14},
+keywords = {cloud-edge collaboration, serverless computing, video analytics},
+location = {Istanbul, Turkey},
+series = {MMSys '21}
+}
+
+@inproceedings{suresh2019fnsched,
+  title={Fnsched: An efficient scheduler for serverless functions},
+  author={Suresh, Amoghvarsha and Gandhi, Anshul},
+  booktitle={Proceedings of the 5th International Workshop on Serverless Computing},
+  pages={19--24},
+  year={2019}
+}

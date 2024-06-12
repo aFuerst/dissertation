@@ -1,0 +1,44 @@
+\vspace*{-0.2cm}
+\section{Evaluation}
+\label{sec:eval}
+We evaluate our load-balancing policy (RLU) using the OpenWhisk implementation and a simulation implementation of the same policies. 
+Our primary goal is to quantify the impact of different load-balancing policies on function latencies under varying load conditions. 
+
+% 1. policy impact on global latency
+% 2. worker load impact on functions
+% 3. policy impact on worker load
+% 4. policy effectiveness under varied load conditions
+
+% \subsection{Research Questions}
+% \begin{enumerate}
+% \item Locality and load are the two counter-prevailing parameters, just like recency and frequency for caching. ARC balances the two via shadow caches which capture the ``regret''. Can we do the same? Can we auto-tune the locality/load importance? So just have one parameter, pfwd.
+% \item What can be used as feedback to auto-adjust the paramter(s)?  hit-rate? 
+% \item Complexity and information in LB decision making: What is the effect of various pieces of information such as load, cold/warm ratio, hit-rate?
+% \item Role of randomness. How to use it effectively? Wow eps-random doesnt work at all. Thus our combination of locality and randomness is key. Also too many popular functions getting randomly forwarded is BAD. 
+% \item How important is staleness of loads? 
+% \item Which functions are affected the most by load and locality (cold/warm). 
+% \item Chain effects. How is locality and hit-rate affected by chain length?
+% \item Regret. When passing over a server, what is the empirical regret? Since we cant go back.
+% \item Is SHARDS needed or can we store IAT of all? What is the difference in iat curves and how much does it impact performance? 
+% \item How does RLU perform under increasing load?
+% \item What is the effect of memory size and locality?
+% \item Evaluation: Single trace but different ordered subsets of it? Having fewer and fewer popular functions?
+% \item Effect of available CPUs
+% \item Effect of smaller servers
+% \item Effect of available memory and miss-rate 
+% \end{enumerate}
+
+% \subsection{Observations}
+
+% \begin{enumerate}
+% \item eps-greedy doesnt preserve locality so is bad 
+% \item CH-Random family does well
+% \item Auto-scaling significantly improves performance. Local minimums avoided 
+% \item 
+% \end{enumerate}
+
+\input{eval-ow}
+
+%\input{eval-sim}
+
+\input{eval-qos}

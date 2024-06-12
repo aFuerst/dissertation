@@ -1,0 +1,138 @@
+\documentclass[compsoc]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+% \documentclass[letterpaper,twocolumn,10pt]{article}
+%\usepackage{usenix-2020-09}
+\usepackage{graphicx}
+\usepackage{subfig}
+%Removing the geometry package used for Tighter Format
+%\usepackage{geometry}
+%\usepackage{times}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{comment}
+\usepackage{booktabs}
+
+\usepackage[noend]{algpseudocode}
+\usepackage[nothing]{algorithm}
+
+% \usepackage[hyphens]{url}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+%\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=footnotesize]{todonotes}
+\newcommand{\todocristina}[1]{\todo[inline, color=blue!60]{\textbf{Cristina}: #1}}
+\newcommand{\todoprateek}[1]{\todo[inline, color=yellow!60]{\textbf{Prateek}: #1}}
+\newcommand{\todojose}[1]{\todo[inline, color=red!60]{\textbf{José}: #1}}
+\newcommand{\todoall}[1]{\todo[inline, color=green!60]{\textbf{Comment}: #1}}
+
+
+%Used only for breaking hypenated URLs
+\usepackage{etoolbox}
+\gappto{\UrlBreaks}{\UrlOrds}
+%
+
+\hypersetup{breaklinks=true}
+
+\urlstyle{same}
+
+\begin{document}
+\date{}
+
+\title{Priority- and Locality-aware Load Balancing For Serverless Clusters}
+% \title{Serverless Cluster Management using Locality and Stale-load aware Policies}
+% \title{Combining Locality and Stale-load awareness for Serverless Load Balancing}
+
+% ABOUT AUTHOR ORDER: I am using the one we had discussed months ago. We can change it to, for example, the alternate author order shown below.
+%Alternate author order based 100% on contribution: Prateek, Cristina, Alexandre, José, Robinson
+% \author{Alexander Fuerst,~\IEEEmembership{Student Member,~IEEE,}
+%         Jos\'{e} Viteri,
+%         Robinson Flores,
+%         Prateek Sharnma,~\IEEEmembership{Member,~IEEE,}
+%         Cristina L. Abad,~\IEEEmembership{Senior Member,~IEEE,}%% <-this % stops a space
+% \IEEEcompsocitemizethanks{\IEEEcompsocthanksitem A. Fuerst and P. Sharma are with Indiana University, Bloomington-USA\protect\\
+% % note need leading \protect in front of \\ to get a newline within \thanks as
+% % \\ is fragile and will error, could use \hfil\break instead.
+% E-mail: \{alfuerst,prateeks\}@iu.edu
+% \IEEEcompsocthanksitem J. Viteri, R. Flores and C. Abad are with Escuela Superior Politecnica del Litoral, Guayaquil-Ecuador.\protect\\
+% E-mail: \{javiteri,rjflores,cabadr\}@espol.edu.ec}% <-this % stops an unwanted space
+% %\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}
+% }
+\author{Alexander Fuerst,
+        Prateek Sharnma,
+        Cristina L. Abad}
+      
+%\IEEEcompsocitemizethanks{\IEEEcompsocthanksitem A. Fuerst and P. Sharma are with Indiana University, Bloomington-USA\protect\\
+% note need leading \protect in front of \\ to get a newline within \thanks as
+% \\ is fragile and will error, could use \hfil\break instead.
+
+%      E-mail: \{alfuerst,prateeks\}@iu.edu
+%\IEEEcompsocthanksitem C. Abad is with Escuela Superior Politecnica del %Litoral (ESPOL), Guayaquil-Ecuador.\protect\\
+%E-mail: cabadr@espol.edu.ec}% <-this % stops an unwanted space
+%\thanks{Manuscript received April 19, 2005; revised August 26, 2015.}
+%}
+
+
+\maketitle
+
+\begin{abstract}
+  \input{abstract}
+\end{abstract}
+
+
+
+\input{intro.tex}
+
+\input{bg}
+
+\input{challenges}
+
+% case for priorities?
+
+\input{part-motiv}
+
+\input{design.qos}
+
+%\input{qos-policy}
+
+\input{implementation}
+
+\input{eval}
+
+\input{related}
+
+\input{conclusion}
+
+% use section* for acknowledgment
+\ifCLASSOPTIONcompsoc
+  % The Computer Society usually uses the plural form
+  \section*{Acknowledgments}
+\else
+  % regular IEEE prefers the singular form
+  \section*{Acknowledgment}
+\fi
+The authors would like to thank Jose Viteri and Robinson Flores from ESPOL, who helped analyze the Azure trace data with respect to burstiness and workload characterization of high- versus low-priority functions (Figure~\ref{fig:bursty:allworkloads} and Section~\ref{sec:motivation:workload}).
+% This work was funded by NSF OAC-ICICLE 
+
+
+{
+\bibliographystyle{acm}
+\interlinepenalty=10000 %%%%For fixing url-related errors only 
+\bibliography{faas,faas-asplos,lb,differentiated}
+%\bibliography{bagsjobs}
+}
+
+\input{authorbios}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

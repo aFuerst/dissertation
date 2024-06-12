@@ -1,0 +1,140 @@
+\section{Design}
+
+In this section, we describe the load-balancing algorithm which is locality, load, and burst aware.
+
+\subsection{Design Criteria}
+\begin{enumerate}
+\item Locality aware 
+\item Burst tolerance 
+\item Doesnt require Consistent global state of containers
+\item Tolerant to stale loads
+\item Practical
+\item Not fully centralized: Partially decentralized. Important for scaling since replies go through LB as well and has to keep track of a lot of state. 
+\end{enumerate}
+
+\subsection{High-level overview}
+Derived from CH-BL, with its guarantees.
+
+
+\subsection{Locality with Bounded Loads}
+
+Forward functions on overflow to the next one in the ring.
+Advantages over other methods. Locality is very important. So if we ``overflow'' a server, there is a higher chance of a keep-alive cache ``hit'' 
+
+We combine bounded loads and consistent hashing into a \textbf{CH-BL} policy.
+Starting with the function's hash chosen node, we loop around the ring looking for a server who's load is below the bounded ceiling.
+The first matching server is sent the invocation. 
+Algorithm~\ref{algo:BoundedLoadsPolicy}
+
+\begin{figure}
+  \begin{algorithmic}[1]
+    \State $bounded\_ceil \gets 1.2$
+    \For{$Server \gets ServerRing$}
+      \State $L \gets Server.load$
+      \If{$L \leq bounded\_ceil$}
+        \State \textbf{Send to server Server}
+      \EndIf
+    \EndFor
+    \State \textbf{Send to random server}
+  \end{algorithmic}
+  \caption{Bounded Loads Locality Policy}
+\label{algo:BoundedLoadsPolicy}    
+\end{figure}
+
+\subsection{Caching Aware Forwarding}
+
+% Impact of the warm starts is different for different functions. And so we use this information to make the forwarding decision. 
+% FaasCache \cite{TODO} established not only that functions benifit from warm starts, but vary greatly between their cold and warm runtimes.
+% It has been well established that functions benefit from being run warm, and that better cache eviction choices can improve warm hits.
+Different functions can gain more from running warm than others, knowledge that is used in our FaasCache eviction strategy.
+Our load balancer can then assume a function previously ran on a certain worker will still be warm unless under high load.
+% If we mimic our eviction decision in our load balancing, we can better identify when locality has been trumped by high server load.   
+% When the load  load balancer can rely on FaasCache locality keeping a function warm unless under very heavy loads. 
+Unless the server's load is extremely high, we will gain benefit from the function running as a warm-hit, betting on locality, than a cold hit on a less loaded server.
+We use the warm run speedup of $cold\_time / warm\_time$ as a load bound on our forwarding decision.
+% The rule is ... \textbf{Derivation goes here}
+This ratio can be extreme for some functions, with a warm time being an order of magnitude lower or more than the cold time, and must be curtailed to prevent skewed functions spamming their hashed server.
+% Upper limit on this is currently 2.2 What's the justification? Linear slowdown limit? 
+% Load of 1000 is clearly suboptimal. Plus need to think about the future as well. If it is bursty then we will probabilistically forward it anyways. So in the long run, better to spread it around.
+To accomplish this we limit the \textit{slowdown} to some factor of \textit{bounded\_ceil} (typically 1-1.5) as seen in Algorithm~\ref{algo:ConsistentCachePolicy}.
+We compute the predicted slowdown for the function's cold start and assign it to the first server on the ring whose load is less than the function's slowdown threshold.
+% or expecting a warm hit on the server under quest 
+% Thus the regret is a greedy regret and does not take into account future invocations. 
+
+
+\begin{figure}
+  \begin{algorithmic}[1]
+    \State $slowdown \gets 1.2*(bounded\_ceil+1)$
+    \If{$warm\_time \neq 0$}
+      \State $r\_orig \gets cold\_time / warm\_time$
+      \State $slowdown \gets min(r\_orig, slowdown)$
+    \EndIf
+    \State $thresh \gets slowdown-1.0$
+    \For{$Server \gets ServerRing$}
+      \State $L \gets Server.load$
+      \If{$L - thresh \leq 0$}
+        \State \textbf{Send to server Server}
+      \EndIf
+    \EndFor
+    \State \textbf{Send to random server}
+  \end{algorithmic}
+  \caption{Default Consistent Caching Policy}
+\label{algo:ConsistentCachePolicy}    
+\end{figure}
+
+\subsection{Handling Bursts}
+
+Functions come in a variety of frequency classes and are also prone to unpredictable burstiness \cite{TODO}.
+Identifying these bursts and both keeping latency for such "popular" functions low and preventing them from negatively impacting co-located functions is critical.
+% Very popular functions can present problems.
+We use two strategies:
+1. Identify popular functions in a low-overhead online manner.
+1a. Use this information to inform the load estimate. Due to the problem of \textbf{stale loads.}
+2. Extreme overload: pick random server if going around the horn. 
+
+\subsubsection{Popular function detection with Spatial Sampling}
+
+Our solution to identifying popular functions and function bursts is inspired by SHARDS \cite{shards}.
+We can identify the top \textit{p} percentile of functions, or filter on some IAT threshold, depending on what is desired. 
+We use the former to avoid unnecessary hyperparamaters and, following SHARDS, randomly sampling invocations to track individual IATs.
+This tracking is simplified by only recording the most recent access time, and then computing the IAT as an estimated moving average of the current IAT and  $now - last_access$.
+These values are tracked for every function, and functions in the top $20^th$ percentile of IATs are considered \textbf{popular}.
+
+\subsubsection{Load error correction}
+
+Popular functions represent such a large percentage of invocations yet a small number of functions they can be safely spread across many servers without causing cold starts.
+A fair load balancing algorithm \textbf{must} spread popular functions to ensure QoS for less frequent functions.
+To achieve this, we introduce Gaussian noise to the forwarding decision.
+% is added to the load based on the iat and the rate. Per-function noise. Can also be just a per-server estimate if desired. 
+We compute the global arrival rate, then estimate the per-server arrival rate and the effect an invocation has on server load, following the steps in Algorithm~\ref{algo:PopularRLUPolicy}.
+For each server we then sample noise from the normal distribution who's mean is centered on the \textit{anticip\_load}, and add that to the server's tracked load to get \textit{Lnoise}.
+As with the previous policies, we iterate along the ring of servers until we find one who's \textit{Lnoise} is less than the global \textit{popular\_threshold}.
+
+% \textbf{Question 1:} Why not do the stale load error correction for all functions, why just the popular ones?
+
+\begin{figure}
+  \begin{algorithmic}[1]
+    \State $bounded\_ceil \gets 1.5$
+    \State $arrival\_rate \gets 1.0 / avg\_iat$
+    \State $server\_arrival\_rate \gets arrival\_rate / len(workers)$
+    \State $anticip\_load \gets server\_arrival\_rate / worker\_cpus$
+    \For{$Server \gets ServerRing$}
+      \State $L \gets Server.load$
+      \State $Lnoise \gets L + \mathcal{N}(\mu=anticip\_load,\,\sigma=0.1)$
+      \If{$Lnoise \leq bounded\_ceil$}
+        \State \textbf{Send to server Server}
+      \EndIf
+    \EndFor
+    \State \textbf{Send to random server}
+    \end{algorithmic}
+\caption{Random Load Update Policy for popular functions}
+\label{algo:PopularRLUPolicy}    
+\end{figure}
+
+
+\subsection{Putting it all together}
+
+Unpopular functions still use Algorithm~\ref{algo:ConsistentCachePolicy}.
+In all cases, if we exhaust the list of servers trying to find one with low load, we randomly assign the invocation to a server.
+This only occurs in the most extreme cases of system load and also prevents spamming a popular server in that same scenario.
+

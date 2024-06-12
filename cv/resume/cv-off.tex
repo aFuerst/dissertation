@@ -1,0 +1,83 @@
+\documentclass[paper=a4,fontsize=11pt]{scrartcl} % KOMA-article class
+                            
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{hyperref}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{amsmath,amsfonts,amsthm}     % Math packages
+\usepackage{graphicx}                    % Enable pdflatex
+\usepackage[svgnames]{xcolor}            % Colors by their 'svgnames'
+\usepackage{geometry}
+    \textheight=800px                    % Saving trees ;-)
+    \geometry{margin=0.5in}
+\usepackage{url}
+\usepackage{multicol}
+
+\usepackage[none]{hyphenat}%%%%
+
+\input{shared/entries.tex}
+
+\fontfamily{lmr}\selectfont
+\frenchspacing              % Better looking spacings after periods
+\pagestyle{empty}           % No pagenumbers/headers/footers
+
+%%% Custom sectioning (sectsty package)
+%%% ------------------------------------------------------------
+\usepackage{sectsty}
+
+\sectionfont{%			            % Change font of \section command
+    \usefont{OT1}{lmr}{b}{n}%		% bch-b-n: CharterBT-Bold font
+    \sectionrule{0pt}{0pt}{-5pt}{3pt}}
+
+%%% Begin Document
+%%% ------------------------------------------------------------
+\begin{document}
+% \vspace*{-1.5cm}
+\MyName{Alex Fuerst}
+
+\sepspace
+
+\begin{center}
+\phone~\par\noindent
+\email~$\mid$ \linkedin~$\mid$ \github~$\mid$ \website
+  % \url{fuersta.2013@gmail.com} $\mid$ \url{linkedin.com/in/alex-fuerst} $\mid$ \url{github.com/aFuerst} $\mid$ \url{afuerst.github.io}
+\end{center}
+
+\NewPart{Objective}
+
+\ObjectiveStatement
+% Experienced systems engineer with experience in both low-level virtualization and OS, and high-level distributed systems looking to tackle inefficiencies and problems of modern computing environments who can analyze and communicate findings to general audiences.
+% I want to tackle the inefficiencies of systems computing at any scale, and look to enable new computing opportunities with advanced designs and technologies.
+
+% My experience ranges from low level virtualization and operating systems to high level distributed and cloud computing as helped me accomplish this in several projects and publications.
+
+% The tech stack at all levels, from Virtualization and OS, to Distributed Systems, are prime for accelerating cloud computing.
+
+\Education
+\sepspace
+
+\Publications
+\sepspace
+
+\WorkExperience
+\sepspace
+
+\Projects
+\sepspace
+
+\Skills
+\sepspace
+
+\Presentations
+\sepspace
+
+\Awards
+\sepspace
+
+\Courses
+\sepspace
+
+\Activities
+
+\end{document}
+

@@ -1,0 +1,580 @@
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{hyperref}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{amsmath,amsfonts,amsthm}     % Math packages
+\usepackage{graphicx}                    % Enable pdflatex
+\usepackage[svgnames]{xcolor}            % Colors by their 'svgnames'
+\usepackage{geometry}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{etaremune}
+\usepackage[none]{hyphenat}%%%%
+\usepackage{comment}
+\usepackage{enumitem}
+
+%%% Custom sectioning (sectsty package)
+%%% ------------------------------------------------------------
+\usepackage{sectsty}
+
+
+%%% Macros
+%%% ------------------------------------------------------------
+\newcommand{\sysname}{Il\'{u}vatar} % \xspace}
+
+\newcommand{\phone}{(440) - 669 - 5865}
+\newcommand{\email}{\url{fuersta.2013@gmail.com}}
+\newcommand{\linkedin}{\url{linkedin.com/in/alex-fuerst}}
+\newcommand{\github}{\url{github.com/aFuerst}}
+\newcommand{\website}{\url{afuerst.github.io}}
+
+\newlength{\spacebox}
+\settowidth{\spacebox}{8888888888}			% Box to align text
+\newcommand{\sepspace}{\vspace*{0 mm}}		% Vertical space macro
+
+\newcommand{\MyName}[1]{ % Name
+        \Huge \usefont{OT1}{lmr}{b}{n} \hfill \centerline{#1}
+        \par \normalsize \normalfont}
+        
+\newcommand{\NewPart}[1]{
+\vspace*{-.25cm}
+\section*{\uppercase{#1}}}
+
+\newcommand{\SkillsEntry}[2]{      % Same as \PersonalEntry
+        \noindent\hangindent=2em\hangafter=0 % Indentation
+        \parbox{\spacebox}{        % Box to align text
+        \textit{#1:}}			   % Entry name (birth, address, etc.)
+        \hspace{1.5em} #2 
+        \normalsize \par}    % Entry value	
+
+\newcommand{\WorkEntry}[6]{				  % Same as \EducationEntry
+        \noindent \textit{#4} \hfill \textit {#5}   \par       % Company % Location
+        \noindent \textbf{#1} \hfill      % Jobname
+        \vspace*{-.1cm}
+        {#2} - {#3} \par
+        \noindent\hangindent=2em\hangafter=0 \small #6 % Description
+        \normalsize \par}
+
+\newcommand{\WorkName}[2]{
+        \noindent \textit{#1} \hfill \textit {#2}   
+        \normalsize \par       % Company % Location
+        }
+
+\newcommand{\PositionEntry}[2]{
+        \noindent \textbf{#1} \hfill      % Jobname
+        {#2} \normalsize  \par  % Duration
+}
+
+\newcommand{\JobDesc}[1]{
+    \noindent\hangindent=2em\hangafter=0 \small #1 \normalsize % Description
+}
+
+\newcommand{\AwardEntry}[3]{
+    \noindent \textit{#1} % institution
+    \textbf{#2}
+     \hfill	\text{#3}				% name
+     \normalsize \par}
+
+\newcommand{\ProjectEntry}[2]{
+        \noindent \textbf{#1} \par      % Title
+        \noindent\hangindent=2em\hangafter=0 \small #2% Description
+        \normalsize \par}
+
+\newcommand{\CourseworkEntry}[2]{
+    \noindent \textbf{#1} \par      % Title
+    \noindent\hangindent=2em\hangafter=0 \small #2% Description
+    \normalsize \par}
+
+\newcommand{\PresentationEntry}[4]{
+    \noindent #1. % Name
+    #2. % Conference & date
+    \href{#3.}{Slides} % Slides URL
+    \href{#4.}{Video} % Presentation video URL
+    \normalsize \par \vspace{2pt}}
+
+\newcommand{\PresentationEntryNoVid}[3]{
+      \noindent #1. % Name
+      #2. % Conference & date
+      \href{#3.}{Slides} % Slides URL
+      \normalsize \par \vspace{2pt}}
+        
+\newcommand{\EducationEntry}[5]{
+  \noindent \textbf{#1}     % Study
+  \hfill {#2} \par
+  \textit{#3} \hfill {#4}	%school  % award
+  \noindent\hangindent=2em\hangafter=0 \small #5% Description
+  \normalsize}
+
+\newcommand{\PresentationList}[1]{
+  \noindent\hangindent=3em\hangafter=0  \small Presentations: \textit {#1} % List
+  \hfill \normalsize}
+
+  \newcommand{\CourseList}[1]{
+  \noindent\hangindent=3em\hangafter=0  \small Courses: \textit {#1} % List
+  \hfill \normalsize}
+  
+\newcommand{\ObjectiveStatement} {
+\noindent Systems engineer with five years' development experience, expertise in low-level virtualization, operating systems, and high-level distributed systems, who can analyze and communicate findings to general audiences.
+Looking to design solutions to the inefficiencies and problems of modern computing in cloud-scale environments.
+}
+
+\newcommand{\Education} {
+  \NewPart{Education}
+
+  \EduPhd
+
+  \EduMs
+  
+  \EduBs 
+  
+  \EducationEntry{Diploma with Honors}{May 2013}{Medina High School}{GPA 3.6}  
+
+}
+
+\newcommand{\EduPhd} {
+  \EducationEntry{Computer Engineering, PhD}{Expected May 2024}{Indiana University, Intelligent Systems Engineering}{Major GPA 3.9}  
+}
+\newcommand{\EduMs} {
+  \EducationEntry{Computer Engineering, MS}{Dec 2023}{Indiana University, Intelligent Systems Engineering}{Major GPA 3.9}
+}
+\newcommand{\EduBs} {
+  \EducationEntry{Computer Science, Bachelor of Science}{May 2017}{Xavier University}{Major GPA 3.6}
+}
+
+\newcommand{\MyAuth}[1]{\textbf{#1}}
+\newcommand{\PublicationEntry}[3]{
+    \noindent #1. % Authors
+    #2. % Title
+    #3 % Conference & date
+    \normalsize \par \vspace{2pt}}
+\newcommand{\Conference}[2]{
+\textit{#1}. Acceptance Rate = #2\%}
+\newcommand{\ShortConference}[1]{
+\textit{#1}.}
+\newcommand{\HPDC}[2] {\Conference{International ACM Symposium on High-Performance Parallel and Distributed Computing [HPDC] #1}{#2}}
+\newcommand{\ASPLOS}[2] {\Conference{International Conference on Architectural Support for Programming Languages and Operating Systems [ASPLOS] #1}{#2}}
+\newcommand{\HpdcShort}[1] {\ShortConference{Symposium on High-Performance Parallel and Distributed Computing #1}}
+\newcommand{\AsplosShort}[1] {\ShortConference{Conference on Architectural Support for Programming Languages and Operating Systems #1}}
+
+\newcommand{\Publications} {
+  \NewPart{Publications}
+  \begin{etaremune}[leftmargin=14pt]
+    \setlength\itemsep{0em}
+    \item \PublicationEntry{\MyAuth{Alexander Fuerst}, Abdul Rehman, and Prateek Sharma}
+    {\sysname~: A Fast Control Plane for Serverless Computing}
+    {\HPDC{2023}{21}}
+
+    \item \PublicationEntry{\MyAuth{Alexander Fuerst}, and Prateek Sharma}
+    {Locality-aware Load-Balancing For Serverless Clusters}
+    {\HPDC{2022}{19}}
+
+    \item \PublicationEntry{\MyAuth{Alexander Fuerst}, Stanko Novakovic, Inigo Goiri, Gohar Irfan Chaudhry, Prateek Sharma, Kapil Arya, Kevin Broas, Eugene Bak, Mehmet Iyigun, and Ricardo Bianchini}
+    {Memory-Harvesting VMs in Cloud Platforms}
+    {\ASPLOS{2022}{20}}
+
+    \item \PublicationEntry{\MyAuth{Alexander Fuerst}, and Prateek Sharma}
+    {FaasCache: Keeping Serverless Computing Alive With Greedy-Dual Caching}
+    {\ASPLOS{2021}{18.8}}
+
+    \item \PublicationEntry{\MyAuth{Alexander Fuerst}, Ahmed Ali-Eldin, Prashant Shenoy, and Prateek Sharma}
+    {Cloud-scale VM-deflation for Running Interactive Applications On Transient Servers}
+    {\HPDC{2020}{22}}
+  \end{etaremune}  
+}
+
+\newcommand{\ResearchExpEntry}[2]{
+        \noindent \textbf{#1} \par      % Title
+        \vspace*{-.0cm}
+        \noindent\hangindent=2em\hangafter=0 \small #2% Description
+        \normalsize \par}
+
+% \ResearchExpEntry{Serverless Scheduling and GPU Acceleration}
+% {Designed a load balancing algorithm to optimize locality while preventing worker overloading, providing 2x reduction in latency.
+% Created a first of its kind caching policy in FaaS 
+% Unique 
+% Published at HPDC 2023, ASPLOS 2021.}
+
+\newcommand{\IluvatarExp} {
+\ResearchExpEntry{\href{https://github.com/cos-in/iluvatar-faas}{\sysname~Serverless Control Plane}}
+{An open-source, fast, jitter-free Serverless control plane written in $\sim$23k lines of Rust.
+\sysname~gives 100x reduction in p99 latency under high load over competing open-source platforms.
+Combines distributed systems, scheduling, caching, and virtualization techniques to achieve performance.
+Published at \href{https://afuerst.github.io/assets/Il\%C3\%BAvatar.pdf}{HPDC 2023}.}}
+
+\newcommand{\FaaSCtrlPlaneExp} {
+\ResearchExpEntry{\href{https://github.com/cos-in/iluvatar-faas}{\sysname~Control Plane \& GPU Acceleration for FaaS}}
+{An open-source, fast, jitter-free Serverless control plane written in $\sim$23k lines of Rust.
+\sysname~gives 100x reduction in p99 latency under high load over competing open-source platforms.
+% Combines distributed systems, scheduling, and virtualization techniques to achieve performance.
+Enabled control plane management of GPU memory to reuse GPU function containers and improve scheduling for 14x better latency.
+Published at \href{https://afuerst.github.io/assets/Il\%C3\%BAvatar.pdf}{HPDC 2023}.}}
+
+\newcommand{\FaaSExp} {
+\ResearchExpEntry{Scheduling and Mitigating Cold Starts in Serverless Clusters}
+{Designed a load balancing algorithm to optimize cluster locality and avoid worker overloading, providing 2x latency reduction.
+Added intelligence to systems to handle the bursty and heterogeneous traffic ubiquitous in FaaS.
+Created container caching strategy to reduce resource usage by 3x in busy workers.
+Published at \href{https://afuerst.github.io/assets/FaasCache.pdf}{ASPLOS 2021}, \href{https://afuerst.github.io/assets/lbfaas.pdf}{HPDC 2022}.}}
+
+\newcommand{\FaasLBExp} {
+\ResearchExpEntry{Locality and Load-Balancing for Serverless Clusters}
+{Designed a drop-in replacement load balancing algorithm that optimizes for locality while preventing worker overloading.
+Load balancing algorithm provided a 2x reduction in function latency over the existing algorithms.
+It can handle bursty or heterogeneous traffic and supports cluster auto-scaling under high load. 
+Published at \href{https://afuerst.github.io/assets/lbfaas.pdf}{HPDC 2022}.}
+}
+
+\newcommand{\DeflationExp} {
+\ResearchExpEntry{Cloud-scale VM Deflation}
+{Used hypervisor mechanisms to create deflatable (dynamically resourced) VMs, to reduce cluster underutilization.
+Showed that microservices inside such VMs have negligible overhead and can adjust to resource changes.
+Examined policies to allow 50\% resource overcommitment while keeping cluster performant.
+Published at \href{https://afuerst.github.io/assets/deflation.pdf}{HPDC 2020}.}}
+
+\newcommand{\CloudResourceExp} {
+\ResearchExpEntry{Cloud Cluster Resource Utilization}
+{Improved para-virtual interface between host \& guest for better dynamic resource allocation support.
+% Used hypervisor mechanisms to create deflatable (dynamically resourced) VMs, to reduce cluster underutilization.
+% Showed that microservices inside such VMs have negligible overhead and can adjust to resource changes.
+% Examined policies to 
+Designed cooperative policies to allow 50\% resource overcommitment with minimal application interference.
+Improved memory utilization inside Azure by 25\% with no impact to guest VMs.
+Published at \href{https://afuerst.github.io/assets/deflation.pdf}{HPDC 2020} \href{https://afuerst.github.io/assets/Memory-Harvesting.pdf}{ASPLOS 2022}.}}
+
+
+\newcommand{\GoogIntern} {
+  \WorkEntry{Software Engineering Intern}{May 2023}{August 2023}{Google, Inc.}{Mountain View, California}{
+    \begin{itemize}
+    \setlength\itemsep{0em}
+    \item Delved into performance of advanced Linux and KVM-based virtualization technologies under cloud workloads
+    \item Explored techniques to seamlessly upgrade VMM and hypervisor with zero downtime to guest OS and applications
+    \item Modified Linux kernel, KVM, and Cloud Hypervisor VMM to test possibilities for seamless upgrade
+    \item Developed proof-of-concept experiments to show feasibility of designed techniques
+    \end{itemize}
+    }
+}
+\newcommand{\GoogCloudIntern} {
+  \WorkEntry{Software Engineering Intern}{May 2023}{August 2023}{Google, Inc.}{Mountain View, California}{
+    \begin{itemize}
+    \setlength\itemsep{0em}
+    \item Delved into performance of advanced Linux and KVM-based virtualization technologies under cloud workloads
+    \item Explored techniques to seamlessly upgrade VMM and hypervisor with zero downtime to guest OS and applications
+    \item Conferred with multiple teams on design of how conduct zero-downtime upgrades of hosts with VMs 
+    \item Modified Linux kernel, KVM, and Cloud Hypervisor VMM in proof-of-concept tests for designs
+    % \item Developed proof-of-concept experiments to show feasibility of designed techniques
+    \end{itemize}
+    }
+}
+\begin{comment}
+At Google I worked on advanced KVM-based virtualization technologies with their internal Linux kernel memory management team, under the supervision of Pasha Tatashin. 
+We examined the causes of virtual machine guest exits to the host hypervisor, and ways of minimizing such exits. 
+Then we designed techniques to seamlessly upgrade the hosting virtual machine monitor and hypervisor without interruption of the running guest.
+I developed proof-of-concept experiments by modifying the Rust-based Cloud Hypervisor as VMM, KVM as hypervisor, and Linux as the guest OS to show feasibility of our techniques.
+\end{comment}
+
+
+\newcommand{\CloudMsftIntern} {
+  \WorkEntry{Research Intern}{May 2021}{August 2021}{Microsoft Research}{Redmond, Washington}{
+  \begin{itemize}
+  \setlength\itemsep{0em}
+  \item Analyzed modern hypervisor and control plane's performance under strenuous runtime conditions
+  % \item Modified cloud control plane, hypervisor, and guest OS to improve cluster memory management
+  \item Enhanced production Azure control plane with active memory management capabilities
+  \item Collaborated with Azure team to alleviate production contentions and plan rollout across clusters
+  \item Improved resource utilization by 20\% in Azure without impact to hosted virtual machines or applications
+  % \item First author on published research paper that resulted from this work
+  \end{itemize}
+  }
+}
+\begin{comment}
+My internship at Microsoft Research was targeted at improving physical memory utilization inside Microsoft Azure. 
+The goal was to enable running low-priority virtual machines (VMs) using the extra resources, but be able to quickly transfer the resources to regular VMs when they were started.
+To accomplish this, we modified both the hypervisor and guest OS improving guest VM memory adjustment performance.
+We also created a para-virtual interface to optimize guest OS and internal application's runtime performance and ability to adjust to memory pressure.
+These resulted in improved resource utilization in Azure by 20% with no impact to hosted VMs or applications.
+All of this work culminated in a research paper in which I was the first author, and then presented by me at ASPLOS 2022 in Switzerland.
+\end{comment}
+\newcommand{\MsftIntern} {
+  \WorkEntry{Research Intern}{May 2021}{August 2021}{Microsoft Research}{Redmond, Washington}{
+  \begin{itemize}
+  \setlength\itemsep{0em}
+  \item Analyzed modern hypervisor and control plane's performance under strenuous runtime conditions
+  % \item Modified hypervisor and guest OS to improve guest VM memory resizing
+  \item Modified Azure control plane, hypervisor, and guest OS to improve cluster virtual memory management by 50\%
+  \item Collaborated with Azure team to alleviate production contentions and plan rollout across clusters
+  \item Improved resource utilization by 20\% in Azure without impact to hosted virtual machines or applications
+  % \item First author on published research paper that resulted from this work
+  \end{itemize}
+  }
+}
+
+\newcommand{\Hyland} {
+  % \PositionEntry {Developer 1}{2017-2018}
+  % \PositionEntry {Developer 2}{2018-2019}
+  \WorkEntry{Developer 1 \& 2}{June 2017}{July 2019}{Hyland Software}{Westlake, Ohio}{
+  \begin{itemize}
+  \setlength\itemsep{0em}
+  \item Developed features and wrote tests for a cloud application capable of handling thousands of daily users
+  \item Troubleshot complex issues of a multiservice .Net SaaS application running in production
+  \item Refactored monolith application into a microservice design and support autoscaling inside Kubernetes
+  \item Modernized application CI/CD pipeline to halve time-to-deployment for features and enable rollback scenarios
+  \end{itemize}
+  }
+}
+\begin{comment}
+I was a member of the backend team developing a cloud application capable of handling thousands of users.
+Daily tasks included developing new features, fixing bugs found by QA or development, and troubleshooting complex issues of the multi-service application while it was running in production.
+My role evolved into a mixed developer/DevOps role where we planned and designed the breakup of our monolith codebase to run as a series of microservices in Kubernetes.
+I was also responsible for modernizing our CI/CD pipeline which halved time-to-deployment for features and releases, and allowed easy rollback scenarios.
+\end{comment}
+\newcommand{\RaIU} {
+  \WorkEntry{Research Assistant}{August 2021}{Present}{Indiana University}{Bloomington, Indiana}{
+  \begin{itemize}
+  \setlength\itemsep{0em}
+  % \item Identified opportunities for improving cloud computing platforms and distributed systems
+  % \item Developed novel cutting-edge techniques and algorithms to improve the state-of-the-art for computer systems
+  \item Performed advanced research in cloud resource management, serverless computing, and virtualization
+  \item Developed novel techniques and algorithms improving resource utilization and latency in cloud control planes
+  \item Designed experiments to showcase techniques' effectiveness and transform results into actionable data
+  \item Published several first author papers and gave presentations at high-impact conferences
+  \end{itemize}
+  }
+}
+\begin{comment}
+The latter half of my PhD was as a dedicated research assistant under my advisor.
+We would spend time identifying opportunities for enhancing existing systems or potential for entirely new designs. 
+Once a direction was decided, we prototyped our plans in simulation form and implemented them as real-world systems.
+Each new work required planning and executing on a variety of experiments to showcase their effectiveness. 
+My research has spanned from cloud resource management, serverless computing, virtualization, and simulation acceleration.
+These works have resulted in 5 published first author papers and presentations of those papers at several top conferences.
+\end{comment} 
+\newcommand{\AiIU} {
+  \WorkEntry{Associate Instructor}{August 2019}{May 2020}{Indiana University}{Bloomington, Indiana}{
+    \begin{itemize}
+    \setlength\itemsep{0em}
+    \item Assisted with Engineering Cloud Computing \& Distributed Computing Engineering course work
+    \item Created assignments and exams given to students
+    \item Hosted lab and office hours to discuss project design and assist with student questions
+    \end{itemize}
+    }
+}
+
+\newcommand{\WorkExperience} {
+  \NewPart{Experience}
+
+  \GoogIntern
+  \sepspace
+  
+  \MsftIntern
+  \sepspace
+  
+  \RaIU
+  \sepspace
+
+  \AiIU
+  \sepspace
+    
+  \Hyland
+  \sepspace
+  
+  \WorkEntry{Teaching Assistant}{August 2016}{December 2016}{Xavier University} {Cincinnati, Ohio}{
+    \begin{itemize}
+    \setlength\itemsep{0em}
+    \item Work with students during class exercises
+    \item Host office hours answering questions and giving guidance on assignments
+    \end{itemize}
+    }
+  \sepspace
+  
+  \WorkEntry{Student Technician Tier II}{August 2013}{August 2017}{Xavier University} {Cincinnati, Ohio}{
+  \begin{itemize}
+  \setlength\itemsep{0em}
+  \item Troubleshoot complex technology issues and provide onsite service and repair for faculty, staff and public computing
+  \item Provide software, hardware and network problem resolution
+  \item Handle tickets escalated from Tier I
+  \end{itemize}
+  }
+  \sepspace
+  
+  \WorkEntry{NSF REU Researcher}{May 2016}{August 2016}{Salisbury University}{Salisbury, Maryland}{
+  \begin{itemize}
+  \setlength\itemsep{0em}
+  \item Applied emerging parallel computing models using GPU and CPU parallelism with NVIDIA's CUDA
+  \item Tackled data and compute-intensive problems in geographic information systems
+  \item Presented findings to GIS professionals and Salisbury Faculty
+  \end{itemize}
+  }
+  \sepspace
+  
+  \WorkEntry{Paralegal Intern}{August 2012}{June 2013}{Critchfield, Critchfield \& Johnston, Ltd.}{Medina, Ohio}{
+  \begin{itemize}
+  \setlength\itemsep{0em}
+  \item Prepared and delivered documents to county offices
+  \item Finalized legal binders for delivery to clients
+  \end{itemize}
+  }  
+}
+
+\newcommand{\Presentations} {
+  \NewPart{Presentations}
+
+  \begin{itemize}
+    \setlength\itemsep{0em}
+
+    \item \PresentationEntryNoVid{\sysname~: A Fast Control Plane for Serverless Computing}
+    {HPDC 2023}
+    {https://afuerst.github.io/assets/iluvatar-presentation.pptx}
+
+    \item \PresentationEntry{Locality-aware Load-Balancing For Serverless Clusters}
+    {HPDC 2022}
+    {https://afuerst.github.io/assets/faas-lb-presentation.pptx}
+    {https://youtu.be/nEB45\_dtx6U}
+
+    \item \PresentationEntry{Memory-Harvesting VMs in Cloud Platforms}
+    {ASPLOS 2022}
+    {https://afuerst.github.io/assets/5B_0262_Fuerst.pptx}
+    {https://www.youtube.com/watch?v=fvPAzienOTQ}
+
+    \item \PresentationEntry{FaasCache: Keeping Serverless Computing Alive With Greedy-Dual Caching}
+    {ASPLOS 2021}
+    {https://afuerst.github.io/assets/ASPLOS-2021-pres.pptx}
+    {https://www.youtube.com/watch?v=vpP5nROZpDM}
+
+    \item \PresentationEntry{Cloud-scale VM-deflation for Running Interactive Applications On Transient Servers}
+    {HPDC 2020}
+    {https://afuerst.github.io/assets/HPDC-2020-pres.pptx}
+    {https://www.youtube.com/watch?v=gFzaHkM\_1Tg}
+  \end{itemize}
+}
+
+\newcommand{\iluvatar} {
+  \ProjectEntry{\href{https://github.com/cos-in/iluvatar-faas}{\sysname~FaaS Control Plane}}
+  {An open-source, fast, jitter-free control plane for Serverless function execution written in $\sim$23k lines of Rust.
+  \sysname~provides a 3x reduction in overhead compared to popular open-sourced examples under normal load, and under high load has a 100x reduction in p99 latency.
+  Additionally, it enables unique usability and extensibility designed to accelerate FaaS research.}
+}
+
+\newcommand{\faascache} {
+  \ProjectEntry{FaasCache}
+  {Introduced caching insights into the Function-As-A-Service paradigm.
+  Enhanced the open source FaaS application OpenWhisk using Greedy-Dual caching.
+  Reduced cold-start overhead for functions by up to 3x and can reduce constrained system resources by up to 30\%.
+  These high cache reuse results allow for increased ability to serve functions and lower latency for users.}
+}
+
+\newcommand{\compucell} {
+  \ProjectEntry{CompuCell3D Tissue Modeling Parallel Rendering}
+  {CompuCell3D is a 3D modeling software for large-scale cellular, tissue, and biochemical simulation.
+  The modeling steps used an OpenMP Cellular Potts Model algorithm, but the 3D rendering of cell states and positions was done serially.
+  This project re-wrote the rendering code in $\sim$1000 lines of OpenMP C, achieving a near-linear scaling with the increase in threads.
+  Overall, some simulations were accelerated by up to 50\% over the serial implementation.}
+}
+
+\newcommand{\Projects} {
+  \NewPart{Projects}
+
+  \iluvatar
+  
+  \faascache
+  
+  \compucell
+
+  \ProjectEntry{Dynamically Typed Racket Compiler}
+  {A scratch built compiler supporting a subset of statically typed and dynamically typed Racket.}
+  
+  \ProjectEntry{Tensorflow NanoParticle Simulator}
+  {Implementation of the Lennard-Jones potential in a simulated cube and electrostatic forces of colliding ions in a confined nano-channel.
+  THe simulator Achieved performance similar to MPI/C++ code performing the same simulation.}
+  
+  \ProjectEntry{Jae OS}{Just Another Educational Operating System. A port of the Kaya OS project to the new $\mu$ARM emulator. 
+  Wrote the student guide and the canonical implementation of Jae OS.}
+  
+  \ProjectEntry{Kaya OS}{Wrote a complete operating system from scratch. 
+  The final product, in addition to support a multitude of peripheral devices, successfully ran eight concurrent processes, each running in their own virtual address space.}
+  
+  \ProjectEntry{Parallel GIS Raster Calculator}{Developed a tool combining CPU based parallelism and NVIDIA's CUDA technology for GPU calculation for performing GIS raster calculations. 
+  Achieved 2 - 5 times performance increase over traditional analysis tools due to GPU performance.}
+  
+  \ProjectEntry{Eagle Scout Project}{Installed commemorative plaques on veterans’ graves at local cemetery. 
+  Led a group of 15 scouts to plan and accomplish this project.}
+  
+}
+
+\newcommand{\Courses} {
+  \NewPart{Course Work}
+
+  \begin{multicols}{2}
+    \begin{itemize}
+      \setlength\itemsep{0em}
+      \item Engineering Cloud Computing
+      \item Engineering Distributed Systems
+      \item Graph Analytics
+      \item Deep Learning Systems
+      \item Engineering Compilers
+      \item Programming Languages
+    \end{itemize}
+  \vfill\null
+  \columnbreak
+    \begin{itemize}
+      \setlength\itemsep{0em}
+      \item Engineering Operating System
+      \item Simulating Nanoscale Systems
+      \item High Performance Computing
+      \item Computational Modeling for Virtual Tissues % Computational Modeling Methods for Virtual Tissues
+      \item Databases
+      % \item Data Structures \& Algorithms
+    \end{itemize}
+  \vfill\null
+  \end{multicols}
+} 
+
+\newcommand{\ProgrammingSkills} {
+  \SkillsEntry{Programming}{Debugging, Problem Solving, Code Optimization, Git, Agile}
+}
+\newcommand{\LanguagesSkills} {
+  \SkillsEntry{Languages}{Rust, Python, C, C++, C\#, Bash, PowerShell, SQL, \LaTeX} % , Java, Scheme
+}
+\newcommand{\InfrastructureSkills} {
+  \SkillsEntry{Infrastructure}{Kubernetes, Docker, Redis, Octopus Deploy, Ansible, AWS, Azure}
+}
+\newcommand{\TechnologiesSkills} {
+  \SkillsEntry{Technologies}{Linux, KVM, GPUs, GDB, OpenMP, MPI, Tensorflow, SQL Server}
+}
+\newcommand{\AdditionalSkills} {
+  \SkillsEntry{Additional}{Research, DevOps, Presentations, Technical Writing, Agile, Git, Debugging} % , Documentation
+  }
+\newcommand{\Skills} {
+  \NewPart{Skills}
+
+  \ProgrammingSkills
+  \LanguagesSkills
+  \InfrastructureSkills
+  \TechnologiesSkills
+  % \SkillsEntry{Technologies}{Ansible, Linux, KVM, Octopus Deploy, GDB, OpenWhisk, Tensorflow, OpenMP, MPI}
+  %\SkillsEntry{OS}{Linux, Windows, Mac; various editions}  
+}
+
+\newcommand{\Awards} {
+  \NewPart{Awards}
+
+  \AwardEntry{Reserve Champion, Baked Goods Division}{}{Monroe County Fair 2023}
+  \AwardEntry{HPDC Travel Grant}{}{Travel grant to HPDC 2023}
+  \AwardEntry{ACM Travel Grant}{}{Travel grant to ASPLOS 2022}
+  \AwardEntry{John F. Niehaus Scholarship}{}{Xavier University}
+  \AwardEntry{John F. Niehaus Award}{}{Xavier University}  
+  \AwardEntry{Eagle Scout}{}{Boy Scouts of America}
+  \AwardEntry{National Honors Society}{}{Medina High School}
+  \AwardEntry{National Technical Honors Society}{}{Medina County Career Center}
+}
+
+\newcommand{\Activities} {
+  \NewPart{Activities}
+
+  \AwardEntry{Parish Pastoral Council, St. Paul's Catholic Center}{}{Member, 2023-2024}
+  \AwardEntry{Young Adult Ministry, St. Paul's Catholic Center}{}{Vice Chair, 2023-2024}
+  \AwardEntry{}{}{Member, 2022-2023}
+  \AwardEntry{Computer Science Club, Xavier University}{}{Vice President, 2016-2017}
+  \AwardEntry{}{}{Treasurer, 2015-2017}
+  \AwardEntry{Dean’s Advisory Council, Xavier University}{}{Member, 2015 – 2017}
+}
+

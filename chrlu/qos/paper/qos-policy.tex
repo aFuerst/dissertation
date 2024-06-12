@@ -1,0 +1,110 @@
+\section{QoS Policy}
+
+Users provide the QoS priority. Currently binary: high and low priority. 
+
+\subsection{QoS Policy Tradeoffs and Challenges}
+
+There are many possible paths towards realizing QoS differentiation on FaaS clusters, and we now discuss different possible approaches and their tradeoffs.
+
+\paragraph{Cgroups.} We can enforce service differentiation at the \emph{server} level: and use the virtual environment's resource allocation and control mechanisms.
+For instance, we can use cgroups to reduce the relative and absolute cpu and memory allocation of the low-priority function containers.
+While this approach is feasible, it has some drawbacks.
+Mainly, using cgroups only controls the resource footprint of the actual function execution.
+
+However as we saw in the previous section, a significant, often majority, time is spent in the various function initialization steps.
+This initialization is not necessarily part of the ``function context'', and thus not directly controllable through cgroups-like mechanisms.
+Significant resource consumption occurs in initializing the function for cold starts and \emph{even for warm starts.}
+Specifically, we found that unpausing a docker container and allocating network interfaces to it can consume significant CPU resources.
+
+However, this resource consumption occurs as part of the FaaS ``control plane'', i.e., OpenWhisk, Docker, kernel components for networking, namespaces, and cgroups.
+Using cgroups to reduce resource allocation by reducing the cgroup priority/quotas/limits only reduces function execution speed, but misses the significant (and often the majority) resource consumption in the control plane.
+Thus,
+\todocristina{Last paragraph is incomplete; other than that, we need a figure for the unpausing docker container experiment.}
+
+\paragraph{Queueing at the server.}
+Another server-level approach is to introduce a queue at each server, which can prioritize function execution by delaying low-priority functions.
+This can be a  powerful approach in general.
+Priority queueing algorithms often assume some deterministic or a probability distribution of service times of the different jobs such as exponential distributions.
+
+However, function execution times, due to the control-plane overheads, show a very high variance, and their execution time is not exponentially distributed.
+Moreover, function execution times are highly heterogenenous, and servers run 100s of different functions, which makes analytical solutions non-trivial. \todocristina{Do we know that function durations are not exponentially distributed?}
+
+\textbf{Need to tighten this argument, or remove it.}
+
+Server-level throttling either using cgroups or queueing also has more general tradeoffs. 
+If all servers are available for a delayable function to use, then idle servers can be used to opportunistically run them. 
+However, this may lead to poorer locality (i.e., more cold-starts), and increased risk of performance interference between high and low priority functions. 
+
+% Our approach : 
+
+\subsection{Our approach: Cluster Pools}
+
+Key idea is to have a separate pool of servers for running the low-priority delayable functions. 
+The high priority pool handles the conventional functions. 
+
+Within each pool, we use a locality-aware load-balancing policy to reduce the effects of cold-starts and server loads. 
+
+\subsection{Low priority pool as Burst buffer}
+
+Low priority servers can be used to handle high priority invocations in case of bursty invocations that are quite common.
+
+We integrate load balancing with cluster pools to handle workload bursts.
+
+\begin{itemize}
+\item Locality is important, so we must build on consistent hashing. 
+\item However, consistent hashing alone results in overloaded servers because of the heavily skewed workload (1\% functions taking 90\% resources, etc.)
+\item This is fixed with bounded loads and forwarding. Make sure each server has a max capacity. For a new invocation will exceed this capacity, it is forwarded along the ring. 
+\item For bursty functions, even this may be suboptimal, since a sudden burst of invocations can saturate many consecutive servers, starving other functions of warm hits. 
+\item Thus, recently, CH-RLU has been proposed: which adds a random load to each server for popular functions, to forward popular functions more aggressively. 
+\item We build on CH-RLU. 
+\item For forwarding functions, we set a max forward limit (the chain length). If we exceed the chain length, \emph{our key idea is to run the function on the low-priority cluster pool.} Currently, CH-RLU will run function on least-loaded server, breaking locality. 
+\item Our key new idea also preserves locality. Popular functions likely to run on the same subset of servers in the low priority pool. 
+\item Low-priority pool continues to use CH-RLU without any overflowing. 
+\item Thus bursts can be quickly handled without slow and expensive repartitions. 
+\item We call our policy ``CH-RLO'': Consistent Hashing with Random Loads and Overflow. 
+\end{itemize}
+
+
+\subsection{Partitioning Policy}
+
+Assume we have a fixed number of servers, $S$. 
+Out of these, $x$ are for the high-priority functions, and the remaining $S-x$ for the low-priority functions. 
+The ultimate goal of the partitioning policy is to decide what $x$ should be. For this, we use a simple online control-based optimization approach. 
+
+\textbf{Initial configuration.}
+Since functions have to be registered as low or high priority, we set $x/S$ proportional to the ratio of number of high ($N_H$ )and low priority ($N_L$) functions.
+Specifically, we introduce an overcommitment parameter $c$ that determines how small the low-priority pool is going to be.
+
+
+\begin{equation} x_0 = c \frac{N_H}{N_L} S \end{equation}
+
+\textbf{Adjusting x.}
+Note that the invocation frequency and running time of functions can vary widely, so this initial assignment need not be ideal.
+Our goal is to improve the performance of both the high and low priority functions, but deprioritize the performance of low-priority functions by a factor of $c$.
+Thus, the objective function, $F$, is:
+\begin{equation}
+  F(x) = f_H - \frac{f_L}{c},
+\end{equation}
+where $f_H$ is some aggregate performance measure of all high-priority functions, and $f_L$ is for low-priority.
+
+We use
+\begin{equation}
+f_H=\sum_i^{N_H} \frac{\bar{\tau_i}}{\min{\tau_i}},  
+\end{equation}
+
+where $\bar{\tau_i}$ is the average latency of function $i$. (Better symbol? L already used for Low priority). 
+More concretely, the performance measure is the increase in latency. Since FaaS providers do not have access to the ``ideal'' or baseline latency, and because it can vary widely based on the function (from few ms to few minutes), it needs to be normalized. We normalize each function's latency by the minimum latency of that function observed so far. 
+
+Our goal is to balance the cluster so that $F(x)=0$.
+
+Thus, periodically, we use a gradient-based method: $\delta(x) = \eta F(x)$, where $\eta$ is the step size.
+
+We can consider other objective functions too.
+One appealing one is to measure the delay of functions explicitly, where delay is defined as the total latency minus the actual function execution duration. This captures the FaaS control-plane (i.e., OpenWhisk, docker and other components) overheads.
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

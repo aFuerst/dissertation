@@ -1,0 +1,84 @@
+\section{Introduction}
+%\noindent \textbf{Motivation.}
+
+Serverless computing, or Function-as-a-Service (FaaS), has emerged as an important and challenging abstraction for cloud providers, with an ever-increasing range of applications and workflows using this new abstraction. 
+%
+By handling all aspects of function execution--including resource allocation--cloud platforms can provide a ``serverless'' computing model where users do not have to explicitly provision and manage cloud resources (i.e., virtualized servers). 
+Applications such as web services, machine learning, data analytics, and even high-performance computing can benefit greatly from the resource elasticity, lower pricing, auto-scaling, and development convenience of FaaS platforms.
+
+While it provides more convenient abstractions for developing and deploying applications, the FaaS programming model presents new fundamental performance and efficiency tradeoffs for \emph{cloud providers}. 
+% what is that tradeoff? 
+When coupled with the extreme scale (public clouds execute millions of functions a day) and heterogeneity (applications have widely varying function invocation rates and resource footprints), FaaS presents cloud providers with several performance challenges.
+%In this paper, we tackle the load-balancing and scheduling challenges arising from this heterogeneity and scale, and develop new load-balancing algorithms.
+The growing diversity and popularity of serverless applications introduces new challenges and opportunities in load-balancing and cluster-level scheduling.  
+
+
+Recent work has highlighted the importance of \emph{locality} in serverless function execution.
+A direct consequence of the FaaS programming model and a fundamental performance attribute is the high startup latency of functions, which is referred to as a ``cold start''. 
+Cold starts are caused by operations such as initializing a virtual execution environment (such as a lightweight VM or a container), and installing data and code dependencies (packages and libraries), and can add 100s of milliseconds to function latency.
+Reducing cold-starts is a key challenge in serverless computing~\cite{vanEyk:2018:ICPE:PerformanceChallenges}. 
+In the FaaS context, locality entails running future invocations on the same server, which increases the ``warm starts'', since the initialized function sandbox can be retained in server memory (also known as keep-alive).
+
+
+
+%\textbf{Key insights and contributions.}
+In this paper, we present the design and implementation of a priority-aware auto-scaling load balancer for FaaS platforms (such as OpenWhisk, OpenFaaS, and others). 
+We address the challenges of routing and scheduling functions on a cluster of servers, and how such clusters can be horizontally scaled.
+Our work extends locality as the primary design principle for FaaS cluster-level resource management. 
+However, we find that locality alone is insufficient: server load is also an important parameter which influences the slowdown of functions due to queueing delays and resource contention on overloaded servers.
+
+
+Our second key insight is that functions have different \emph{latency tolerances} that can be used to prioritize their execution and provide quality-of-service (QoS) differentiation.
+Function prioritization introduces additional resource-management and scheduling challenges and opportunities.
+For instance, we can delay lower-priority functions during workload bursts and periods of high server loads.
+Our empirical analysis into production FaaS workload traces highlights the pervasiveness and importance of highly bursty function invocations.
+
+
+The triumvirate of locality, load, and priorities has many intricate tradeoffs resulting in a large design space of load-balancing policies and algorithms, and presents many challenges. 
+Our goal is to design simple load-balancing and scaling policies that address these challenges in a rigorous and practical manner.
+Because of the importance of locality in improving function latency, we use consistent hashing~\cite{karger1997consistent} as the building block, which preserves locality even when the cluster is scaled by adding or removing servers, which is critical since function workloads are highly bursty. 
+
+% First, functions are highly \textbf{heterogeneous} in terms of their initialization overheads, resource footprints, and invocation frequencies. 
+% However, most classic load-balancing approaches for clusters of web-servers and data storage tend to assume homogeneous requests, and thus cannot directly be used.
+% Second, production FaaS workloads tend to have extremely high \textbf{skew}: a tiny fraction of functions tend to account for a vast majority of invocations.
+% This has severe ramifications for hashing-based load-balancing (such as consistent hashing), which assumes homogeneous object popularities to provide guarantees about server loads.
+% Third, large FaaS clusters cannot assume that exact and timely information about server loads will always be available: and thus load-balancing policies must deal with stochastic and \textbf{stale server loads}.
+% Finally, function priorities and QoS 
+
+
+We tackle the load-balancing challenges in a modular manner. 
+We first address the problem of locality and load-aware load balancing with a solution that can handle function heterogeneity, skew, and burstiness.
+For this, we extend Consistent Hashing with Bounded Loads~\cite{mirrokni2018consistent}, where the key idea is to run a function on its ``home'' server as long as the server is not overloaded.
+This preserves locality and allows for functions to be ``forwarded'' to other servers in case of overload. 
+We compensate for stale server loads by introducing the notion of stochastic random loads. 
+Our resulting algorithm, Consistent Hashing with Random Load Updates (CH-RLU), is cognizant of function locality, server loads, and different function cold and warm times.
+
+
+We then extend CH-RLU to be priority aware, by introducing the notion of \emph{cluster priority pools.} 
+Functions of the same priority run within the same cluster partition or pool.
+This prevents lower-priority functions from interfering with latency-sensitive high-priority functions, and allows overcommitting and shrinking low-priority pools to reduce the resource requirements of serverless clusters. 
+Our overall load-balancing algorithm is called $k$-CH-RLU, since it can support $k$ priority classes. 
+Our policies are designed to be simple and practical, with a small number of user-controlled parameters, allowing them to be a drop-in replacement for OpenWhisk's default load balancing implementation~\cite{openwhisk}. 
+
+
+%\textbf{Experimental methodology and artifact availability.}
+Prior work in serverless computing has largely focused on optimizing performance on a~\emph{single} server using various cold-start mitigating mechanisms and policies~\cite{vhive-asplos21,faascache-asplos21}. 
+We build on past insights on the importance of function locality, and extend them to a large cluster of servers instead of a single server. 
+While load balancing has a long history of rigorous solutions, we find that the heterogeneity, skew, and stale loads of the FaaS environment present unique challenges. 
+Classic load-aware techniques that use randomization such as power-of-2 random choices do not capture locality and lead to high cold-starts, and hashing-based techniques cannot deal with the heavy skew in function popularity.
+%
+In sum, we make the following contributions:
+\begin{enumerate}
+\item We find that the locality vs. load tradeoff is central to function performance, and show how it can be combined with consistent hashing.
+\item We conduct an empirical study of FaaS workloads and applications, and introduce the notion of function prioritization and QoS. We find prioritization can ameliorate bursty invocations and resulting load-spikes. Prioritization improves function latencies and cluster utilization. 
+\item We develop a priority-aware load-balancing policy, $k$-CH-RLU: Consistent Hashing with Random Load Updates with $k$ priorities.
+  $k$-CH-RLU partitions a cluster into $k$ pools to avoid interference and increase locality, and tackles practical challenges of highly heterogeneous functions, bursty workloads, and stale/imprecise load information on a large cluster of servers. 
+\item We implement and evaluate $k$-CH-RLU in OpenWhisk. Compared to OpenWhisk, it provides more than $3\times$ reduction in latency for high-priority functions, and reduces the required number of servers by $25\%$. 
+
+%\item We evaluate various load and locality-sensitive policies in a discrete-event simulator using the Azure function traces~\cite{Shahrad:ATC:2020:ServerlessInTheWild}, and find that CH-RLU can outperform even a omniscient, impractical, online greedy approach by more than 20\% under a wide range of conditions.
+\end{enumerate}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:
