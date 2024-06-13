@@ -25,7 +25,7 @@ This approach also preserves function locality, which is important for reducing 
 \subsection{$k$-CH-RLU}
 \label{subsec:kchrlu}
 
-Our overall policy, Consistent Hashing with Random Load and Updates with $k$ pools ($k$-CH-RLU), combines all the previously described techniques and insights.
+Our overall policy, Consistent Hashing with Random Load and Updates with $k$ pools ($k$-CH-RLU), extends the techniques and insights detailed in Section~\ref{subsec:chrlu:together}.
 
 Upon a new function invocation, it runs in its pool using the \texttt{forward} procedure in Algorithm~\ref{algo:PopularRLUPolicy}, which combines the use of SHARDS for popularity detection, cold and warm times for increasing the effective load bound, and noisy loads. 
 The initial server is determined using a consistent hashing function. 
@@ -44,7 +44,7 @@ The lower-priority pools thus also serve as a ``burst buffer'', crucial consider
 Low-priority functions can't make use of higher-priority servers even if they are available, since we want to be able to handle bursty invocations of higher-priority functions. 
 For the lowest-priority pool, we run the function on the least-loaded server in their pool. 
 %
-If the least loaded server is also overloaded, we drop the function.
+If the least loaded server is also overloaded, we enqueue the function.
 % \begin{figure}
 % \begin{algorithm}[t]
 %   \caption{$k$-CH-RLU}

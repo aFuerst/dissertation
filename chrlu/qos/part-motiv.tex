@@ -1,6 +1,7 @@
-\section{Function Prioritization Motivation}
+\section{Function Prioritization}
 \label{sec:qos:motivation}
 
+\begin{comment}
 \begin{table}
   \caption{Delay-tolerant scenarios. The ID of the use case is taken from a public dataset~\cite{Eismann:zenodo:2021:dataset}. We studied each case and estimate a likely delay tolerance for that scenario.}
   \label{tab:examples}
@@ -19,6 +20,7 @@
   \hline
 \end{tabular}
 \end{table}
+\end{comment}
 
 In this section, we show that---in opposition to what others have argued in the past~\cite{Wiesner:Middleware:2021:TemporalShifting}---(some) real serverless workloads \emph{are} delay tolerant (Section~\ref{sec:motivation:delay-tolerant}), we discuss the current status of differentiated serverless functions (Section~\ref{sec:motivation:currentStatus}) and provide a workload characterization based on dividing functions into high- and low-priority classes (Section~\ref{sec:motivation:workload}).
 Our study of the delay tolerance of serverless functions is based on a recent dataset of serverless applications~\cite{Eismann:Software:2021:Why,Eismann:TSE:2021:CommunityConsensus}.
@@ -31,40 +33,43 @@ In this subsection, we analyze if serverless functions can tolerate some level o
 This delay could come from not executing the function immediately (e.g. through queuing), or via reduced priority in scheduling (e.g. giving less resources to lower-priority functions).
 While these two mechanisms differ, the result of both is increasing the turnaround time of the functions; this increase is not appropriate for some functions---like those supporting interactive or real-time applications---but is tolerable for multiple other applications, as discussed in this subsection.
 
-Serverless functions can be triggered through several mechanisms like http invocations, cloud-native events, queue messages and timers.
-Functions triggered by http are time sensitive as these are synchronous requests that can timeout and are often used in interactive applications;
+Serverless functions can be triggered through several mechanisms like HTTP invocations, cloud-native events, queue messages and timers.
+Functions triggered by HTTP are time sensitive as these are synchronous requests that can timeout and are often used in interactive applications;
 all other triggers invoke functions that can tolerate delays to varying degrees.
-Thus, functions not triggered by http are (potentially) delayable; in the Azure trace, these constitute $59.06\%$ of the functions and $69.07\%$ of the invocations.
-
+Thus, functions not triggered by HTTP are (potentially) delayable; in the Azure trace, these constitute $59.06\%$ of the functions and $69.07\%$ of the invocations.
 Furthermore, a recent survey of serverless use cases~\cite{Eismann:TSE:2021:CommunityConsensus} found that 66\% of applications in a large dataset have at least one delay-tolerant function.
-To further illustrate our point, we analyzed the applications in the dataset and selected one delay-tolerant scenario for each of the triggers (except http, which is not delayable as already explained);
+
+\begin{comment}
+To further illustrate our point, we analyzed the applications in the dataset and selected one delay-tolerant scenario for each of the triggers (except HTTP, which is not delayable as already explained);
 these scenarios are described in Table~\ref{tab:examples} and include examples such as removing unutilized EBS volumes, a web analytics (clickstream) application, a messenger chatbot, a batch image manipulation application for a serverless galleria, a subscription fulfillment application for The Guardian, and an application for sequence alignment of protein sequences.
 
-A note on http-triggered functions: Some web applications need end users to invoke asynchronous behavior via http requests.
-The Microsoft Azure Cloud Design Patterns documentation~\cite{Eastbury:2022:Azure:AsyncPattern} provides a solution to this problem with the ``Asynchronous Request-Reply'' pattern which disaggregates such behavior into three functions: two http-triggered ones (to enqueue request and to check status of job), and a queue-triggered backend function.
-In this scenario, the http-triggered functions are not delay tolerant, but the queue-triggered function is.
+A note on HTTP-triggered functions: Some web applications need end-users to invoke asynchronous behavior via HTTP requests.
+The Microsoft Azure Cloud Design Patterns documentation~\cite{Eastbury:2022:Azure:AsyncPattern} provides a solution to this problem with the ``Asynchronous Request-Reply'' pattern which disaggregates such behavior into three functions: two HTTP-triggered ones (to enqueue request and to check status of job), and a queue-triggered backend function.
+In this scenario, the HTTP-triggered functions are not delay tolerant, but the queue-triggered function is.
 %(though it may tolerate only a small delay depending on the specific use case).
+\end{comment}
 
-
+\begin{comment}
 \subsection{Current Status of Differentiated FaaS Invocations}
 \label{sec:motivation:currentStatus}
-A recent empirical study~\cite{Tariq:SOCC:2020:Sequoia} found that current cloud providers (AWS, Azure, GCP and IBM) treat http functions differently from those triggered by other means, frequently via undocumented behavior, including different concurrency limits and prioritization versus background functions.
+A recent empirical study~\cite{Tariq:SOCC:2020:Sequoia} found that current cloud providers (AWS, Azure, GCP and IBM) treat HTTP functions differently from those triggered by other means, frequently via undocumented behavior, including different concurrency limits and prioritization versus background functions.
 In addition, while asynchronous functions are queued and thus the user understands that they may not execute immediately, providers don't typically enqueue synchronous functions but rather return with an error if peak exceeds concurrency limits or provider capacity.\footnote{An exception is GCP which handles synchronous calls in best effort fashion, performing queuing but not ensuring zero drops~\cite{Tariq:SOCC:2020:Sequoia}.}
 %
 Thus, the major public cloud providers are already implicitly defining two classes of functions: high priority (synchronous) and lower priority (asynchronous), with the latter being delay-tolerant.
-%asynchronous functions in AWS can be queued up to 6 hours.\footnote{\url{https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html}}
+%asynchronous functions in AWS can be queued up to 6 hours.\footnote{\url{HTTPs://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html}}
 %Asynchronous functions are either explicitly (for example, with the \texttt{async} keyword in OpenWhisk) or implicitly (by its trigger) defined in current platforms.
 %The asynchronous functions are good candidates to be delayed if needed.
 
 In OpenWhisk asynchronous functions are defined with the \texttt{async} keyword and follow a different execution path than synchronous ones.
 However, the platform does not use any mechanism to delay or execute them at a lower priority.
 A solution that treats \texttt{async} functions as delay-tolerant, scheduled with a lower priority than synchronous functions, can be added to OpenWhisk without API modifications.
+\end{comment}
 
 \subsection{High- and Low-Priority Workloads}
 \label{sec:motivation:workload}
 %Re-write section: try to make more compact 1-2 paragraphs is better
 Considering the two function classes described in the prior subsection---high and low priority---we analyze the Azure traces applying this division in the workload.
-For the high priority class, we consider http-triggered functions.
+For the high priority class, we consider HTTP-triggered functions.
 For the low priority class, we consider all other functions.
 
 %\paragraph{Prevalence in workload}
