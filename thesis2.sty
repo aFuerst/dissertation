@@ -160,7 +160,7 @@ p@footnote\endcsname\@thefnmark}\@makefntext
 \def\titlep{
 \thispagestyle{empty}	\null\vskip 1in	
 \begin{center}
-{\Large\uppercase\expandafter{\@title}}		
+{\titlesize\uppercase\expandafter{\@title}}		
 \end{center}	\vfill
 \begin{center}		
 {\large \@author}\\	
@@ -168,7 +168,7 @@ p@footnote\endcsname\@thefnmark}\@makefntext
 \vfill	
 \vfill
 \begin{center}
-Submitted to the faculty of the University Graduate School\\
+Submitted to the faculty of the Graduate School\\
 in partial fulfillment of the requirements\\
 for the degree\\
 Doctor of Philosophy\\
@@ -255,12 +255,17 @@ the requirements of the degree of Doctor of Philosophy.
 
 \def\dedicationpage{%
 \null\vfill
+\addcontentsline{toc}{chapter}{Dedication}
 \input{dedication}
 \vfill\newpage}
 
-\def\abstractpage{%\begin{center}
-	%\chapter*{Abstract}
+\def\abstractpage{
 	\addcontentsline{toc}{chapter}{Abstract}
+	\\
+	\centerline{\@author}
+	\\
+	\centerline{\underline{\@title}}
+	\\
 	\input{abstract}
 	\vfill\newpage}
 
@@ -285,7 +290,7 @@ the requirements of the degree of Doctor of Philosophy.
 	
 \def\vitapage{%
 	\chapter*{Curriculum Vitae}
-        \addcontentsline{toc}{chapter}{Curriculum Vitae}
+	\addcontentsline{toc}{chapter}{Curriculum Vitae}
 	\input{cv}
 \vfill\newpage}
 
@@ -301,7 +306,7 @@ the requirements of the degree of Doctor of Philosophy.
 }
 
 \def\cvsection{
-  \pagenumbering{gobble}
+%   \pagenumbering{gobble}
   \pagestyle{plain}
   \thispagestyle{empty}
   \vitapage

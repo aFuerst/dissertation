@@ -32,11 +32,11 @@
 \newcommand{\sepspace}{\vspace*{0 mm}}		% Vertical space macro
 
 \newcommand{\MyName}[1]{ % Name
-        \Huge \usefont{OT1}{lmr}{b}{n} \hfill \centerline{#1}
+        \large \hfill \centerline{#1}
         \par \normalsize \normalfont}
         
 \newcommand{\NewPart}[1]{
-\vspace*{-.25cm}
+% \vspace*{-.25cm}
 \section*{\uppercase{#1}}}
 
 \newcommand{\SkillsEntry}[2]{      % Same as \PersonalEntry
@@ -49,7 +49,7 @@
 \newcommand{\WorkEntry}[6]{				  % Same as \EducationEntry
         \noindent \textit{#4} \hfill \textit {#5}   \par       % Company % Location
         \noindent \textbf{#1} \hfill      % Jobname
-        \vspace*{-.1cm}
+        % \vspace*{-.1cm}
         {#2} - {#3} \par
         \noindent\hangindent=2em\hangafter=0 \small #6 % Description
         \normalsize \par}
@@ -131,10 +131,10 @@ Looking to design solutions to the inefficiencies and problems of modern computi
 }
 
 \newcommand{\EduPhd} {
-  \EducationEntry{Computer Engineering, PhD}{Expected May 2024}{Indiana University, Intelligent Systems Engineering}{Major GPA 3.9}  
+  \EducationEntry{Intelligent Systems Engineering, PhD}{July 2024}{Indiana University, Intelligent Systems Engineering}{}  
 }
 \newcommand{\EduMs} {
-  \EducationEntry{Computer Engineering, MS}{Dec 2023}{Indiana University, Intelligent Systems Engineering}{Major GPA 3.9}
+  \EducationEntry{Intelligent Systems Engineering, MS}{December 2023}{Indiana University, Intelligent Systems Engineering}{Major GPA 3.9}
 }
 \newcommand{\EduBs} {
   \EducationEntry{Computer Science, Bachelor of Science}{May 2017}{Xavier University}{Major GPA 3.6}
@@ -183,7 +183,7 @@ Looking to design solutions to the inefficiencies and problems of modern computi
 
 \newcommand{\ResearchExpEntry}[2]{
         \noindent \textbf{#1} \par      % Title
-        \vspace*{-.0cm}
+        % \vspace*{-.0cm}
         \noindent\hangindent=2em\hangafter=0 \small #2% Description
         \normalsize \par}
 

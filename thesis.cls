@@ -19,7 +19,28 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{thesis}[\filedate\space\fileversion\space%
        LaTeX document class (wm).]
-\newcommand\@ptsize{}
+
+% Font sizes can only be 11 or 12 pt
+% Title (16 pt) and foot notes (10 pt) are only exception
+% \renewcommand{\miniscule}{\normalsize}
+\newcommand{\titlesize}{\fontsize{15pt}{18pt}\selectfont}
+% \def{\titlesize}{\Large}
+\renewcommand{\tiny}{\normalsize}
+\renewcommand{\scriptsize}{\normalsize}
+\renewcommand{\footnotesize}{\small}
+\renewcommand{\small}{\normalsize}
+% \renewcommand{\large}{\large}
+\renewcommand{\Large}{\large}
+\renewcommand{\LARGE}{\large}
+\renewcommand{\huge}{\large}
+\ifdefined\Huge
+\renewcommand{\Huge}{\large}
+\else
+\newcommand{\Huge}{\large}
+\fi
+% \renewcommand{\HUGE}{\large}
+
+  \newcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@titlepage
 \@titlepagetrue
@@ -125,7 +146,7 @@
     \subsubsectionfont{\slshape}
     \paragraphfont{\slshape}
     \subparagraphfont{\slshape}
-    \titlefont{\LARGE}
+    \titlefont{\titlesize}
     \subtitlefont{\large}
     \authorfont{}
     \institutionfont{\slshape}
@@ -141,6 +162,32 @@
     \figurefont{}
     \tablefont{}
 }
+% No italics or bold in Table of Contents
+\DeclareOption{straight}{
+    \partfont{\Large}
+    \chapterfont{\large\upshape}
+    \chapterauthorfont{\large\upshape}
+    \sectionfont{\large\upshape}
+    \subsectionfont{\upshape}
+    \subsubsectionfont{\upshape}
+    \paragraphfont{\upshape}
+    \subparagraphfont{\upshape}
+    \titlefont{\titlesize}
+    \subtitlefont{\large}
+    \authorfont{\upshape}
+    \institutionfont{\upshape}
+    \translatorfont{\upshape}
+    \theoremheaderfont{\upshape}
+    \theorembodyfont{\upshape}
+    \itemfont{\upshape}
+    \examplefont{\upshape}
+    \headingstextfont{\small\upshape}
+    \pagenumberfont{\small}
+    \captionheaderfont{\upshape\small}
+    \captionbodyfont{\small}
+    \figurefont{\upshape}
+    \tablefont{\upshape}
+}
 \DeclareOption{bold}{%
     \partfont{\LARGE\bfseries}
     \chapterfont{\LARGE\bfseries}
@@ -150,7 +197,7 @@
     \subsubsectionfont{\bfseries}
     \paragraphfont{\bfseries}
     \subparagraphfont{\bfseries}
-    \titlefont{\LARGE\bfseries}
+    \titlefont{\titlesize\bfseries}
     \subtitlefont{\large}
     \authorfont{}
     \translatorfont{}
@@ -175,7 +222,7 @@
     \subsubsectionfont{\sffamily\bfseries}
     \paragraphfont{\sffamily\bfseries}
     \subparagraphfont{\sffamily}
-    \titlefont{\LARGE\sffamily\bfseries}
+    \titlefont{\titlesize\sffamily\bfseries}
     \subtitlefont{\large\sffamily}
     \authorfont{\Large\sffamily\slshape}
     \translatorfont{}
@@ -202,8 +249,9 @@
 \DeclareOption{openbib}{\@openbibtrue}
 \newif\if@chapterbib \@chapterbibfalse
 \DeclareOption{chapterbib}{\@chapterbibtrue}
-\ExecuteOptions{letterpaper,10pt,oneside,onecolumn,final,openright,%
-                slanted,center,upper}
+% force 11pt font to make all other font sizes within requirements
+\ExecuteOptions{letterpaper,11pt,oneside,onecolumn,final,openright,%
+                straight,center,upper}
 \ProcessOptions*
 \input{bk1\@ptsize.clo}
 \setlength\lineskip{1\p@}
@@ -401,7 +449,7 @@
    \gdef\@uppertitleback{}\gdef\@lowertitleback{}\gdef\@dedication{}%
    \gdef\@title{}\gdef\@subtitle{}\let\maketitle\relax}
 \def\abstract{%\titlepage
-  \chapter*{\abstractname\@mkboth{\abstractname}{\abstractname}}}
+  \chapter*{\abstractname\@mkboth{\abstractname}{TESTING}}}
 \def\endabstract{\par\vfil\null\endtitlepage}
 \if@thema
    \if@center
@@ -958,6 +1006,7 @@
 \newcommand*{\l@paragraph}    {\@dottedtocline{4}{10em}{5em}}
 \newcommand*{\l@subparagraph} {\@dottedtocline{5}{12em}{6em}}
 \newcommand{\listoffigures}{%
+    \addcontentsline{toc}{chapter}{List of Figures}
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
@@ -971,6 +1020,7 @@
     }
 \newcommand*{\l@figure}{\@dottedtocline{1}{1.5em}{2.3em}}
 \newcommand{\listoftables}{%
+    \addcontentsline{toc}{chapter}{List of Tables}
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else

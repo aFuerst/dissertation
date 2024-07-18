@@ -2,6 +2,8 @@ PDF = dissertation.pdf
 BLOATED = dissertation-bloated.pdf
 TEX = $(shell find ./ -type f -name '*.tex')
 BIB = $(shell find ./ -type f -name '*.bib')
+STY = $(shell find ./ -type f -name '*.sty')
+CLS = $(shell find ./ -type f -name '*.cls')
 
 UNAME := $(shell uname)
 
@@ -11,7 +13,7 @@ PDFLATEX_ARGS = -shell-escape -interaction nonstopmode
 
 default : $(PDF)
 
-$(PDF) : $(TEX) $(BIB)
+$(PDF) : $(TEX) $(BIB) $(STY) $(CLS)
 	-pdflatex $(PDFLATEX_ARGS) dissertation
 	-pdflatex $(PDFLATEX_ARGS) dissertation
 	-bibtex dissertation
