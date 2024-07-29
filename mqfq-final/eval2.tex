@@ -52,13 +52,13 @@ For \batch, we insert invocations into per-function flows, and dispatch the enti
 \begin{figure}
   \centering 
   \subfloat[\textbf{Average latency} is significantly lower with \QName~for different device-parallelism (\D) levels.  \label{fig:queue-e2e}]
-  {\includegraphics[width=0.45\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/no_naive_e2e_sec.pdf}}
+  {\includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/no_naive_e2e_sec.pdf}}
  \hfill  
 \subfloat[The average and variance of \textbf{per-function latency} is much lower with \QName.  \label{fig:queue-fairness}]
-{\includegraphics[width=0.45\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/paper_fairness.pdf}}
+{\includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/paper_fairness.pdf}}
 \hfill 
 \subfloat[\textbf{Device utilization} for the medium-load trace. \label{fig:util} ]
-{\includegraphics[width=0.45\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/all_util_no_zeroes.pdf}}
+{\includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/all_util_no_zeroes.pdf}}
 \label{fig:base-all}
 \caption{Latency, fairness, and utilization for a medium-intensity FaaS workload.}
 % average variance across functions:
@@ -258,13 +258,13 @@ When all flow usages are assumed to be constant (1.0 in the figure), long functi
 \begin{figure}
   \centering
   \subfloat[Anticipatory flow keep-alive (non-zero flow TTL) can reduce latency by up to 50\%. We use function IAT for scaling the TTL. \label{fig:flow-ttl}]
-  {  \includegraphics[width=0.5\textwidth]{./mqfq-final/graphs/ttl/25.8/mqfq-ttl-compare.pdf}}
+  {  \includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/ttl/25.8/mqfq-ttl-compare.pdf}}
   \hfill
   \subfloat[Concurrent function invocations (\D) increase execution time due to contention. GPU utilization thresholds reduce overload. \label{fig:concur-exec-overhead}]
-  {  \includegraphics[width=0.4\textwidth]{./mqfq-final/graphs/concurrency/25.7/paper_exec_overhead.pdf}}
+  {  \includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/concurrency/25.7/paper_exec_overhead.pdf}}
   \hfill 
   \subfloat[Concurrent execution can reduce latency by reducing queuing. However, this is negated by execution interference  at higher levels.  \label{fig:concur-e2e}]
-  {  \includegraphics[width=0.4\textwidth]{./mqfq-final/graphs/concurrency/25.7/paper_e2e_sec.pdf}}
+  {  \includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/concurrency/25.7/paper_e2e_sec.pdf}}
   \caption{Flow TTL and device parallelism (\D) are set based on workload and utilization.}
   \label{fig:knobs-all}
 \end{figure}

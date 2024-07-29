@@ -63,12 +63,12 @@ It gives some balance between outcomes, for example, a rare function may get sev
 
 \begin{figure*}%[ht] 
   \centering
-  \subfloat[Latency]{\includegraphics[width=0.4\textwidth]{chrlu/faaslb-osdi22/figs/compare/120-global-latencies-cntnorm.pdf} \label{fig:120-normalized-latencies}} 
+  \subfloat[Latency]{\includegraphics[width=0.6\textwidth]{chrlu/faaslb-osdi22/figs/compare/120-global-latencies-cntnorm.pdf} \label{fig:120-normalized-latencies}} 
   \hfill
-  \subfloat[Throughput]{\includegraphics[width=0.4\textwidth]{chrlu/faaslb-osdi22/figs/compare/120-invokes-ttl.pdf} \label{fig:120-invokes}}
+  \subfloat[Throughput]{\includegraphics[width=0.6\textwidth]{chrlu/faaslb-osdi22/figs/compare/120-invokes-ttl.pdf} \label{fig:120-invokes}}
   \hfill
   \subfloat[Server Load variance]
-  {\includegraphics[width=0.4\textwidth]{chrlu/faaslb-osdi22/figs/compare/3-120-loadAvg-variance.pdf} \label{fig:120-load-variance}}
+  {\includegraphics[width=0.6\textwidth]{chrlu/faaslb-osdi22/figs/compare/3-120-loadAvg-variance.pdf} \label{fig:120-load-variance}}
  % \vspace*{-0.5cm}
   \caption{At high server loads, our RLU policy reduces average latency by 2.2x at higher throughput, compared to OpenWhisk's default policy. It does so by keeping cold starts and load-variances low.}
   \label{fig:high-load}

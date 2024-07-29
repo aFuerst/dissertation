@@ -23,20 +23,20 @@
 % Font sizes can only be 11 or 12 pt
 % Title (16 pt) and foot notes (10 pt) are only exception
 % \renewcommand{\miniscule}{\normalsize}
-\newcommand{\titlesize}{\fontsize{15pt}{18pt}\selectfont}
+\newcommand{\titlesize}{\fontsize{16pt}{16pt}\selectfont}
 % \def{\titlesize}{\Large}
-\renewcommand{\tiny}{\normalsize}
-\renewcommand{\scriptsize}{\normalsize}
-\renewcommand{\footnotesize}{\small}
-\renewcommand{\small}{\normalsize}
+\renewcommand{\tiny}{\fontsize{12pt}{12pt}\selectfont}
+\renewcommand{\scriptsize}{\fontsize{12pt}{12pt}\selectfont}
+\renewcommand{\footnotesize}{\fontsize{11pt}{11pt}\selectfont}
+\renewcommand{\small}{\fontsize{12pt}{12pt}\selectfont}
 % \renewcommand{\large}{\large}
-\renewcommand{\Large}{\large}
-\renewcommand{\LARGE}{\large}
-\renewcommand{\huge}{\large}
+\renewcommand{\Large}{\fontsize{12pt}{12pt}\selectfont}
+\renewcommand{\LARGE}{\fontsize{12pt}{12pt}\selectfont}
+\renewcommand{\huge}{\fontsize{12pt}{12pt}\selectfont}
 \ifdefined\Huge
-\renewcommand{\Huge}{\large}
+\renewcommand{\Huge}{\fontsize{12pt}{12pt}\selectfont}
 \else
-\newcommand{\Huge}{\large}
+\newcommand{\Huge}{\fontsize{12pt}{12pt}\selectfont}
 \fi
 % \renewcommand{\HUGE}{\large}
 
@@ -250,7 +250,7 @@
 \newif\if@chapterbib \@chapterbibfalse
 \DeclareOption{chapterbib}{\@chapterbibtrue}
 % force 11pt font to make all other font sizes within requirements
-\ExecuteOptions{letterpaper,11pt,oneside,onecolumn,final,openright,%
+\ExecuteOptions{letterpaper,12pt,oneside,onecolumn,final,openright,%
                 straight,center,upper}
 \ProcessOptions*
 \input{bk1\@ptsize.clo}

@@ -50,7 +50,7 @@ To prevent popular functions from monopolizing the GPU, flows are \emph{throttle
     \VT & Virtual Time, device wall clock service time accrued by a flow \\
     \GlobVT & Minimum \VT~across all active flows \\
     \T & Amount any flow's \VT~can exceed \GlobVT~before being throttled \\
-    \D & Device concurrent invocations, can be fixed or dynamic with an upper-bound \\
+    \D & Device concurrent invocations, can be fixed or dynamic but bounded \\
     % \FinVT & A Flows \quotes{Finish}~\VT, the flow's \VT~plus its length by average execution time \\
     TTL & Time-to-live for an empty flow to become inactive \\
     % Service Average & Amount by which a flow's \VT~is increased after dispatch \\

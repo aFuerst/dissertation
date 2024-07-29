@@ -6,7 +6,7 @@
 % Page layout
 
 \makeatletter
-\oddsidemargin 0.5in 
+\oddsidemargin 0.4in 
 \evensidemargin 0.0in		
 \marginparwidth 40pt \marginparsep 10pt
 \topmargin 0pt \headsep .5in \headheight 14pt
@@ -14,6 +14,7 @@
 \parskip 7pt plus 2pt minus 2pt
 \if@twoside\else\flushbottom\fi
 \brokenpenalty=10000
+\sloppy
 
 % The following section is copied from rep12.sty and \Huge is changed into
 % \huge to make the chapter headings smaller.
@@ -306,7 +307,7 @@ the requirements of the degree of Doctor of Philosophy.
 }
 
 \def\cvsection{
-%   \pagenumbering{gobble}
+  \pagenumbering{gobble}
   \pagestyle{plain}
   \thispagestyle{empty}
   \vitapage
