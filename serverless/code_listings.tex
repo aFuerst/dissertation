@@ -43,7 +43,7 @@
 % }
 % {}
 \begin{figure}
-  \begin{lstlisting}[language=python, numbers=left, frame=single, basicstyle=\footnotesize\sffamily, columns=fullflexible, label={lst:python-lambda-example}]
+  \begin{lstlisting}[language=python, numbers=left, frame=single, columns=fullflexible, label={lst:python-lambda-example}, basicstyle=\small]
 # Initialization code 
 import numpy as np 
 import tensorflow as tf
@@ -95,7 +95,7 @@ def lambda_handler(event, context):
    captionpos=b
 }
 \begin{figure}
-  \begin{lstlisting}[language=JavaScript, numbers=left, frame=single, basicstyle=\footnotesize\sffamily, columns=fullflexible]
+  \begin{lstlisting}[language=JavaScript, numbers=left, frame=single, basicstyle=\small, columns=fullflexible]
 const doc = require("dynamodb-doc");    
 const dynamo = new doc.DynamoDB();
 
@@ -112,7 +112,7 @@ exports.handler = (event, context, callback) => {
             dynamo.deleteItem(JSON.parse(event.body), done);
             break;
         case "GET":
-            dynamo.scan({ TableName: event.queryStringParameters.TableName }, done);
+            dynamo.scan({ TableName: event.queryParams.TableName }, done);
             break;
         case "POST":
             dynamo.putItem(JSON.parse(event.body), done);
@@ -131,7 +131,7 @@ exports.handler = (event, context, callback) => {
 
 \begin{comment}
   \begin{figure}
-  \begin{lstlisting}[frame=single, basicstyle=\footnotesize\sffamily, columns=fullflexible]
+  \begin{lstlisting}[frame=single, basicstyle=\small, columns=fullflexible]
 GET http://faas.com/img_recogn?input_bucket=9bcc64b9.png
   \end{lstlisting}
   \caption{Invoking a serverless function to perform image recognition. Small inputs may be passed directly, with large ones passed indirectly via storage.}

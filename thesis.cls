@@ -19,26 +19,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{thesis}[\filedate\space\fileversion\space%
        LaTeX document class (wm).]
-
-% Font sizes can only be 11 or 12 pt
-% Title (16 pt) and foot notes (10 pt) are only exception
-% \renewcommand{\miniscule}{\normalsize}
 \newcommand{\titlesize}{\fontsize{16pt}{16pt}\selectfont}
-% \def{\titlesize}{\Large}
-\renewcommand{\tiny}{\fontsize{12pt}{12pt}\selectfont}
-\renewcommand{\scriptsize}{\fontsize{12pt}{12pt}\selectfont}
-\renewcommand{\footnotesize}{\fontsize{11pt}{11pt}\selectfont}
-\renewcommand{\small}{\fontsize{12pt}{12pt}\selectfont}
-% \renewcommand{\large}{\large}
-\renewcommand{\Large}{\fontsize{12pt}{12pt}\selectfont}
-\renewcommand{\LARGE}{\fontsize{12pt}{12pt}\selectfont}
-\renewcommand{\huge}{\fontsize{12pt}{12pt}\selectfont}
-\ifdefined\Huge
-\renewcommand{\Huge}{\fontsize{12pt}{12pt}\selectfont}
-\else
-\newcommand{\Huge}{\fontsize{12pt}{12pt}\selectfont}
-\fi
-% \renewcommand{\HUGE}{\large}
 
   \newcommand\@ptsize{}
 \newif\if@restonecol

@@ -49,18 +49,15 @@ For \batch, we insert invocations into per-function flows, and dispatch the enti
 \subsection{GPU Scheduling Performance}
 \label{sec:queue-perf}
 
-\begin{figure}
-  \centering 
-  \subfloat[\textbf{Average latency} is significantly lower with \QName~for different device-parallelism (\D) levels.  \label{fig:queue-e2e}]
-  {\includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/no_naive_e2e_sec.pdf}}
- \hfill  
-\subfloat[The average and variance of \textbf{per-function latency} is much lower with \QName.  \label{fig:queue-fairness}]
-{\includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/paper_fairness.pdf}}
-\hfill 
-\subfloat[\textbf{Device utilization} for the medium-load trace. \label{fig:util} ]
-{\includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/all_util_no_zeroes.pdf}}
-\label{fig:base-all}
-\caption{Latency, fairness, and utilization for a medium-intensity FaaS workload.}
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/all_util_no_zeroes.pdf}
+\caption{\textbf{Device utilization} for the medium-load trace.}
+\label{fig:util}
+\end{figure}
+
+% \label{fig:base-all}
+% \caption{Latency, fairness, and utilization for a medium-intensity FaaS workload.}
 % average variance across functions:
 % 25.708
 % mqfq,fcfs,batch
@@ -85,6 +82,13 @@ Not shown in the figure is the current baseline \naive~scheduling with Nvidia-do
 The high latency is because of every invocation results in a cold-start, causing a large queue buildup.
 Note that our workload trace is open-loop, and thus invocations are generated at fixed intervals.
 
+\begin{figure}[H]
+  \centering 
+  \includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/no_naive_e2e_sec.pdf}
+  \caption{\textbf{Average latency} for a medium-intensity workload is significantly lower with \QName~for different device-parallelism (\D) levels.}
+  \label{fig:queue-e2e}
+\end{figure}
+
 
 % \naive~has extreme wait times due to cold starts caused by the lack of warm pool. 
 %as we saw in Fig.~\ref{fig:container-pool-cold-hits}.
@@ -100,6 +104,13 @@ When \D~is set too high (\D=3), the device cannot handle the higher concurrency,
 For this workload, the queuing delays account for more than 99\% of the end to end function latency, and thus scheduling policies have significant impact. 
 % Execution time is equal between all three policies, as they share the GPU monitor, latency improvements come entirely from more optimal scheduling decisions and reduced cold starts.
 % \todo{Add queuing vs execution split for the latency results?}
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/q_compare/25.7095/20/paper_fairness.pdf}
+\caption{The average and variance of \textbf{per-function latency} under a medium-intensity workload is much lower with \QName.}
+\label{fig:queue-fairness}
+\end{figure}
 
 \noindent \textbf{Fairness.}
 In Figure~\ref{fig:queue-fairness}, we show the per-function latency (averaged across all its invocations).
@@ -141,8 +152,9 @@ When considering the latency weighted by the number of invocations, and normaliz
 \QName's weighted normalized latency is more than $10\times$ lower (vs \fcfs) at higher loads, and $2.5\times$ lower vs. \batch. 
 
 
-\begin{figure}
-  \centering  \includegraphics[width=0.7\textwidth]{./mqfq-final/graphs/multi-gpu/25.7/concurr_scale.pdf}
+\begin{figure}[H]
+  \centering  
+  \includegraphics[width=0.7\textwidth]{./mqfq-final/graphs/multi-gpu/25.7/concurr_scale.pdf}
   \caption{\QName~also uses locality-aware scheduling for multiple GPUs, significantly reducing queuing.}
   \label{fig:multi-gpu}
 \end{figure}
@@ -208,8 +220,9 @@ Interestingly, hybrid execution with the CPU and single GPU reduces latency even
 % CPU/GPU 0.9972267068610635
 
 
-\begin{figure}
-  \centering  \includegraphics[width=0.7\textwidth]{./mqfq-final/graphs/container_pool/big-60min/65/cold_hits.pdf}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{./mqfq-final/graphs/container_pool/big-60min/65/cold_hits.pdf}
   \caption{Container-pool reduces cold-starts. \QName~provides higher locality.}
   \label{fig:caching}
 \end{figure}
@@ -240,7 +253,7 @@ In this subsection, we explore the effects of configuration knobs to see their e
 %     \vspace{-0.4cm}
 % \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{./mqfq-final/graphs/unfairness/25.7/e2e_sec.pdf} 
   \caption{Larger T yields more batching and lower latencies because it allows popular flows to run ahead. Using historical function execution latencies helps significantly compared to uniform flow costs in classical fair queuing.}
@@ -255,19 +268,15 @@ The figure also shows the value of using function wall clock execution times.
 When all flow usages are assumed to be constant (1.0 in the figure), long functions may dominate, which increases average latency by more than 3x.
 \emph{Thus, a small amount of over-run guided by function characteristics helps significantly.}
 
-\begin{figure}
+\begin{figure}[H]
   \centering
-  \subfloat[Anticipatory flow keep-alive (non-zero flow TTL) can reduce latency by up to 50\%. We use function IAT for scaling the TTL. \label{fig:flow-ttl}]
-  {  \includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/ttl/25.8/mqfq-ttl-compare.pdf}}
-  \hfill
-  \subfloat[Concurrent function invocations (\D) increase execution time due to contention. GPU utilization thresholds reduce overload. \label{fig:concur-exec-overhead}]
-  {  \includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/concurrency/25.7/paper_exec_overhead.pdf}}
-  \hfill 
-  \subfloat[Concurrent execution can reduce latency by reducing queuing. However, this is negated by execution interference  at higher levels.  \label{fig:concur-e2e}]
-  {  \includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/concurrency/25.7/paper_e2e_sec.pdf}}
-  \caption{Flow TTL and device parallelism (\D) are set based on workload and utilization.}
-  \label{fig:knobs-all}
+  \includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/ttl/25.8/mqfq-ttl-compare.pdf}
+  \caption{Anticipatory flow keep-alive (non-zero flow TTL) can reduce latency by up to 50\%. We use function IAT for scaling the TTL. }
+  \label{fig:flow-ttl}
 \end{figure}
+
+% \caption{Flow TTL and device parallelism (\D) are set based on workload and utilization.}
+% \label{fig:knobs-all}
 
 
 \mhead{Flow keep-alive TTL}
@@ -291,6 +300,13 @@ Higher TTLs ($\alpha > 3$) may result in too many active functions and pressure 
 \emph{Thus, anticipatory scheduling improves latency by 50\%, and \QName~performance is not sensitive to the TTL.} 
 
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/concurrency/25.7/paper_exec_overhead.pdf}
+  \caption{Concurrent function invocations (\D) increase execution time due to contention. GPU utilization thresholds reduce overload.}
+  \label{fig:concur-exec-overhead}
+\end{figure}
+
 \mhead{Device Concurrency}
 We now explore the tradeoff due to device concurrency, which can improve utilization, but also risks performance interference and is dependent on the co-located applications, which are constantly changing in FaaS workloads. 
 We run our medium workload and adjust device concurrency using \D~and examine the effect on execution time (without considering queuing delays) in Figure~\ref{fig:concur-exec-overhead}. 
@@ -299,8 +315,14 @@ All numbers are normalized to the no concurrency (i.e. $\D=1$) case.
 When we increase \D~and use a fixed value, shown in the gray line, we always have \D~number of invocations trying to execute on the GPU concurrently.
 Normalized execution time is unsurprisingly correlated with \D, as GPU contention between invocations causes up to 100\% overhead at the maximum $\D=6$.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./mqfq-final/graphs/concurrency/25.7/paper_e2e_sec.pdf}
+  \caption{Concurrent execution can reduce latency by reducing queuing. However, this is negated by execution interference  at higher levels.}
+  \label{fig:concur-e2e}
+\end{figure}
 
-By default, we use the GPU utilization upper bound (shown by different lines in Figure\ref{fig:concur-exec-overhead}).
+By default, we use the GPU utilization upper bound (shown by different lines in Figure~\ref{fig:concur-exec-overhead}).
 Setting the upper bound to 50\% utilization prevents over-saturation of the GPU, and reduces overheads significantly. 
 However, this increases the queuing and total latency, as shown in Figure~\ref{fig:concur-e2e}.
 For this workload, the total latency increases slightly due to contention and interference, and the limited memory of our GPU (16 GB).

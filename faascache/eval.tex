@@ -7,42 +7,6 @@
 We now present the experimental evaluation of our caching-based keep-alive technique by using function workload traces and serverless benchmarks.
 Our goal is to investigate the effectiveness of these techniques under different workload and system conditions. 
 
-
-\begin{figure*}
-  \centering
-\subfloat[ Representative functions.     \label{fig:rep-trace-exec}]
-{\includegraphics[width=0.37\textwidth]{faascache/faas-keepalive-20/graphs/rep-funcs-392/exec_inc_mem-392-legend.pdf}}
-  \hfill 
-    \subfloat[Rare functions.     \label{fig:rare-trace-exec}]
-{\includegraphics[width=0.3\textwidth]{faascache/faas-keepalive-20/graphs/rare-funcs-1000/exec_inc_mem-1000.pdf}}
-\hfill 
-  \subfloat[Random sampling.      \label{fig:random-trace-exec}] {\includegraphics[width=0.3\textwidth]{faascache/faas-keepalive-20/graphs/random-funcs-200/exec_inc_mem-200.pdf}}
-\caption{Increase in execution time due to cold starts for different workloads derived from the Azure function trace.}
-\label{fig:exec-overheads-all}
-\end{figure*}
-
-
-\begin{figure*}[t]
-  \centering
-%  \vspace*{\myfigspace}
-%  \begin{minipage}[c]{0.7\linewidth}
-  \subfloat[Representative functions.\label{fig:rep-trace-cold}] {\includegraphics[width=0.33\textwidth]{faascache/faas-keepalive-20/graphs/rep-funcs-392/cold_drop_mem-392-legend.pdf}}
-  \hfill
-    \subfloat[Rare functions. \label{fig:rare-trace-cold}] {\includegraphics[width=0.33\textwidth]{faascache/faas-keepalive-20/graphs/rare-funcs-1000/cold_drop_mem-1000.pdf}}
-  \hfill
-  \subfloat[Random sampling. \label{fig:random-trace-cold}]
-  {\includegraphics[width=0.33\textwidth]{faascache/faas-keepalive-20/graphs/random-funcs-200/cold_drop_mem-200.pdf}}
-    \caption{Fraction of cold starts is lower with caching-based keep-alive. } % for different samples of the Azure function trace.}
-      \label{fig:cold starts-all}
-%    \end{minipage}
-%    \hfill
-%    \begin{minipage}[c]{0.29\linewidth}
- %      \begin{figure}
- %     \end{figure}
-%    \end{minipage}
-\end{figure*}
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \noindent \textbf{Setup, Workloads, and Metrics.}
 %
@@ -169,6 +133,19 @@ A function is evicted when the policy predicts it will not have an invocation in
 % \textbf{More details. Histogram size? When created? Online? }
 
 
+\begin{figure}[H]
+  \centering
+\subfloat[ Representative functions.     \label{fig:rep-trace-exec}]
+{\includegraphics[width=0.6\textwidth]{faascache/faas-keepalive-20/graphs/rep-funcs-392/exec_inc_mem-392-legend.pdf}}
+  \hfill 
+    \subfloat[Rare functions.     \label{fig:rare-trace-exec}]
+{\includegraphics[width=0.6\textwidth]{faascache/faas-keepalive-20/graphs/rare-funcs-1000/exec_inc_mem-1000.pdf}}
+\hfill 
+  \subfloat[Random sampling.      \label{fig:random-trace-exec}] {\includegraphics[width=0.6\textwidth]{faascache/faas-keepalive-20/graphs/random-funcs-200/exec_inc_mem-200.pdf}}
+\caption{Increase in execution time due to cold starts for different workloads derived from the Azure function trace.}
+\label{fig:exec-overheads-all}
+\end{figure}
+
 %
 The increase in execution time for different traces and for different cache sizes is shown in Figure~\ref{fig:exec-overheads-all}.
 % How is this measured?
@@ -209,6 +186,26 @@ As the IAT grows, the effectiveness of work-conserving caching-based approaches 
 %While Figure~\ref{fig:exec-overheads-all} focuses on the average increase in execution latency, keep-alive can also reduce the tail latency of functions. Cold start 
 
 %%%%
+
+\begin{figure}[tH]
+  \centering
+%  \vspace*{\myfigspace}
+%  \begin{minipage}[c]{0.7\linewidth}
+  \subfloat[Representative functions.\label{fig:rep-trace-cold}] {\includegraphics[width=0.6\textwidth]{faascache/faas-keepalive-20/graphs/rep-funcs-392/cold_drop_mem-392-legend.pdf}}
+  \hfill
+    \subfloat[Rare functions. \label{fig:rare-trace-cold}] {\includegraphics[width=0.6\textwidth]{faascache/faas-keepalive-20/graphs/rare-funcs-1000/cold_drop_mem-1000.pdf}}
+  \hfill
+  \subfloat[Random sampling. \label{fig:random-trace-cold}]
+  {\includegraphics[width=0.6\textwidth]{faascache/faas-keepalive-20/graphs/random-funcs-200/cold_drop_mem-200.pdf}}
+    \caption{Fraction of cold starts is lower with caching-based keep-alive. } % for different samples of the Azure function trace.}
+      \label{fig:cold starts-all}
+%    \end{minipage}
+%    \hfill
+%    \begin{minipage}[c]{0.29\linewidth}
+ %      \begin{figure}
+ %     \end{figure}
+%    \end{minipage}
+\end{figure}
 
 We see a similar relation and behavior in the miss-ratio curves shown in Figure~\ref{fig:cold starts-all}. 
 Due to function heterogeneity, the cold start overheads are not strictly correlated with cache miss ratios, and thus the differences between policies is different compared to the previously described actual cold start overheads. 
@@ -365,7 +362,7 @@ but we seek to avoid the resultant small changes to memory-size to minimize frag
 
 \begin{figure}[t]
   \centering 
-  \includegraphics[width=0.6\textwidth]{faascache/faas-keepalive-20/graphs/dyn-scale-392-b.pdf}
+  \includegraphics[width=0.8\textwidth]{faascache/faas-keepalive-20/graphs/dyn-scale-392-b.pdf}
   \caption{With dynamic cache size adjustment, the cold starts per second are kept close to the target (horizontal line), which reduces the average server size by 30\%. }
   \label{fig:dynamic}
 \end{figure}
