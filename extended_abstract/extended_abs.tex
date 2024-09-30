@@ -1,0 +1,235 @@
+\documentclass[pageno]{jpaper}
+\usepackage[normalem]{ulem}
+
+\begin{document}
+
+\input{../defs.tex}
+
+\title{Serverless Control Planes for Orchestration of Cloud Resources \\ \textbf{Extended Abstract}}
+\author{Alexander Fuerst}
+
+\date{}
+
+\begin{comment}
+The SPEC Research Group promotes research in quantitative system evaluation and analysis
+both with classical performance metrics – such as response time, throughput, scalability and efficiency,
+as well as other extra-functional system properties included under the term dependability – 
+such as availability, reliability, and security. Contributions of interest span the design of metrics
+for system evaluation as well as the development of methodologies, techniques and tools for
+measurement, load testing, profiling, workload characterization, dependability and efficiency evaluation of computing systems.
+
+A separate one-page extended abstract. 
+You can take the current abstract and add a few more sentences about the technical novelty, results, etc., 
+since this will be for a performance-engineering audience  
+\end{comment}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\section{Motivation}
+
+
+Cloud computing is comprised of a variety of services and abstractions to reduce the complexity of building and running applications.
+Function as a Service (FaaS) is a unique abstraction amongst the many: user supplied code entirely managed by the cloud provider.
+Serverless control planes face unique challenges caused by the highly heterogeneous workloads predominant.
+Users run machine learning inference, web services, multimedia analysis, and even scientific computing, to the tune of billions of invocations per day.
+These, in turn, vary widely in resource usage, execution time, and frequency of invocation, which the control plane must handle efficiently.
+A typical function invocation runs for less than a second and uses only 128 MB of memory, after invocation, these resources can sit idle indefinitely.
+Handling functions like classical cloud applications can cause significant latency delays and tremendous wasted resources.
+
+The diverse platforms serverless has been proposed to run on vary in scale, prupose, and even hardware design.
+Edge~\cite{hall_execution_2019}, public cloud, and heterogeneous~\cite{du2022serverless} scenarios have different capabilities and resource requirements.
+Existing open-source platforms rely on complex and high-overhead systems like Docker or Kubernetes~\cite{openwhisk,openfaas} which do not fit on low-powered devices and perform poorly at FaaS scale.
+Each invocation must run inside an isolation mechanism, which can take several seconds and add orders of magnitude of time to latency.
+The large tech stacks of these designs wastes precious resources, adds 100s of milliseconds to invocation overhead, and are ill-suited to fast-paced research advancements.
+% It must also handle problems like cold start overheads neccessitated by executing invocations within isolated containers, and resource underutilization during idle periods.
+
+\section{Insights}
+
+A key insight of this thesis is that existing open-source FaaS platforms are neither performant at scale nor launchpads for advanced research across the many serverless topics. 
+Current server-full mechanisms for hosting software and managing resources poorly support the needs of the emerging FaaS ecosystem.
+Centralized load balancing or scheduling designs, such as is found in OpenWhisk~\cite{openwhisk}, cause unnecessary overhead or fail to scale with FaaS workloads, often both.
+A platform meeting these performance goals that can run using limited system resources, is easily extensible, and runnable on devices from the edge-to-cloud continuum is needed.
+
+
+\section{Key Contributions}
+
+This thesis addresses performance and resource management challenges by developing novel system designs and tailoring algorithms to handle the new workloads and platforms of FaaS.
+I detail several algorithms that tackle poor resource allocation and load scheduling at both individual server and cluster levels.
+The key finding of orchestration at both levels is the reliance on function characteristics in decision-making.
+The centerpoint of this thesis is a redesigned control plane, called \sysname~\cite{fuerst2023iluvatar}.
+\sysname~handles requests with less than \textit{2 milliseconds} of platform overhead and reduces latency spikes by 100x found in existing open-source systems.
+This is primarily accomplished by disaggregating scheduling decisions to avoid contention between distributed services of the control plane.
+Finally, I leverage the high degree of resource control made possible by this new system to integrate GPU acceleration into the serverless ecosystem.
+This uses a variety of novel mechanisms to minimize overhead despite limited device resources, boosting performance by several orders of magnitude over baseline solutions.
+Altogether, the contributions of this thesis serverless improve latency by 75\% and cluster resource utilization by up to 20x.
+
+\sysname~was written in 20k lines of Rust code, with the goal of making new research easier at both ends of development and experimentation.
+This thesis shows two examples of this, first implementing alternate container isolation mechanisms that are faster than Docker, and second comparing GPU scheduling policies for complex invocation workloads.
+Results captured by the built-in workload generation tools are designed to be easily parseable for post-analysis writeup of results.
+% Previous research that has done wither of these tasks have built entire system designs from the ground up, making difficult 
+
+\bibliographystyle{plain}
+\bibliography{../refs.bib,
+../chrlu/faaslb-osdi22/camready/related.bib,
+../chrlu/faaslb-osdi22/camready/faas-asplos.bib,
+../chrlu/faaslb-osdi22/camready/faas.bib,
+../chrlu/faaslb-osdi22/camready/lb.bib,
+../chrlu/qos/paper/lb.bib,
+../chrlu/qos/paper/faas.bib,
+../chrlu/qos/paper/faas-asplos.bib,
+../chrlu/qos/paper/differentiated.bib,
+../iluvatar/camera-ready/efaas.bib,
+../iluvatar/camera-ready/faas.bib,
+../iluvatar/camera-ready/faas-asplos.bib,
+../faascache/faas-keepalive-20/asplos_camready/faas.bib,
+../mqfq-final/paper/gpu-q-faas.bib}
+
+\begin{comment}
+ASPLOS'21 will be piloting the submission of {\it Extended
+Abstracts}. Your extended abstract — inspired by the model used for
+IEEE Micro Top
+Picks — should be {\it two pages long}, and it will be submitted separately
+from your main paper. The deadline for the extended abstract and the
+full paper will be identical. Except for the page limit, \textbf{all other
+formatting and anonymity requirements are identical} to those for full
+papers: no names or affiliations should be present, and citations should
+be anonymized if appropriate. Extended abstracts should be self-contained, though they may
+contain references to the full paper.
+
+We \emph{recommend}---but do not require--- that you use
+the following organization for your abstract. 
+Sections~\ref{sec:motivation} through \ref{sec:key-contributions}
+should be a summary of your full paper. Section~\ref{sec:motivation}
+motivates the paper; Section~\ref{sec:limitations} describes
+limitations of the state of the art, if applicable;
+Section~\ref{sec:key-insights} presents the key new insight or
+insights of the paper; 
+Section~\ref{sec:main-artifacts} presents the main artifacts described
+in the paper;  Section~\ref{sec:key-contributions} summarizes the key
+results and technical contributions of your paper. Finally,
+Section~\ref{sec:why-asplos} should explain why the paper is suitable
+for ASPLOS, and Section~\ref{sec:citation} should \emph{anonymously} state what its
+citation would be for a ten year test-of-time award. In
+Section~\ref{sec:revisions}, you may optionally include a paragraph
+describing how your paper has been revised, if it was previously
+submitted to another conference.
+
+The extended abstracts must be submitted in printable PDF format and should contain a
+{\bf maximum of 2 pages} of single-spaced two-column text, {\bf not
+  including references}.  You may include any number of pages for
+references, but we suggest you limit your bibliography to
+only the most relevant references. The extended
+abstracts should use the same formating as the regular papers. If you are using
+\LaTeX~\cite{lamport94} to typeset your extended abstract, then we suggest that
+you use \href{https://asplos-conference.org/wp-content/uploads/2020/06/asplos21-templates.zip}{this template}.
+If you use a different
+software package, then please adhere to the
+\href{https://asplos-conference.org/wp-content/uploads/2020/06/asplos21-paper-template.pdf}{formatting guidelines}
+for ASPLOS papers.
+
+%The \href{ https://asplos-conference.org/wp-content/uploads/2020/06/asplos21-extended-abstract-template.pdf}{sample file} for the
+%extended abstract includes guidelines the information your abstract
+%should include. 
+
+
+%The references section of your extended abstract will not count
+%towards the two page limit. We suggest you limit your bibliography to
+%only the most relevant references~\cite{lamport94}.
+The extended abstract should not have an abstract. Start with Section~\ref{sec:motivation}.
+
+\section{Motivation}
+\label{sec:motivation}
+
+
+\begin{itemize}
+\item What is the problem your work attacks? Be specific.
+\item Why is it an important problem?
+\end{itemize}
+
+\vspace{1em}
+
+\noindent
+Articulate the importance of this problem to the broader ASPLOS
+community, using as little jargon as possible. \emph{Be specific}
+about the problem you are addressing; it should be the one that your
+paper directly addresses.
+
+\section{Limitations of the State of the Art}
+\label{sec:limitations}
+
+\begin{itemize}
+\item What is the state of the art in this topic today (if any)?
+\item What are its limits?
+\end{itemize}
+
+\section{Key Insights}
+\label{sec:key-insights}
+
+\begin{itemize}
+\item What are the one or two key new insights in this paper?
+\item How does it advance the state of the art?
+\item What makes it more effective than past approaches?
+\end{itemize}
+
+\section{Main Artifacts}
+\label{sec:main-artifacts}
+
+\begin{itemize}
+\item What are the key artifacts presented in your paper: a
+  methodology, a hardware design, a software algorithm, an
+  optimization or control technique, etc.?
+  \item How were your artifacts implemented and evaluated? 
+\end{itemize}
+
+\section{Key Results and Contributions}
+\label{sec:key-contributions}
+
+\begin{itemize}
+  \item What are the most important \emph{one or two} empirical or theoretical
+    results of this approach?
+  \item What are the contributions that this paper makes to the state of the
+    art? List them in an \texttt{itemize} section. Each contribution should be no more than a few sentences long.
+  \item Clearly describe its advantages over past work, including how it overcomes their limitations.
+\end{itemize}
+
+
+\section{Why ASPLOS}
+\label{sec:why-asplos}
+
+ASPLOS emphasizes multidisciplinary research; explain how this
+  paper emphasizes synergy of \emph{two or more ASPLOS areas}: architecture,
+  programming languages, operating systems, and related areas (broadly
+  interpreted).
+
+\noindent
+If you are unsure whether your paper falls within the scope of ASPLOS,
+please check with the program chairs -- ASPLOS is a broad,
+multidisciplinary conference and encourages new topics.
+
+\section{Citation for Most Influential Paper Award}
+\label{sec:citation}
+
+Provide the citation for your paper if it won a Most Influential
+Paper award. You can find example citations
+on the \href{https://www.sigops.org/awards/hof/}{SIGOPS Hall of Fame}
+and \href{https://www.sigplan.org/Awards/PLDI/}{PLDI most influential
+  paper list}.  Limit the citation to 1-3 sentences
+\emph{Recall that your citation here must be anonymous}; do not include names or affiliations.
+
+%  \url{https://rb.gy/hd1hms}).
+
+\section{Revisions}
+\label{sec:revisions}
+
+ \emph{Optional:} Describe how this paper has been revised, if it was previously submitted to another conference.
+
+ 
+\pagebreak
+\bibliographystyle{plain}
+\bibliography{references}
+\end{comment}
+
+\end{document}
+
